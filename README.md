@@ -5,7 +5,7 @@
 
 Simple Analog Watch Face for Wear OS
 
-![Screenshot](https://i.imgur.com/FnEm39f.png)
+![Screenshot](https://i.imgur.com/5oRCGaP.png)
 
 About
 -------
