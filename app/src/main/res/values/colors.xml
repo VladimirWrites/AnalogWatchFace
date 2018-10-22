@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="watch_tick">#FFFFFF</color>
-    <color name="watch_shadow">#2B3948</color>
+    <color name="watch_shadow">#000000</color>
 
     <color name="watch_hand_second">#FFFFFF</color>
     <color name="watch_hand_minute">#FFA17A</color>

@@ -5,10 +5,15 @@
     <dimen name="tick_width">1dp</dimen>
 
     <dimen name="hand_width_second">1dp</dimen>
-    <dimen name="hand_width_minute">1.5dp</dimen>
-    <dimen name="hand_width_hour">2dp</dimen>
+    <dimen name="hand_width_minute">2dp</dimen>
+    <dimen name="hand_width_hour">2.5dp</dimen>
     <dimen name="middle_circle_radius">2dp</dimen>
     <dimen name="circle_hand_gap">5dp</dimen>
+
     <dimen name="complication_preview_size">48dp</dimen>
-    <dimen name="complication_preview_margin">24dp</dimen>
+    <dimen name="complication_big_preview_width">96dp</dimen>
+    <dimen name="complication_big_preview_height">32dp</dimen>
+
+    <dimen name="complication_preview_margin_horizontal">24dp</dimen>
+    <dimen name="complication_preview_margin_vertical">32dp</dimen>
 </resources>

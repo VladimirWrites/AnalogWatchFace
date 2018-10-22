@@ -1,35 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+             android:layout_width="match_parent" android:layout_height="match_parent">
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background"/>
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/preview_clock"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/preview_clock"/>
 
     <ImageView
-        android:id="@+id/left_complication"
-        android:layout_width="@dimen/complication_preview_size"
-        android:layout_height="@dimen/complication_preview_size"
-        android:layout_margin="@dimen/complication_preview_margin"
-        android:layout_gravity="center_vertical|start"
-        android:scaleType="centerInside"
-        android:src="@drawable/add_complication"
-        android:background="@android:color/transparent"/>
+            android:id="@+id/left_complication"
+            android:layout_width="@dimen/complication_preview_size"
+            android:layout_height="@dimen/complication_preview_size"
+            android:layout_margin="@dimen/complication_preview_margin_horizontal"
+            android:layout_gravity="center_vertical|start"
+            android:scaleType="centerInside"
+            android:src="@drawable/add_complication"
+            android:background="@android:color/transparent"/>
 
     <ImageView
-        android:id="@+id/right_complication"
-        android:layout_width="@dimen/complication_preview_size"
-        android:layout_height="@dimen/complication_preview_size"
-        android:layout_margin="@dimen/complication_preview_margin"
-        android:layout_gravity="center_vertical|end"
-        android:scaleType="centerInside"
-        android:src="@drawable/add_complication"
-        android:background="@android:color/transparent"/>
+            android:id="@+id/right_complication"
+            android:layout_width="@dimen/complication_preview_size"
+            android:layout_height="@dimen/complication_preview_size"
+            android:layout_margin="@dimen/complication_preview_margin_horizontal"
+            android:layout_gravity="center_vertical|end"
+            android:scaleType="centerInside"
+            android:src="@drawable/add_complication"
+            android:background="@android:color/transparent"/>
+
+    <ImageView
+            android:id="@+id/top_complication"
+            android:layout_width="@dimen/complication_big_preview_width"
+            android:layout_height="@dimen/complication_big_preview_height"
+            android:layout_marginTop="@dimen/complication_preview_margin_vertical"
+            android:layout_gravity="center_horizontal|top"
+            android:scaleType="centerInside"
+            android:src="@drawable/add_big_complication"
+            android:background="@android:color/transparent"/>
+
+    <ImageView
+            android:id="@+id/bottom_complication"
+            android:layout_width="@dimen/complication_big_preview_width"
+            android:layout_height="@dimen/complication_big_preview_height"
+            android:layout_marginBottom="@dimen/complication_preview_margin_vertical"
+            android:layout_gravity="center_horizontal|bottom"
+            android:scaleType="centerInside"
+            android:src="@drawable/add_big_complication"
+            android:background="@android:color/transparent"/>
 
 </FrameLayout>

@@ -9,6 +9,8 @@ import com.vlad1m1r.watchface.R
 
 const val LEFT_COMPLICATION_ID = 100
 const val RIGHT_COMPLICATION_ID = 101
+const val TOP_COMPLICATION_ID = 102
+const val BOTTOM_COMPLICATION_ID = 103
 
 val COMPLICATION_SUPPORTED_TYPES = mapOf(
     LEFT_COMPLICATION_ID to intArrayOf(
@@ -22,6 +24,14 @@ val COMPLICATION_SUPPORTED_TYPES = mapOf(
         ComplicationData.TYPE_ICON,
         ComplicationData.TYPE_SHORT_TEXT,
         ComplicationData.TYPE_SMALL_IMAGE
+    ),
+    TOP_COMPLICATION_ID to intArrayOf(
+        ComplicationData.TYPE_LONG_TEXT,
+        ComplicationData.TYPE_SMALL_IMAGE
+    ),
+    BOTTOM_COMPLICATION_ID to intArrayOf(
+        ComplicationData.TYPE_LONG_TEXT,
+        ComplicationData.TYPE_SMALL_IMAGE
     )
 )
 
@@ -32,6 +42,12 @@ class Complications(context: Context): WatchView(context) {
             setContext(context)
         })
         put(RIGHT_COMPLICATION_ID, (context.getDrawable(R.drawable.complication_drawable) as ComplicationDrawable).apply {
+            setContext(context)
+        })
+        put(TOP_COMPLICATION_ID, (context.getDrawable(R.drawable.complication_drawable) as ComplicationDrawable).apply {
+            setContext(context)
+        })
+        put(BOTTOM_COMPLICATION_ID, (context.getDrawable(R.drawable.complication_drawable) as ComplicationDrawable).apply {
             setContext(context)
         })
     }
@@ -51,6 +67,17 @@ class Complications(context: Context): WatchView(context) {
     }
 
     override fun setCenter(centerX: Float, centerY: Float) {
+        setBoundsToSmallComplications(centerX, centerY)
+        setBoundsToBigComplications(centerX, centerY)
+    }
+
+    fun draw(canvas: Canvas, currentTime: Long) {
+        COMPLICATION_SUPPORTED_TYPES.keys.forEach {
+            complicationDrawables[it]!!.draw(canvas, currentTime)
+        }
+    }
+
+    private fun setBoundsToSmallComplications(centerX: Float, centerY: Float) {
         val sizeOfComplication = centerX.toInt() / 2
         val horizontalOffset = (centerX.toInt() - sizeOfComplication) / 2
         val verticalOffset = centerY.toInt() - sizeOfComplication / 2
@@ -73,9 +100,27 @@ class Complications(context: Context): WatchView(context) {
         complicationDrawables[RIGHT_COMPLICATION_ID]!!.bounds = rightBounds
     }
 
-    fun draw(canvas: Canvas, currentTime: Long) {
-        COMPLICATION_SUPPORTED_TYPES.keys.forEach {
-            complicationDrawables[it]!!.draw(canvas, currentTime)
-        }
+    private fun setBoundsToBigComplications(centerX: Float, centerY: Float) {
+        val heightOfComplication = centerX.toInt() / 3
+        val widthOfComplication = centerX.toInt()
+        val horizontalOffset = centerX.toInt()/2
+        val verticalOffset = (centerY.toInt() - heightOfComplication) / 2
+
+        val topBounds = Rect(
+            horizontalOffset,
+            verticalOffset,
+            horizontalOffset + widthOfComplication,
+            verticalOffset + heightOfComplication
+        )
+
+        val bottomBounds = Rect(
+            horizontalOffset,
+            centerY.toInt() + verticalOffset,
+            horizontalOffset + widthOfComplication,
+            centerY.toInt() + verticalOffset + heightOfComplication
+        )
+
+        complicationDrawables[TOP_COMPLICATION_ID]!!.bounds = topBounds
+        complicationDrawables[BOTTOM_COMPLICATION_ID]!!.bounds = bottomBounds
     }
 }
