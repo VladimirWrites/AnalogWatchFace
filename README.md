@@ -12,6 +12,15 @@ About
 
 This is an improved version of the demo project created for the Pluralsight's course: [Wear OS Fundamentals: Watch Face](https://app.pluralsight.com/library/courses/wear-os-fundamentals-watch-face)
 
+Demo
+-----
+
+Demo application is available on Google Play.
+
+<a href='https://play.google.com/store/apps/details?id=com.vlad1m1r.watchface'>
+    <img alt='Get it on Google Play' src='http://i.imgur.com/tka3Exw.png'/>
+</a>
+
 Contributing
 -------
 
