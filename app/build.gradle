@@ -65,8 +65,9 @@ dependencies {
 
     implementation Deps.kotlin_stdlib
 
-    compileOnly  Deps.wearable
+    implementation Deps.wearable_support_ui
     implementation Deps.wearable_support
+    compileOnly  Deps.wearable
 
     testImplementation Deps.junit
     testImplementation Deps.mockito_core

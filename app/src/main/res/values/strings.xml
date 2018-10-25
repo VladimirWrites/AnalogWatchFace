@@ -3,4 +3,5 @@
 
     <string name="edit_complication">Edit Complication %s</string>
     <string name="add_complication">Add Complication</string>
+    <string name="complications_in_ambient_mode">Show complications in Ambient Mode</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.vlad1m1r.watchface
 
+import android.content.Context
 import android.graphics.*
 import android.os.Bundle
 import android.os.Handler
@@ -48,6 +49,8 @@ class WatchFace : CanvasWatchFaceService() {
 
         private val mode: Mode = Mode()
 
+        private lateinit var dataProvider: DataProvider
+
         override fun onCreate(holder: SurfaceHolder) {
             super.onCreate(holder)
 
@@ -67,6 +70,12 @@ class WatchFace : CanvasWatchFaceService() {
             setActiveComplications(*COMPLICATION_SUPPORTED_TYPES.keys.toIntArray())
 
             updateTimeHandler.sendEmptyMessage(MESSAGE_UPDATE_ID)
+
+            val sharedPref = getSharedPreferences(
+                KEY_ANALOG_WATCH_FACE,
+                Context.MODE_PRIVATE
+            )
+            dataProvider = DataProvider(sharedPref)
         }
 
         override fun onDestroy() {
@@ -124,7 +133,9 @@ class WatchFace : CanvasWatchFaceService() {
             canvas.save()
             background.draw(canvas)
             ticks.draw(canvas)
-            complications.draw(canvas, System.currentTimeMillis())
+            if (!mode.isAmbient || dataProvider.hasComplicationsInAmbientMode()) {
+                complications.draw(canvas, System.currentTimeMillis())
+            }
             hands.draw(canvas, calendar)
             canvas.restore()
         }

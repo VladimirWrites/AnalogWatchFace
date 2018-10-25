@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="complication_preview_size">42dp</dimen>
+    <dimen name="complication_big_preview_width">84dp</dimen>
+    <dimen name="complication_big_preview_height">28dp</dimen>
+
+    <dimen name="complication_preview_margin_horizontal">32dp</dimen>
+    <dimen name="complication_preview_margin_vertical">32dp</dimen>
+</resources>
