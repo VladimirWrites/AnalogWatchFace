@@ -1,9 +1,9 @@
 object Versions {
     val kotlin = "1.2.71"
 
-    val wearable_support = "2.3.0"
+    val wearable_support = "2.4.0"
     val wearable_support_ui = "28.0.0"
-    val wearable = "2.3.0"
+    val wearable = "2.4.0"
 
     val junit = "4.12"
     val mockito_core = "2.23.0"
