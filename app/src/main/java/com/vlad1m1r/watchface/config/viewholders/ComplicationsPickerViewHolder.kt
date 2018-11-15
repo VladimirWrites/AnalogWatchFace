@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.config
+package com.vlad1m1r.watchface.config.viewholders
 
 import android.app.Activity
 import android.content.ComponentName
@@ -9,9 +9,10 @@ import android.view.View
 import android.widget.ImageView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.WatchFace
+import com.vlad1m1r.watchface.config.COMPLICATION_CONFIG_REQUEST_CODE
 import com.vlad1m1r.watchface.utils.*
 
-class ComplicationsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+class ComplicationsPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
     enum class ComplicationLocation(val id: Int, val isBig: Boolean) {
         LEFT(LEFT_COMPLICATION_ID, false),
@@ -29,16 +30,16 @@ class ComplicationsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
     }
 
     private val leftComplication = itemView.findViewById<ImageView>(R.id.left_complication).apply {
-        setOnClickListener(this@ComplicationsViewHolder)
+        setOnClickListener(this@ComplicationsPickerViewHolder)
     }
     private val rightComplication = itemView.findViewById<ImageView>(R.id.right_complication).apply {
-        setOnClickListener(this@ComplicationsViewHolder)
+        setOnClickListener(this@ComplicationsPickerViewHolder)
     }
     private val topComplication = itemView.findViewById<ImageView>(R.id.top_complication).apply {
-        setOnClickListener(this@ComplicationsViewHolder)
+        setOnClickListener(this@ComplicationsPickerViewHolder)
     }
     private val bottomComplication = itemView.findViewById<ImageView>(R.id.bottom_complication).apply {
-        setOnClickListener(this@ComplicationsViewHolder)
+        setOnClickListener(this@ComplicationsPickerViewHolder)
     }
 
     private var selectedComplication: ComplicationLocation? = null
@@ -53,7 +54,8 @@ class ComplicationsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
     }
 
     fun setComplication(complicationProviderInfo: ComplicationProviderInfo?, watchFaceComplicationId: Int) {
-        val complicationLocation = ComplicationLocation.getFromId(
+        val complicationLocation =
+            ComplicationLocation.getFromId(
                 watchFaceComplicationId
             )
         val complicationView = complicationLocation.getComplicationView()

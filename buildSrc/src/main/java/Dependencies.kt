@@ -1,5 +1,5 @@
 object Versions {
-    val kotlin = "1.2.71"
+    val kotlin = "1.3.10"
 
     val wearable_support = "2.4.0"
     val wearable_support_ui = "28.0.0"
@@ -7,7 +7,7 @@ object Versions {
 
     val junit = "4.12"
     val mockito_core = "2.23.0"
-    val mockito_kotlin = "2.0.0-RC3"
+    val mockito_kotlin = "2.0.0"
     val truth = "0.42"
 
     val gradle_android = "3.2.1"
@@ -19,8 +19,8 @@ object Versions {
     val compile_sdk = 28
     val build_tools = "28.0.3"
 
-    val version_code = 110
-    val version_name = "1.1.0"
+    val version_code = 120
+    val version_name = "1.2.0"
 }
 
 object Deps {

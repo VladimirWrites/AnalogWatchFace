@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Switch xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/settings_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/activity_config_padding"
+        android:paddingEnd="@dimen/activity_config_padding"
+        android:paddingTop="@dimen/activity_config_padding_small"
+        android:paddingBottom="@dimen/activity_config_padding_small"
+        style="@style/SwitchStyle"/>

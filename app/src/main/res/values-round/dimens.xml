@@ -7,4 +7,5 @@
 
     <dimen name="complication_preview_margin_horizontal">32dp</dimen>
     <dimen name="complication_preview_margin_vertical">32dp</dimen>
+    <dimen name="bottom_margin">64dp</dimen>
 </resources>

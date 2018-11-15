@@ -132,7 +132,10 @@ class WatchFace : CanvasWatchFaceService() {
             calendar.timeInMillis = System.currentTimeMillis()
             canvas.save()
             background.draw(canvas)
-            ticks.draw(canvas)
+            if((mode.isAmbient && dataProvider.hasTicksInAmbientMode()) ||
+                (!mode.isAmbient && dataProvider.hasTicksInInteractiveMode())) {
+                ticks.draw(canvas)
+            }
             if (!mode.isAmbient || dataProvider.hasComplicationsInAmbientMode()) {
                 complications.draw(canvas, System.currentTimeMillis())
             }

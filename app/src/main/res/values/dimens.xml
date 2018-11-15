@@ -18,4 +18,5 @@
     <dimen name="complication_preview_margin_vertical">24dp</dimen>
     <dimen name="activity_config_padding_small">8dp</dimen>
     <dimen name="activity_config_padding">16dp</dimen>
+    <dimen name="bottom_margin">16dp</dimen>
 </resources>

@@ -1,6 +1,6 @@
 # Analog Watch Face for Wear OS
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/VladimirWrites/AnalogWatchFace/blob/master/LICENSE) 
-[![Kotlin](https://img.shields.io/badge/style-1.2.71-green.svg?style=flat&label=Kotlin)](https://kotlinlang.org) 
+[![Kotlin](https://img.shields.io/badge/style-1.3.10-green.svg?style=flat&label=Kotlin)](https://kotlinlang.org) 
 [![Build Status](https://travis-ci.com/VladimirWrites/AnalogWatchFace.svg?branch=master)](https://travis-ci.com/VladimirWrites/AnalogWatchFace)
 
 Simple Analog Watch Face for Wear OS

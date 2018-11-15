@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 const val KEY_ANALOG_WATCH_FACE = "analog_watch_face_key"
 
 private const val KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE = "has_complications_in_ambient_mode"
+private const val KEY_HAS_TICKS_IN_AMBIENT_MODE = "has_ticks_in_ambient_mode"
+private const val KEY_HAS_TICKS_IN_INTERACTIVE_MODE = "has_ticks_in_interactive_mode"
 
 class DataProvider(private val sharedPreferences: SharedPreferences) {
 
@@ -13,6 +15,22 @@ class DataProvider(private val sharedPreferences: SharedPreferences) {
     fun setHasComplicationsInAmbientMode(complicationsInAmbientMode: Boolean) {
         val editor = sharedPreferences.edit()
         editor.putBoolean(KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE, complicationsInAmbientMode)
+        editor.apply()
+    }
+
+    fun hasTicksInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_AMBIENT_MODE, true)
+
+    fun setHasTicksInAmbientMode(ticksInAmbientMode: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_HAS_TICKS_IN_AMBIENT_MODE, ticksInAmbientMode)
+        editor.apply()
+    }
+
+    fun hasTicksInInteractiveMode() = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_INTERACTIVE_MODE, true)
+
+    fun setHasTicksInInteractiveMode(ticksInInteractiveMode: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_HAS_TICKS_IN_INTERACTIVE_MODE, ticksInInteractiveMode)
         editor.apply()
     }
 }

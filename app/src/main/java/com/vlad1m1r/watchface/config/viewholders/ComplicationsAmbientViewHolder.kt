@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.config
+package com.vlad1m1r.watchface.config.viewholders
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -7,8 +7,9 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.utils.DataProvider
 
 class ComplicationsAmbientViewHolder(itemView: View, private val dataProvider: DataProvider): RecyclerView.ViewHolder(itemView) {
-    private val switch = itemView.findViewById<Switch>(R.id.switch_complications_ambient).apply {
+    private val switch = itemView.findViewById<Switch>(R.id.settings_switch).apply {
         isChecked = dataProvider.hasComplicationsInAmbientMode()
+        setText(R.string.complications_in_ambient_mode)
         setOnCheckedChangeListener { _, isChecked ->
             dataProvider.setHasComplicationsInAmbientMode(isChecked)
         }
