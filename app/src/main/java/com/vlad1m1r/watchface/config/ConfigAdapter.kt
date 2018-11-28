@@ -5,10 +5,7 @@ import android.support.wearable.complications.ComplicationProviderInfo
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.config.viewholders.ComplicationsAmbientViewHolder
-import com.vlad1m1r.watchface.config.viewholders.ComplicationsPickerViewHolder
-import com.vlad1m1r.watchface.config.viewholders.TicksAmbientViewHolder
-import com.vlad1m1r.watchface.config.viewholders.TicksInteractiveViewHolder
+import com.vlad1m1r.watchface.config.viewholders.*
 import com.vlad1m1r.watchface.utils.DataProvider
 import java.lang.IllegalArgumentException
 
@@ -16,6 +13,7 @@ const val TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG = 0
 const val TYPE_COMPLICATIONS_AMBIENT_MODE = 1
 const val TYPE_TICKS_AMBIENT_MODE = 2
 const val TYPE_TICKS_INTERACTIVE_MODE = 3
+const val TYPE_BACKGROUND_BLACK = 4
 
 class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -69,13 +67,24 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
                             ),
                         dataProvider
                     )
+
+            TYPE_BACKGROUND_BLACK -> viewHolder =
+                    BlackBackgroundViewHolder(
+                        LayoutInflater.from(parent.context)
+                            .inflate(
+                                R.layout.item_settings_switch,
+                                parent,
+                                false
+                            ),
+                        dataProvider
+                    )
         }
 
         return viewHolder!!
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return 5
     }
 
     override fun getItemViewType(position: Int) =
@@ -84,6 +93,7 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
             1 -> TYPE_COMPLICATIONS_AMBIENT_MODE
             2 -> TYPE_TICKS_AMBIENT_MODE
             3 -> TYPE_TICKS_INTERACTIVE_MODE
+            4 -> TYPE_BACKGROUND_BLACK
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 

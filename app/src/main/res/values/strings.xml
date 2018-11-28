@@ -6,4 +6,5 @@
     <string name="complications_in_ambient_mode">Complications in Ambient Mode</string>
     <string name="ticks_in_ambient_mode">Ticks in Ambient Mode</string>
     <string name="ticks_in_interactive_mode">Ticks in Interactive Mode</string>
+    <string name="background_black">Black background</string>
 </resources>

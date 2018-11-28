@@ -15,10 +15,4 @@ class TicksInteractiveViewHolder(itemView: View, private val dataProvider: DataP
             dataProvider.setHasTicksInInteractiveMode(isChecked)
         }
     }
-
-    init {
-        val layoutParams = itemView.layoutParams as ViewGroup.MarginLayoutParams
-        layoutParams.bottomMargin = itemView.context.resources.getDimensionPixelSize(R.dimen.bottom_margin)
-        itemView.layoutParams = layoutParams
-    }
 }

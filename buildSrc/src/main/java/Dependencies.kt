@@ -19,8 +19,8 @@ object Versions {
     val compile_sdk = 28
     val build_tools = "28.0.3"
 
-    val version_code = 120
-    val version_name = "1.2.0"
+    val version_code = 130
+    val version_name = "1.3.0"
 }
 
 object Deps {

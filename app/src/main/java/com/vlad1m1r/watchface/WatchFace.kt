@@ -59,10 +59,14 @@ class WatchFace : CanvasWatchFaceService() {
                     .setAcceptsTapEvents(true)
                     .build()
             )
-
+            val sharedPref = getSharedPreferences(
+                KEY_ANALOG_WATCH_FACE,
+                Context.MODE_PRIVATE
+            )
+            dataProvider = DataProvider(sharedPref)
             calendar = Calendar.getInstance()
 
-            background = Background()
+            background = Background(dataProvider)
             ticks = Ticks(this@WatchFace)
             complications = Complications(this@WatchFace)
             hands = Hands(this@WatchFace)
@@ -70,12 +74,6 @@ class WatchFace : CanvasWatchFaceService() {
             setActiveComplications(*COMPLICATION_SUPPORTED_TYPES.keys.toIntArray())
 
             updateTimeHandler.sendEmptyMessage(MESSAGE_UPDATE_ID)
-
-            val sharedPref = getSharedPreferences(
-                KEY_ANALOG_WATCH_FACE,
-                Context.MODE_PRIVATE
-            )
-            dataProvider = DataProvider(sharedPref)
         }
 
         override fun onDestroy() {

@@ -2,7 +2,7 @@ package com.vlad1m1r.watchface.utils
 
 import android.graphics.*
 
-class Background {
+class Background(val dataProvider: DataProvider) {
 
     private var centerX = 0f
     private var centerY = 0f
@@ -13,7 +13,7 @@ class Background {
     private var mode: Mode = Mode()
 
     fun draw(canvas: Canvas) {
-        if(mode.isAmbient && (mode.isLowBitAmbient || mode.isBurnInProtection)) {
+        if(dataProvider.hasBlackBackground() || (mode.isAmbient && (mode.isLowBitAmbient || mode.isBurnInProtection))) {
             canvas.drawColor(android.graphics.Color.BLACK)
         } else if(mode.isAmbient) {
             if(!this::ambientBitmap.isInitialized) {
