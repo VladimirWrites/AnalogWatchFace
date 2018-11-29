@@ -10,7 +10,10 @@ import android.support.wearable.watchface.CanvasWatchFaceService
 import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
+import com.vlad1m1r.watchface.data.DataProvider
+import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.utils.*
+import com.vlad1m1r.watchface.utils.Point
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -130,8 +133,9 @@ class WatchFace : CanvasWatchFaceService() {
             calendar.timeInMillis = System.currentTimeMillis()
             canvas.save()
             background.draw(canvas)
-            if((mode.isAmbient && dataProvider.hasTicksInAmbientMode()) ||
-                (!mode.isAmbient && dataProvider.hasTicksInInteractiveMode())) {
+            if ((mode.isAmbient && dataProvider.hasTicksInAmbientMode()) ||
+                (!mode.isAmbient && dataProvider.hasTicksInInteractiveMode())
+            ) {
                 ticks.draw(canvas)
             }
             if (!mode.isAmbient || dataProvider.hasComplicationsInAmbientMode()) {
@@ -150,13 +154,12 @@ class WatchFace : CanvasWatchFaceService() {
         override fun onSurfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
             super.onSurfaceChanged(holder, format, width, height)
 
-            val centerX = width / 2f
-            val centerY = height / 2f
+            val center = Point(width / 2f, height / 2f)
 
-            background.setCenter(centerX, centerY)
-            ticks.setCenter(centerX, centerY)
-            complications.setCenter(centerX, centerY)
-            hands.setCenter(centerX, centerY)
+            background.setCenter(center)
+            ticks.setCenter(center)
+            complications.setCenter(center)
+            hands.setCenter(center)
         }
 
         private fun updateTimer() {

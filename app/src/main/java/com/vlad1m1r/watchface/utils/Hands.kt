@@ -66,19 +66,17 @@ class Hands(context: Context) : WatchView(context) {
         )
     }
 
-    private var centerX = 0f
-    private var centerY = 0f
+    private var center = Point()
 
     private var secondHandLength = 0f
     private var minuteHandLength = 0f
     private var hourHandLength = 0f
 
-    override fun setCenter(centerX: Float, centerY: Float) {
-        this.centerX = centerX
-        this.centerY = centerY
-        secondHandLength = (centerX * 0.875).toFloat()
-        minuteHandLength = (centerX * 0.75).toFloat()
-        hourHandLength = (centerX * 0.5).toFloat()
+    override fun setCenter(center: Point) {
+        this.center = center
+        secondHandLength = (center.x * 0.875).toFloat()
+        minuteHandLength = (center.x * 0.75).toFloat()
+        hourHandLength = (center.x * 0.5).toFloat()
     }
 
     fun draw(canvas: Canvas, calendar: Calendar) {
@@ -86,45 +84,45 @@ class Hands(context: Context) : WatchView(context) {
         val minutesRotation = calendar.minutesRotation()
         val hoursRotation = calendar.hoursRotation()
 
-        canvas.rotate(hoursRotation, centerX, centerY)
+        canvas.rotate(hoursRotation, center.x, center.y)
         canvas.drawLine(
-            centerX,
-            centerY - middleCircleRadius - circleHandGap,
-            centerX,
-            centerY - hourHandLength,
+            center.x,
+            center.y - middleCircleRadius - circleHandGap,
+            center.x,
+            center.y - hourHandLength,
             hourPaint
         )
 
-        canvas.rotate(minutesRotation - hoursRotation, centerX, centerY)
+        canvas.rotate(minutesRotation - hoursRotation, center.x, center.y)
         canvas.drawLine(
-            centerX,
-            centerY - middleCircleRadius - circleHandGap,
-            centerX,
-            centerY - minuteHandLength,
+            center.x,
+            center.y - middleCircleRadius - circleHandGap,
+            center.x,
+            center.y - minuteHandLength,
             minutePaint
         )
 
-        if(showSecondsHand) {
-            canvas.rotate(secondsRotation - minutesRotation, centerX, centerY)
+        if (showSecondsHand) {
+            canvas.rotate(secondsRotation - minutesRotation, center.x, center.y)
             canvas.drawLine(
-                centerX,
-                centerY - middleCircleRadius,
-                centerX,
-                centerY - secondHandLength,
+                center.x,
+                center.y - middleCircleRadius,
+                center.x,
+                center.y - secondHandLength,
                 secondPaint
             )
         }
 
         canvas.drawCircle(
-            centerX,
-            centerY,
+            center.x,
+            center.y,
             middleCircleRadius,
             circlePaint
         )
     }
 
     fun setMode(mode: Mode) {
-        if(mode.isAmbient) {
+        if (mode.isAmbient) {
             showSecondsHand = false
 
             hourPaint.inAmbientMode()

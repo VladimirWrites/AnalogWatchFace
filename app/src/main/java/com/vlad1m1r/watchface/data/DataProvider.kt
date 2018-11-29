@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.utils
+package com.vlad1m1r.watchface.data
 
 import android.content.SharedPreferences
 

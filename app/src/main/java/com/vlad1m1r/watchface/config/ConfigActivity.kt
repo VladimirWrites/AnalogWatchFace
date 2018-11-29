@@ -14,8 +14,8 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.WatchFace
 import com.vlad1m1r.watchface.utils.COMPLICATION_SUPPORTED_TYPES
 import java.util.concurrent.Executors
-import com.vlad1m1r.watchface.utils.DataProvider
-import com.vlad1m1r.watchface.utils.KEY_ANALOG_WATCH_FACE
+import com.vlad1m1r.watchface.data.DataProvider
+import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 
 const val COMPLICATION_CONFIG_REQUEST_CODE = 1001
 

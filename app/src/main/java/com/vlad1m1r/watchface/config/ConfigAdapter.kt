@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.config.viewholders.*
-import com.vlad1m1r.watchface.utils.DataProvider
+import com.vlad1m1r.watchface.data.DataProvider
 import java.lang.IllegalArgumentException
 
 const val TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG = 0

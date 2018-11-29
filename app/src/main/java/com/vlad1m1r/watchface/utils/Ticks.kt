@@ -25,16 +25,14 @@ class Ticks(context: Context) : WatchView(context) {
         )
     }
 
-    private var centerX: Float = 0f
-    private var centerY: Float = 0f
+    private var center = Point()
     private var outerTickRadius: Float = 0f
     private var innerTickRadius: Float = 0f
 
-    override fun setCenter(centerX: Float, centerY: Float) {
-        this.centerX = centerX
-        this.centerY = centerY
-        this.outerTickRadius = centerX
-        this.innerTickRadius = centerX - tickLength
+    override fun setCenter(center: Point) {
+        this.center = center
+        this.outerTickRadius = center.x
+        this.innerTickRadius = center.x - tickLength
     }
 
     fun draw(canvas: Canvas) {
@@ -45,8 +43,8 @@ class Ticks(context: Context) : WatchView(context) {
             val outerX = sin(tickRotation) * outerTickRadius
             val outerY = -cos(tickRotation) * outerTickRadius
             canvas.drawLine(
-                (centerX + innerX).toFloat(), (centerY + innerY).toFloat(),
-                (centerX + outerX).toFloat(), (centerY + outerY).toFloat(), tickPaint
+                (center.x + innerX).toFloat(), (center.y + innerY).toFloat(),
+                (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaint
             )
         }
     }

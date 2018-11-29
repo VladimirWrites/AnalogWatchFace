@@ -66,9 +66,9 @@ class Complications(context: Context): WatchView(context) {
         return complicationDrawables[id]?: throw IllegalArgumentException("Unsupported ComplicationDrawable id: $id")
     }
 
-    override fun setCenter(centerX: Float, centerY: Float) {
-        setBoundsToSmallComplications(centerX, centerY)
-        setBoundsToBigComplications(centerX, centerY)
+    override fun setCenter(center: Point) {
+        setBoundsToSmallComplications(center.x, center.y)
+        setBoundsToBigComplications(center.x, center.y)
     }
 
     fun draw(canvas: Canvas, currentTime: Long) {

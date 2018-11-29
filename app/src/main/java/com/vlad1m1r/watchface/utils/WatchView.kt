@@ -10,7 +10,7 @@ abstract class WatchView(context: Context) {
     protected val shadowRadius = context.resources.getDimension(R.dimen.shadow_radius)
     private val ambientColor = ContextCompat.getColor(context, R.color.watch_ambient)
 
-    abstract fun setCenter(centerX: Float, centerY: Float)
+    abstract fun setCenter(center: Point)
 
     protected fun Paint.inAmbientMode() {
         color = ambientColor
