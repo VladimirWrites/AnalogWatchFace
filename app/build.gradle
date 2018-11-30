@@ -21,7 +21,7 @@ android {
             testCoverageEnabled true
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -72,7 +72,7 @@ dependencies {
 
     implementation Deps.wearable_support_ui
     implementation Deps.wearable_support
-    compileOnly  Deps.wearable
+    compileOnly Deps.wearable
 
     testImplementation Deps.junit
     testImplementation Deps.mockito_core
