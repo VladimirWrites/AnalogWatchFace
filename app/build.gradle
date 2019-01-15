@@ -1,81 +1,25 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'jacoco'
-
-jacoco {
-    toolVersion = Versions.jacoco
-}
 
 android {
     compileSdkVersion Versions.compile_sdk
-    buildToolsVersion Versions.build_tools
     defaultConfig {
         applicationId "com.vlad1m1r.watchface"
         minSdkVersion Versions.min_sdk
         targetSdkVersion Versions.target_sdk
-        versionCode Versions.version_code
+        versionCode Versions.version_code_app
         versionName Versions.version_name
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
-        debug {
-            testCoverageEnabled true
-        }
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-        }
-    }
-    configurations.all {
-        resolutionStrategy.force 'com.android.support:percent:28.0.0'
-        resolutionStrategy.force 'com.android.support:support-media-compat:28.0.0'
-        resolutionStrategy.force 'com.android.support:support-v4:28.0.0'
-    }
-}
-
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-}
-
-task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
-
-    reports {
-        csv.enabled = false
-        xml.enabled = true
-        html.enabled = true
-    }
-
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/androidTest/java"
-
-    sourceDirectories = files([mainSrc])
-    classDirectories = files([debugTree], [kotlinDebugTree])
-    executionData = fileTree(dir: "$buildDir", includes: [
-            "jacoco/testDebugUnitTest.exec",
-            "outputs/code-coverage/connected/*coverage.ec"
-    ])
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation Deps.kotlin_stdlib
-
-    implementation Deps.wearable_support_ui
-    implementation Deps.wearable_support
-    compileOnly Deps.wearable
-
-    testImplementation Deps.junit
-    testImplementation Deps.mockito_core
-    testImplementation Deps.mockito_kotlin
-    testImplementation Deps.truth
 }
