@@ -15,10 +15,4 @@ class BlackBackgroundViewHolder(itemView: View, private val dataProvider: DataPr
             dataProvider.setHasBlackBackground(isChecked)
         }
     }
-
-    init {
-        val layoutParams = itemView.layoutParams as ViewGroup.MarginLayoutParams
-        layoutParams.bottomMargin = itemView.context.resources.getDimensionPixelSize(R.dimen.bottom_margin)
-        itemView.layoutParams = layoutParams
-    }
 }

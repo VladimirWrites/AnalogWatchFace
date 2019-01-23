@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Switch xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/settings_switch"
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/settings_rate"
+        android:text="@string/rate_the_watch_face"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/screen_percentage_10"
         android:paddingEnd="@dimen/screen_percentage_10"
         android:paddingTop="@dimen/screen_percentage_05"
         android:paddingBottom="@dimen/screen_percentage_05"
+        android:layout_marginBottom="@dimen/bottom_margin"
+        android:drawableEnd="@drawable/ic_rating_star"
+        android:drawablePadding="@dimen/screen_percentage_05"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        style="@style/SwitchStyle"/>
+        style="@style/ButtonStyle"/>
