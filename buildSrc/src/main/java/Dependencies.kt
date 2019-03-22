@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlin = "1.3.20"
+    const val kotlin = "1.3.21"
 
     const val wearable_support = "2.4.0"
     const val wearable_support_ui = "28.0.0"
@@ -8,20 +8,20 @@ object Versions {
     const val junit = "4.12"
     const val mockito_core = "2.23.4"
     const val mockito_kotlin = "2.1.0"
-    const val truth = "0.42"
+    const val truth = "0.43"
 
-    const val gradle_android = "3.3.0"
+    const val gradle_android = "3.3.2"
 
-    const val jacoco = "0.8.2"
+    const val jacoco = "0.8.3"
 
     const val min_sdk = 24
     const val target_sdk = 28
     const val compile_sdk = 28
     const val build_tools = "28.0.3"
 
-    const val version_code_app = 1410
-    const val version_code_wear = 1411
-    const val version_name = "1.4.1"
+    const val version_code_app = 1420
+    const val version_code_wear = 1421
+    const val version_name = "1.4.2"
 }
 
 object Deps {
