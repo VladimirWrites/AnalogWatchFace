@@ -2,11 +2,11 @@ package com.vlad1m1r.watchface.config.viewholders
 
 import android.app.Activity
 import android.content.ComponentName
-import android.support.v7.widget.RecyclerView
 import android.support.wearable.complications.ComplicationHelperActivity
 import android.support.wearable.complications.ComplicationProviderInfo
 import android.view.View
 import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.WatchFace
 import com.vlad1m1r.watchface.config.COMPLICATION_CONFIG_REQUEST_CODE

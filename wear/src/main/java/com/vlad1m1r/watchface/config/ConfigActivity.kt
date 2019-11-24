@@ -5,11 +5,12 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.wear.widget.WearableRecyclerView
 import android.support.wearable.complications.ComplicationProviderInfo
 import android.support.wearable.complications.ProviderChooserIntent
 import android.support.wearable.complications.ProviderInfoRetriever
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.WatchFace
 import com.vlad1m1r.watchface.utils.COMPLICATION_SUPPORTED_TYPES
@@ -37,8 +38,9 @@ class ConfigActivity : Activity() {
 
         adapter = ConfigAdapter(dataProvider)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true
-            layoutManager = LinearLayoutManager(this@ConfigActivity)
+            isCircularScrollingGestureEnabled = true
         }
 
         wearableRecyclerView.adapter = adapter

@@ -1,6 +1,6 @@
 # Analog Watch Face for Wear OS
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/VladimirWrites/AnalogWatchFace/blob/master/LICENSE) 
-[![Kotlin](https://img.shields.io/badge/style-1.3.21-green.svg?style=flat&label=Kotlin)](https://kotlinlang.org) 
+[![Kotlin](https://img.shields.io/badge/style-1.3.60-green.svg?style=flat&label=Kotlin)](https://kotlinlang.org)
 [![Build Status](https://travis-ci.com/VladimirWrites/AnalogWatchFace.svg?branch=master)](https://travis-ci.com/VladimirWrites/AnalogWatchFace)
 
 Simple Analog Watch Face for Wear OS
@@ -15,7 +15,7 @@ This is an improved version of the demo project created for the Pluralsight's co
 Demo
 -----
 
-Demo application is available on Google Play.
+Demo application is available on Google Play Store.
 
 <a href='https://play.google.com/store/apps/details?id=com.vlad1m1r.watchface'>
     <img alt='Get it on Google Play' src='http://i.imgur.com/tka3Exw.png'/>

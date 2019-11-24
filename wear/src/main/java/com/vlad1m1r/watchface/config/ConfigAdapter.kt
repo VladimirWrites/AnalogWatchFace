@@ -1,9 +1,9 @@
 package com.vlad1m1r.watchface.config
 
-import android.support.v7.widget.RecyclerView
 import android.support.wearable.complications.ComplicationProviderInfo
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.config.viewholders.*
 import com.vlad1m1r.watchface.data.DataProvider
@@ -115,10 +115,17 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
     }
 
     fun updateSelectedComplication(complicationProviderInfo: ComplicationProviderInfo?) {
-        complicationsPickerViewHolder.updateComplicationViews(complicationProviderInfo)
+        if(::complicationsPickerViewHolder.isInitialized) {
+            complicationsPickerViewHolder.updateComplicationViews(complicationProviderInfo)
+        }
     }
 
     fun setComplication(complicationProviderInfo: ComplicationProviderInfo?, watchFaceComplicationId: Int) {
-        complicationsPickerViewHolder.setComplication(complicationProviderInfo, watchFaceComplicationId)
+        if(::complicationsPickerViewHolder.isInitialized) {
+            complicationsPickerViewHolder.setComplication(
+                complicationProviderInfo,
+                watchFaceComplicationId
+            )
+        }
     }
 }
