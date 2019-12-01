@@ -40,7 +40,7 @@ class ConfigActivity : Activity() {
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true
-            isCircularScrollingGestureEnabled = true
+            isCircularScrollingGestureEnabled = false
         }
 
         wearableRecyclerView.adapter = adapter

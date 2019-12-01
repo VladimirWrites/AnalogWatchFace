@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlin = "1.3.60"
+    const val kotlin = "1.3.61"
 
     const val wearable_support = "2.5.0"
     const val wearable_support_ui = "1.0.0"
@@ -20,8 +20,8 @@ object Versions {
     const val build_tools = "29.0.2"
 
     const val version_code_app = 1500
-    const val version_code_wear = 1501
-    const val version_name = "1.5.0"
+    const val version_code_wear = 1511
+    const val version_name = "1.5.1"
 }
 
 object Deps {
