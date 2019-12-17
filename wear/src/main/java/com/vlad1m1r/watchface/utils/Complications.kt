@@ -26,12 +26,18 @@ val COMPLICATION_SUPPORTED_TYPES = mapOf(
         ComplicationData.TYPE_SMALL_IMAGE
     ),
     TOP_COMPLICATION_ID to intArrayOf(
-        ComplicationData.TYPE_LONG_TEXT,
-        ComplicationData.TYPE_SMALL_IMAGE
+        ComplicationData.TYPE_RANGED_VALUE,
+        ComplicationData.TYPE_ICON,
+        ComplicationData.TYPE_SHORT_TEXT,
+        ComplicationData.TYPE_SMALL_IMAGE,
+        ComplicationData.TYPE_LONG_TEXT
     ),
     BOTTOM_COMPLICATION_ID to intArrayOf(
-        ComplicationData.TYPE_LONG_TEXT,
-        ComplicationData.TYPE_SMALL_IMAGE
+        ComplicationData.TYPE_RANGED_VALUE,
+        ComplicationData.TYPE_ICON,
+        ComplicationData.TYPE_SHORT_TEXT,
+        ComplicationData.TYPE_SMALL_IMAGE,
+        ComplicationData.TYPE_LONG_TEXT
     )
 )
 
@@ -51,6 +57,16 @@ class Complications(context: Context): WatchView(context) {
             setContext(context)
         })
     }
+    private val topBottomComplicationTypes = mutableMapOf<Int, Int>().apply {
+        put(
+            TOP_COMPLICATION_ID,
+            ComplicationData.TYPE_EMPTY
+        )
+        put(
+            BOTTOM_COMPLICATION_ID,
+            ComplicationData.TYPE_EMPTY
+        )
+    }
 
     fun setMode(mode: Mode) {
         COMPLICATION_SUPPORTED_TYPES.keys.forEach {
@@ -66,9 +82,17 @@ class Complications(context: Context): WatchView(context) {
         return complicationDrawables[id]?: throw IllegalArgumentException("Unsupported ComplicationDrawable id: $id")
     }
 
+    fun setComplicationData(id: Int, complicationData: ComplicationData?) {
+        if (topBottomComplicationTypes.containsKey(id)) {
+            topBottomComplicationTypes[id] = complicationData?.type ?: ComplicationData.TYPE_NOT_CONFIGURED
+        }
+        complicationDrawables[id]?.setComplicationData(complicationData)
+            ?: throw IllegalArgumentException("Unsupported ComplicationDrawable id: $id")
+    }
+
     override fun setCenter(center: Point) {
-        setBoundsToSmallComplications(center.x, center.y)
-        setBoundsToBigComplications(center.x, center.y)
+        setBoundsToLeftRightComplications(center.x, center.y)
+        setBoundsToTopBottomComplications(center.x, center.y)
     }
 
     fun draw(canvas: Canvas, currentTime: Long) {
@@ -77,7 +101,7 @@ class Complications(context: Context): WatchView(context) {
         }
     }
 
-    private fun setBoundsToSmallComplications(centerX: Float, centerY: Float) {
+    private fun setBoundsToLeftRightComplications(centerX: Float, centerY: Float) {
         val sizeOfComplication = centerX.toInt() / 2
         val horizontalOffset = (centerX.toInt() - sizeOfComplication) / 2
         val verticalOffset = centerY.toInt() - sizeOfComplication / 2
@@ -100,25 +124,49 @@ class Complications(context: Context): WatchView(context) {
         complicationDrawables[RIGHT_COMPLICATION_ID]!!.bounds = rightBounds
     }
 
-    private fun setBoundsToBigComplications(centerX: Float, centerY: Float) {
-        val heightOfComplication = centerX.toInt() / 3
-        val widthOfComplication = centerX.toInt()
-        val horizontalOffset = centerX.toInt()/2
-        val verticalOffset = (centerY.toInt() - heightOfComplication) / 2
+    private fun setBoundsToTopBottomComplications(centerX: Float, centerY: Float) {
+        val sizeOfComplicationSmall = centerX.toInt() / 2
+        val horizontalOffsetSmall = centerX.toInt() - (sizeOfComplicationSmall / 2)
+        val verticalOffsetSmall = (centerY.toInt() - sizeOfComplicationSmall) / 2
 
-        val topBounds = Rect(
-            horizontalOffset,
-            verticalOffset,
-            horizontalOffset + widthOfComplication,
-            verticalOffset + heightOfComplication
-        )
+        val heightOfComplicationLarge = centerX.toInt() / 3
+        val widthOfComplicationLarge = centerX.toInt()
+        val horizontalOffsetLarge = centerX.toInt() / 2
+        val verticalOffsetLarge = (centerY.toInt() - heightOfComplicationLarge) / 2
 
-        val bottomBounds = Rect(
-            horizontalOffset,
-            centerY.toInt() + verticalOffset,
-            horizontalOffset + widthOfComplication,
-            centerY.toInt() + verticalOffset + heightOfComplication
-        )
+        val topBounds =
+            if (topBottomComplicationTypes[TOP_COMPLICATION_ID] == ComplicationData.TYPE_LONG_TEXT) {
+                Rect(
+                    horizontalOffsetLarge,
+                    verticalOffsetLarge,
+                    horizontalOffsetLarge + widthOfComplicationLarge,
+                    verticalOffsetLarge + heightOfComplicationLarge
+                )
+            } else {
+                Rect(
+                    horizontalOffsetSmall,
+                    verticalOffsetSmall,
+                    horizontalOffsetSmall + sizeOfComplicationSmall,
+                    verticalOffsetSmall + sizeOfComplicationSmall
+                )
+            }
+
+        val bottomBounds =
+            if (topBottomComplicationTypes[BOTTOM_COMPLICATION_ID] == ComplicationData.TYPE_LONG_TEXT) {
+                Rect(
+                    horizontalOffsetLarge,
+                    centerY.toInt() + verticalOffsetLarge,
+                    horizontalOffsetLarge + widthOfComplicationLarge,
+                    centerY.toInt() + verticalOffsetLarge + heightOfComplicationLarge
+                )
+            } else {
+                Rect(
+                    horizontalOffsetSmall,
+                    centerY.toInt() + verticalOffsetSmall,
+                    horizontalOffsetSmall + sizeOfComplicationSmall,
+                    centerY.toInt() + verticalOffsetSmall + sizeOfComplicationSmall
+                )
+            }
 
         complicationDrawables[TOP_COMPLICATION_ID]!!.bounds = topBounds
         complicationDrawables[BOTTOM_COMPLICATION_ID]!!.bounds = bottomBounds
