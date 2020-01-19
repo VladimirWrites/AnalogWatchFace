@@ -3,6 +3,7 @@
 
     <string name="edit_complication">Edit Complication %s</string>
     <string name="add_complication">Add Complication</string>
+    <string name="layout2">Show layout2</string>
     <string name="complications_in_ambient_mode">Complications in Ambient Mode</string>
     <string name="ticks_in_ambient_mode">Ticks in Ambient Mode</string>
     <string name="ticks_in_interactive_mode">Ticks in Interactive Mode</string>

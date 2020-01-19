@@ -1,7 +1,9 @@
 package com.vlad1m1r.watchface
 
 import android.content.Context
-import android.graphics.*
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import android.graphics.Canvas
+import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -12,8 +14,8 @@ import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
 import com.vlad1m1r.watchface.data.DataProvider
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
+import com.vlad1m1r.watchface.data.KEY_IS_LAYOUT2
 import com.vlad1m1r.watchface.utils.*
-import com.vlad1m1r.watchface.utils.Point
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -41,10 +43,7 @@ class WatchFace : CanvasWatchFaceService() {
 
     inner class Engine : CanvasWatchFaceService.Engine() {
 
-        private lateinit var background: Background
-        private lateinit var complications: Complications
-        private lateinit var ticks: Ticks
-        private lateinit var hands: Hands
+        private lateinit var layouts: Layouts
 
         private lateinit var calendar: Calendar
 
@@ -53,6 +52,15 @@ class WatchFace : CanvasWatchFaceService() {
         private val mode: Mode = Mode()
 
         private lateinit var dataProvider: DataProvider
+
+        private val prefsChangeListener =
+            OnSharedPreferenceChangeListener { _, key ->
+                // only update layouts if the changed preference is the preference
+                // to choose the layouts
+                if (key == KEY_IS_LAYOUT2) {
+                    layouts.update()
+                }
+            }
 
         override fun onCreate(holder: SurfaceHolder) {
             super.onCreate(holder)
@@ -68,19 +76,22 @@ class WatchFace : CanvasWatchFaceService() {
             )
             dataProvider = DataProvider(sharedPref)
             calendar = Calendar.getInstance()
-
-            background = Background(dataProvider)
-            ticks = Ticks(this@WatchFace)
-            complications = Complications(this@WatchFace)
-            hands = Hands(this@WatchFace, dataProvider)
+            layouts = Layouts(dataProvider, this@WatchFace)
 
             setActiveComplications(*COMPLICATION_SUPPORTED_TYPES.keys.toIntArray())
 
             updateTimeHandler.sendEmptyMessage(MESSAGE_UPDATE_ID)
+
+            sharedPref.registerOnSharedPreferenceChangeListener(prefsChangeListener)
         }
 
         override fun onDestroy() {
             updateTimeHandler.removeMessages(MESSAGE_UPDATE_ID)
+            val sharedPref = getSharedPreferences(
+                KEY_ANALOG_WATCH_FACE,
+                Context.MODE_PRIVATE
+            )
+            sharedPref.unregisterOnSharedPreferenceChangeListener(prefsChangeListener)
             super.onDestroy()
         }
 
@@ -119,7 +130,7 @@ class WatchFace : CanvasWatchFaceService() {
             when (tapType) {
                 WatchFaceService.TAP_TYPE_TAP -> {
                     COMPLICATION_SUPPORTED_TYPES.keys.forEach {
-                        val successfulTap = complications[it].onTap(x, y)
+                        val successfulTap = layouts.complications[it].onTap(x, y)
                         if (successfulTap) {
                             return
                         }
@@ -131,25 +142,28 @@ class WatchFace : CanvasWatchFaceService() {
 
         override fun onDraw(canvas: Canvas, bounds: Rect) {
             calendar.timeInMillis = System.currentTimeMillis()
+            if (layouts.complications.centerInvalidated || layouts.ticks.centerInvalidated) {
+                val center = Point(canvas.width / 2f, canvas.height / 2f)
+                layouts.complications.setCenter(center)
+                layouts.ticks.setCenter(center)
+            }
             canvas.save()
-            background.draw(canvas)
+            layouts.background.draw(canvas)
             if ((mode.isAmbient && dataProvider.hasTicksInAmbientMode()) ||
                 (!mode.isAmbient && dataProvider.hasTicksInInteractiveMode())
             ) {
-                ticks.draw(canvas)
+                layouts.ticks.draw(canvas)
             }
             if (!mode.isAmbient || dataProvider.hasComplicationsInAmbientMode()) {
-                val center = Point(canvas.width / 2f, canvas.height / 2f)
-                complications.setCenter(center)
-                complications.draw(canvas, System.currentTimeMillis())
+                layouts.complications.draw(canvas, System.currentTimeMillis())
             }
-            hands.draw(canvas, calendar)
+            layouts.hands.draw(canvas, calendar)
             canvas.restore()
         }
 
         override fun onComplicationDataUpdate(watchFaceComplicationId: Int, data: ComplicationData?) {
             super.onComplicationDataUpdate(watchFaceComplicationId, data)
-            complications.setComplicationData(watchFaceComplicationId, data)
+            layouts.complications.setComplicationData(watchFaceComplicationId, data)
             invalidate()
         }
 
@@ -158,10 +172,10 @@ class WatchFace : CanvasWatchFaceService() {
 
             val center = Point(width / 2f, height / 2f)
 
-            background.setCenter(center)
-            ticks.setCenter(center)
-            complications.setCenter(center)
-            hands.setCenter(center)
+            layouts.background.setCenter(center)
+            layouts.ticks.setCenter(center)
+            layouts.complications.setCenter(center)
+            layouts.hands.setCenter(center)
         }
 
         private fun updateTimer() {
@@ -183,10 +197,10 @@ class WatchFace : CanvasWatchFaceService() {
         }
 
         private fun refreshMode() {
-            background.setMode(mode)
-            complications.setMode(mode)
-            ticks.setMode(mode)
-            hands.setMode(mode)
+            layouts.background.setMode(mode)
+            layouts.complications.setMode(mode)
+            layouts.ticks.setMode(mode)
+            layouts.hands.setMode(mode)
         }
     }
 }

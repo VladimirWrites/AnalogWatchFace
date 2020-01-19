@@ -12,8 +12,8 @@ abstract class WatchView(context: Context) {
 
     abstract fun setCenter(center: Point)
 
-    protected fun Paint.inAmbientMode() {
-        color = ambientColor
+    protected fun Paint.inAmbientMode(color: Int = ambientColor) {
+        this.color = color
         isAntiAlias = false
         clearShadowLayer()
     }

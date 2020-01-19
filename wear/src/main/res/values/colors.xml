@@ -5,14 +5,26 @@
     <color name="accent_color">#fe7682</color>
 
     <color name="watch_tick">#ffffff</color>
+    <color name="watch_design2_tick">#A8C5C5C5</color>
+    <color name="watch_design2_tick_minute">#54C5C5C5</color>
     <color name="watch_shadow">#000000</color>
 
     <color name="watch_hand_second">#ffffff</color>
     <color name="watch_hand_minute">#ffa17a</color>
+    <color name="watch_design2_hand_minute">#FFFFFF</color>
     <color name="watch_hand_hour">#fe7682</color>
+    <color name="watch_design2_hand_hour">#FFFFFF</color>
 
     <color name="watch_ambient">#ffffff</color>
     <color name="watch_ambient_gray">#aaaaaa</color>
     <color name="watch_complications">#ecede7</color>
+    <color name="watch_design2_complications">#B3ECEDE7</color>
+    <color name="watch_design2_complications_text">#E6FFFFFF</color>
+    <color name="watch_design2_complications_border">#54ECEDE7</color>
+    <color name="watch_design2_complications_border_ambient">#33ECEDE7</color>
     <color name="watch_complication_background">#33000000</color>
+
+    <color name="watch_design2_complications_ranged_primary">#54FFFFFF</color>
+    <color name="watch_design2_complications_ranged_secondary">@android:color/transparent</color>
+
 </resources>

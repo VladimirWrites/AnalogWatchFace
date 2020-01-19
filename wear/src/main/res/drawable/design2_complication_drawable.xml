@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<drawable class="android.support.wearable.complications.rendering.ComplicationDrawable"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:textColor="@color/watch_design2_complications_text"
+    app:titleColor="@color/watch_design2_complications"
+    app:iconColor="@color/watch_design2_complications"
+    app:borderColor="@color/watch_design2_complications_border"
+    app:rangedValuePrimaryColor="@color/watch_design2_complications_ranged_primary"
+    app:rangedValueSecondaryColor="@color/watch_design2_complications_ranged_secondary"
+    app:backgroundColor="@color/watch_complication_background">
+
+    <ambient
+        app:borderColor="@color/watch_design2_complications_border_ambient"
+        app:rangedValuePrimaryColor="@android:color/transparent"
+        app:rangedValueSecondaryColor="@android:color/transparent"
+        app:backgroundColor="@android:color/transparent"/>
+
+</drawable>
