@@ -72,7 +72,7 @@ class WatchFace : CanvasWatchFaceService() {
             background = Background(dataProvider)
             ticks = Ticks(this@WatchFace)
             complications = Complications(this@WatchFace)
-            hands = Hands(this@WatchFace)
+            hands = Hands(this@WatchFace, dataProvider)
 
             setActiveComplications(*COMPLICATION_SUPPORTED_TYPES.keys.toIntArray())
 

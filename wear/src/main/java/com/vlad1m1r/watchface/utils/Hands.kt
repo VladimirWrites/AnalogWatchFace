@@ -5,9 +5,10 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import androidx.core.content.ContextCompat
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.data.DataProvider
 import java.util.*
 
-class Hands(context: Context) : WatchView(context) {
+class Hands(context: Context, private val dataProvider: DataProvider) : WatchView(context) {
 
     private val secondColor = ContextCompat.getColor(context, R.color.watch_hand_second)
     private val minuteColor = ContextCompat.getColor(context, R.color.watch_hand_minute)
@@ -122,9 +123,10 @@ class Hands(context: Context) : WatchView(context) {
     }
 
     fun setMode(mode: Mode) {
-        if (mode.isAmbient) {
-            showSecondsHand = false
 
+        showSecondsHand = !mode.isAmbient && dataProvider.hasSecondHand()
+
+        if (mode.isAmbient) {
             hourPaint.inAmbientMode()
             minutePaint.inAmbientMode()
             secondPaint.inAmbientMode()
@@ -133,8 +135,6 @@ class Hands(context: Context) : WatchView(context) {
                 circlePaint.strokeWidth = 0f
             }
         } else {
-            showSecondsHand = true
-
             hourPaint.inInteractiveMode(hourColor)
             minutePaint.inInteractiveMode(minuteColor)
             secondPaint.inInteractiveMode(secondColor)

@@ -15,6 +15,7 @@ const val TYPE_TICKS_AMBIENT_MODE = 2
 const val TYPE_TICKS_INTERACTIVE_MODE = 3
 const val TYPE_BACKGROUND_BLACK = 4
 const val TYPE_RATE = 5
+const val TYPE_SECOND_HAND = 6
 
 class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -90,13 +91,23 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
                             ),
                         RateApp(parent.context)
                     )
+            TYPE_SECOND_HAND -> viewHolder =
+                SecondHandViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(
+                            R.layout.item_settings_switch,
+                            parent,
+                            false
+                        ),
+                    dataProvider
+                )
         }
 
         return viewHolder!!
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return 7
     }
 
     override fun getItemViewType(position: Int) =
@@ -106,7 +117,8 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
             2 -> TYPE_TICKS_AMBIENT_MODE
             3 -> TYPE_TICKS_INTERACTIVE_MODE
             4 -> TYPE_BACKGROUND_BLACK
-            5 -> TYPE_RATE
+            5 -> TYPE_SECOND_HAND
+            6 -> TYPE_RATE
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 

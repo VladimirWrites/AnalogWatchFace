@@ -8,6 +8,7 @@ private const val KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE = "has_complications_in_
 private const val KEY_HAS_TICKS_IN_AMBIENT_MODE = "has_ticks_in_ambient_mode"
 private const val KEY_HAS_TICKS_IN_INTERACTIVE_MODE = "has_ticks_in_interactive_mode"
 private const val KEY_HAS_BLACK_BACKGROUND = "has_black_background"
+private const val KEY_HAS_SECOND_HAND = "has_second_hand"
 
 class DataProvider(private val sharedPreferences: SharedPreferences) {
 
@@ -40,6 +41,14 @@ class DataProvider(private val sharedPreferences: SharedPreferences) {
     fun setHasBlackBackground(hasBlackBackground: Boolean) {
         val editor = sharedPreferences.edit()
         editor.putBoolean(KEY_HAS_BLACK_BACKGROUND, hasBlackBackground)
+        editor.apply()
+    }
+
+    fun hasSecondHand() = sharedPreferences.getBoolean(KEY_HAS_SECOND_HAND, true)
+
+    fun setHasSecondHand(hasSecondHand: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_HAS_SECOND_HAND, hasSecondHand)
         editor.apply()
     }
 }

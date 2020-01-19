@@ -14,7 +14,7 @@ class Background(private val dataProvider: DataProvider) {
 
     fun draw(canvas: Canvas) {
         if (dataProvider.hasBlackBackground() || (mode.isAmbient && (mode.isLowBitAmbient || mode.isBurnInProtection))) {
-            canvas.drawColor(android.graphics.Color.BLACK)
+            canvas.drawColor(Color.BLACK)
         } else if (mode.isAmbient) {
             if (!this::ambientBitmap.isInitialized) {
                 initializeAmbientBackground()
