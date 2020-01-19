@@ -139,6 +139,8 @@ class WatchFace : CanvasWatchFaceService() {
                 ticks.draw(canvas)
             }
             if (!mode.isAmbient || dataProvider.hasComplicationsInAmbientMode()) {
+                val center = Point(canvas.width / 2f, canvas.height / 2f)
+                complications.setCenter(center)
                 complications.draw(canvas, System.currentTimeMillis())
             }
             hands.draw(canvas, calendar)
@@ -147,7 +149,7 @@ class WatchFace : CanvasWatchFaceService() {
 
         override fun onComplicationDataUpdate(watchFaceComplicationId: Int, data: ComplicationData?) {
             super.onComplicationDataUpdate(watchFaceComplicationId, data)
-            complications[watchFaceComplicationId].setComplicationData(data)
+            complications.setComplicationData(watchFaceComplicationId, data)
             invalidate()
         }
 
