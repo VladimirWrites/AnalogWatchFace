@@ -5,12 +5,12 @@ object Versions {
     const val wearable_support_ui = "1.0.0"
     const val wearable = "2.5.0"
 
-    const val junit = "4.12"
-    const val mockito_core = "3.1.0"
+    const val junit = "4.13"
+    const val mockito_core = "3.2.4"
     const val mockito_kotlin = "2.2.0"
-    const val truth = "1.0"
+    const val truth = "1.0.1"
 
-    const val gradle_android = "3.3.2"
+    const val gradle_android = "3.5.3"
 
     const val jacoco = "0.8.5"
 
