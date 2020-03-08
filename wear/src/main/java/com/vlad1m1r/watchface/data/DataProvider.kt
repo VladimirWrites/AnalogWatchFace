@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 
 const val KEY_ANALOG_WATCH_FACE = "analog_watch_face_key"
 
-const val KEY_IS_LAYOUT2 = "is_layout2"
+const val KEY_WATCH_FACE_TYPE = "watch_face_type"
 private const val KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE = "has_complications_in_ambient_mode"
 private const val KEY_HAS_TICKS_IN_AMBIENT_MODE = "has_ticks_in_ambient_mode"
 private const val KEY_HAS_TICKS_IN_INTERACTIVE_MODE = "has_ticks_in_interactive_mode"
@@ -13,11 +13,13 @@ private const val KEY_HAS_SECOND_HAND = "has_second_hand"
 
 class DataProvider(private val sharedPreferences: SharedPreferences) {
 
-    fun isLayout2() = sharedPreferences.getBoolean(KEY_IS_LAYOUT2, true)
+    fun getWatchFaceType(): WatchFaceType {
+        return WatchFaceType.fromId(sharedPreferences.getInt(KEY_WATCH_FACE_TYPE, WatchFaceType.ORIGINAL.id))
+    }
 
-    fun setIsLayout2(isLayout2: Boolean) {
+    fun setWatchFaceType(watchFaceType: WatchFaceType) {
         val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_IS_LAYOUT2, isLayout2)
+        editor.putInt(KEY_WATCH_FACE_TYPE, watchFaceType.id)
         editor.apply()
     }
 

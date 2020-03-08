@@ -10,7 +10,7 @@ import com.vlad1m1r.watchface.data.DataProvider
 import java.lang.IllegalArgumentException
 
 const val TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG = 0
-const val TYPE_LAYOUT2 = 1
+const val TYPE_WATCH_FACE_PICKER = 1
 const val TYPE_COMPLICATIONS_AMBIENT_MODE = 2
 const val TYPE_TICKS_AMBIENT_MODE = 3
 const val TYPE_TICKS_INTERACTIVE_MODE = 4
@@ -18,9 +18,12 @@ const val TYPE_BACKGROUND_BLACK = 5
 const val TYPE_RATE = 6
 const val TYPE_SECOND_HAND = 7
 
-class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ConfigAdapter(private val dataProvider: DataProvider) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var complicationsPickerViewHolder: ComplicationsPickerViewHolder
+
+    private lateinit var watchFacePickerViewHolder: WatchFacePickerViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -39,8 +42,21 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
                 viewHolder = complicationsPickerViewHolder
             }
 
-            TYPE_LAYOUT2 -> viewHolder =
-                Layout2ViewHolder(
+            TYPE_WATCH_FACE_PICKER -> {
+                watchFacePickerViewHolder = WatchFacePickerViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(
+                            R.layout.item_settings_pick_watch_face,
+                            parent,
+                            false
+                        ),
+                    dataProvider
+                )
+                viewHolder = watchFacePickerViewHolder
+            }
+
+            TYPE_COMPLICATIONS_AMBIENT_MODE -> viewHolder =
+                ComplicationsAmbientViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
                             R.layout.item_settings_switch,
@@ -49,17 +65,6 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
                         ),
                     dataProvider
                 )
-
-            TYPE_COMPLICATIONS_AMBIENT_MODE -> viewHolder =
-                    ComplicationsAmbientViewHolder(
-                        LayoutInflater.from(parent.context)
-                            .inflate(
-                                R.layout.item_settings_switch,
-                                parent,
-                                false
-                            ),
-                        dataProvider
-                    )
 
             TYPE_TICKS_AMBIENT_MODE -> viewHolder = TicksAmbientViewHolder(
                 LayoutInflater.from(parent.context)
@@ -72,15 +77,15 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
             )
 
             TYPE_TICKS_INTERACTIVE_MODE -> viewHolder =
-                    TicksInteractiveViewHolder(
-                        LayoutInflater.from(parent.context)
-                            .inflate(
-                                R.layout.item_settings_switch,
-                                parent,
-                                false
-                            ),
-                        dataProvider
-                    )
+                TicksInteractiveViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(
+                            R.layout.item_settings_switch,
+                            parent,
+                            false
+                        ),
+                    dataProvider
+                )
 
             TYPE_BACKGROUND_BLACK -> viewHolder =
                 BlackBackgroundViewHolder(
@@ -94,15 +99,15 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
                 )
 
             TYPE_RATE -> viewHolder =
-                    RateViewHolder(
-                        LayoutInflater.from(parent.context)
-                            .inflate(
-                                R.layout.item_settings_rate,
-                                parent,
-                                false
-                            ),
-                        RateApp(parent.context)
-                    )
+                RateViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(
+                            R.layout.item_settings_rate,
+                            parent,
+                            false
+                        ),
+                    RateApp(parent.context)
+                )
             TYPE_SECOND_HAND -> viewHolder =
                 SecondHandViewHolder(
                     LayoutInflater.from(parent.context)
@@ -125,7 +130,7 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
     override fun getItemViewType(position: Int) =
         when (position) {
             0 -> TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG
-            1 -> TYPE_LAYOUT2
+            1 -> TYPE_WATCH_FACE_PICKER
             2 -> TYPE_COMPLICATIONS_AMBIENT_MODE
             3 -> TYPE_TICKS_AMBIENT_MODE
             4 -> TYPE_TICKS_INTERACTIVE_MODE
@@ -140,17 +145,26 @@ class ConfigAdapter(private val dataProvider: DataProvider) : RecyclerView.Adapt
     }
 
     fun updateSelectedComplication(complicationProviderInfo: ComplicationProviderInfo?) {
-        if(::complicationsPickerViewHolder.isInitialized) {
+        if (::complicationsPickerViewHolder.isInitialized) {
             complicationsPickerViewHolder.updateComplicationViews(complicationProviderInfo)
         }
     }
 
-    fun setComplication(complicationProviderInfo: ComplicationProviderInfo?, watchFaceComplicationId: Int) {
-        if(::complicationsPickerViewHolder.isInitialized) {
+    fun setComplication(
+        complicationProviderInfo: ComplicationProviderInfo?,
+        watchFaceComplicationId: Int
+    ) {
+        if (::complicationsPickerViewHolder.isInitialized) {
             complicationsPickerViewHolder.setComplication(
                 complicationProviderInfo,
                 watchFaceComplicationId
             )
+        }
+    }
+
+    fun updateWatchFacePicker() {
+        if (::watchFacePickerViewHolder.isInitialized) {
+            watchFacePickerViewHolder.refreshImage()
         }
     }
 }

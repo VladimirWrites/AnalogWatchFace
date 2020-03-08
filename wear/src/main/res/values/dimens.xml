@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="tick_length">4dp</dimen>
     <dimen name="design2_tick_length">12dp</dimen>
     <dimen name="tick_length_minute">8dp</dimen>

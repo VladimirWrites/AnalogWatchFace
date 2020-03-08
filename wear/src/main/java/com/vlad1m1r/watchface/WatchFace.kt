@@ -14,7 +14,7 @@ import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
 import com.vlad1m1r.watchface.data.DataProvider
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
-import com.vlad1m1r.watchface.data.KEY_IS_LAYOUT2
+import com.vlad1m1r.watchface.data.KEY_WATCH_FACE_TYPE
 import com.vlad1m1r.watchface.utils.*
 import java.lang.ref.WeakReference
 import java.util.*
@@ -57,7 +57,7 @@ class WatchFace : CanvasWatchFaceService() {
             OnSharedPreferenceChangeListener { _, key ->
                 // only update layouts if the changed preference is the preference
                 // to choose the layouts
-                if (key == KEY_IS_LAYOUT2) {
+                if (key == KEY_WATCH_FACE_TYPE) {
                     layouts.update()
                 }
             }

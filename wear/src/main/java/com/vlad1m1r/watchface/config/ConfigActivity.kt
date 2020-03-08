@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.wearable.complications.ComplicationProviderInfo
 import android.support.wearable.complications.ProviderChooserIntent
 import android.support.wearable.complications.ProviderInfoRetriever
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
@@ -19,6 +20,7 @@ import com.vlad1m1r.watchface.data.DataProvider
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 
 const val COMPLICATION_CONFIG_REQUEST_CODE = 1001
+const val FACE_PICKER_REQUEST_CODE = 1002
 
 class ConfigActivity : Activity() {
 
@@ -70,6 +72,9 @@ class ConfigActivity : Activity() {
                 data?.getParcelableExtra<ComplicationProviderInfo>(ProviderChooserIntent.EXTRA_PROVIDER_INFO)
             adapter.updateSelectedComplication(complicationProviderInfo)
 
+        }
+        if( requestCode == FACE_PICKER_REQUEST_CODE && resultCode == RESULT_OK) {
+            adapter.updateWatchFacePicker()
         }
     }
 
