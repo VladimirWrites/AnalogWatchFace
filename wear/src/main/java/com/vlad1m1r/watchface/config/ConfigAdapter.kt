@@ -135,8 +135,8 @@ class ConfigAdapter(private val dataProvider: DataProvider) :
             3 -> TYPE_TICKS_AMBIENT_MODE
             4 -> TYPE_TICKS_INTERACTIVE_MODE
             5 -> TYPE_BACKGROUND_BLACK
-            6 -> TYPE_RATE
-            7 -> TYPE_SECOND_HAND
+            6 -> TYPE_SECOND_HAND
+            7 -> TYPE_RATE
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
