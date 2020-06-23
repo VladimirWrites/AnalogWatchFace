@@ -12,9 +12,11 @@ import com.vlad1m1r.watchface.data.DataProvider
 import com.vlad1m1r.watchface.facepicker.FacePickerActivity
 
 class WatchFacePickerViewHolder(itemView: View, val dataProvider: DataProvider): RecyclerView.ViewHolder(itemView) {
-    private val watchFacePicker = itemView.findViewById<ConstraintLayout>(R.id.settings_watch_face_picker).apply {
-        val intent = Intent(itemView.context, FacePickerActivity::class.java)
-        setOnClickListener { (itemView.context as Activity).startActivityForResult(intent, FACE_PICKER_REQUEST_CODE) }
+    init {
+        itemView.findViewById<ConstraintLayout>(R.id.settings_watch_face_picker).apply {
+            val intent = Intent(itemView.context, FacePickerActivity::class.java)
+            setOnClickListener { (itemView.context as Activity).startActivityForResult(intent, FACE_PICKER_REQUEST_CODE) }
+        }
     }
 
     private val image = itemView.findViewById<ImageView>(R.id.image_watch_face).apply {
