@@ -8,8 +8,8 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/activity_config_padding"
             android:layout_marginTop="@dimen/activity_config_padding_small"
-            android:layout_marginLeft="@dimen/activity_config_padding_small"
-            android:layout_marginRight="@dimen/activity_config_padding_small"
+            android:layout_marginStart="@dimen/activity_config_padding_small"
+            android:layout_marginEnd="@dimen/activity_config_padding_small"
             android:background="@drawable/background"/>
 
     <View
@@ -17,15 +17,15 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/activity_config_padding"
             android:layout_marginTop="@dimen/activity_config_padding_small"
-            android:layout_marginLeft="@dimen/activity_config_padding_small"
-            android:layout_marginRight="@dimen/activity_config_padding_small"
+            android:layout_marginStart="@dimen/activity_config_padding_small"
+            android:layout_marginEnd="@dimen/activity_config_padding_small"
             android:background="@drawable/preview_clock"/>
 
     <ImageView
             android:id="@+id/left_complication"
             android:layout_width="@dimen/complication_preview_size"
             android:layout_height="@dimen/complication_preview_size"
-            android:layout_marginLeft="@dimen/complication_preview_margin_horizontal"
+            android:layout_marginStart="@dimen/complication_preview_margin_horizontal"
             android:layout_gravity="center_vertical|start"
             android:scaleType="centerInside"
             android:src="@drawable/add_complication"
@@ -35,7 +35,7 @@
             android:id="@+id/right_complication"
             android:layout_width="@dimen/complication_preview_size"
             android:layout_height="@dimen/complication_preview_size"
-            android:layout_marginRight="@dimen/complication_preview_margin_horizontal"
+            android:layout_marginEnd="@dimen/complication_preview_margin_horizontal"
             android:layout_gravity="center_vertical|end"
             android:scaleType="centerInside"
             android:src="@drawable/add_complication"
