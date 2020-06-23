@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.config.FACE_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.data.DataProvider
 import com.vlad1m1r.watchface.data.WatchFaceType
 
