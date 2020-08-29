@@ -24,7 +24,7 @@ const val FACE_PICKER_REQUEST_CODE: Int = 1002
 class ConfigActivity : Activity() {
 
     private lateinit var wearableRecyclerView: WearableRecyclerView
-    private lateinit var adapter: ConfigAdapter
+    internal lateinit var adapter: ConfigAdapter
     private lateinit var providerInfoRetriever: ProviderInfoRetriever
 
     override fun onCreate(savedInstanceState: Bundle?) {
