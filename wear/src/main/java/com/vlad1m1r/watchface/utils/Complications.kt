@@ -6,12 +6,12 @@ import android.graphics.Rect
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.rendering.ComplicationDrawable
 
-const val LEFT_COMPLICATION_ID = 100
-const val RIGHT_COMPLICATION_ID = 101
-const val TOP_COMPLICATION_ID = 102
-const val BOTTOM_COMPLICATION_ID = 103
+const val LEFT_COMPLICATION_ID: Int = 100
+const val RIGHT_COMPLICATION_ID: Int = 101
+const val TOP_COMPLICATION_ID: Int = 102
+const val BOTTOM_COMPLICATION_ID: Int = 103
 
-val COMPLICATION_SUPPORTED_TYPES = mapOf(
+val COMPLICATION_SUPPORTED_TYPES: Map<Int, IntArray> = mapOf(
     LEFT_COMPLICATION_ID to intArrayOf(
         ComplicationData.TYPE_RANGED_VALUE,
         ComplicationData.TYPE_ICON,
@@ -49,7 +49,7 @@ class Complications(val context: Context): WatchView(context) {
         put(BOTTOM_COMPLICATION_ID, null)
     }
     private val complicationData = mutableMapOf<Int, ComplicationData?>()
-    var centerInvalidated = true
+    var centerInvalidated: Boolean = true
         private set
 
     fun setMode(mode: Mode) {
@@ -92,7 +92,7 @@ class Complications(val context: Context): WatchView(context) {
 
     fun draw(canvas: Canvas, currentTime: Long) {
         COMPLICATION_SUPPORTED_TYPES.keys.forEach {
-            complicationDrawables[it]!!.draw(canvas, currentTime)
+            complicationDrawables[it]?.draw(canvas, currentTime)
         }
     }
 
@@ -115,8 +115,8 @@ class Complications(val context: Context): WatchView(context) {
             verticalOffset + sizeOfComplication
         )
 
-        complicationDrawables[LEFT_COMPLICATION_ID]!!.bounds = leftBounds
-        complicationDrawables[RIGHT_COMPLICATION_ID]!!.bounds = rightBounds
+        complicationDrawables[LEFT_COMPLICATION_ID]?.bounds = leftBounds
+        complicationDrawables[RIGHT_COMPLICATION_ID]?.bounds = rightBounds
     }
 
     private fun setBoundsToTopBottomComplications(centerX: Float, centerY: Float) {
@@ -163,7 +163,7 @@ class Complications(val context: Context): WatchView(context) {
                 )
             }
 
-        complicationDrawables[TOP_COMPLICATION_ID]!!.bounds = topBounds
-        complicationDrawables[BOTTOM_COMPLICATION_ID]!!.bounds = bottomBounds
+        complicationDrawables[TOP_COMPLICATION_ID]?.bounds = topBounds
+        complicationDrawables[BOTTOM_COMPLICATION_ID]?.bounds = bottomBounds
     }
 }

@@ -12,7 +12,7 @@ class HandsCalculationsSecondsShould(private val timeInMillis: Long, private val
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data() = listOf(
+        fun data(): List<Array<out Any>> = listOf(
             arrayOf(1540054913000, 318),
             arrayOf(1540054713000, 198),
             arrayOf(1540014613000, 78),
@@ -26,7 +26,7 @@ class HandsCalculationsSecondsShould(private val timeInMillis: Long, private val
         )
     }
 
-    val calendar = Calendar.getInstance().apply {
+    private val calendar: Calendar = Calendar.getInstance().apply {
         timeZone = TimeZone.getTimeZone("CET")
     }
 

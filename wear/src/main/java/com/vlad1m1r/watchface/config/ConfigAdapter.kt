@@ -9,14 +9,14 @@ import com.vlad1m1r.watchface.config.viewholders.*
 import com.vlad1m1r.watchface.data.DataProvider
 import java.lang.IllegalArgumentException
 
-const val TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG = 0
-const val TYPE_WATCH_FACE_PICKER = 1
-const val TYPE_COMPLICATIONS_AMBIENT_MODE = 2
-const val TYPE_TICKS_AMBIENT_MODE = 3
-const val TYPE_TICKS_INTERACTIVE_MODE = 4
-const val TYPE_BACKGROUND_BLACK = 5
-const val TYPE_RATE = 6
-const val TYPE_SECOND_HAND = 7
+const val TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG: Int = 0
+const val TYPE_WATCH_FACE_PICKER: Int = 1
+const val TYPE_COMPLICATIONS_AMBIENT_MODE: Int = 2
+const val TYPE_TICKS_AMBIENT_MODE: Int = 3
+const val TYPE_TICKS_INTERACTIVE_MODE: Int = 4
+const val TYPE_BACKGROUND_BLACK: Int = 5
+const val TYPE_RATE: Int = 6
+const val TYPE_SECOND_HAND: Int = 7
 
 class ConfigAdapter(private val dataProvider: DataProvider) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -127,7 +127,7 @@ class ConfigAdapter(private val dataProvider: DataProvider) :
         return 8
     }
 
-    override fun getItemViewType(position: Int) =
+    override fun getItemViewType(position: Int): Int =
         when (position) {
             0 -> TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG
             1 -> TYPE_WATCH_FACE_PICKER

@@ -2,9 +2,9 @@ package com.vlad1m1r.watchface.data
 
 import android.content.SharedPreferences
 
-const val KEY_ANALOG_WATCH_FACE = "analog_watch_face_key"
+const val KEY_ANALOG_WATCH_FACE: String = "analog_watch_face_key"
 
-const val KEY_WATCH_FACE_TYPE = "watch_face_type"
+const val KEY_WATCH_FACE_TYPE: String = "watch_face_type"
 private const val KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE = "has_complications_in_ambient_mode"
 private const val KEY_HAS_TICKS_IN_AMBIENT_MODE = "has_ticks_in_ambient_mode"
 private const val KEY_HAS_TICKS_IN_INTERACTIVE_MODE = "has_ticks_in_interactive_mode"
@@ -23,7 +23,7 @@ class DataProvider(private val sharedPreferences: SharedPreferences) {
         editor.apply()
     }
 
-    fun hasComplicationsInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE, true)
+    fun hasComplicationsInAmbientMode(): Boolean = sharedPreferences.getBoolean(KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE, true)
 
     fun setHasComplicationsInAmbientMode(complicationsInAmbientMode: Boolean) {
         val editor = sharedPreferences.edit()
@@ -31,7 +31,7 @@ class DataProvider(private val sharedPreferences: SharedPreferences) {
         editor.apply()
     }
 
-    fun hasTicksInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_AMBIENT_MODE, true)
+    fun hasTicksInAmbientMode(): Boolean = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_AMBIENT_MODE, true)
 
     fun setHasTicksInAmbientMode(ticksInAmbientMode: Boolean) {
         val editor = sharedPreferences.edit()
@@ -39,7 +39,7 @@ class DataProvider(private val sharedPreferences: SharedPreferences) {
         editor.apply()
     }
 
-    fun hasTicksInInteractiveMode() = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_INTERACTIVE_MODE, true)
+    fun hasTicksInInteractiveMode(): Boolean = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_INTERACTIVE_MODE, true)
 
     fun setHasTicksInInteractiveMode(ticksInInteractiveMode: Boolean) {
         val editor = sharedPreferences.edit()
@@ -47,7 +47,7 @@ class DataProvider(private val sharedPreferences: SharedPreferences) {
         editor.apply()
     }
 
-    fun hasBlackBackground() = sharedPreferences.getBoolean(KEY_HAS_BLACK_BACKGROUND, false)
+    fun hasBlackBackground(): Boolean = sharedPreferences.getBoolean(KEY_HAS_BLACK_BACKGROUND, false)
 
     fun setHasBlackBackground(hasBlackBackground: Boolean) {
         val editor = sharedPreferences.edit()
@@ -55,7 +55,7 @@ class DataProvider(private val sharedPreferences: SharedPreferences) {
         editor.apply()
     }
 
-    fun hasSecondHand() = sharedPreferences.getBoolean(KEY_HAS_SECOND_HAND, true)
+    fun hasSecondHand(): Boolean = sharedPreferences.getBoolean(KEY_HAS_SECOND_HAND, true)
 
     fun setHasSecondHand(hasSecondHand: Boolean) {
         val editor = sharedPreferences.edit()

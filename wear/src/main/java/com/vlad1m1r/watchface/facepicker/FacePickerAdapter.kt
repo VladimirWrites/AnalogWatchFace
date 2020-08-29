@@ -9,7 +9,7 @@ import com.vlad1m1r.watchface.data.WatchFaceType.ORIGINAL
 import com.vlad1m1r.watchface.data.WatchFaceType.WATCH_FACE_1
 import kotlin.IllegalArgumentException
 
-const val TYPE_FACE = 0
+const val TYPE_FACE: Int = 0
 
 class FacePickerAdapter(private val dataProvider: DataProvider) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -37,7 +37,7 @@ class FacePickerAdapter(private val dataProvider: DataProvider) :
         return 2
     }
 
-    override fun getItemViewType(position: Int) =
+    override fun getItemViewType(position: Int): Int =
         when (position) {
             0, 1 -> TYPE_FACE
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
