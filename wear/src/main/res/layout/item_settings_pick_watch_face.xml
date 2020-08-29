@@ -8,7 +8,6 @@
         android:foreground="?android:attr/selectableItemBackgroundBorderless">
 
     <TextView
-            android:id="@+id/text_watch_face_picker"
             style="@style/TextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

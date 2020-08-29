@@ -6,7 +6,6 @@
     <dimen name="tick_length_minute">8dp</dimen>
     <dimen name="shadow_radius">1dp</dimen>
     <dimen name="tick_width">1dp</dimen>
-    <dimen name="design2_tick_width">2dp</dimen>
     <dimen name="design2_tick_width_minute">2dp</dimen>
 
     <dimen name="hand_width_second">1dp</dimen>
