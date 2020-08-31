@@ -3,6 +3,8 @@ package com.vlad1m1r.watchface.facepicker
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.support.wearable.input.RotaryEncoder
+import android.view.MotionEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +13,7 @@ import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataProvider
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
+import kotlin.math.roundToInt
 
 
 class FacePickerActivity : Activity() {
@@ -42,5 +45,14 @@ class FacePickerActivity : Activity() {
         snapHelper.attachToRecyclerView(wearableRecyclerView)
 
         wearableRecyclerView.adapter = adapter
+    }
+
+    override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
+        if (event?.action == MotionEvent.ACTION_SCROLL && RotaryEncoder.isFromRotaryEncoder(event)) {
+            val delta = -RotaryEncoder.getRotaryAxisValue(event) * RotaryEncoder.getScaledScrollFactor(this)
+            wearableRecyclerView.scrollBy(0, delta.roundToInt())
+            return true
+        }
+        return super.onGenericMotionEvent(event)
     }
 }
