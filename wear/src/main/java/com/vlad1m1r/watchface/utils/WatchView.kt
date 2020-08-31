@@ -6,8 +6,8 @@ import androidx.core.content.ContextCompat
 import com.vlad1m1r.watchface.R
 
 abstract class WatchView(context: Context) {
-    protected val shadowColor: Int = ContextCompat.getColor(context, R.color.watch_shadow)
-    protected val shadowRadius: Float = context.resources.getDimension(R.dimen.shadow_radius)
+    protected val shadowColor = ContextCompat.getColor(context, R.color.watch_shadow)
+    protected val shadowRadius = context.resources.getDimension(R.dimen.shadow_radius)
     private val ambientColor = ContextCompat.getColor(context, R.color.watch_ambient)
 
     abstract fun setCenter(center: Point)

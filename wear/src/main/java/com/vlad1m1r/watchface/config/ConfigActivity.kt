@@ -18,8 +18,8 @@ import java.util.concurrent.Executors
 import com.vlad1m1r.watchface.data.DataProvider
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 
-const val COMPLICATION_CONFIG_REQUEST_CODE: Int = 1001
-const val FACE_PICKER_REQUEST_CODE: Int = 1002
+const val COMPLICATION_CONFIG_REQUEST_CODE = 1001
+const val FACE_PICKER_REQUEST_CODE = 1002
 
 class ConfigActivity : Activity() {
 

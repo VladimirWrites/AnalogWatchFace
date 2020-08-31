@@ -6,12 +6,12 @@ import android.graphics.Rect
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.rendering.ComplicationDrawable
 
-const val LEFT_COMPLICATION_ID: Int = 100
-const val RIGHT_COMPLICATION_ID: Int = 101
-const val TOP_COMPLICATION_ID: Int = 102
-const val BOTTOM_COMPLICATION_ID: Int = 103
+const val LEFT_COMPLICATION_ID = 100
+const val RIGHT_COMPLICATION_ID = 101
+const val TOP_COMPLICATION_ID = 102
+const val BOTTOM_COMPLICATION_ID = 103
 
-val COMPLICATION_SUPPORTED_TYPES: Map<Int, IntArray> = mapOf(
+val COMPLICATION_SUPPORTED_TYPES = mapOf(
     LEFT_COMPLICATION_ID to intArrayOf(
         ComplicationData.TYPE_RANGED_VALUE,
         ComplicationData.TYPE_ICON,
@@ -49,7 +49,7 @@ class Complications(val context: Context): WatchView(context) {
         put(BOTTOM_COMPLICATION_ID, null)
     }
     private val complicationData = mutableMapOf<Int, ComplicationData?>()
-    var centerInvalidated: Boolean = true
+    var centerInvalidated = true
         private set
 
     fun setMode(mode: Mode) {
