@@ -104,7 +104,7 @@ class ComplicationsPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(it
 
     fun updateComplicationViews(complicationProviderInfo: ComplicationProviderInfo?) {
         if (selectedComplication != null) {
-            setComplication(complicationProviderInfo, selectedComplication?.id ?: return)
+            setComplication(complicationProviderInfo, selectedComplication?.id ?: throw IllegalArgumentException())
         }
     }
 }
