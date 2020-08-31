@@ -20,7 +20,7 @@ class FacePickerActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_config)
+        setContentView(R.layout.activity_face_picker)
 
         val sharedPref = getSharedPreferences(
             KEY_ANALOG_WATCH_FACE,

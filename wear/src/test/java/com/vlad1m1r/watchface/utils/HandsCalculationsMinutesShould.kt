@@ -26,7 +26,7 @@ class HandsCalculationsMinutesShould(private val timeInMillis: Long, private val
         )
     }
 
-    val calendar = Calendar.getInstance().apply {
+    val calendar: Calendar = Calendar.getInstance().apply {
         timeZone = TimeZone.getTimeZone("CET")
     }
 

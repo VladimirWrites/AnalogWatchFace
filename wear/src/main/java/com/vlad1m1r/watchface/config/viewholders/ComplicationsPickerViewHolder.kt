@@ -86,7 +86,7 @@ class ComplicationsPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(it
                 itemView.context,
                 ComponentName(itemView.context, WatchFace::class.java),
                 complicationLocation.id,
-                *COMPLICATION_SUPPORTED_TYPES[complicationLocation.id]!!
+                *COMPLICATION_SUPPORTED_TYPES.getValue(complicationLocation.id)
             ),
             COMPLICATION_CONFIG_REQUEST_CODE
         )
@@ -104,7 +104,7 @@ class ComplicationsPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(it
 
     fun updateComplicationViews(complicationProviderInfo: ComplicationProviderInfo?) {
         if (selectedComplication != null) {
-            setComplication(complicationProviderInfo, selectedComplication!!.id)
+            setComplication(complicationProviderInfo, selectedComplication?.id ?: throw IllegalArgumentException())
         }
     }
 }

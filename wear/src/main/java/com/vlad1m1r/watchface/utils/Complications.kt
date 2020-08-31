@@ -92,7 +92,7 @@ class Complications(val context: Context): WatchView(context) {
 
     fun draw(canvas: Canvas, currentTime: Long) {
         COMPLICATION_SUPPORTED_TYPES.keys.forEach {
-            complicationDrawables[it]!!.draw(canvas, currentTime)
+            complicationDrawables[it]?.draw(canvas, currentTime)
         }
     }
 
@@ -115,8 +115,8 @@ class Complications(val context: Context): WatchView(context) {
             verticalOffset + sizeOfComplication
         )
 
-        complicationDrawables[LEFT_COMPLICATION_ID]!!.bounds = leftBounds
-        complicationDrawables[RIGHT_COMPLICATION_ID]!!.bounds = rightBounds
+        complicationDrawables[LEFT_COMPLICATION_ID]?.bounds = leftBounds
+        complicationDrawables[RIGHT_COMPLICATION_ID]?.bounds = rightBounds
     }
 
     private fun setBoundsToTopBottomComplications(centerX: Float, centerY: Float) {
@@ -163,7 +163,7 @@ class Complications(val context: Context): WatchView(context) {
                 )
             }
 
-        complicationDrawables[TOP_COMPLICATION_ID]!!.bounds = topBounds
-        complicationDrawables[BOTTOM_COMPLICATION_ID]!!.bounds = bottomBounds
+        complicationDrawables[TOP_COMPLICATION_ID]?.bounds = topBounds
+        complicationDrawables[BOTTOM_COMPLICATION_ID]?.bounds = bottomBounds
     }
 }
