@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.support.wearable.complications.ComplicationProviderInfo
 import android.support.wearable.complications.ProviderChooserIntent
 import android.support.wearable.complications.ProviderInfoRetriever
+import android.support.wearable.input.RotaryEncoder
+import android.view.MotionEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
@@ -17,6 +19,7 @@ import com.vlad1m1r.watchface.utils.COMPLICATION_SUPPORTED_TYPES
 import java.util.concurrent.Executors
 import com.vlad1m1r.watchface.data.DataProvider
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
+import kotlin.math.roundToInt
 
 const val COMPLICATION_CONFIG_REQUEST_CODE = 1001
 const val FACE_PICKER_REQUEST_CODE = 1002
@@ -75,6 +78,15 @@ class ConfigActivity : Activity() {
         if( requestCode == FACE_PICKER_REQUEST_CODE && resultCode == RESULT_OK) {
             adapter.updateWatchFacePicker()
         }
+    }
+
+    override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
+        if (event?.action == MotionEvent.ACTION_SCROLL && RotaryEncoder.isFromRotaryEncoder(event)) {
+            val delta = -RotaryEncoder.getRotaryAxisValue(event) * RotaryEncoder.getScaledScrollFactor(this)
+            wearableRecyclerView.scrollBy(0, delta.roundToInt())
+            return true
+        }
+        return super.onGenericMotionEvent(event)
     }
 
     override fun onDestroy() {
