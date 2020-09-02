@@ -1,16 +1,16 @@
 object Versions {
-    const val kotlin = "1.3.72"
+    const val kotlin = "1.4.0"
 
     const val wearable_support = "2.7.0"
     const val wearable_support_ui = "1.0.0"
     const val wearable = "2.7.0"
 
     const val junit = "4.13"
-    const val mockito_core = "3.3.3"
+    const val mockito_core = "3.5.7"
     const val mockito_kotlin = "2.2.0"
     const val truth = "1.0.1"
 
-    const val gradle_android = "4.0.0"
+    const val gradle_android = "4.0.1"
 
     const val jacoco = "0.8.5"
 
@@ -20,8 +20,8 @@ object Versions {
     const val build_tools = "29.0.2"
 
     const val version_code_app = 1500
-    const val version_code_wear = 1710
-    const val version_name = "1.7.1"
+    const val version_code_wear = 1800
+    const val version_name = "1.8.0"
 }
 
 object Deps {

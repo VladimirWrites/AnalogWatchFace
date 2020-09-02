@@ -13,16 +13,16 @@ class HandsCalculationsHoursShould(private val timeInMillis: Long, private val r
         @JvmStatic
         @Parameterized.Parameters
         fun data() = listOf(
-            arrayOf(1540114563000, 348),
-            arrayOf(1540255423100, 81.5f),
-            arrayOf(1540115913000, 359),
-            arrayOf(1540256898000, 94),
-            arrayOf(1540052710000, 192.5f),
-            arrayOf(1540050000000, 170),
-            arrayOf(1540214113100, 97.5f),
-            arrayOf(1540052913020, 194),
-            arrayOf(1540050213003, 171.5f),
-            arrayOf(1540054824123, 210)
+            arrayOf(1540114563000L, 348),
+            arrayOf(1540255423100L, 81.5f),
+            arrayOf(1540115913000L, 359),
+            arrayOf(1540256898000L, 94),
+            arrayOf(1540052710000L, 192.5f),
+            arrayOf(1540050000000L, 170),
+            arrayOf(1540214113100L, 97.5f),
+            arrayOf(1540052913020L, 194),
+            arrayOf(1540050213003L, 171.5f),
+            arrayOf(1540054824123L, 210)
         )
     }
 
