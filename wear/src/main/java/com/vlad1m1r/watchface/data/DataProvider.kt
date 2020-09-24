@@ -10,6 +10,7 @@ private const val KEY_HAS_TICKS_IN_AMBIENT_MODE = "has_ticks_in_ambient_mode"
 private const val KEY_HAS_TICKS_IN_INTERACTIVE_MODE = "has_ticks_in_interactive_mode"
 private const val KEY_HAS_BLACK_BACKGROUND = "has_black_background"
 private const val KEY_HAS_SECOND_HAND = "has_second_hand"
+private const val KEY_HAS_HANDS = "has_hands"
 
 class DataProvider(private val sharedPreferences: SharedPreferences) {
 
@@ -60,6 +61,14 @@ class DataProvider(private val sharedPreferences: SharedPreferences) {
     fun setHasSecondHand(hasSecondHand: Boolean) {
         val editor = sharedPreferences.edit()
         editor.putBoolean(KEY_HAS_SECOND_HAND, hasSecondHand)
+        editor.apply()
+    }
+
+    fun hasHands() = sharedPreferences.getBoolean(KEY_HAS_HANDS, true)
+
+    fun setHasHands(hasSecondHand: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_HAS_HANDS, hasSecondHand)
         editor.apply()
     }
 }

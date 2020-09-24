@@ -7,7 +7,9 @@
     <string name="complications_in_ambient_mode">Complications in Ambient Mode</string>
     <string name="ticks_in_ambient_mode">Ticks in Ambient Mode</string>
     <string name="ticks_in_interactive_mode">Ticks in Interactive Mode</string>
-    <string name="second_hand">Second hand</string>
+    <string name="hide_second_hand">Hide second hand</string>
+    <string name="hide_all_hands">Hide all hands</string>
+    <string name="hand_settings">Hand settings</string>
     <string name="background_black">Black background</string>
     <string name="rate_the_watch_face">Rate the Watch Face</string>
 </resources>

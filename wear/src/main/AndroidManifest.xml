@@ -58,6 +58,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".facepicker.FacePickerActivity"/>
+        <activity android:name=".hands.HandsActivity"/>
     </application>
 
 </manifest>

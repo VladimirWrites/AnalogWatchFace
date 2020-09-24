@@ -23,6 +23,7 @@ class Hands(context: Context, private val dataProvider: DataProvider) : WatchVie
     private val circleHandGap = context.resources.getDimension(R.dimen.circle_hand_gap)
 
     private var showSecondsHand = true
+    private var showHands = true
 
     private var hourPaint = Paint().apply {
         color = hourColor
@@ -81,6 +82,10 @@ class Hands(context: Context, private val dataProvider: DataProvider) : WatchVie
     }
 
     fun draw(canvas: Canvas, calendar: Calendar) {
+        if(!showHands) {
+            return
+        }
+
         val secondsRotation = calendar.secondsRotation()
         val minutesRotation = calendar.minutesRotation()
         val hoursRotation = calendar.hoursRotation()
@@ -125,6 +130,7 @@ class Hands(context: Context, private val dataProvider: DataProvider) : WatchVie
     fun setMode(mode: Mode) {
 
         showSecondsHand = !mode.isAmbient && dataProvider.hasSecondHand()
+        showHands = dataProvider.hasHands()
 
         if (mode.isAmbient) {
             hourPaint.inAmbientMode()

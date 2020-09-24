@@ -16,7 +16,7 @@ const val TYPE_TICKS_AMBIENT_MODE = 3
 const val TYPE_TICKS_INTERACTIVE_MODE = 4
 const val TYPE_BACKGROUND_BLACK = 5
 const val TYPE_RATE = 6
-const val TYPE_SECOND_HAND = 7
+const val TYPE_HANDS = 7
 
 class ConfigAdapter(private val dataProvider: DataProvider) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -108,15 +108,14 @@ class ConfigAdapter(private val dataProvider: DataProvider) :
                         ),
                     RateApp(parent.context)
                 )
-            TYPE_SECOND_HAND -> viewHolder =
-                SecondHandViewHolder(
+            TYPE_HANDS -> viewHolder =
+                HandsViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
-                            R.layout.item_settings_switch,
+                            R.layout.item_settings_text,
                             parent,
                             false
-                        ),
-                    dataProvider
+                        )
                 )
         }
 
@@ -135,7 +134,7 @@ class ConfigAdapter(private val dataProvider: DataProvider) :
             3 -> TYPE_TICKS_AMBIENT_MODE
             4 -> TYPE_TICKS_INTERACTIVE_MODE
             5 -> TYPE_BACKGROUND_BLACK
-            6 -> TYPE_SECOND_HAND
+            6 -> TYPE_HANDS
             7 -> TYPE_RATE
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
