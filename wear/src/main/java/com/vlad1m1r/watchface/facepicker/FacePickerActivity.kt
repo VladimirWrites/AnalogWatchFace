@@ -5,6 +5,8 @@ import android.content.Context
 import android.os.Bundle
 import android.support.wearable.input.RotaryEncoder
 import android.view.MotionEvent
+import android.view.ViewConfiguration
+import androidx.core.view.ViewConfigurationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -49,7 +51,9 @@ class FacePickerActivity : Activity() {
 
     override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
         if (event?.action == MotionEvent.ACTION_SCROLL && RotaryEncoder.isFromRotaryEncoder(event)) {
-            val delta = -RotaryEncoder.getRotaryAxisValue(event) * RotaryEncoder.getScaledScrollFactor(this)
+            val delta = -RotaryEncoder.getRotaryAxisValue(event) * ViewConfigurationCompat.getScaledVerticalScrollFactor(
+                ViewConfiguration.get(this), this
+            )
             wearableRecyclerView.scrollBy(0, delta.roundToInt())
             return true
         }

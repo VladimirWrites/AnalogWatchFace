@@ -10,6 +10,9 @@ import android.support.wearable.complications.ProviderChooserIntent
 import android.support.wearable.complications.ProviderInfoRetriever
 import android.support.wearable.input.RotaryEncoder
 import android.view.MotionEvent
+import android.view.ViewConfiguration
+import androidx.core.view.ViewConfigurationCompat.getScaledHorizontalScrollFactor
+import androidx.core.view.ViewConfigurationCompat.getScaledVerticalScrollFactor
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
@@ -82,7 +85,9 @@ class ConfigActivity : Activity() {
 
     override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
         if (event?.action == MotionEvent.ACTION_SCROLL && RotaryEncoder.isFromRotaryEncoder(event)) {
-            val delta = -RotaryEncoder.getRotaryAxisValue(event) * RotaryEncoder.getScaledScrollFactor(this)
+            val delta = -RotaryEncoder.getRotaryAxisValue(event) * getScaledVerticalScrollFactor(
+                ViewConfiguration.get(this), this
+            )
             wearableRecyclerView.scrollBy(0, delta.roundToInt())
             return true
         }
