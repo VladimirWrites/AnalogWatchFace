@@ -16,6 +16,15 @@ android {
         versionCode Versions.version_code_wear
         versionName Versions.version_name
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     buildTypes {
         debug {
             testCoverageEnabled true
@@ -61,8 +70,6 @@ task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'cre
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation Deps.kotlin_stdlib
 
     implementation Deps.wearable_support_ui

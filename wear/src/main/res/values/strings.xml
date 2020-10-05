@@ -3,13 +3,36 @@
 
     <string name="edit_complication">Edit Complication %s</string>
     <string name="add_complication">Add Complication</string>
-    <string name="watch_face_picker">Pick Watch Face</string>
+    <string name="ticks_layout_picker">Pick Ticks Layout</string>
+    <string name="bigger_top_and_bottom_complications">Even Wider Top and Bottom Complications</string>
     <string name="complications_in_ambient_mode">Complications in Ambient Mode</string>
     <string name="ticks_in_ambient_mode">Ticks in Ambient Mode</string>
     <string name="ticks_in_interactive_mode">Ticks in Interactive Mode</string>
     <string name="hide_second_hand">Hide second hand</string>
     <string name="hide_all_hands">Hide all hands</string>
     <string name="hand_settings">Hand settings</string>
-    <string name="background_black">Black background</string>
+    <string name="background_settings">Background settings</string>
+    <string name="complications_settings">Complications settings</string>
+    <string name="ticks_settings">Ticks settings</string>
     <string name="rate_the_watch_face">Rate the Watch Face</string>
+
+    <string name="hours_hand_color">Hours Hand Color</string>
+    <string name="minutes_hand_color">Minutes Hand Color</string>
+    <string name="seconds_hand_color">Seconds Hand Color</string>
+    <string name="central_circle_color">Central Circle Color</string>
+
+    <string name="left_background_color">Background Color Left</string>
+    <string name="right_background_color">Background Color Right</string>
+
+    <string name="hour_ticks_color">Hour Ticks Color</string>
+    <string name="minute_ticks_color">Minute Ticks Color</string>
+
+    <string name="complications_text_color">Complication Text Color</string>
+    <string name="complications_title_color">Complication Title Color</string>
+    <string name="complications_icon_color">Complication Icon Color</string>
+    <string name="complications_border_color">Complication Border Color</string>
+    <string name="complications_ranged_value_primary_color">Complication Ranged Value Primary Color</string>
+    <string name="complications_ranged_value_secondary_color">Complication Ranged Value Secondary Color</string>
+    <string name="complications_background_color">Complication Background Color</string>
+
 </resources>

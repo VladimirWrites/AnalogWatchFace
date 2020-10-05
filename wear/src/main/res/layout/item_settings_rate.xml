@@ -8,7 +8,6 @@
         android:paddingEnd="@dimen/screen_percentage_10"
         android:paddingTop="@dimen/screen_percentage_05"
         android:paddingBottom="@dimen/screen_percentage_05"
-        android:layout_marginBottom="@dimen/bottom_margin"
         android:drawableEnd="@drawable/ic_rating_star"
         android:drawablePadding="@dimen/screen_percentage_05"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"

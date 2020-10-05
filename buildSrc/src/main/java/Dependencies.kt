@@ -1,27 +1,27 @@
 object Versions {
-    const val kotlin = "1.4.0"
+    const val kotlin = "1.4.10"
 
-    const val wearable_support = "2.7.0"
-    const val wearable_support_ui = "1.0.0"
-    const val wearable = "2.7.0"
+    const val wearable_support = "2.8.1"
+    const val wearable_support_ui = "1.1.0"
+    const val wearable = "2.8.1"
 
-    const val junit = "4.13"
-    const val mockito_core = "3.5.7"
+    const val junit = "4.13.1"
+    const val mockito_core = "3.6.0"
     const val mockito_kotlin = "2.2.0"
-    const val truth = "1.0.1"
+    const val truth = "1.1"
 
-    const val gradle_android = "4.0.1"
+    const val gradle_android = "4.1.1"
 
     const val jacoco = "0.8.5"
 
     const val min_sdk = 24
-    const val target_sdk = 29
-    const val compile_sdk = 29
-    const val build_tools = "29.0.3"
+    const val target_sdk = 30
+    const val compile_sdk = 30
+    const val build_tools = "30.0.2"
 
     const val version_code_app = 1500
-    const val version_code_wear = 1900
-    const val version_name = "1.9.0"
+    const val version_code_wear = 2000
+    const val version_name = "2.0.0"
 }
 
 object Deps {

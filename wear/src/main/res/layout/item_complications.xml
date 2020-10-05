@@ -28,8 +28,7 @@
             android:layout_marginStart="@dimen/complication_preview_margin_horizontal"
             android:layout_gravity="center_vertical|start"
             android:scaleType="centerInside"
-            android:src="@drawable/add_complication"
-            android:background="@android:color/transparent"/>
+            android:background="@drawable/add_complication"/>
 
     <ImageView
             android:id="@+id/right_complication"
@@ -38,8 +37,7 @@
             android:layout_marginEnd="@dimen/complication_preview_margin_horizontal"
             android:layout_gravity="center_vertical|end"
             android:scaleType="centerInside"
-            android:src="@drawable/add_complication"
-            android:background="@android:color/transparent"/>
+            android:background="@drawable/add_complication"/>
 
     <ImageView
             android:id="@+id/top_complication"
@@ -48,8 +46,7 @@
             android:layout_marginTop="@dimen/complication_preview_margin_vertical"
             android:layout_gravity="center_horizontal|top"
             android:scaleType="centerInside"
-            android:src="@drawable/add_big_complication"
-            android:background="@android:color/transparent"/>
+            android:background="@drawable/add_complication"/>
 
     <ImageView
             android:id="@+id/bottom_complication"
@@ -58,8 +55,8 @@
             android:layout_marginBottom="@dimen/complication_preview_margin_vertical"
             android:layout_gravity="center_horizontal|bottom"
             android:scaleType="centerInside"
-            android:src="@drawable/add_big_complication"
-            android:background="@android:color/transparent"/>
+            android:padding="@dimen/complication_padding_preview_big"
+            android:background="@drawable/add_complication"/>
 
     <ImageView
             android:layout_width="wrap_content"

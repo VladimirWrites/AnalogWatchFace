@@ -6,16 +6,18 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.watchface.CanvasWatchFaceService
 import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
-import com.vlad1m1r.watchface.data.DataProvider
-import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
-import com.vlad1m1r.watchface.data.KEY_WATCH_FACE_TYPE
-import com.vlad1m1r.watchface.utils.*
+import com.vlad1m1r.watchface.components.COMPLICATION_SUPPORTED_TYPES
+import com.vlad1m1r.watchface.components.Layouts
+import com.vlad1m1r.watchface.data.*
+import com.vlad1m1r.watchface.model.Mode
+import com.vlad1m1r.watchface.model.Point
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -28,8 +30,8 @@ class WatchFace : CanvasWatchFaceService() {
         return Engine()
     }
 
-    private class EngineHandler(engine: Engine) : Handler() {
-        private val weakReferenceEngine = WeakReference<Engine>(engine)
+    private class EngineHandler(engine: Engine) :Handler(Looper.getMainLooper()) {
+        private val weakReferenceEngine = WeakReference(engine)
 
         override fun handleMessage(message: Message) {
             val engine = weakReferenceEngine.get()
@@ -51,14 +53,30 @@ class WatchFace : CanvasWatchFaceService() {
 
         private val mode: Mode = Mode()
 
-        private lateinit var dataProvider: DataProvider
+        private lateinit var dataStorage: DataStorage
+
+        private lateinit var colorStorage: ColorStorage
 
         private val prefsChangeListener =
             OnSharedPreferenceChangeListener { _, key ->
                 // only update layouts if the changed preference is the preference
                 // to choose the layouts
-                if (key == KEY_WATCH_FACE_TYPE) {
-                    layouts.update()
+                if (key == KEY_WATCH_FACE_TYPE || key == KEY_HOUR_TICKS_COLOR || key == KEY_MINUTE_TICKS_COLOR) {
+                    layouts.initTicks()
+                }
+                if (key == KEY_HOURS_HAND_COLOR || key == KEY_MINUTES_HAND_COLOR ||
+                    key == KEY_SECONDS_HAND_COLOR || key == KEY_HAS_SECOND_HAND ||
+                    key == KEY_HAS_HANDS || key == KEY_CENTRAL_CIRCLE_COLOR) {
+                    layouts.invalidateHands()
+                }
+                if (key == KEY_BACKGROUND_LEFT_COLOR || key == KEY_BACKGROUND_RIGHT_COLOR) {
+                    layouts.invalidateBackground()
+                }
+                if (key == KEY_COMPLICATIONS_TEXT_COLOR || key == KEY_COMPLICATIONS_TITLE_COLOR ||
+                    key == KEY_COMPLICATIONS_ICON_COLOR || key == KEY_COMPLICATIONS_BORDER_COLOR ||
+                    key == KEY_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR || key == KEY_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR ||
+                    key == KEY_COMPLICATIONS_BACKGROUND_COLOR || key == KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS) {
+                    layouts.invalidateComplications()
                 }
             }
 
@@ -74,9 +92,11 @@ class WatchFace : CanvasWatchFaceService() {
                 KEY_ANALOG_WATCH_FACE,
                 Context.MODE_PRIVATE
             )
-            dataProvider = DataProvider(sharedPref)
+            dataStorage = DataStorage(sharedPref)
+            colorStorage = ColorStorage(this@WatchFace.applicationContext, sharedPref)
+
             calendar = Calendar.getInstance()
-            layouts = Layouts(dataProvider, this@WatchFace)
+            layouts = Layouts(dataStorage, colorStorage, this@WatchFace, )
 
             setActiveComplications(*COMPLICATION_SUPPORTED_TYPES.keys.toIntArray())
 
@@ -149,12 +169,12 @@ class WatchFace : CanvasWatchFaceService() {
             }
             canvas.save()
             layouts.background.draw(canvas)
-            if ((mode.isAmbient && dataProvider.hasTicksInAmbientMode()) ||
-                (!mode.isAmbient && dataProvider.hasTicksInInteractiveMode())
+            if ((mode.isAmbient && dataStorage.hasTicksInAmbientMode()) ||
+                (!mode.isAmbient && dataStorage.hasTicksInInteractiveMode())
             ) {
                 layouts.ticks.draw(canvas)
             }
-            if (!mode.isAmbient || dataProvider.hasComplicationsInAmbientMode()) {
+            if (!mode.isAmbient || dataStorage.hasComplicationsInAmbientMode()) {
                 layouts.complications.draw(canvas, System.currentTimeMillis())
             }
             layouts.hands.draw(canvas, calendar)

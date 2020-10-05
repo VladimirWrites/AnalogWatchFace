@@ -23,4 +23,11 @@
     <dimen name="activity_config_padding_small">8dp</dimen>
     <dimen name="activity_config_padding">16dp</dimen>
     <dimen name="bottom_margin">16dp</dimen>
+    <dimen name="drawable_margin">4dp</dimen>
+
+    <dimen name="complication_padding_preview_small">8dp</dimen>
+    <dimen name="complication_padding_preview_big">4dp</dimen>
+
+    <dimen name="item_color_picker_height">46dp</dimen>
+    <dimen name="item_color_picker_height_small">38dp</dimen>
 </resources>
