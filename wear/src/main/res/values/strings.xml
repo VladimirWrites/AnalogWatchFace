@@ -8,12 +8,10 @@
     <string name="complications_in_ambient_mode">Complications in Ambient Mode</string>
     <string name="ticks_in_ambient_mode">Ticks in Ambient Mode</string>
     <string name="ticks_in_interactive_mode">Ticks in Interactive Mode</string>
-    <string name="hide_second_hand">Hide second hand</string>
-    <string name="hide_all_hands">Hide all hands</string>
-    <string name="hand_settings">Hand settings</string>
-    <string name="background_settings">Background settings</string>
-    <string name="complications_settings">Complications settings</string>
-    <string name="ticks_settings">Ticks settings</string>
+    <string name="hand_settings">Hand Settings</string>
+    <string name="background_settings">Background Settings</string>
+    <string name="complications_settings">Complications Settings</string>
+    <string name="ticks_settings">Ticks Settings</string>
     <string name="rate_the_watch_face">Rate the Watch Face</string>
 
     <string name="hours_hand_color">Hours Hand Color</string>
