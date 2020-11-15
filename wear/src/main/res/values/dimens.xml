@@ -33,4 +33,12 @@
 
     <dimen name="item_color_picker_deselected_stroke_width">1dp</dimen>
     <dimen name="item_color_picker_selected_stroke_width">3dp</dimen>
+    <dimen name="about_app_item_padding">10dp</dimen>
+    <dimen name="divider">1dp</dimen>
+
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_mini">14sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+
 </resources>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary_color_dark">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/screen_percentage_10"
+                android:src="@mipmap/ic_launcher" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold" />
+
+        <TextView
+                android:id="@+id/version_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="normal"
+                tools:text="v2.0.0" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/screen_percentage_10"
+                android:drawableBottom="@drawable/ic_arrow_down"
+                android:text="@string/view_on_you_phone"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_mini"
+                android:textStyle="normal" />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider"
+                android:background="@color/light_grey" />
+
+        <TextView
+                android:id="@+id/github_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_github"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_normal"
+                android:paddingStart="@dimen/screen_percentage_15"
+                android:paddingTop="@dimen/about_app_item_padding"
+                android:paddingEnd="@dimen/screen_percentage_15"
+                android:paddingBottom="@dimen/about_app_item_padding"
+                android:text="@string/github_title"
+                android:textColor="@color/white" />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider"
+                android:background="@color/light_grey" />
+
+        <TextView
+                android:id="@+id/email_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_email"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_normal"
+                android:paddingStart="@dimen/screen_percentage_15"
+                android:paddingTop="@dimen/about_app_item_padding"
+                android:paddingEnd="@dimen/screen_percentage_15"
+                android:paddingBottom="@dimen/about_app_item_padding"
+                android:text="@string/email_title"
+                android:textColor="@color/white" />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider"
+                android:background="@color/light_grey" />
+
+        <TextView
+                android:id="@+id/play_store_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_play_store"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_normal"
+                android:paddingStart="@dimen/screen_percentage_15"
+                android:paddingTop="@dimen/about_app_item_padding"
+                android:paddingEnd="@dimen/screen_percentage_15"
+                android:paddingBottom="@dimen/about_app_item_padding"
+                android:text="@string/play_store_title"
+                android:textColor="@color/white" />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider"
+                android:layout_marginBottom="@dimen/bottom_margin"
+                android:background="@color/light_grey" />
+
+    </LinearLayout>
+</ScrollView>

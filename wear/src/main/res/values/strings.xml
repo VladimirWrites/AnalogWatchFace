@@ -9,6 +9,7 @@
     <string name="ticks_in_ambient_mode">Ticks in Ambient Mode</string>
     <string name="ticks_in_interactive_mode">Ticks in Interactive Mode</string>
     <string name="hand_settings">Hand Settings</string>
+    <string name="about_app">About App</string>
     <string name="background_settings">Background Settings</string>
     <string name="complications_settings">Complications Settings</string>
     <string name="ticks_settings">Ticks Settings</string>
@@ -32,5 +33,15 @@
     <string name="complications_ranged_value_primary_color">Complication Ranged Value Primary Color</string>
     <string name="complications_ranged_value_secondary_color">Complication Ranged Value Secondary Color</string>
     <string name="complications_background_color">Complication Background Color</string>
+
+    <string name="github_title">GitHub</string>
+    <string name="email_title">Email</string>
+    <string name="play_store_title">Play Store</string>
+    <string name="view_on_you_phone">View on you phone</string>
+
+    <string name="github_url" translatable="false">https://github.com/VladimirWrites/AnalogWatchFace/</string>
+    <string name="email" translatable="false">write@vladimirj.dev</string>
+    <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.vlad1m1r.watchface</string>
+
 
 </resources>

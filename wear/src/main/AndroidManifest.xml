@@ -60,9 +60,11 @@
         <activity android:name="com.vlad1m1r.watchface.settings.tickslayoutpicker.TicksLayoutPickerActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.hands.HandsActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.colorpicker.ColorPickerActivity"/>
+        <activity android:name="com.vlad1m1r.watchface.settings.about.AboutActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.background.BackgroundActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.ticks.TicksActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.complications.ComplicationsActivity"/>
+        <activity android:name="androidx.wear.activity.ConfirmationActivity" />
     </application>
 
 </manifest>
