@@ -44,13 +44,7 @@ class ConfigActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        val sharedPref = getSharedPreferences(
-            KEY_ANALOG_WATCH_FACE,
-            Context.MODE_PRIVATE
-        )
-        val dataProvider = DataStorage(sharedPref)
-
-        adapter = ConfigAdapter(dataProvider)
+        adapter = ConfigAdapter()
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

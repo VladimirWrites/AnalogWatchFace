@@ -16,12 +16,7 @@ class ColorPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
     private val activity = itemView.context as Activity
 
-    fun setData(
-        @StringRes title: Int,
-        requestCode: Int,
-        @ColorInt currentColor: Int,
-        showNoColor: Boolean
-    ) {
+    fun setData(@StringRes title: Int, requestCode: Int, @ColorInt currentColor: Int, showNoColor: Boolean) {
         val colorDrawable =
             if (currentColor == Color.TRANSPARENT) {
                 itemView.context.getDrawable(R.drawable.remove_color_small)

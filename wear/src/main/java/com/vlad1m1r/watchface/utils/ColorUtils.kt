@@ -36,7 +36,6 @@ fun getDistanceBetweenColors(@ColorInt color1: Int, @ColorInt color2: Int): Floa
     val g2 = Color.green(color2)
     val b2 = Color.blue(color2)
 
-
     return sqrt(
         (r1 - r2).toFloat().pow(2) +
                 (g1 - g2).toFloat().pow(2) +

@@ -68,20 +68,20 @@ class ColorsPickerViewHolder(
     }
 
     private fun ImageView.selectColor(@ColorInt color: Int) {
-        val color = getStrokeColor(color)
+        val strokeColor = getStrokeColor(color)
         val gradientDrawable = this.getGradientDrawable()
         gradientDrawable.setStroke(
             context.resources.getDimensionPixelSize(R.dimen.item_color_picker_selected_stroke_width),
-            color
+            strokeColor
         )
     }
 
     private fun ImageView.deselectColor(@ColorInt color: Int) {
-        val color = getStrokeColor(color)
+        val strokeColor = getStrokeColor(color)
         val gradientDrawable = this.getGradientDrawable()
         gradientDrawable.setStroke(
             context.resources.getDimensionPixelSize(R.dimen.item_color_picker_deselected_stroke_width),
-            color
+            strokeColor
         )
     }
 

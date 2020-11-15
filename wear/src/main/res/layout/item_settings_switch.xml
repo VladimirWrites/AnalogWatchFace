@@ -7,5 +7,6 @@
         android:paddingEnd="@dimen/screen_percentage_10"
         android:paddingTop="@dimen/screen_percentage_05"
         android:paddingBottom="@dimen/screen_percentage_05"
+        android:textSize="@dimen/text_size_normal"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         style="@style/SwitchStyle"/>

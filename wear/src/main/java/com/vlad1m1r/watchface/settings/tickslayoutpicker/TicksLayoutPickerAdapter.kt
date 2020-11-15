@@ -20,7 +20,7 @@ class TickLayoutPickerAdapter(private val dataStorage: DataStorage) :
                 TicksLayoutPickerViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
-                            R.layout.item_face_picker,
+                            R.layout.item_ticks_picker,
                             parent,
                             false
                         ),

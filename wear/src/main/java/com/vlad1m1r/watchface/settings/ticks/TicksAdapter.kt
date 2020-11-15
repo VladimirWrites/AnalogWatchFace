@@ -34,7 +34,7 @@ class TicksAdapter(private val dataStorage: DataStorage, private val colorStorag
                 ticksLayoutPickerViewHolder = TicksLayoutPickerViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
-                            R.layout.item_settings_pick_watch_face,
+                            R.layout.item_settings_ticks_layout_picker,
                             parent,
                             false
                         ),
