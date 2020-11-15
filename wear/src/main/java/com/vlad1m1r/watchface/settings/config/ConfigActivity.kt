@@ -3,13 +3,11 @@ package com.vlad1m1r.watchface.settings.config
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.support.wearable.input.RotaryEncoder
 import android.view.MotionEvent
-import android.view.ViewConfiguration
-import androidx.core.view.ViewConfigurationCompat.getScaledVerticalScrollFactor
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
+import com.google.android.wearable.input.RotaryEncoderHelper
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
@@ -63,10 +61,8 @@ class ConfigActivity : Activity() {
     }
 
     override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_SCROLL && RotaryEncoder.isFromRotaryEncoder(event)) {
-            val delta = -RotaryEncoder.getRotaryAxisValue(event) * getScaledVerticalScrollFactor(
-                ViewConfiguration.get(this), this
-            )
+        if (event?.action == MotionEvent.ACTION_SCROLL && RotaryEncoderHelper.isFromRotaryEncoder(event)) {
+            val delta = -RotaryEncoderHelper.getRotaryAxisValue(event) * RotaryEncoderHelper.getScaledScrollFactor(this)
             wearableRecyclerView.scrollBy(0, delta.roundToInt())
             return true
         }
