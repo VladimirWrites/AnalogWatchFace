@@ -28,5 +28,7 @@
     <color name="watch_design2_complications_ranged_primary">#54FFFFFF</color>
     <color name="watch_design2_complications_ranged_secondary">@android:color/transparent</color>
     <color name="transparent">#00000000</color>
+    <color name="item_color_picker_light_stroke_color">#eeeeee</color>
+    <color name="item_color_picker_dark_stroke_color">#888888</color>
 
 </resources>

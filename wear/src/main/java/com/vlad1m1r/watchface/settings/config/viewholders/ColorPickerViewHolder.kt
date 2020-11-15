@@ -35,7 +35,7 @@ class ColorPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
             setText(title)
             setCompoundDrawablesWithIntrinsicBounds(null, null, colorDrawable, null)
             setOnClickListener {
-                val intent = ColorPickerActivity.newInstance(activity, showNoColor)
+                val intent = ColorPickerActivity.newInstance(activity, showNoColor, currentColor)
                 activity.startActivityForResult(
                     intent,
                     requestCode

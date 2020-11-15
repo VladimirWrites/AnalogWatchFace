@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.wearable.input.RotaryEncoder
 import android.view.MotionEvent
 import android.view.ViewConfiguration
+import androidx.annotation.ColorInt
 import androidx.core.view.ViewConfigurationCompat.getScaledVerticalScrollFactor
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,13 +18,14 @@ import kotlin.math.roundToInt
 const val KEY_SELECTED_COLOR = "selected_color"
 
 private const val KEY_SHOW_NO_COLOR = "show_no_color"
+private const val KEY_ALREADY_SELECTED_COLOR = "already_selected_color"
 
 class ColorPickerActivity : Activity() {
 
     private lateinit var wearableRecyclerView: WearableRecyclerView
     private lateinit var adapter: ColorPickerAdapter
 
-    private val onColorSelected = object: OnColorSelected {
+    private val onColorSelected = object : OnColorSelected {
         override fun colorSelected(color: Int) {
             val data = Intent()
             data.putExtra(KEY_SELECTED_COLOR, color)
@@ -37,13 +39,15 @@ class ColorPickerActivity : Activity() {
         setContentView(R.layout.activity_list)
 
         val showNoColor = intent.getBooleanExtra(KEY_SHOW_NO_COLOR, true)
+        val preselectedColor = intent.getIntExtra(KEY_ALREADY_SELECTED_COLOR, 0)
 
-        adapter = ColorPickerAdapter(ColorProvider(this), onColorSelected, showNoColor)
-        wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            isEdgeItemsCenteringEnabled = true
-            isCircularScrollingGestureEnabled = false
-        }
+        adapter = ColorPickerAdapter(ColorProvider(this), onColorSelected, showNoColor, preselectedColor)
+        wearableRecyclerView =
+            findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
+                layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                isEdgeItemsCenteringEnabled = true
+                isCircularScrollingGestureEnabled = false
+            }
 
         wearableRecyclerView.adapter = adapter
     }
@@ -60,9 +64,14 @@ class ColorPickerActivity : Activity() {
     }
 
     companion object {
-        fun newInstance(context: Context, showNoColor: Boolean): Intent {
+        fun newInstance(
+            context: Context,
+            showNoColor: Boolean,
+            @ColorInt preselectedColor: Int
+        ): Intent {
             return Intent(context, ColorPickerActivity::class.java).apply {
                 putExtra(KEY_SHOW_NO_COLOR, showNoColor)
+                putExtra(KEY_ALREADY_SELECTED_COLOR, preselectedColor)
             }
         }
     }

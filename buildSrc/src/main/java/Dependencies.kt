@@ -20,8 +20,8 @@ object Versions {
     const val build_tools = "30.0.2"
 
     const val version_code_app = 1500
-    const val version_code_wear = 2000
-    const val version_name = "2.0.0"
+    const val version_code_wear = 2010
+    const val version_name = "2.0.1"
 }
 
 object Deps {

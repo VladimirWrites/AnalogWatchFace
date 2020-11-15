@@ -30,4 +30,7 @@
 
     <dimen name="item_color_picker_height">46dp</dimen>
     <dimen name="item_color_picker_height_small">38dp</dimen>
+
+    <dimen name="item_color_picker_deselected_stroke_width">1dp</dimen>
+    <dimen name="item_color_picker_selected_stroke_width">3dp</dimen>
 </resources>

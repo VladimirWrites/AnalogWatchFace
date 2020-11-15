@@ -8,7 +8,8 @@ import com.vlad1m1r.watchface.R
 class ColorPickerAdapter(
     private val colorProvider: ColorProvider,
     private val onColorSelected: OnColorSelected,
-    private val showNoColor: Boolean
+    private val showNoColor: Boolean,
+    private val preselectedColor: Int
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -21,7 +22,8 @@ class ColorPickerAdapter(
                     parent,
                     false
                 ),
-            onColorSelected
+            onColorSelected,
+            preselectedColor
         )
     }
 
