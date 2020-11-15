@@ -20,10 +20,10 @@ class TicksLayoutPickerViewHolder(itemView: View, val dataStorage: DataStorage):
     }
 
     private val image = itemView.findViewById<ImageView>(R.id.image_watch_face).apply {
-        this.setImageResource(dataStorage.getTicksLayoutType().drawableRes)
+        this.setImageResource(dataStorage.getTicksLayoutType().drawableZoomedRes)
     }
 
     fun refreshImage() {
-        image.setImageResource(dataStorage.getTicksLayoutType().drawableRes)
+        image.setImageResource(dataStorage.getTicksLayoutType().drawableZoomedRes)
     }
 }
