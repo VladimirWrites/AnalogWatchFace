@@ -8,7 +8,6 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.settings.config.HOURS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.MINUTES_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.config.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.viewholders.ColorPickerViewHolder
 import java.lang.IllegalArgumentException
@@ -18,8 +17,7 @@ const val TYPE_COLOR_MINUTE_HAND = 2
 const val TYPE_COLOR_SECOND_HAND = 3
 const val TYPE_COLOR_CENTRAL_CIRCLE = 4
 
-class HandsAdapter(private val dataStorage: DataStorage, private val colorStorage: ColorStorage) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HandsAdapter(private val colorStorage: ColorStorage) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -57,7 +55,7 @@ class HandsAdapter(private val dataStorage: DataStorage, private val colorStorag
         }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        when(viewHolder.itemViewType) {
+        when (viewHolder.itemViewType) {
             TYPE_COLOR_HOUR_HAND ->
                 (viewHolder as ColorPickerViewHolder).setData(
                     R.string.hours_hand_color,

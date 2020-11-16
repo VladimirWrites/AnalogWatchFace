@@ -1,7 +1,6 @@
 package com.vlad1m1r.watchface.settings.config
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.MotionEvent
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
 import com.google.android.wearable.input.RotaryEncoderHelper
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import kotlin.math.roundToInt
 
 const val COMPLICATION_CONFIG_REQUEST_CODE = 1001

@@ -15,7 +15,6 @@ import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import com.vlad1m1r.watchface.settings.config.HOURS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.MINUTES_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.config.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
 import kotlin.math.roundToInt
@@ -34,10 +33,10 @@ class HandsActivity : Activity() {
             KEY_ANALOG_WATCH_FACE,
             Context.MODE_PRIVATE
         )
-        val dataStorage = DataStorage(sharedPref)
+
         colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
-        adapter = HandsAdapter(dataStorage, colorStorage)
+        adapter = HandsAdapter(colorStorage)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

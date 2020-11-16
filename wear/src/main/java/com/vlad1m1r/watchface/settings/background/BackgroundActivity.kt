@@ -13,7 +13,6 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import com.vlad1m1r.watchface.settings.config.*
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import kotlin.math.roundToInt
 
@@ -32,10 +31,9 @@ class BackgroundActivity : Activity() {
             Context.MODE_PRIVATE
         )
 
-        val dataStorage = DataStorage(sharedPref)
         colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
-        adapter = BackgroundAdapter(dataStorage, colorStorage)
+        adapter = BackgroundAdapter(colorStorage)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

@@ -21,8 +21,7 @@ const val TYPE_RATE = 5
 const val TYPE_HANDS = 6
 const val TYPE_ABOUT = 7
 
-class ConfigAdapter() :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 

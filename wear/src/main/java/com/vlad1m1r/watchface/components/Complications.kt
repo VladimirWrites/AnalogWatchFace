@@ -186,7 +186,7 @@ class Complications(
         complicationDrawables[BOTTOM_COMPLICATION_ID]?.bounds = bottomBounds
     }
 
-    fun invalidateColors() {
+    private fun invalidateColors() {
         val backgroundColor = colorStorage.getComplicationsBackgroundColor()
         val titleColor = colorStorage.getComplicationsTitleColor()
         val textColor = colorStorage.getComplicationsTextColor()

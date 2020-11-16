@@ -4,6 +4,9 @@
         <item name="android:colorPrimary">@color/primary_color</item>
         <item name="android:colorPrimaryDark">@color/primary_color_dark</item>
         <item name="android:colorAccent">@color/accent_color</item>
+        <item name="android:background">@color/primary_color_dark</item>
+        <item name="android:windowBackground">@color/primary_color_dark</item>
+        <item name="android:colorBackground">@color/primary_color_dark</item>
     </style>
 
     <style name="SwitchStyle" parent="Widget.Wear.RoundSwitch">

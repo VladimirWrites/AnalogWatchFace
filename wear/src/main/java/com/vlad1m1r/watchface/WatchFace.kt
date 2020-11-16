@@ -96,7 +96,7 @@ class WatchFace : CanvasWatchFaceService() {
             colorStorage = ColorStorage(this@WatchFace.applicationContext, sharedPref)
 
             calendar = Calendar.getInstance()
-            layouts = Layouts(dataStorage, colorStorage, this@WatchFace, )
+            layouts = Layouts(dataStorage, colorStorage, this@WatchFace)
 
             setActiveComplications(*COMPLICATION_SUPPORTED_TYPES.keys.toIntArray())
 
