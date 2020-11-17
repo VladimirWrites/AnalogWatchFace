@@ -23,8 +23,8 @@ class TicksLayout1(context: Context, colorStorage: ColorStorage) : WatchView(con
     private val watchMinuteTickColor = colorStorage.getMinuteTicksColor()
     private val tickWidthMinute = context.resources.getDimension(R.dimen.design2_tick_width_minute)
 
-     override var centerInvalidated = true
-         private set
+    override var centerInvalidated = true
+        private set
 
     private val tickPaint = Paint().apply {
         color = watchHourTickColor

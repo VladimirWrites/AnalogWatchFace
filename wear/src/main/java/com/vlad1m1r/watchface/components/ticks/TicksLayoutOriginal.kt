@@ -18,7 +18,9 @@ class TicksLayoutOriginal(context: Context, colorStorage: ColorStorage) : WatchV
     private val tickLength = context.resources.getDimension(R.dimen.tick_length)
     private val watchTickColor = colorStorage.getHourTicksColor()
     private val tickWidth = context.resources.getDimension(R.dimen.tick_width)
-    override val centerInvalidated = false
+
+    override var centerInvalidated = true
+        private set
 
     private val tickPaint = Paint().apply {
         color = watchTickColor
@@ -35,6 +37,7 @@ class TicksLayoutOriginal(context: Context, colorStorage: ColorStorage) : WatchV
     private var innerTickRadius: Float = 0f
 
     override fun setCenter(center: Point) {
+        centerInvalidated = false
         this.center = center
         this.outerTickRadius = center.x
         this.innerTickRadius = center.x - tickLength
