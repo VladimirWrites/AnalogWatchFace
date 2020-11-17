@@ -9,8 +9,7 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.config.HOUR_TICKS_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.MINUTE_TICKS_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.viewholders.ColorPickerViewHolder
-import com.vlad1m1r.watchface.settings.ticks.viewholders.TicksAmbientViewHolder
-import com.vlad1m1r.watchface.settings.ticks.viewholders.TicksInteractiveViewHolder
+import com.vlad1m1r.watchface.settings.config.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.ticks.viewholders.TicksLayoutPickerViewHolder
 import java.lang.IllegalArgumentException
 
@@ -42,27 +41,18 @@ class TicksAdapter(private val dataStorage: DataStorage, private val colorStorag
                 )
                 viewHolder = ticksLayoutPickerViewHolder
             }
-            TYPE_TICKS_AMBIENT_MODE -> viewHolder = TicksAmbientViewHolder(
+            TYPE_TICKS_INTERACTIVE_MODE,
+            TYPE_TICKS_AMBIENT_MODE -> viewHolder = SettingsWithSwitchViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(
                         R.layout.item_settings_switch,
                         parent,
                         false
-                    ),
-                dataStorage
+                    )
             )
 
-            TYPE_TICKS_INTERACTIVE_MODE -> viewHolder =
-                TicksInteractiveViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_switch,
-                            parent,
-                            false
-                        ),
-                    dataStorage
-                )
-            TYPE_HOUR_TICKS_COLOR, TYPE_MINUTE_TICKS_COLOR -> viewHolder =
+            TYPE_HOUR_TICKS_COLOR,
+            TYPE_MINUTE_TICKS_COLOR -> viewHolder =
                 ColorPickerViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
@@ -92,6 +82,20 @@ class TicksAdapter(private val dataStorage: DataStorage, private val colorStorag
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         when(viewHolder.itemViewType) {
+            TYPE_TICKS_AMBIENT_MODE ->
+                (viewHolder as SettingsWithSwitchViewHolder).bind(
+                    R.string.ticks_in_ambient_mode,
+                    dataStorage.hasTicksInAmbientMode()
+                ) {
+                    dataStorage.setHasTicksInAmbientMode(it)
+                }
+            TYPE_TICKS_INTERACTIVE_MODE ->
+                (viewHolder as SettingsWithSwitchViewHolder).bind(
+                    R.string.ticks_in_interactive_mode,
+                    dataStorage.hasTicksInInteractiveMode()
+                ) {
+                    dataStorage.setHasTicksInInteractiveMode(it)
+                }
             TYPE_HOUR_TICKS_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
                     R.string.hour_ticks_color,

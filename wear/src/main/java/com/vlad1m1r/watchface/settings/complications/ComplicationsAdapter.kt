@@ -7,11 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.settings.complications.viewholder.ComplicationsAmbientViewHolder
-import com.vlad1m1r.watchface.settings.complications.viewholder.ComplicationsBiggerTopAndBottomViewHolder
 import com.vlad1m1r.watchface.settings.complications.viewholder.ComplicationsPickerViewHolder
 import com.vlad1m1r.watchface.settings.config.*
 import com.vlad1m1r.watchface.settings.config.viewholders.ColorPickerViewHolder
+import com.vlad1m1r.watchface.settings.config.viewholders.SettingsWithSwitchViewHolder
 import kotlin.IllegalArgumentException
 
 const val TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG = 0
@@ -45,15 +44,15 @@ class ComplicationsAdapter(
                 )
                 complicationsPickerViewHolder
             }
+            TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS,
             TYPE_COMPLICATIONS_AMBIENT_MODE ->
-                ComplicationsAmbientViewHolder(
+                SettingsWithSwitchViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
                             R.layout.item_settings_switch,
                             parent,
                             false
-                        ),
-                    dataStorage
+                        )
                 )
             TYPE_COMPLICATIONS_TEXT_COLOR,
             TYPE_COMPLICATIONS_TITLE_COLOR,
@@ -69,16 +68,6 @@ class ComplicationsAdapter(
                             parent,
                             false
                         )
-                )
-            TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS ->
-                ComplicationsBiggerTopAndBottomViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_switch,
-                            parent,
-                            false
-                        ),
-                    dataStorage
                 )
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
@@ -106,7 +95,14 @@ class ComplicationsAdapter(
         }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        when(viewHolder.itemViewType) {
+        when (viewHolder.itemViewType) {
+            TYPE_COMPLICATIONS_AMBIENT_MODE ->
+                (viewHolder as SettingsWithSwitchViewHolder).bind(
+                    R.string.complications_in_ambient_mode,
+                    dataStorage.hasComplicationsInAmbientMode()
+                ) {
+                    dataStorage.setHasComplicationsInAmbientMode(it)
+                }
             TYPE_COMPLICATIONS_TEXT_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
                     R.string.complications_text_color,
@@ -156,6 +152,22 @@ class ComplicationsAdapter(
                     colorStorage.getComplicationsBackgroundColor(),
                     true
                 )
+            TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS -> {
+                (viewHolder as SettingsWithSwitchViewHolder).apply {
+                    bind(
+                        R.string.bigger_top_and_bottom_complications,
+                        dataStorage.hasBiggerTopAndBottomComplications(),
+                    ) {
+                        dataStorage.setHasBiggerTopAndBottomComplications(it)
+                    }
+                    itemView.setPadding(
+                        itemView.paddingLeft,
+                        itemView.paddingTop,
+                        itemView.paddingRight,
+                        itemView.resources.getDimensionPixelSize(R.dimen.bottom_margin)
+                    )
+                }
+            }
         }
     }
 
