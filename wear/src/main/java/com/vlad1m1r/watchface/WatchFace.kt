@@ -21,7 +21,10 @@ import com.vlad1m1r.watchface.model.Point
 import java.lang.ref.WeakReference
 import java.util.*
 
-private const val INTERACTIVE_UPDATE_RATE_MS = 1000
+private const val INTERACTIVE_UPDATE_RATE_SLOW_MS = 1000
+private const val INTERACTIVE_UPDATE_RATE_FAST_MS = 33
+
+
 private const val MESSAGE_UPDATE_ID = 0
 
 class WatchFace : CanvasWatchFaceService() {
@@ -30,7 +33,7 @@ class WatchFace : CanvasWatchFaceService() {
         return Engine()
     }
 
-    private class EngineHandler(engine: Engine) :Handler(Looper.getMainLooper()) {
+    private class EngineHandler(engine: Engine) : Handler(Looper.getMainLooper()) {
         private val weakReferenceEngine = WeakReference(engine)
 
         override fun handleMessage(message: Message) {
@@ -57,6 +60,8 @@ class WatchFace : CanvasWatchFaceService() {
 
         private lateinit var colorStorage: ColorStorage
 
+        private var hasSmoothSecondsHand: Boolean = false
+
         private val prefsChangeListener =
             OnSharedPreferenceChangeListener { _, key ->
                 // only update layouts if the changed preference is the preference
@@ -64,19 +69,24 @@ class WatchFace : CanvasWatchFaceService() {
                 if (key == KEY_WATCH_FACE_TYPE || key == KEY_HOUR_TICKS_COLOR || key == KEY_MINUTE_TICKS_COLOR) {
                     layouts.initTicks()
                 }
-                if (key == KEY_HOURS_HAND_COLOR || key == KEY_MINUTES_HAND_COLOR ||
+                else if (key == KEY_HOURS_HAND_COLOR || key == KEY_MINUTES_HAND_COLOR ||
                     key == KEY_SECONDS_HAND_COLOR || key == KEY_HAS_SECOND_HAND ||
-                    key == KEY_HAS_HANDS || key == KEY_CENTRAL_CIRCLE_COLOR) {
+                    key == KEY_HAS_HANDS || key == KEY_CENTRAL_CIRCLE_COLOR
+                ) {
                     layouts.invalidateHands()
                 }
-                if (key == KEY_BACKGROUND_LEFT_COLOR || key == KEY_BACKGROUND_RIGHT_COLOR) {
+                else if (key == KEY_BACKGROUND_LEFT_COLOR || key == KEY_BACKGROUND_RIGHT_COLOR) {
                     layouts.invalidateBackground()
                 }
-                if (key == KEY_COMPLICATIONS_TEXT_COLOR || key == KEY_COMPLICATIONS_TITLE_COLOR ||
+                else if (key == KEY_COMPLICATIONS_TEXT_COLOR || key == KEY_COMPLICATIONS_TITLE_COLOR ||
                     key == KEY_COMPLICATIONS_ICON_COLOR || key == KEY_COMPLICATIONS_BORDER_COLOR ||
                     key == KEY_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR || key == KEY_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR ||
-                    key == KEY_COMPLICATIONS_BACKGROUND_COLOR || key == KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS) {
+                    key == KEY_COMPLICATIONS_BACKGROUND_COLOR || key == KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS
+                ) {
                     layouts.invalidateComplications()
+                }
+                else if(key == KEY_HAS_SMOOTH_SECONDS_HAND) {
+                    hasSmoothSecondsHand = dataStorage.hasSmoothSecondsHand()
                 }
             }
 
@@ -93,6 +103,8 @@ class WatchFace : CanvasWatchFaceService() {
                 Context.MODE_PRIVATE
             )
             dataStorage = DataStorage(sharedPref)
+            hasSmoothSecondsHand = dataStorage.hasSmoothSecondsHand()
+
             colorStorage = ColorStorage(this@WatchFace.applicationContext, sharedPref)
 
             calendar = Calendar.getInstance()
@@ -139,9 +151,9 @@ class WatchFace : CanvasWatchFaceService() {
             super.onPropertiesChanged(properties)
 
             mode.isLowBitAmbient =
-                    properties.getBoolean(WatchFaceService.PROPERTY_LOW_BIT_AMBIENT, false)
+                properties.getBoolean(WatchFaceService.PROPERTY_LOW_BIT_AMBIENT, false)
             mode.isBurnInProtection =
-                    properties.getBoolean(WatchFaceService.PROPERTY_BURN_IN_PROTECTION, false)
+                properties.getBoolean(WatchFaceService.PROPERTY_BURN_IN_PROTECTION, false)
 
             refreshMode()
         }
@@ -212,8 +224,17 @@ class WatchFace : CanvasWatchFaceService() {
         fun handleUpdateTimeMessage() {
             invalidate()
             val timeMs = System.currentTimeMillis()
-            val delayMs = INTERACTIVE_UPDATE_RATE_MS - timeMs % INTERACTIVE_UPDATE_RATE_MS
+            val updateRate = getUpdateRate()
+            val delayMs = updateRate - timeMs % updateRate
             updateTimeHandler.sendEmptyMessageDelayed(MESSAGE_UPDATE_ID, delayMs)
+        }
+
+        private fun getUpdateRate(): Int {
+            return if (hasSmoothSecondsHand) {
+                INTERACTIVE_UPDATE_RATE_FAST_MS
+            } else {
+                INTERACTIVE_UPDATE_RATE_SLOW_MS
+            }
         }
 
         private fun refreshMode() {

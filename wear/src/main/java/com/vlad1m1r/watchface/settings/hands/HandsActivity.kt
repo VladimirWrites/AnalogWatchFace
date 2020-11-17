@@ -11,6 +11,7 @@ import androidx.wear.widget.WearableRecyclerView
 import com.google.android.wearable.input.RotaryEncoderHelper
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import com.vlad1m1r.watchface.settings.config.HOURS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.MINUTES_HAND_COLOR_PICKER_REQUEST_CODE
@@ -34,9 +35,11 @@ class HandsActivity : Activity() {
             Context.MODE_PRIVATE
         )
 
+        val dataStorage = DataStorage(sharedPref)
+
         colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
-        adapter = HandsAdapter(colorStorage)
+        adapter = HandsAdapter(colorStorage, dataStorage)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

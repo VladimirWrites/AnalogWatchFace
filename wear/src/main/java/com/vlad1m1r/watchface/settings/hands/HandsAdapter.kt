@@ -5,19 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.config.HOURS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.MINUTES_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.viewholders.ColorPickerViewHolder
+import com.vlad1m1r.watchface.settings.config.viewholders.SettingsWithSwitchViewHolder
 import java.lang.IllegalArgumentException
 
 const val TYPE_COLOR_HOUR_HAND = 1
 const val TYPE_COLOR_MINUTE_HAND = 2
 const val TYPE_COLOR_SECOND_HAND = 3
 const val TYPE_COLOR_CENTRAL_CIRCLE = 4
+const val TYPE_SMOOTH_SECONDS_HAND = 5
 
-class HandsAdapter(private val colorStorage: ColorStorage) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HandsAdapter(
+    private val colorStorage: ColorStorage,
+    private val dataStorage: DataStorage
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -36,13 +42,22 @@ class HandsAdapter(private val colorStorage: ColorStorage) : RecyclerView.Adapte
                             false
                         )
                 )
+            TYPE_SMOOTH_SECONDS_HAND -> viewHolder =
+                SettingsWithSwitchViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(
+                            R.layout.item_settings_switch,
+                            parent,
+                            false
+                        )
+                )
         }
 
         return viewHolder!!
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return 5
     }
 
     override fun getItemViewType(position: Int) =
@@ -51,6 +66,7 @@ class HandsAdapter(private val colorStorage: ColorStorage) : RecyclerView.Adapte
             1 -> TYPE_COLOR_MINUTE_HAND
             2 -> TYPE_COLOR_SECOND_HAND
             3 -> TYPE_COLOR_CENTRAL_CIRCLE
+            4 -> TYPE_SMOOTH_SECONDS_HAND
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
@@ -84,6 +100,13 @@ class HandsAdapter(private val colorStorage: ColorStorage) : RecyclerView.Adapte
                     colorStorage.getCentralCircleColor(),
                     true
                 )
+            TYPE_SMOOTH_SECONDS_HAND ->
+                (viewHolder as SettingsWithSwitchViewHolder).bind(
+                    R.string.smooth_seconds_hand,
+                    dataStorage.hasSmoothSecondsHand()
+                ) {
+                    dataStorage.setHasSmoothSecondsHand(it)
+                }
         }
     }
 }

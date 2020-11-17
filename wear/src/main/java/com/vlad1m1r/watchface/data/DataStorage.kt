@@ -12,6 +12,7 @@ private const val KEY_HAS_TICKS_IN_INTERACTIVE_MODE = "has_ticks_in_interactive_
 const val KEY_HAS_SECOND_HAND = "has_second_hand"
 const val KEY_HAS_HANDS = "has_hands"
 const val KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS = "has_bigger_top_and_bottom_complications"
+const val KEY_HAS_SMOOTH_SECONDS_HAND = "has_smooth_seconds_hand"
 
 class DataStorage(private val sharedPreferences: SharedPreferences) {
 
@@ -54,6 +55,14 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
     fun setHasBiggerTopAndBottomComplications(biggerTopAndBottomComplications: Boolean) {
         val editor = sharedPreferences.edit()
         editor.putBoolean(KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS, biggerTopAndBottomComplications)
+        editor.apply()
+    }
+
+    fun hasSmoothSecondsHand() = sharedPreferences.getBoolean(KEY_HAS_SMOOTH_SECONDS_HAND, false)
+
+    fun setHasSmoothSecondsHand(hasSmoothSecondsHand: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_HAS_SMOOTH_SECONDS_HAND, hasSmoothSecondsHand)
         editor.apply()
     }
 }

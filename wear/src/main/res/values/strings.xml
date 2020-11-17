@@ -19,6 +19,7 @@
     <string name="minutes_hand_color">Minutes Hand Color</string>
     <string name="seconds_hand_color">Seconds Hand Color</string>
     <string name="central_circle_color">Central Circle Color</string>
+    <string name="smooth_seconds_hand">Smooth Seconds Hand</string>
 
     <string name="left_background_color">Background Color Left</string>
     <string name="right_background_color">Background Color Right</string>
