@@ -54,9 +54,15 @@ class TicksLayout2(context: Context, colorStorage: ColorStorage) : WatchView(con
 
     override fun draw(canvas: Canvas) {
         for (tickIndex in 0..59) {
-            // do not under paint the hour ones
-            if (tickIndex % 5 != 0) {
-                val tickRotation = tickIndex * PI / 30
+            val tickRotation = tickIndex * PI / 30
+            if (tickIndex % 5 == 0) {
+                val x = sin(tickRotation) * outerTickRadius
+                val y = -cos(tickRotation) * outerTickRadius
+                canvas.drawCircle(
+                    (center.x + x).toFloat(), (center.y + y).toFloat(),
+                    tickRadius, tickPaint
+                )
+            } else {
                 val x = sin(tickRotation) * outerTickRadius
                 val y = -cos(tickRotation) * outerTickRadius
                 canvas.drawCircle(
@@ -64,15 +70,6 @@ class TicksLayout2(context: Context, colorStorage: ColorStorage) : WatchView(con
                     tickRadiusMinute, tickPaintMinute
                 )
             }
-        }
-        for (tickIndex in 0..11) {
-            val tickRotation = tickIndex * PI / 6
-            val x = sin(tickRotation) * outerTickRadius
-            val y = -cos(tickRotation) * outerTickRadius
-            canvas.drawCircle(
-                (center.x + x).toFloat(), (center.y + y).toFloat(),
-                tickRadius, tickPaint
-            )
         }
     }
 

@@ -15,9 +15,12 @@ import kotlin.math.sin
 
 class TicksLayoutOriginal(context: Context, colorStorage: ColorStorage) : WatchView(context), Ticks {
 
-    private val tickLength = context.resources.getDimension(R.dimen.tick_length)
+    private val tickLength = context.resources.getDimension(R.dimen.original_tick_length)
     private val watchTickColor = colorStorage.getHourTicksColor()
-    private val tickWidth = context.resources.getDimension(R.dimen.tick_width)
+    private val tickWidth = context.resources.getDimension(R.dimen.original_tick_width)
+
+    private val tickBurnInPadding = context.resources.getDimension(R.dimen.original_tick_padding)
+    private var tickPadding = tickBurnInPadding
 
     override var centerInvalidated = true
         private set
@@ -39,8 +42,8 @@ class TicksLayoutOriginal(context: Context, colorStorage: ColorStorage) : WatchV
     override fun setCenter(center: Point) {
         centerInvalidated = false
         this.center = center
-        this.outerTickRadius = center.x
-        this.innerTickRadius = center.x - tickLength
+        this.outerTickRadius = center.x - tickPadding
+        this.innerTickRadius = center.x - tickLength - tickPadding
     }
 
     override fun draw(canvas: Canvas) {
@@ -69,5 +72,11 @@ class TicksLayoutOriginal(context: Context, colorStorage: ColorStorage) : WatchV
                 strokeWidth = tickWidth
             }
         }
+        tickPadding = if (mode.isAmbient && mode.isBurnInProtection) {
+            tickBurnInPadding
+        } else {
+            0f
+        }
+        centerInvalidated = true
     }
 }

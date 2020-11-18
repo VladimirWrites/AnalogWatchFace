@@ -35,7 +35,6 @@ class WatchFace : CanvasWatchFaceService() {
 
     private class EngineHandler(engine: Engine) : Handler(Looper.getMainLooper()) {
         private val weakReferenceEngine = WeakReference(engine)
-
         override fun handleMessage(message: Message) {
             val engine = weakReferenceEngine.get()
             if (engine != null) {
@@ -46,7 +45,7 @@ class WatchFace : CanvasWatchFaceService() {
         }
     }
 
-    inner class Engine : CanvasWatchFaceService.Engine() {
+    inner class Engine : CanvasWatchFaceService.Engine(false) {
 
         private lateinit var layouts: Layouts
 
@@ -154,7 +153,6 @@ class WatchFace : CanvasWatchFaceService() {
                 properties.getBoolean(WatchFaceService.PROPERTY_LOW_BIT_AMBIENT, false)
             mode.isBurnInProtection =
                 properties.getBoolean(WatchFaceService.PROPERTY_BURN_IN_PROTECTION, false)
-
             refreshMode()
         }
 

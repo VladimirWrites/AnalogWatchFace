@@ -23,6 +23,9 @@ class TicksLayout1(context: Context, colorStorage: ColorStorage) : WatchView(con
     private val watchMinuteTickColor = colorStorage.getMinuteTicksColor()
     private val tickWidthMinute = context.resources.getDimension(R.dimen.design1_tick_width_minute)
 
+    private val tickBurnInPadding = context.resources.getDimension(R.dimen.design1__tick_padding)
+    private var tickPadding = tickBurnInPadding
+
      override var centerInvalidated = true
          private set
 
@@ -53,16 +56,24 @@ class TicksLayout1(context: Context, colorStorage: ColorStorage) : WatchView(con
     override fun setCenter(center: Point) {
         centerInvalidated = false
         this.center = center
-        this.outerTickRadius = center.x
-        this.innerTickRadius = center.x - tickLength
-        this.innerTickRadiusMinute = center.x - tickLengthMinute
+        this.outerTickRadius = center.x - tickPadding
+        this.innerTickRadius = center.x - tickLength - tickPadding
+        this.innerTickRadiusMinute = center.x - tickLengthMinute - tickPadding
     }
 
     override fun draw(canvas: Canvas) {
         for (tickIndex in 0..59) {
-            // do not under paint the hour ones
-            if (tickIndex % 5 != 0) {
-                val tickRotation = tickIndex * PI / 30
+            val tickRotation = tickIndex * PI / 30
+            if (tickIndex % 5 == 0) {
+                val innerX = sin(tickRotation) * innerTickRadius
+                val innerY = -cos(tickRotation) * innerTickRadius
+                val outerX = sin(tickRotation) * outerTickRadius
+                val outerY = -cos(tickRotation) * outerTickRadius
+                canvas.drawLine(
+                    (center.x + innerX).toFloat(), (center.y + innerY).toFloat(),
+                    (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaint
+                )
+            } else {
                 val innerX = sin(tickRotation) * innerTickRadiusMinute
                 val innerY = -cos(tickRotation) * innerTickRadiusMinute
                 val outerX = sin(tickRotation) * outerTickRadius
@@ -72,17 +83,6 @@ class TicksLayout1(context: Context, colorStorage: ColorStorage) : WatchView(con
                     (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaintMinute
                 )
             }
-        }
-        for (tickIndex in 0..11) {
-            val tickRotation = tickIndex * PI / 6
-            val innerX = sin(tickRotation) * innerTickRadius
-            val innerY = -cos(tickRotation) * innerTickRadius
-            val outerX = sin(tickRotation) * outerTickRadius
-            val outerY = -cos(tickRotation) * outerTickRadius
-            canvas.drawLine(
-                (center.x + innerX).toFloat(), (center.y + innerY).toFloat(),
-                (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaint
-            )
         }
     }
 
@@ -109,5 +109,11 @@ class TicksLayout1(context: Context, colorStorage: ColorStorage) : WatchView(con
                 strokeWidth = tickWidthMinute
             }
         }
+        tickPadding = if (mode.isAmbient && mode.isBurnInProtection) {
+            tickBurnInPadding
+        } else {
+            0f
+        }
+        centerInvalidated = true
     }
 }

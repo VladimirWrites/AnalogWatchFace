@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="tick_length">4dp</dimen>
-    <dimen name="tick_width">1dp</dimen>
+    <dimen name="original_tick_length">4dp</dimen>
+    <dimen name="original_tick_width">1dp</dimen>
+    <dimen name="original_tick_padding">4dp</dimen>
 
     <dimen name="design1_tick_length">12dp</dimen>
     <dimen name="design1_tick_width">1dp</dimen>
     <dimen name="design1_tick_length_minute">8dp</dimen>
     <dimen name="design1_tick_width_minute">2dp</dimen>
+    <dimen name="design1__tick_padding">4dp</dimen>
 
     <dimen name="design2_tick_radius">3.5dp</dimen>
     <dimen name="design2_tick_radius_minute">2dp</dimen>
