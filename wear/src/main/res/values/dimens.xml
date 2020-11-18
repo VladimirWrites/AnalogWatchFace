@@ -2,11 +2,26 @@
 <resources>
 
     <dimen name="tick_length">4dp</dimen>
-    <dimen name="design2_tick_length">12dp</dimen>
-    <dimen name="tick_length_minute">8dp</dimen>
-    <dimen name="shadow_radius">1dp</dimen>
     <dimen name="tick_width">1dp</dimen>
-    <dimen name="design2_tick_width_minute">2dp</dimen>
+
+    <dimen name="design1_tick_length">12dp</dimen>
+    <dimen name="design1_tick_width">1dp</dimen>
+    <dimen name="design1_tick_length_minute">8dp</dimen>
+    <dimen name="design1_tick_width_minute">2dp</dimen>
+
+    <dimen name="design2_tick_radius">3.5dp</dimen>
+    <dimen name="design2_tick_radius_minute">2dp</dimen>
+    <dimen name="design2_tick_padding">8dp</dimen>
+
+    <dimen name="design3_tick_length">10dp</dimen>
+    <dimen name="design3_tick_width">2dp</dimen>
+    <dimen name="design3_tick_length_minute">6dp</dimen>
+    <dimen name="design3_tick_width_minute">1dp</dimen>
+    <dimen name="design3_tick_length_milli">4dp</dimen>
+    <dimen name="design3_tick_width_milli">1px</dimen>
+    <dimen name="design3_tick_padding">4dp</dimen>
+
+    <dimen name="shadow_radius">1dp</dimen>
 
     <dimen name="hand_width_second">1dp</dimen>
     <dimen name="hand_width_minute">2dp</dimen>

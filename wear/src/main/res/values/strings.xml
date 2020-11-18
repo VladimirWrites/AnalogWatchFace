@@ -4,10 +4,6 @@
     <string name="edit_complication">Edit Complication %s</string>
     <string name="add_complication">Add Complication</string>
     <string name="ticks_layout_picker">Pick Ticks Layout</string>
-    <string name="bigger_top_and_bottom_complications">Even Wider Top and Bottom Complications</string>
-    <string name="complications_in_ambient_mode">Complications in Ambient Mode</string>
-    <string name="ticks_in_ambient_mode">Ticks in Ambient Mode</string>
-    <string name="ticks_in_interactive_mode">Ticks in Interactive Mode</string>
     <string name="hand_settings">Hand Settings</string>
     <string name="about_app">About App</string>
     <string name="background_settings">Background Settings</string>
@@ -24,9 +20,12 @@
     <string name="left_background_color">Background Color Left</string>
     <string name="right_background_color">Background Color Right</string>
 
+    <string name="ticks_in_ambient_mode">Ticks in Ambient Mode</string>
+    <string name="ticks_in_interactive_mode">Ticks in Interactive Mode</string>
     <string name="hour_ticks_color">Hour Ticks Color</string>
     <string name="minute_ticks_color">Minute Ticks Color</string>
 
+    <string name="complications_in_ambient_mode">Complications in Ambient Mode</string>
     <string name="complications_text_color">Complication Text Color</string>
     <string name="complications_title_color">Complication Title Color</string>
     <string name="complications_icon_color">Complication Icon Color</string>
@@ -34,6 +33,8 @@
     <string name="complications_ranged_value_primary_color">Complication Ranged Value Primary Color</string>
     <string name="complications_ranged_value_secondary_color">Complication Ranged Value Secondary Color</string>
     <string name="complications_background_color">Complication Background Color</string>
+    <string name="bigger_top_and_bottom_complications">Even Wider Top and Bottom Complications</string>
+    <string name="bigger_round_complications">Bigger Round Complications</string>
 
     <string name="github_title">GitHub</string>
     <string name="email_title">Email</string>

@@ -2,11 +2,9 @@ package com.vlad1m1r.watchface.components
 
 import android.content.Context
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.components.ticks.Ticks
+import com.vlad1m1r.watchface.components.ticks.*
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.TicksLayoutType
-import com.vlad1m1r.watchface.components.ticks.TicksLayout1
-import com.vlad1m1r.watchface.components.ticks.TicksLayoutOriginal
 import com.vlad1m1r.watchface.data.ColorStorage
 
 class Layouts(
@@ -33,6 +31,12 @@ class Layouts(
             }
             TicksLayoutType.TICKS_LAYOUT_1 -> {
                 TicksLayout1(context, colorStorage)
+            }
+            TicksLayoutType.TICKS_LAYOUT_2 -> {
+                TicksLayout2(context, colorStorage)
+            }
+            TicksLayoutType.TICKS_LAYOUT_3 -> {
+                TicksLayout3(context, colorStorage)
             }
         }
     }
