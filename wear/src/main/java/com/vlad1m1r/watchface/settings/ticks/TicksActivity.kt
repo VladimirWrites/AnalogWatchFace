@@ -35,7 +35,7 @@ class TicksActivity : Activity() {
 
         colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
-        adapter = TicksAdapter(dataProvider, colorStorage)
+        adapter = TicksAdapter(resources, dataProvider, colorStorage)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

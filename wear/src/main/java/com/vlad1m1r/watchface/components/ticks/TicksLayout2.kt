@@ -5,15 +5,13 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
-import com.vlad1m1r.watchface.utils.WatchView
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
+import kotlin.math.*
 
-class TicksLayout2(context: Context, colorStorage: ColorStorage) : WatchView(context), Ticks {
+class TicksLayout2(context: Context, dataStorage: DataStorage, colorStorage: ColorStorage) : TicksLayout(context, dataStorage) {
 
     private val tickRadius = context.resources.getDimension(R.dimen.design2_tick_radius)
     private val watchHourTickColor = colorStorage.getHourTicksColor()
@@ -55,16 +53,17 @@ class TicksLayout2(context: Context, colorStorage: ColorStorage) : WatchView(con
     override fun draw(canvas: Canvas) {
         for (tickIndex in 0..59) {
             val tickRotation = tickIndex * PI / 30
+            val adjust = if(shouldAdjustToSquareScreen) adjustToSquare(tickRotation) else 1.0
             if (tickIndex % 5 == 0) {
-                val x = sin(tickRotation) * outerTickRadius
-                val y = -cos(tickRotation) * outerTickRadius
+                val x = sin(tickRotation) * outerTickRadius * adjust
+                val y = -cos(tickRotation) * outerTickRadius * adjust
                 canvas.drawCircle(
                     (center.x + x).toFloat(), (center.y + y).toFloat(),
                     tickRadius, tickPaint
                 )
             } else {
-                val x = sin(tickRotation) * outerTickRadius
-                val y = -cos(tickRotation) * outerTickRadius
+                val x = sin(tickRotation) * outerTickRadius * adjust
+                val y = -cos(tickRotation) * outerTickRadius * adjust
                 canvas.drawCircle(
                     (center.x + x).toFloat(), (center.y + y).toFloat(),
                     tickRadiusMinute, tickPaintMinute

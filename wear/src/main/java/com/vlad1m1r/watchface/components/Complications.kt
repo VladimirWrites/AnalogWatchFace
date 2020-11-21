@@ -63,8 +63,6 @@ class Complications(
     var centerInvalidated = true
         private set
 
-
-
     fun setMode(mode: Mode) {
         COMPLICATION_SUPPORTED_TYPES.keys.forEach {
             complicationDrawables[it]?.apply {

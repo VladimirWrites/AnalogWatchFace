@@ -22,6 +22,7 @@
 
     <string name="ticks_in_ambient_mode">Ticks in Ambient Mode</string>
     <string name="ticks_in_interactive_mode">Ticks in Interactive Mode</string>
+    <string name="ticks_adjust_to_square_screen">Adjust Ticks to Square Screen</string>
     <string name="hour_ticks_color">Hour Ticks Color</string>
     <string name="minute_ticks_color">Minute Ticks Color</string>
 

@@ -1,5 +1,6 @@
 package com.vlad1m1r.watchface.settings.ticks
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,9 +19,13 @@ const val TYPE_TICKS_INTERACTIVE_MODE = 1
 const val TYPE_HOUR_TICKS_COLOR = 2
 const val TYPE_MINUTE_TICKS_COLOR = 3
 const val TYPE_TICKS_LAYOUT_PICKER = 4
+const val TYPE_ADJUST_TO_SQUARE_SCREEN = 5
 
-class TicksAdapter(private val dataStorage: DataStorage, private val colorStorage: ColorStorage) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TicksAdapter(
+    private val res: Resources,
+    private val dataStorage: DataStorage,
+    private val colorStorage: ColorStorage
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var ticksLayoutPickerViewHolder: TicksLayoutPickerViewHolder
 
@@ -42,7 +47,8 @@ class TicksAdapter(private val dataStorage: DataStorage, private val colorStorag
                 viewHolder = ticksLayoutPickerViewHolder
             }
             TYPE_TICKS_INTERACTIVE_MODE,
-            TYPE_TICKS_AMBIENT_MODE -> viewHolder = SettingsWithSwitchViewHolder(
+            TYPE_TICKS_AMBIENT_MODE,
+            TYPE_ADJUST_TO_SQUARE_SCREEN -> viewHolder = SettingsWithSwitchViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(
                         R.layout.item_settings_switch,
@@ -67,7 +73,7 @@ class TicksAdapter(private val dataStorage: DataStorage, private val colorStorag
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return if(res.getBoolean(R.bool.is_square_screen)) 6 else 5
     }
 
     override fun getItemViewType(position: Int) =
@@ -77,6 +83,7 @@ class TicksAdapter(private val dataStorage: DataStorage, private val colorStorag
             2 -> TYPE_TICKS_INTERACTIVE_MODE
             3 -> TYPE_HOUR_TICKS_COLOR
             4 -> TYPE_MINUTE_TICKS_COLOR
+            5 -> TYPE_ADJUST_TO_SQUARE_SCREEN
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
@@ -110,6 +117,13 @@ class TicksAdapter(private val dataStorage: DataStorage, private val colorStorag
                     colorStorage.getMinuteTicksColor(),
                     false
                 )
+            TYPE_ADJUST_TO_SQUARE_SCREEN ->
+                (viewHolder as SettingsWithSwitchViewHolder).bind(
+                    R.string.ticks_adjust_to_square_screen,
+                    dataStorage.shouldAdjustToSquareScreen()
+                ) {
+                    dataStorage.setShouldAdjustToSquareScreen(it)
+                }
         }
     }
 

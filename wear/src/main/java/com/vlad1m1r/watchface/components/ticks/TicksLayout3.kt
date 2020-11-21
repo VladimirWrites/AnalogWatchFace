@@ -5,15 +5,13 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
-import com.vlad1m1r.watchface.utils.WatchView
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
+import kotlin.math.*
 
-class TicksLayout3(context: Context, colorStorage: ColorStorage) : WatchView(context), Ticks {
+class TicksLayout3(context: Context, dataStorage: DataStorage, colorStorage: ColorStorage) : TicksLayout(context, dataStorage) {
 
     private val tickLength = context.resources.getDimension(R.dimen.design3_tick_length)
     private val watchHourTickColor = colorStorage.getHourTicksColor()
@@ -84,17 +82,19 @@ class TicksLayout3(context: Context, colorStorage: ColorStorage) : WatchView(con
 
             val tickRotation = tickIndex * PI / 120
 
+            val adjust = if(shouldAdjustToSquareScreen) adjustToSquare(tickRotation) else 1.0
+
             val sinTickRotation = sin(tickRotation)
             val cosTickRotation = -cos(tickRotation)
 
-            val outerX = sinTickRotation * outerTickRadius
-            val outerY = cosTickRotation * outerTickRadius
+            val outerX = sinTickRotation * outerTickRadius * adjust
+            val outerY = cosTickRotation * outerTickRadius * adjust
 
 
             when {
                 tickIndex % 20 == 0 -> {
-                    val innerX = sinTickRotation * innerTickRadius
-                    val innerY = cosTickRotation * innerTickRadius
+                    val innerX = sinTickRotation * innerTickRadius * adjust
+                    val innerY = cosTickRotation * innerTickRadius * adjust
                     canvas.drawLine(
                         (center.x + innerX).toFloat(), (center.y + innerY).toFloat(),
                         (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaint
@@ -102,16 +102,16 @@ class TicksLayout3(context: Context, colorStorage: ColorStorage) : WatchView(con
 
                 }
                 tickIndex % 4 == 0 -> {
-                    val innerX = sinTickRotation * innerTickRadiusMinute
-                    val innerY = cosTickRotation * innerTickRadiusMinute
+                    val innerX = sinTickRotation * innerTickRadiusMinute * adjust
+                    val innerY = cosTickRotation * innerTickRadiusMinute * adjust
                     canvas.drawLine(
                         (center.x + innerX).toFloat(), (center.y + innerY).toFloat(),
                         (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaintMinute
                     )
                 }
                 else -> {
-                    val innerXMilli = sinTickRotation * innerTickRadiusMilli
-                    val innerYMilli = cosTickRotation * innerTickRadiusMilli
+                    val innerXMilli = sinTickRotation * innerTickRadiusMilli * adjust
+                    val innerYMilli = cosTickRotation * innerTickRadiusMilli * adjust
 
                     canvas.drawLine(
                         (center.x + innerXMilli).toFloat(), (center.y + innerYMilli).toFloat(),
@@ -145,7 +145,7 @@ class TicksLayout3(context: Context, colorStorage: ColorStorage) : WatchView(con
                 strokeWidth = tickWidthMinute
             }
         }
-        tickPadding = if (mode.isAmbient && mode.isBurnInProtection) {
+        tickPadding = if (shouldAdjustForBurnInProtection(mode)) {
             tickBurnInPadding
         } else {
             0f

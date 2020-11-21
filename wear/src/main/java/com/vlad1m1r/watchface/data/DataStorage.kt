@@ -14,6 +14,8 @@ const val KEY_HAS_HANDS = "has_hands"
 const val KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS = "has_bigger_top_and_bottom_complications"
 const val KEY_HAS_SMOOTH_SECONDS_HAND = "has_smooth_seconds_hand"
 
+const val KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN = "should_adjust_to_square_screen"
+
 class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun getTicksLayoutType(): TicksLayoutType {
@@ -63,6 +65,14 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
     fun setHasSmoothSecondsHand(hasSmoothSecondsHand: Boolean) {
         val editor = sharedPreferences.edit()
         editor.putBoolean(KEY_HAS_SMOOTH_SECONDS_HAND, hasSmoothSecondsHand)
+        editor.apply()
+    }
+
+    fun shouldAdjustToSquareScreen() = sharedPreferences.getBoolean(KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN, false)
+
+    fun setShouldAdjustToSquareScreen(shouldAdjustToSquareScreen: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN, shouldAdjustToSquareScreen)
         editor.apply()
     }
 }

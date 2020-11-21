@@ -65,7 +65,8 @@ class WatchFace : CanvasWatchFaceService() {
             OnSharedPreferenceChangeListener { _, key ->
                 // only update layouts if the changed preference is the preference
                 // to choose the layouts
-                if (key == KEY_WATCH_FACE_TYPE || key == KEY_HOUR_TICKS_COLOR || key == KEY_MINUTE_TICKS_COLOR) {
+                if (key == KEY_WATCH_FACE_TYPE || key == KEY_HOUR_TICKS_COLOR ||
+                    key == KEY_MINUTE_TICKS_COLOR || key == KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN) {
                     layouts.initTicks()
                 }
                 else if (key == KEY_HOURS_HAND_COLOR || key == KEY_MINUTES_HAND_COLOR ||
