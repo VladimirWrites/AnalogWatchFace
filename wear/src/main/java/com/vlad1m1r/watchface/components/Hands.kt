@@ -92,17 +92,6 @@ class Hands(
         val hoursRotation = calendar.hoursRotation()
         val minutesRotation = calendar.minutesRotation()
 
-        if(showHoursHand) {
-            canvas.rotate(hoursRotation, center.x, center.y)
-            canvas.drawLine(
-                center.x,
-                center.y - middleCircleRadius - circleHandGap,
-                center.x,
-                center.y - hourHandLength,
-                hourPaint
-            )
-        }
-
         if(showMinutesHand) {
             canvas.rotate(minutesRotation - hoursRotation, center.x, center.y)
             canvas.drawLine(
@@ -111,6 +100,17 @@ class Hands(
                 center.x,
                 center.y - minuteHandLength,
                 minutePaint
+            )
+        }
+
+        if(showHoursHand) {
+            canvas.rotate(hoursRotation, center.x, center.y)
+            canvas.drawLine(
+                center.x,
+                center.y - middleCircleRadius - circleHandGap,
+                center.x,
+                center.y - hourHandLength,
+                hourPaint
             )
         }
 
