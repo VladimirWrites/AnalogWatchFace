@@ -17,7 +17,7 @@ abstract class TicksLayout(context: Context, dataStorage: DataStorage) {
     protected val shadowColor = ContextCompat.getColor(context, R.color.watch_shadow)
     protected val shadowRadius = context.resources.getDimension(R.dimen.shadow_radius)
     private val ambientColor = ContextCompat.getColor(context, R.color.watch_ambient)
-    protected val isSquareScreen: Boolean = context.resources.getBoolean(R.bool.is_square_screen)
+    private val isSquareScreen: Boolean = context.resources.getBoolean(R.bool.is_square_screen)
     protected val shouldAdjustToSquareScreen: Boolean = dataStorage.shouldAdjustToSquareScreen()
 
     abstract val centerInvalidated: Boolean

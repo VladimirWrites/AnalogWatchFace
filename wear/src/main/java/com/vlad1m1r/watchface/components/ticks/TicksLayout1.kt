@@ -118,7 +118,7 @@ class TicksLayout1(context: Context, dataStorage: DataStorage, colorStorage: Col
         tickPadding = if (shouldAdjustForBurnInProtection(mode)) {
             tickBurnInPadding
         } else {
-            0f
+            -2f
         }
         centerInvalidated = true
     }
