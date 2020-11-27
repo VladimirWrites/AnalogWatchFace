@@ -73,7 +73,7 @@ class TicksAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if(res.getBoolean(R.bool.is_square_screen)) 6 else 5
+        return if(res.configuration.isScreenRound) 5 else 6
     }
 
     override fun getItemViewType(position: Int) =
