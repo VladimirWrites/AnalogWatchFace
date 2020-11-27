@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlin = "1.4.10"
+    const val kotlin = "1.4.20"
 
     const val wearable_support = "2.8.1"
     const val wearable_support_ui = "1.1.0"
