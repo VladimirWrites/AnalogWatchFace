@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_color_light">#87b2bc</color>
+    <color name="primary_color">#377e8f</color>
+    <color name="primary_color_dark">#2b3948</color>
+    <color name="accent_color">#fe7682</color>
+
+    <color name="watch_background_left">#2b3948</color>
+    <color name="watch_background_right">#377e8f</color>
+
+    <color name="light_grey">#bdbdbd</color>
+    <color name="white">#ffffffff</color>
+</resources>

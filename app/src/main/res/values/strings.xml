@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Analog Watch Face</string>
+
+    <string name="subtitle">❤ Thanks for downloading the app! ❤️</string>
+
+    <string name="description">This app is here to make it
+        easier to install the watch face on your <b>Wear OS</b> watch. Once the watch face is installed you
+        can uninstall this app from your phone. \n\n
+        The whole project is open-sourced, so if you have coding experience feel free to contribute!\n\n
+        If you enjoy using this watch face don\'t forget to rate it!\n</string>
+
+    <string name="no_watch">It seems that this device doesn\'t have a Wear OS watch paired with it.
+        \nSorry for the inconvenience, but Analog Watch Face can only be installed on Wear OS devices.\n\n
+        You can also do it manually from the watch by searching for this watch face on the built-in store.
+    </string>
+    <string name="install_watch_face">Install Analog Watch Face</string>
+    <string name="uninstall_app">Uninstall this app</string>
+    <string name="open_playstore_success_message">Check your watch!</string>
+    <string name="open_playstore_error_message">Something went wrong! Make sure that you have a Wear OS device paired with the phone.</string>
+
 </resources>

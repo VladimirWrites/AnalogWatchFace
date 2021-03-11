@@ -9,7 +9,6 @@ android {
         targetSdkVersion Versions.target_sdk
         versionCode Versions.version_code_app
         versionName Versions.version_name
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -22,8 +21,21 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+dependencies {
+    implementation project(path: ':styleguide')
+
+    implementation Deps.kotlin_stdlib
+
+    implementation Deps.wearable_support
+
+    implementation Deps.androidXCoreKtx
+    implementation Deps.androidXAppCompat
+    implementation Deps.material
+    implementation Deps.constraintLayout
 }

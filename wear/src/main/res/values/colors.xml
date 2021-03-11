@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_color_light">#87b2bc</color>
-    <color name="primary_color">#377e8f</color>
-    <color name="primary_color_dark">#2b3948</color>
-    <color name="accent_color">#fe7682</color>
 
     <color name="watch_hour_ticks">#ffffff</color>
     <color name="watch_minute_ticks">#54C5C5C5</color>
@@ -19,9 +15,6 @@
     <color name="watch_design2_complications_text">#E6FFFFFF</color>
     <color name="watch_design2_complications_border">#54ECEDE7</color>
     <color name="watch_complication_background">#33000000</color>
-
-    <color name="watch_background_left">#2b3948</color>
-    <color name="watch_background_right">#377e8f</color>
 
     <color name="watch_design2_complications_ranged_primary">#54FFFFFF</color>
     <color name="watch_design2_complications_ranged_secondary">@android:color/transparent</color>

@@ -126,7 +126,6 @@ class Hands(
                 center.y - secondHandLength,
                 secondPaint
             )
-            canvas.rotate(-secondsRotation, center.x, center.y)
         }
 
         if(showSecondsHand || showHoursHand || showMinutesHand) {

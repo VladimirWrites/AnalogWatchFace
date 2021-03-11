@@ -1,0 +1,5 @@
+<resources>
+    <string name="github_url" translatable="false">https://github.com/VladimirWrites/AnalogWatchFace/</string>
+    <string name="email" translatable="false">write@vladimirj.dev</string>
+    <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.vlad1m1r.watchface</string>
+</resources>

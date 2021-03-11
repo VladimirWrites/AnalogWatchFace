@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/padding_32"
+            android:paddingBottom="@dimen/padding_32"
+            android:paddingStart="@dimen/padding_16"
+            android:paddingEnd="@dimen/padding_16">
+
+        <ImageView
+                android:id="@+id/image_app_logo"
+                android:layout_width="@dimen/logo_size"
+                android:layout_height="@dimen/logo_size"
+                android:paddingBottom="@dimen/padding_8"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintBottom_toTopOf="@id/text_app_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+                android:id="@+id/text_app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/padding_16"
+                android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@id/text_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_app_logo" />
+
+        <TextView
+                android:id="@+id/text_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/padding_16"
+                android:text="@string/subtitle"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@id/text_message"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_app_name" />
+
+        <TextView
+                android:id="@+id/text_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/padding_16"
+                android:text="@string/description"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@id/button_send_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_subtitle" />
+
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_send_email"
+                style="@style/IconButton"
+                app:icon="@drawable/ic_email"
+                app:layout_constraintBottom_toTopOf="@id/button_install_watch_face"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_message" />
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_open_github"
+                style="@style/IconButton"
+                app:icon="@drawable/ic_github"
+                app:layout_constraintBottom_toBottomOf="@id/button_send_email"
+                app:layout_constraintEnd_toStartOf="@id/button_send_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/button_send_email" />
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_open_playstore"
+                style="@style/IconButton"
+                app:icon="@drawable/ic_play_store"
+                app:layout_constraintBottom_toBottomOf="@id/button_send_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/button_send_email"
+                app:layout_constraintTop_toTopOf="@id/button_send_email" />
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_install_watch_face"
+                style="@style/TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_32"
+                android:text="@string/install_watch_face"
+                android:textColor="?attr/colorOnBackground"
+                app:rippleColor="?attr/colorPrimaryDark"
+                app:layout_constraintBottom_toTopOf="@id/button_uninstall_app"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_send_email" />
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_uninstall_app"
+                style="@style/TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_16"
+                android:backgroundTint="?attr/colorPrimaryDark"
+                android:text="@string/uninstall_app"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_install_watch_face" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
