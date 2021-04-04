@@ -42,4 +42,8 @@
     <string name="play_store_title">Play Store</string>
     <string name="view_on_you_phone">View on you phone</string>
 
+    <string name="complication_day_of_month">Day of Month</string>
+    <string name="complication_time_24">Time (24 hours)</string>
+    <string name="complication_time_12">Time (12 hours)</string>
+
 </resources>
