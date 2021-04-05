@@ -18,6 +18,8 @@ const val KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN = "should_adjust_to_square_screen"
 
 const val KEY_HAS_BLACK_AMBIENT_BACKGROUND = "has_black_ambient_background"
 
+const val KEY_HAS_BIGGER_COMPLICATION_TEXT = "has_bigger_complication_text"
+
 class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun getTicksLayoutType(): TicksLayoutType {
@@ -83,6 +85,14 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
     fun setHasBlackAmbientBackground(hasBlackAmbientBackground: Boolean) {
         val editor = sharedPreferences.edit()
         editor.putBoolean(KEY_HAS_BLACK_AMBIENT_BACKGROUND, hasBlackAmbientBackground)
+        editor.apply()
+    }
+
+    fun hasBiggerComplicationText() = sharedPreferences.getBoolean(KEY_HAS_BIGGER_COMPLICATION_TEXT, false)
+
+    fun setHasBiggerComplicationText(hasBiggerComplicationText: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_HAS_BIGGER_COMPLICATION_TEXT, hasBiggerComplicationText)
         editor.apply()
     }
 }

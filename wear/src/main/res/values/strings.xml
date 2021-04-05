@@ -37,6 +37,7 @@
     <string name="complications_background_color">Complication Background Color</string>
     <string name="bigger_top_and_bottom_complications">Even Wider Top and Bottom Complications</string>
     <string name="bigger_round_complications">Bigger Round Complications</string>
+    <string name="bigger_text_in_complications">Use Bigger Text</string>
 
     <string name="github_title">GitHub</string>
     <string name="email_title">Email</string>

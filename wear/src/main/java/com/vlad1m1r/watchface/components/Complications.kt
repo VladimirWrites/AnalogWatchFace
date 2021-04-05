@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.rendering.ComplicationDrawable
+import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Point
@@ -72,6 +73,7 @@ class Complications(
             }
         }
         invalidateColors()
+        invalidateTextSize()
     }
 
     operator fun get(id: Int): ComplicationDrawable {
@@ -202,7 +204,6 @@ class Complications(
                 setIconColorActive(iconColor)
                 setRangedValuePrimaryColorActive(rangedValuePrimaryColor)
                 setRangedValueSecondaryColorActive(rangedValueSecondaryColor)
-
                 setBackgroundColorAmbient(getDarkerGrayscale(backgroundColor))
                 setTitleColorAmbient(getLighterGrayscale(titleColor))
                 setTextColorAmbient(getLighterGrayscale(textColor))
@@ -213,6 +214,27 @@ class Complications(
             }
         }
     }
+
+    private fun invalidateTextSize() {
+        COMPLICATION_SUPPORTED_TYPES.keys.forEach {
+            complicationDrawables[it]?.apply {
+                if (dataStorage.hasBiggerComplicationText()) {
+                    setTitleSizeActive(1000) //Complication will show the biggest size it can fit
+                    setTextSizeActive(1000)
+                    setTitleSizeAmbient(1000)
+                    setTextSizeAmbient(1000)
+                } else {
+                    val defaultTextSize = context.resources.getDimensionPixelSize(R.dimen.text_size_normal)
+                    
+                    setTitleSizeActive(defaultTextSize) //Complication will show the biggest size it can fit
+                    setTextSizeActive(defaultTextSize)
+                    setTitleSizeAmbient(defaultTextSize)
+                    setTextSizeAmbient(defaultTextSize)
+                }
+            }
+        }
+    }
+
     fun invalidate() {
         centerInvalidated = true
     }

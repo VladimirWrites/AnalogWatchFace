@@ -23,6 +23,7 @@ const val TYPE_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR = 6
 const val TYPE_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR = 7
 const val TYPE_COMPLICATIONS_BACKGROUND_COLOR = 8
 const val TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS = 9
+const val TYPE_BIGGER_TEXT = 10
 
 class ComplicationsAdapter(
     private val dataStorage: DataStorage,
@@ -45,7 +46,8 @@ class ComplicationsAdapter(
                 complicationsPickerViewHolder
             }
             TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS,
-            TYPE_COMPLICATIONS_AMBIENT_MODE ->
+            TYPE_COMPLICATIONS_AMBIENT_MODE,
+            TYPE_BIGGER_TEXT->
                 SettingsWithSwitchViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
@@ -76,7 +78,7 @@ class ComplicationsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return 11
     }
 
     override fun getItemViewType(position: Int) =
@@ -91,6 +93,7 @@ class ComplicationsAdapter(
             7 -> TYPE_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR
             8 -> TYPE_COMPLICATIONS_BACKGROUND_COLOR
             9 -> TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS
+            10 -> TYPE_BIGGER_TEXT
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
@@ -159,6 +162,16 @@ class ComplicationsAdapter(
                         dataStorage.hasBiggerTopAndBottomComplications(),
                     ) {
                         dataStorage.setHasBiggerTopAndBottomComplications(it)
+                    }
+                }
+            }
+            TYPE_BIGGER_TEXT -> {
+                (viewHolder as SettingsWithSwitchViewHolder).apply {
+                    bind(
+                        R.string.bigger_text_in_complications,
+                        dataStorage.hasBiggerComplicationText(),
+                    ) {
+                        dataStorage.setHasBiggerComplicationText(it)
                     }
                     itemView.setPadding(
                         itemView.paddingLeft,

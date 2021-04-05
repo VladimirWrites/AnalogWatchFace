@@ -81,7 +81,8 @@ class WatchFace : CanvasWatchFaceService() {
                 else if (key == KEY_COMPLICATIONS_TEXT_COLOR || key == KEY_COMPLICATIONS_TITLE_COLOR ||
                     key == KEY_COMPLICATIONS_ICON_COLOR || key == KEY_COMPLICATIONS_BORDER_COLOR ||
                     key == KEY_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR || key == KEY_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR ||
-                    key == KEY_COMPLICATIONS_BACKGROUND_COLOR || key == KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS
+                    key == KEY_COMPLICATIONS_BACKGROUND_COLOR || key == KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS ||
+                    key == KEY_HAS_BIGGER_COMPLICATION_TEXT
                 ) {
                     layouts.invalidateComplications()
                 }
