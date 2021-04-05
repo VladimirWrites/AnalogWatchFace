@@ -19,6 +19,7 @@
 
     <string name="left_background_color">Background Color Left</string>
     <string name="right_background_color">Background Color Right</string>
+    <string name="black_ambient_background">Black Background in Ambient Mode</string>
 
     <string name="ticks_in_ambient_mode">Ticks in Ambient Mode</string>
     <string name="ticks_in_interactive_mode">Ticks in Interactive Mode</string>

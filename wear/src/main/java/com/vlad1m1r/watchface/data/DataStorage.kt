@@ -16,6 +16,8 @@ const val KEY_HAS_SMOOTH_SECONDS_HAND = "has_smooth_seconds_hand"
 
 const val KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN = "should_adjust_to_square_screen"
 
+const val KEY_HAS_BLACK_AMBIENT_BACKGROUND = "has_black_ambient_background"
+
 class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun getTicksLayoutType(): TicksLayoutType {
@@ -73,6 +75,14 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
     fun setShouldAdjustToSquareScreen(shouldAdjustToSquareScreen: Boolean) {
         val editor = sharedPreferences.edit()
         editor.putBoolean(KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN, shouldAdjustToSquareScreen)
+        editor.apply()
+    }
+
+    fun hasBlackAmbientBackground() = sharedPreferences.getBoolean(KEY_HAS_BLACK_AMBIENT_BACKGROUND, false)
+
+    fun setHasBlackAmbientBackground(hasBlackAmbientBackground: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_HAS_BLACK_AMBIENT_BACKGROUND, hasBlackAmbientBackground)
         editor.apply()
     }
 }

@@ -2,11 +2,15 @@ package com.vlad1m1r.watchface.components
 
 import android.graphics.*
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.utils.getDarkerGrayscale
 
-class Background(private val colorStorage: ColorStorage) {
+class Background(
+    private val colorStorage: ColorStorage,
+    private val dataStorage: DataStorage
+    ) {
 
     private var center = Point()
 
@@ -65,32 +69,42 @@ class Background(private val colorStorage: ColorStorage) {
     }
 
     private fun initializeAmbientBackground() {
-        val leftColorGrayscale = getDarkerGrayscale(colorStorage.getBackgroundLeftColor())
-        val rightColorGrayscale = getDarkerGrayscale(colorStorage.getBackgroundRightColor())
-        val gradient = LinearGradient(
-            0f,
-            center.x * 2,
-            center.y * 2,
-            0f,
-            leftColorGrayscale,
-            rightColorGrayscale,
-            Shader.TileMode.CLAMP
-        )
-        val p = Paint().apply {
-            isDither = true
-            shader = gradient
-        }
+        if(dataStorage.hasBlackAmbientBackground()) {
+            val bitmap = Bitmap.createBitmap(
+                (center.x * 2).toInt(),
+                (center.y * 2).toInt(),
+                Bitmap.Config.ARGB_8888
+            )
+            bitmap.eraseColor(Color.BLACK);
+            ambientBitmap = bitmap
+        } else {
+            val leftColorGrayscale = getDarkerGrayscale(colorStorage.getBackgroundLeftColor())
+            val rightColorGrayscale = getDarkerGrayscale(colorStorage.getBackgroundRightColor())
+            val gradient = LinearGradient(
+                0f,
+                center.x * 2,
+                center.y * 2,
+                0f,
+                leftColorGrayscale,
+                rightColorGrayscale,
+                Shader.TileMode.CLAMP
+            )
+            val p = Paint().apply {
+                isDither = true
+                shader = gradient
+            }
 
-        val bitmap = Bitmap.createBitmap(
-            (center.x * 2).toInt(),
-            (center.y * 2).toInt(),
-            Bitmap.Config.ARGB_8888
-        )
-        Canvas(bitmap).apply {
-            drawRect(RectF(0f, 0f, width.toFloat(), height.toFloat()), p)
-        }
+            val bitmap = Bitmap.createBitmap(
+                (center.x * 2).toInt(),
+                (center.y * 2).toInt(),
+                Bitmap.Config.ARGB_8888
+            )
+            Canvas(bitmap).apply {
+                drawRect(RectF(0f, 0f, width.toFloat(), height.toFloat()), p)
+            }
 
-        ambientBitmap = bitmap
+            ambientBitmap = bitmap
+        }
     }
 
     fun invalidate() {

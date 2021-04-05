@@ -75,7 +75,7 @@ class WatchFace : CanvasWatchFaceService() {
                 ) {
                     layouts.invalidateHands()
                 }
-                else if (key == KEY_BACKGROUND_LEFT_COLOR || key == KEY_BACKGROUND_RIGHT_COLOR) {
+                else if (key == KEY_BACKGROUND_LEFT_COLOR || key == KEY_BACKGROUND_RIGHT_COLOR || key == KEY_HAS_BLACK_AMBIENT_BACKGROUND) {
                     layouts.invalidateBackground()
                 }
                 else if (key == KEY_COMPLICATIONS_TEXT_COLOR || key == KEY_COMPLICATIONS_TITLE_COLOR ||

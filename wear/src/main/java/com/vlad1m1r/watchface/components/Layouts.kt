@@ -13,7 +13,7 @@ class Layouts(
     private val colorStorage: ColorStorage,
     private val context: Context
 ) {
-    val background = Background(colorStorage)
+    val background = Background(colorStorage, dataStorage)
     val complications = Complications(context, dataStorage, colorStorage)
     val hands: Hands = Hands(context, colorStorage)
 
