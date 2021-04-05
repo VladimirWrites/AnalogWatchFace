@@ -70,50 +70,6 @@
                     android:value="com.vlad1m1r.watchface.WatchFace"/>
         </service>
 
-        <service
-                android:name=".provider.Time24Provider"
-                android:icon="@drawable/ic_time"
-                android:label="@string/complication_time_24"
-                android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
-            <intent-filter>
-                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST"/>
-            </intent-filter>
-
-            <meta-data
-                    android:name="android.support.wearable.complications.SUPPORTED_TYPES"
-                    android:value="SHORT_TEXT, LONG_TEXT"/>
-
-            <meta-data
-                    android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
-                    android:value="60"/>
-
-            <meta-data
-                    android:name="android.support.wearable.complications.SAFE_WATCH_FACES"
-                    android:value="com.vlad1m1r.watchface.WatchFace"/>
-        </service>
-
-        <service
-                android:name=".provider.Time12Provider"
-                android:icon="@drawable/ic_time"
-                android:label="@string/complication_time_12"
-                android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
-            <intent-filter>
-                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST"/>
-            </intent-filter>
-
-            <meta-data
-                    android:name="android.support.wearable.complications.SUPPORTED_TYPES"
-                    android:value="SHORT_TEXT, LONG_TEXT"/>
-
-            <meta-data
-                    android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
-                    android:value="60"/>
-
-            <meta-data
-                    android:name="android.support.wearable.complications.SAFE_WATCH_FACES"
-                    android:value="com.vlad1m1r.watchface.WatchFace"/>
-        </service>
-
         <activity android:name="android.support.wearable.complications.ComplicationHelperActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.config.ConfigActivity">
             <intent-filter>

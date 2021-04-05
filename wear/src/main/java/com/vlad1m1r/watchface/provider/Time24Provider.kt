@@ -14,7 +14,8 @@ class Time24Provider: ComplicationProviderService() {
     ) {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY).toString()
-        val minute = calendar.get(Calendar.MINUTE).toString()
+        val minuteTemp = calendar.get(Calendar.SECOND)
+        val minute = if(minuteTemp < 10) "0$minuteTemp" else minuteTemp.toString()
 
         val time = "$hour:$minute"
 
@@ -25,15 +26,11 @@ class Time24Provider: ComplicationProviderService() {
                     .build().also { complicationData ->
                         complicationManager.updateComplicationData(complicationId, complicationData)
                     }
-            ComplicationData.TYPE_LONG_TEXT ->
-                ComplicationData.Builder(ComplicationData.TYPE_LONG_TEXT)
-                    .setLongText(ComplicationText.plainText(time))
-                    .build().also { complicationData ->
-                        complicationManager.updateComplicationData(complicationId, complicationData)
-                    }
             else -> {
                 complicationManager.noUpdateRequired(complicationId)
             }
         }
     }
+
+
 }
