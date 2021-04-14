@@ -74,35 +74,35 @@ class HandsAdapter(
         when (viewHolder.itemViewType) {
             TYPE_COLOR_HOUR_HAND ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.hours_hand_color,
+                    R.string.wear_hours_hand_color,
                     HOURS_HAND_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getHoursHandColor(),
                     true
                 )
             TYPE_COLOR_MINUTE_HAND ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.minutes_hand_color,
+                    R.string.wear_minutes_hand_color,
                     MINUTES_HAND_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getMinutesHandColor(),
                     true
                 )
             TYPE_COLOR_SECOND_HAND ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.seconds_hand_color,
+                    R.string.wear_seconds_hand_color,
                     SECONDS_HAND_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getSecondsHandColor(),
                     true
                 )
             TYPE_COLOR_CENTRAL_CIRCLE ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.central_circle_color,
+                    R.string.wear_central_circle_color,
                     CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getCentralCircleColor(),
                     true
                 )
             TYPE_SMOOTH_SECONDS_HAND ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
-                    R.string.smooth_seconds_hand,
+                    R.string.wear_smooth_seconds_hand,
                     dataStorage.hasSmoothSecondsHand()
                 ) {
                     dataStorage.setHasSmoothSecondsHand(it)

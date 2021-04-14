@@ -81,7 +81,7 @@ class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (viewHolder.itemViewType) {
             TYPE_COMPLICATIONS -> {
                 (viewHolder as SettingsViewHolder).bind(
-                    R.string.complications_settings
+                    R.string.wear_complications_settings
                 ) {
                     val activity = viewHolder.itemView.context as Activity
                     activity.startActivity(
@@ -92,7 +92,7 @@ class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             TYPE_TICKS -> {
                 (viewHolder as SettingsViewHolder).bind(
-                    R.string.ticks_settings
+                    R.string.wear_ticks_settings
                 ) {
                     val activity = viewHolder.itemView.context as Activity
                     activity.startActivity(
@@ -103,7 +103,7 @@ class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             TYPE_BACKGROUND -> {
                 (viewHolder as SettingsViewHolder).bind(
-                    R.string.background_settings
+                    R.string.wear_background_settings
                 ) {
                     val activity = viewHolder.itemView.context as Activity
                     activity.startActivity(
@@ -114,7 +114,7 @@ class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             TYPE_HANDS -> {
                 (viewHolder as SettingsViewHolder).bind(
-                    R.string.hand_settings
+                    R.string.wear_hand_settings
                 ) {
                     val activity = viewHolder.itemView.context as Activity
                     activity.startActivity(
@@ -125,7 +125,7 @@ class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             TYPE_ABOUT -> {
                 (viewHolder as SettingsViewHolder).bind(
-                    R.string.about_app
+                    R.string.wear_about_app
                 ) {
                     val activity = viewHolder.itemView.context as Activity
                     activity.startActivity(

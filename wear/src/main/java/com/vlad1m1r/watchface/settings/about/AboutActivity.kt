@@ -31,9 +31,9 @@ class AboutActivity : Activity() {
         val email = findViewById<TextView>(R.id.email_view)
         val playStore = findViewById<TextView>(R.id.play_store_view)
 
-        gitHub.setOnClickListener { openUri(getString(R.string.github_url)) }
-        email.setOnClickListener { openUri("mailto:${getString(R.string.email)}") }
-        playStore.setOnClickListener { openUri(getString(R.string.play_store_url)) }
+        gitHub.setOnClickListener { openUri(getString(R.string.data_github_url)) }
+        email.setOnClickListener { openUri("mailto:${getString(R.string.data_email)}") }
+        playStore.setOnClickListener { openUri(getString(R.string.data_play_store_url)) }
     }
 
     override fun onGenericMotionEvent(event: MotionEvent?): Boolean {

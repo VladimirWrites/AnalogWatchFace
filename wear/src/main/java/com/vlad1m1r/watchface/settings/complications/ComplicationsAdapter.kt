@@ -101,56 +101,56 @@ class ComplicationsAdapter(
         when (viewHolder.itemViewType) {
             TYPE_COMPLICATIONS_AMBIENT_MODE ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
-                    R.string.complications_in_ambient_mode,
+                    R.string.wear_complications_in_ambient_mode,
                     dataStorage.hasComplicationsInAmbientMode()
                 ) {
                     dataStorage.setHasComplicationsInAmbientMode(it)
                 }
             TYPE_COMPLICATIONS_TEXT_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.complications_text_color,
+                    R.string.wear_complications_text_color,
                     COMPLICATIONS_TEXT_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsTextColor(),
                     true
                 )
             TYPE_COMPLICATIONS_TITLE_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.complications_title_color,
+                    R.string.wear_complications_title_color,
                     COMPLICATIONS_TITLE_COLOR_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsTitleColor(),
                     true
                 )
             TYPE_COMPLICATIONS_ICON_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.complications_icon_color,
+                    R.string.wear_complications_icon_color,
                     COMPLICATIONS_ICON_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsIconColor(),
                     true
                 )
             TYPE_COMPLICATIONS_BORDER_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.complications_border_color,
+                    R.string.wear_complications_border_color,
                     COMPLICATIONS_BORDER_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsBorderColor(),
                     true
                 )
             TYPE_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.complications_ranged_value_primary_color,
+                    R.string.wear_complications_ranged_value_primary_color,
                     COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsRangedValuePrimaryColor(),
                     true
                 )
             TYPE_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.complications_ranged_value_secondary_color,
+                    R.string.wear_complications_ranged_value_secondary_color,
                     COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsRangedValueSecondaryColor(),
                     true
                 )
             TYPE_COMPLICATIONS_BACKGROUND_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.complications_background_color,
+                    R.string.wear_complications_background_color,
                     COMPLICATIONS_BACKGROUND_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsBackgroundColor(),
                     true
@@ -158,7 +158,7 @@ class ComplicationsAdapter(
             TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS -> {
                 (viewHolder as SettingsWithSwitchViewHolder).apply {
                     bind(
-                        R.string.bigger_top_and_bottom_complications,
+                        R.string.wear_bigger_top_and_bottom_complications,
                         dataStorage.hasBiggerTopAndBottomComplications(),
                     ) {
                         dataStorage.setHasBiggerTopAndBottomComplications(it)
@@ -168,7 +168,7 @@ class ComplicationsAdapter(
             TYPE_BIGGER_TEXT -> {
                 (viewHolder as SettingsWithSwitchViewHolder).apply {
                     bind(
-                        R.string.bigger_text_in_complications,
+                        R.string.wear_bigger_text_in_complications,
                         dataStorage.hasBiggerComplicationText(),
                     ) {
                         dataStorage.setHasBiggerComplicationText(it)

@@ -66,21 +66,21 @@ class BackgroundAdapter(
         when(viewHolder.itemViewType) {
             TYPE_COLOR_LEFT ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.left_background_color,
+                    R.string.wear_left_background_color,
                     BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getBackgroundLeftColor(),
                     false
                 )
             TYPE_COLOR_RIGHT ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.right_background_color,
+                    R.string.wear_right_background_color,
                     BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getBackgroundRightColor(),
                     false
                 )
             TYPE_BLACK_AMBIENT ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
-                    R.string.black_ambient_background,
+                    R.string.wear_black_ambient_background,
                     dataStorage.hasBlackAmbientBackground()
                 ) {
                     dataStorage.setHasBlackAmbientBackground(it)

@@ -41,7 +41,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/screen_percentage_10"
                 android:drawableBottom="@drawable/ic_arrow_down"
-                android:text="@string/view_on_you_phone"
+                android:text="@string/wear_view_on_you_phone"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_mini"
                 android:textStyle="normal" />
@@ -64,7 +64,7 @@
                 android:paddingTop="@dimen/about_app_item_padding"
                 android:paddingEnd="@dimen/screen_percentage_15"
                 android:paddingBottom="@dimen/about_app_item_padding"
-                android:text="@string/github_title"
+                android:text="@string/wear_github_title"
                 android:textColor="@color/white" />
 
         <View
@@ -85,7 +85,7 @@
                 android:paddingTop="@dimen/about_app_item_padding"
                 android:paddingEnd="@dimen/screen_percentage_15"
                 android:paddingBottom="@dimen/about_app_item_padding"
-                android:text="@string/email_title"
+                android:text="@string/wear_email_title"
                 android:textColor="@color/white" />
 
         <View
@@ -106,7 +106,7 @@
                 android:paddingTop="@dimen/about_app_item_padding"
                 android:paddingEnd="@dimen/screen_percentage_15"
                 android:paddingBottom="@dimen/about_app_item_padding"
-                android:text="@string/play_store_title"
+                android:text="@string/wear_play_store_title"
                 android:textColor="@color/white" />
 
         <View

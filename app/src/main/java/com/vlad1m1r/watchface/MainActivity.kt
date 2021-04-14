@@ -48,19 +48,19 @@ class MainActivity : Activity() {
             playStore.visibility = View.VISIBLE
             installWatchFace.visibility = View.VISIBLE
 
-            message.text = getString(R.string.description)
+            message.text = getString(R.string.app_description)
             message.setTextAppearance(R.style.TextAppearance_MaterialComponents_Body1)
             message.setTextColor(ContextCompat.getColor(this, R.color.white))
             message.setTypeface(null, Typeface.NORMAL)
 
-            gitHub.setOnClickListener { openUri(getString(R.string.github_url)) }
-            email.setOnClickListener { openUri("mailto:${getString(R.string.email)}") }
-            playStore.setOnClickListener { openUri(getString(R.string.play_store_url)) }
-            installWatchFace.setOnClickListener { openUriOnWear(getString(R.string.play_store_url)) }
+            gitHub.setOnClickListener { openUri(getString(R.string.data_github_url)) }
+            email.setOnClickListener { openUri("mailto:${getString(R.string.data_email)}") }
+            playStore.setOnClickListener { openUri(getString(R.string.data_play_store_url)) }
+            installWatchFace.setOnClickListener { openUriOnWear(getString(R.string.data_play_store_url)) }
         } else {
             subtitle.visibility = View.GONE
 
-            message.text = getString(R.string.no_watch)
+            message.text = getString(R.string.app_no_watch)
             message.setTextAppearance(R.style.TextAppearance_MaterialComponents_Headline6)
             message.setTextColor(ContextCompat.getColor(this, R.color.accent_color))
             message.setTypeface(null, Typeface.BOLD)
@@ -96,9 +96,9 @@ class MainActivity : Activity() {
             override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
                 super.onReceiveResult(resultCode, resultData)
                 if (resultCode == RemoteIntent.RESULT_OK) {
-                    showMessage(R.string.open_playstore_success_message)
+                    showMessage(R.string.app_open_playstore_success_message)
                 } else {
-                    showMessage(R.string.open_playstore_error_message)
+                    showMessage(R.string.app_open_playstore_error_message)
                 }
             }
         })

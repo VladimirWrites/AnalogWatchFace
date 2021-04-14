@@ -1,5 +1,73 @@
 <resources>
-    <string name="github_url" translatable="false">https://github.com/VladimirWrites/AnalogWatchFace/</string>
-    <string name="email" translatable="false">write@vladimirj.dev</string>
-    <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.vlad1m1r.watchface</string>
+    <string name="app_name">Analog Watch Face</string>
+
+    <string name="app_subtitle">❤ Thanks for downloading the app! ❤️</string>
+
+    <string name="app_description">This app is here to make it
+        easier to install the watch face on your <b>Wear OS</b> watch. Once the watch face is installed you
+        can uninstall this app from your phone. \n\n
+        The whole project is open-sourced, so if you have coding experience feel free to contribute!\n\n
+        If you enjoy using this watch face don\'t forget to rate it!\n</string>
+
+    <string name="app_no_watch">It seems that this device doesn\'t have a Wear OS watch paired with it.
+        \nSorry for the inconvenience, but Analog Watch Face can only be installed on Wear OS devices.\n\n
+        You can also do it manually from the watch by searching for this watch face on the built-in store.
+    </string>
+    <string name="app_install_watch_face">Install Analog Watch Face</string>
+    <string name="app_uninstall_app">Uninstall this app</string>
+    <string name="app_open_playstore_success_message">Check your watch!</string>
+    <string name="app_open_playstore_error_message">Something went wrong! Make sure that you have a Wear OS device paired with the phone.</string>
+
+
+    <string name="wear_edit_complication">Edit Complication %s</string>
+    <string name="wear_add_complication">Add Complication</string>
+    <string name="wear_ticks_layout_picker">Pick Ticks Layout</string>
+    <string name="wear_hand_settings">Hand Settings</string>
+    <string name="wear_about_app">About App</string>
+    <string name="wear_background_settings">Background Settings</string>
+    <string name="wear_complications_settings">Complications Settings</string>
+    <string name="wear_ticks_settings">Ticks Settings</string>
+    <string name="wear_rate_the_watch_face">Rate the Watch Face</string>
+
+    <string name="wear_hours_hand_color">Hours Hand Color</string>
+    <string name="wear_minutes_hand_color">Minutes Hand Color</string>
+    <string name="wear_seconds_hand_color">Seconds Hand Color</string>
+    <string name="wear_central_circle_color">Central Circle Color</string>
+    <string name="wear_smooth_seconds_hand">Smooth Seconds Hand</string>
+
+    <string name="wear_left_background_color">Background Color Left</string>
+    <string name="wear_right_background_color">Background Color Right</string>
+    <string name="wear_black_ambient_background">Black Background in Ambient Mode</string>
+
+    <string name="wear_ticks_in_ambient_mode">Ticks in Ambient Mode</string>
+    <string name="wear_ticks_in_interactive_mode">Ticks in Interactive Mode</string>
+    <string name="wear_ticks_adjust_to_square_screen">Adjust Ticks to Square Screen</string>
+    <string name="wear_hour_ticks_color">Hour Ticks Color</string>
+    <string name="wear_minute_ticks_color">Minute Ticks Color</string>
+
+    <string name="wear_complications_in_ambient_mode">Complications in Ambient Mode</string>
+    <string name="wear_complications_text_color">Complication Text Color</string>
+    <string name="wear_complications_title_color">Complication Title Color</string>
+    <string name="wear_complications_icon_color">Complication Icon Color</string>
+    <string name="wear_complications_border_color">Complication Border Color</string>
+    <string name="wear_complications_ranged_value_primary_color">Complication Ranged Value Primary Color</string>
+    <string name="wear_complications_ranged_value_secondary_color">Complication Ranged Value Secondary Color</string>
+    <string name="wear_complications_background_color">Complication Background Color</string>
+    <string name="wear_bigger_top_and_bottom_complications">Even Wider Top and Bottom Complications</string>
+    <string name="wear_bigger_round_complications">Bigger Round Complications</string>
+    <string name="wear_bigger_text_in_complications">Use Bigger Text</string>
+
+    <string name="wear_github_title">GitHub</string>
+    <string name="wear_email_title">Email</string>
+    <string name="wear_play_store_title">Play Store</string>
+    <string name="wear_view_on_you_phone">View on you phone</string>
+
+    <string name="wear_complication_day_of_month">Day of Month</string>
+    <string name="wear_complication_time_24">Time (24 hours)</string>
+    <string name="wear_complication_time_12">Time (12 hours)</string>
+
+    //Shared
+    <string name="data_github_url" translatable="false">https://github.com/VladimirWrites/AnalogWatchFace/</string>
+    <string name="data_email" translatable="false">write@vladimirj.dev</string>
+    <string name="data_play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.vlad1m1r.watchface</string>
 </resources>

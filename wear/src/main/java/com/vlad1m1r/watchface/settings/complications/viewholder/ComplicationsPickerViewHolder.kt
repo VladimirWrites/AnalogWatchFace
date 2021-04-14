@@ -62,7 +62,7 @@ class ComplicationsPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(it
         if (complicationProviderInfo != null) {
             complicationView?.apply {
                 setImageIcon(complicationProviderInfo.providerIcon)
-                contentDescription = itemView.context.getString(R.string.edit_complication, complicationProviderInfo.providerName)
+                contentDescription = itemView.context.getString(R.string.wear_edit_complication, complicationProviderInfo.providerName)
                 setBackgroundResource(
                     if (complicationLocation.isBig) R.drawable.added_big_complication else R.drawable.added_complication
                 )
@@ -76,7 +76,7 @@ class ComplicationsPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(it
             }
         } else {
             complicationView?.apply {
-                contentDescription = itemView.context.getString(R.string.add_complication)
+                contentDescription = itemView.context.getString(R.string.wear_add_complication)
                 setImageResource(android.R.color.transparent)
                 setBackgroundResource(if (complicationLocation.isBig) R.drawable.add_big_complication else R.drawable.add_complication)
             }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/settings_rate"
-        android:text="@string/rate_the_watch_face"
+        android:text="@string/wear_rate_the_watch_face"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/screen_percentage_10"

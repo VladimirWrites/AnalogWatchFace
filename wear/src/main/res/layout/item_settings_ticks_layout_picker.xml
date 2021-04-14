@@ -16,7 +16,7 @@
             android:gravity="start"
             android:paddingTop="@dimen/screen_percentage_05"
             android:paddingBottom="@dimen/screen_percentage_05"
-            android:text="@string/ticks_layout_picker"
+            android:text="@string/wear_ticks_layout_picker"
             android:textSize="@dimen/text_size_normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/image_watch_face"

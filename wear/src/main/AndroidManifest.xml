@@ -51,7 +51,7 @@
         <service
                 android:name=".provider.DateProvider"
                 android:icon="@drawable/ic_date"
-                android:label="@string/complication_day_of_month"
+                android:label="@string/wear_complication_day_of_month"
                 android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
             <intent-filter>
                 <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST"/>

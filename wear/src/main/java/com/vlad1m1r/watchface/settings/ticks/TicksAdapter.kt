@@ -91,35 +91,35 @@ class TicksAdapter(
         when(viewHolder.itemViewType) {
             TYPE_TICKS_AMBIENT_MODE ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
-                    R.string.ticks_in_ambient_mode,
+                    R.string.wear_ticks_in_ambient_mode,
                     dataStorage.hasTicksInAmbientMode()
                 ) {
                     dataStorage.setHasTicksInAmbientMode(it)
                 }
             TYPE_TICKS_INTERACTIVE_MODE ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
-                    R.string.ticks_in_interactive_mode,
+                    R.string.wear_ticks_in_interactive_mode,
                     dataStorage.hasTicksInInteractiveMode()
                 ) {
                     dataStorage.setHasTicksInInteractiveMode(it)
                 }
             TYPE_HOUR_TICKS_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.hour_ticks_color,
+                    R.string.wear_hour_ticks_color,
                     HOUR_TICKS_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getHourTicksColor(),
                     false
                 )
             TYPE_MINUTE_TICKS_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
-                    R.string.minute_ticks_color,
+                    R.string.wear_minute_ticks_color,
                     MINUTE_TICKS_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getMinuteTicksColor(),
                     false
                 )
             TYPE_ADJUST_TO_SQUARE_SCREEN ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
-                    R.string.ticks_adjust_to_square_screen,
+                    R.string.wear_ticks_adjust_to_square_screen,
                     dataStorage.shouldAdjustToSquareScreen()
                 ) {
                     dataStorage.setShouldAdjustToSquareScreen(it)
