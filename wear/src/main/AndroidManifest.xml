@@ -41,6 +41,10 @@
                     android:name="com.google.android.wearable.watchface.wearableConfigurationAction"
                     android:value="com.vlad1m1r.watchface.CONFIG_DIGITAL"/>
 
+            <meta-data
+                    android:name="android.service.wallpaper.square_mode"
+                    android:value="false" />
+
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService"/>
 

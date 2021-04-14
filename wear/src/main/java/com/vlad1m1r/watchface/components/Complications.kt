@@ -141,12 +141,12 @@ class Complications(
     private fun setBoundsToTopBottomComplications(centerX: Float, centerY: Float, wider: Boolean) {
         val sizeOfComplicationSmall = centerX.toInt() / 2
         val horizontalOffsetSmall = centerX.toInt() - (sizeOfComplicationSmall / 2)
-        val verticalOffsetSmall = (centerY.toInt() - sizeOfComplicationSmall) / 2
+        val verticalOffsetSmall = (centerX.toInt() - sizeOfComplicationSmall) / 2
 
         val widthOfComplicationLarge = centerX.toInt() + if (wider) centerX.toInt() / 3 else 0
         val heightOfComplicationLarge = centerX.toInt() / 3
         val horizontalOffsetLarge = centerX.toInt() - widthOfComplicationLarge / 2
-        val verticalOffsetLarge = (centerY.toInt() - heightOfComplicationLarge) / 2
+        val verticalOffsetLarge = (centerX.toInt() - heightOfComplicationLarge) / 2
 
         val topBounds =
             if (complicationData[TOP_COMPLICATION_ID]?.type == ComplicationData.TYPE_LONG_TEXT) {
