@@ -152,16 +152,16 @@ class Complications(
             if (complicationData[TOP_COMPLICATION_ID]?.type == ComplicationData.TYPE_LONG_TEXT) {
                 Rect(
                     horizontalOffsetLarge,
-                    verticalOffsetLarge,
+                    centerY.toInt() - verticalOffsetLarge - heightOfComplicationLarge,
                     horizontalOffsetLarge + widthOfComplicationLarge,
-                    verticalOffsetLarge + heightOfComplicationLarge
+                    centerY.toInt() - verticalOffsetLarge
                 )
             } else {
                 Rect(
                     horizontalOffsetSmall,
-                    verticalOffsetSmall,
+                    centerY.toInt() - verticalOffsetSmall - sizeOfComplicationSmall,
                     horizontalOffsetSmall + sizeOfComplicationSmall,
-                    verticalOffsetSmall + sizeOfComplicationSmall
+                    centerY.toInt() - verticalOffsetSmall
                 )
             }
 
