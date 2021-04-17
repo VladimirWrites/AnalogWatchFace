@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.settings.hands
+package com.vlad1m1r.watchface.settings.hands.hand
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

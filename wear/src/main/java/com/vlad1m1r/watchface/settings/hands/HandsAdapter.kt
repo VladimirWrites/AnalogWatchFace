@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
+import com.vlad1m1r.watchface.settings.hands.centralcircle.CentralCircleActivity
+import com.vlad1m1r.watchface.settings.hands.centralcircle.KEY_CENTRAL_CIRCLE_TITLE
+import com.vlad1m1r.watchface.settings.hands.hand.HandActivity
+import com.vlad1m1r.watchface.settings.hands.hand.HandType
+import com.vlad1m1r.watchface.settings.hands.hand.KEY_HAND_TITLE
+import com.vlad1m1r.watchface.settings.hands.hand.KEY_HAND_TYPE
 import java.lang.IllegalArgumentException
 
 private const val TYPE_TITLE = 0

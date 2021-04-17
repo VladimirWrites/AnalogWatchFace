@@ -66,6 +66,9 @@
     <string name="wear_central_circle" translatable="false">Central Circle</string>
     <string name="wear_hand_color" translatable="false">Hand Color</string>
 
+    <string name="wear_complication_colors" translatable="false">Complication Colors</string>
+    <string name="wear_complication_picker" translatable="false">Complication Picker</string>
+
     <string name="data_github_url" translatable="false">https://github.com/VladimirWrites/AnalogWatchFace/</string>
     <string name="data_email" translatable="false">write@vladimirj.dev</string>
     <string name="data_play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.vlad1m1r.watchface</string>

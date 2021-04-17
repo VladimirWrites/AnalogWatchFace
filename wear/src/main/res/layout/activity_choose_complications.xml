@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_config_padding"
+            android:layout_marginBottom="@dimen/activity_config_padding_small"
+            android:layout_marginTop="@dimen/activity_config_padding_small"
+            android:layout_marginStart="@dimen/activity_config_padding_small"
+            android:layout_marginEnd="@dimen/activity_config_padding_small"
             android:background="@drawable/background"/>
 
     <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_config_padding"
+            android:layout_marginBottom="@dimen/activity_config_padding_small"
+            android:layout_marginTop="@dimen/activity_config_padding_small"
+            android:layout_marginStart="@dimen/activity_config_padding_small"
+            android:layout_marginEnd="@dimen/activity_config_padding_small"
             android:background="@drawable/preview_clock"/>
 
     <ImageView
@@ -21,8 +28,8 @@
             android:layout_height="@dimen/complication_preview_size"
             android:layout_marginStart="@dimen/complication_preview_margin_horizontal"
             android:layout_gravity="center_vertical|start"
-            android:scaleType="fitCenter"
-            android:background="@drawable/add_complication"/>
+            android:scaleType="centerInside"
+            tools:background="@drawable/add_complication"/>
 
     <ImageView
             android:id="@+id/right_complication"
@@ -30,7 +37,7 @@
             android:layout_height="@dimen/complication_preview_size"
             android:layout_marginEnd="@dimen/complication_preview_margin_horizontal"
             android:layout_gravity="center_vertical|end"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:background="@drawable/add_complication"/>
 
     <ImageView
@@ -39,8 +46,8 @@
             android:layout_height="@dimen/complication_big_preview_height"
             android:layout_marginTop="@dimen/complication_preview_margin_vertical"
             android:layout_gravity="center_horizontal|top"
-            android:scaleType="fitCenter"
-            android:background="@drawable/add_big_complication"/>
+            android:scaleType="centerInside"
+            tools:background="@drawable/add_big_complication"/>
 
     <ImageView
             android:id="@+id/bottom_complication"
@@ -48,13 +55,8 @@
             android:layout_height="@dimen/complication_big_preview_height"
             android:layout_marginBottom="@dimen/complication_preview_margin_vertical"
             android:layout_gravity="center_horizontal|bottom"
-            android:scaleType="fitCenter"
-            android:background="@drawable/add_big_complication"/>
-
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_down"
-            android:layout_gravity="center_horizontal|bottom"/>
+            android:scaleType="centerInside"
+            android:padding="@dimen/complication_padding_preview_big"
+            tools:background="@drawable/add_big_complication"/>
 
 </FrameLayout>

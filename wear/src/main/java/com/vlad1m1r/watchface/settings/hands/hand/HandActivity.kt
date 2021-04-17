@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.settings.hands
+package com.vlad1m1r.watchface.settings.hands.hand
 
 import android.content.Context
 import android.content.Intent
@@ -15,29 +15,32 @@ import com.vlad1m1r.watchface.settings.config.MINUTES_HAND_COLOR_PICKER_REQUEST_
 import com.vlad1m1r.watchface.settings.config.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
-import com.vlad1m1r.watchface.settings.config.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
 
-const val KEY_CENTRAL_CIRCLE_TITLE = "central_circle_title"
+const val KEY_HAND_TYPE = "hand_type"
+const val KEY_HAND_TITLE = "hand_title"
 
-class CentralCircleActivity : BaseRecyclerActivity() {
+class HandActivity : BaseRecyclerActivity() {
 
     private lateinit var colorStorage: ColorStorage
-    private lateinit var adapter: CentralCircleAdapter
+    private lateinit var adapter: HandAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        val title = intent.getIntExtra(KEY_CENTRAL_CIRCLE_TITLE, 0)
+        val handType = intent.getSerializableExtra(KEY_HAND_TYPE) as HandType
+        val title = intent.getIntExtra(KEY_HAND_TITLE, 0)
 
         val sharedPref = getSharedPreferences(
             KEY_ANALOG_WATCH_FACE,
             Context.MODE_PRIVATE
         )
 
+        val dataStorage = DataStorage(sharedPref)
+
         colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
-        adapter = CentralCircleAdapter(colorStorage, title)
+        adapter = HandAdapter(colorStorage, dataStorage, handType, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true
@@ -51,9 +54,17 @@ class CentralCircleActivity : BaseRecyclerActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             when (requestCode) {
-                CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE -> {
-                    val centralCircleColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setCentralCircleColor(centralCircleColor)
+                HOURS_HAND_COLOR_PICKER_REQUEST_CODE -> {
+                    val hoursColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                    colorStorage.setHoursHandColor(hoursColor)
+                }
+                MINUTES_HAND_COLOR_PICKER_REQUEST_CODE -> {
+                    val minutesColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                    colorStorage.setMinutesHandColor(minutesColor)
+                }
+                SECONDS_HAND_COLOR_PICKER_REQUEST_CODE -> {
+                    val secondsColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                    colorStorage.setSecondsHandColor(secondsColor)
                 }
             }
             adapter.notifyDataSetChanged()

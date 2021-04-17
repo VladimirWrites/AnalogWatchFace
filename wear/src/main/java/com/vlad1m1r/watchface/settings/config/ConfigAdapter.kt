@@ -11,6 +11,7 @@ import com.vlad1m1r.watchface.settings.about.AboutActivity
 import com.vlad1m1r.watchface.settings.background.BackgroundActivity
 import com.vlad1m1r.watchface.settings.background.KEY_BACKGROUND_TITLE
 import com.vlad1m1r.watchface.settings.complications.ComplicationsActivity
+import com.vlad1m1r.watchface.settings.complications.KEY_COMPLICATIONS_TITLE
 import com.vlad1m1r.watchface.settings.hands.HandsActivity
 import com.vlad1m1r.watchface.settings.hands.KEY_HANDS_TITLE
 import com.vlad1m1r.watchface.settings.ticks.KEY_TICKS_TITLE
@@ -89,6 +90,7 @@ class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     val activity = viewHolder.itemView.context as Activity
                     activity.startActivity(
                         Intent(viewHolder.itemView.context, ComplicationsActivity::class.java)
+                            .putExtra(KEY_COMPLICATIONS_TITLE, R.string.wear_complications_settings)
                     )
                 }
             }
