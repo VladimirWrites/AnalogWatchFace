@@ -1,14 +1,11 @@
 package com.vlad1m1r.watchface.settings.config
 
-import android.app.Activity
 import android.os.Bundle
-import android.view.MotionEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
-import com.google.android.wearable.input.RotaryEncoderHelper
 import com.vlad1m1r.watchface.R
-import kotlin.math.roundToInt
+import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 
 const val COMPLICATION_CONFIG_REQUEST_CODE = 1001
 const val FACE_PICKER_REQUEST_CODE = 1002
@@ -32,9 +29,8 @@ const val COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR_PICKER_REQUEST_CODE = 1045
 const val COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR_PICKER_REQUEST_CODE = 1046
 const val COMPLICATIONS_BACKGROUND_COLOR_PICKER_REQUEST_CODE = 1047
 
-class ConfigActivity : Activity() {
+class ConfigActivity : BaseRecyclerActivity() {
 
-    private lateinit var wearableRecyclerView: WearableRecyclerView
     internal lateinit var adapter: ConfigAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,14 +45,5 @@ class ConfigActivity : Activity() {
         }
 
         wearableRecyclerView.adapter = adapter
-    }
-
-    override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_SCROLL && RotaryEncoderHelper.isFromRotaryEncoder(event)) {
-            val delta = -RotaryEncoderHelper.getRotaryAxisValue(event) * RotaryEncoderHelper.getScaledScrollFactor(this)
-            wearableRecyclerView.scrollBy(0, delta.roundToInt())
-            return true
-        }
-        return super.onGenericMotionEvent(event)
     }
 }

@@ -1,6 +1,5 @@
 package com.vlad1m1r.watchface.settings.complications
 
-import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -8,25 +7,22 @@ import android.os.Bundle
 import android.support.wearable.complications.ComplicationProviderInfo
 import android.support.wearable.complications.ProviderChooserIntent
 import android.support.wearable.complications.ProviderInfoRetriever
-import android.view.MotionEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
-import com.google.android.wearable.input.RotaryEncoderHelper
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.WatchFace
 import com.vlad1m1r.watchface.components.COMPLICATION_SUPPORTED_TYPES
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
+import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import com.vlad1m1r.watchface.settings.config.*
 import java.util.concurrent.Executors
-import kotlin.math.roundToInt
 
-class ComplicationsActivity : Activity() {
+class ComplicationsActivity : BaseRecyclerActivity() {
 
-    private lateinit var wearableRecyclerView: WearableRecyclerView
     private lateinit var adapter: ComplicationsAdapter
     private lateinit var providerInfoRetriever: ProviderInfoRetriever
     private lateinit var colorStorage: ColorStorage
@@ -68,19 +64,10 @@ class ComplicationsActivity : Activity() {
         }
     }
 
-    override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_SCROLL && RotaryEncoderHelper.isFromRotaryEncoder(event)) {
-            val delta = -RotaryEncoderHelper.getRotaryAxisValue(event) * RotaryEncoderHelper.getScaledScrollFactor(this)
-            wearableRecyclerView.scrollBy(0, delta.roundToInt())
-            return true
-        }
-        return super.onGenericMotionEvent(event)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
-            when(requestCode) {
+            when (requestCode) {
                 COMPLICATION_CONFIG_REQUEST_CODE -> {
                     val complicationProviderInfo =
                         data?.getParcelableExtra<ComplicationProviderInfo>(ProviderChooserIntent.EXTRA_PROVIDER_INFO)

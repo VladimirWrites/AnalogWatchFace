@@ -1,23 +1,19 @@
 package com.vlad1m1r.watchface.settings.tickslayoutpicker
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.view.MotionEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import androidx.wear.widget.WearableRecyclerView
-import com.google.android.wearable.input.RotaryEncoderHelper
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
-import kotlin.math.roundToInt
+import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 
-class TicksLayoutPickerActivity : Activity() {
+class TicksLayoutPickerActivity : BaseRecyclerActivity() {
 
-    private lateinit var wearableRecyclerView: WearableRecyclerView
     private lateinit var adapter: TickLayoutPickerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,20 +41,5 @@ class TicksLayoutPickerActivity : Activity() {
         snapHelper.attachToRecyclerView(wearableRecyclerView)
 
         wearableRecyclerView.adapter = adapter
-    }
-
-    override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_SCROLL && RotaryEncoderHelper.isFromRotaryEncoder(
-                event
-            )
-        ) {
-            val delta =
-                -RotaryEncoderHelper.getRotaryAxisValue(event) * RotaryEncoderHelper.getScaledScrollFactor(
-                    this
-                )
-            wearableRecyclerView.scrollBy(0, delta.roundToInt())
-            return true
-        }
-        return super.onGenericMotionEvent(event)
     }
 }

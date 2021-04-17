@@ -1,26 +1,22 @@
 package com.vlad1m1r.watchface.settings.colorpicker
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
-import com.google.android.wearable.input.RotaryEncoderHelper
 import com.vlad1m1r.watchface.R
-import kotlin.math.roundToInt
+import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 
 const val KEY_SELECTED_COLOR = "selected_color"
 
 private const val KEY_SHOW_NO_COLOR = "show_no_color"
 private const val KEY_ALREADY_SELECTED_COLOR = "already_selected_color"
 
-class ColorPickerActivity : Activity() {
+class ColorPickerActivity : BaseRecyclerActivity() {
 
-    private lateinit var wearableRecyclerView: WearableRecyclerView
     private lateinit var adapter: ColorPickerAdapter
 
     private val onColorSelected = object : OnColorSelected {
@@ -50,14 +46,6 @@ class ColorPickerActivity : Activity() {
         wearableRecyclerView.adapter = adapter
     }
 
-    override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_SCROLL && RotaryEncoderHelper.isFromRotaryEncoder(event)) {
-            val delta = -RotaryEncoderHelper.getRotaryAxisValue(event) * RotaryEncoderHelper.getScaledScrollFactor(this)
-            wearableRecyclerView.scrollBy(0, delta.roundToInt())
-            return true
-        }
-        return super.onGenericMotionEvent(event)
-    }
     companion object {
         fun newInstance(
             context: Context,
