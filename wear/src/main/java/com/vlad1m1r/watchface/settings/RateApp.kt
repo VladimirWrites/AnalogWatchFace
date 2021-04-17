@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.settings.config
+package com.vlad1m1r.watchface.settings
 
 import android.content.Context
 import android.content.Intent

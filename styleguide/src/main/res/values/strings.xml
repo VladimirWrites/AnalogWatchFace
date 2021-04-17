@@ -65,6 +65,7 @@
     <string name="wear_seconds_hand" translatable="false">Seconds Hand</string>
     <string name="wear_central_circle" translatable="false">Central Circle</string>
     <string name="wear_hand_color" translatable="false">Hand Color</string>
+    <string name="wear_settings" translatable="false">Settings</string>
 
     <string name="wear_complication_colors" translatable="false">Complication Colors</string>
     <string name="wear_complication_picker" translatable="false">Complication Picker</string>

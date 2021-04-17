@@ -9,9 +9,11 @@ import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
-import com.vlad1m1r.watchface.settings.config.*
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
+import com.vlad1m1r.watchface.settings.FACE_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.HOUR_TICKS_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.MINUTE_TICKS_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 
 const val KEY_TICKS_TITLE = "ticks_title"

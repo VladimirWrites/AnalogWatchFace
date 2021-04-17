@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.settings.config.FACE_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.FACE_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.tickslayoutpicker.TicksLayoutPickerActivity
 

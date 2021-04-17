@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.settings.config.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.config.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
@@ -26,41 +26,36 @@ class BackgroundAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        var viewHolder: RecyclerView.ViewHolder? = null
-
-        when (viewType) {
-            TYPE_TITLE -> viewHolder =
-                TitleViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_title,
-                            parent,
-                            false
-                        )
-                )
+        return when (viewType) {
+            TYPE_TITLE -> TitleViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_title,
+                        parent,
+                        false
+                    )
+            )
             TYPE_COLOR_LEFT,
-            TYPE_COLOR_RIGHT -> viewHolder =
-                ColorPickerViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_text,
-                            parent,
-                            false
-                        )
-                )
-            TYPE_BLACK_AMBIENT -> viewHolder =
-                SettingsWithSwitchViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_switch,
-                            parent,
-                            false
-                        )
-                )
+            TYPE_COLOR_RIGHT -> ColorPickerViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_text,
+                        parent,
+                        false
+                    )
+            )
+            TYPE_BLACK_AMBIENT -> SettingsWithSwitchViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_switch,
+                        parent,
+                        false
+                    )
+            )
+            else -> {
+                throw IllegalArgumentException("viewType: $viewType is not supported")
+            }
         }
-
-        return viewHolder!!
     }
 
     override fun getItemCount(): Int {

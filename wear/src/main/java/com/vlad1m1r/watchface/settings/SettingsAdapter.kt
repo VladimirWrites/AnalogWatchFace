@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.settings.config
+package com.vlad1m1r.watchface.settings
 
 import android.app.Activity
 import android.content.Intent
@@ -18,71 +18,83 @@ import com.vlad1m1r.watchface.settings.ticks.KEY_TICKS_TITLE
 import com.vlad1m1r.watchface.settings.ticks.TicksActivity
 import java.lang.IllegalArgumentException
 
-const val TYPE_COMPLICATIONS = 2
-const val TYPE_TICKS = 3
-const val TYPE_BACKGROUND = 4
-const val TYPE_RATE = 5
-const val TYPE_HANDS = 6
-const val TYPE_ABOUT = 7
+private const val TYPE_TITLE = 0
+private const val TYPE_COMPLICATIONS = 1
+private const val TYPE_TICKS = 2
+private const val TYPE_BACKGROUND = 3
+private const val TYPE_RATE = 4
+private const val TYPE_HANDS = 5
+private const val TYPE_ABOUT = 6
 
-class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SettingsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            TYPE_TITLE -> TitleViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_title,
+                        parent,
+                        false
+                    )
+            )
+            TYPE_COMPLICATIONS,
+            TYPE_TICKS,
+            TYPE_BACKGROUND,
+            TYPE_HANDS -> SettingsViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_text,
+                        parent,
+                        false
+                    )
+            )
 
-        var viewHolder: RecyclerView.ViewHolder? = null
-
-        when (viewType) {
-            TYPE_COMPLICATIONS, TYPE_TICKS, TYPE_BACKGROUND, TYPE_HANDS ->
-                viewHolder = SettingsViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_text,
-                            parent,
-                            false
-                        )
-                )
-
-            TYPE_RATE ->
-                viewHolder = RateViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_rate,
-                            parent,
-                            false
-                        ),
-                    RateApp(parent.context)
-                )
-            TYPE_ABOUT ->
-                viewHolder = SettingsViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_text,
-                            parent,
-                            false
-                        )
-                )
+            TYPE_RATE -> RateViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_rate,
+                        parent,
+                        false
+                    ),
+                RateApp(parent.context)
+            )
+            TYPE_ABOUT -> SettingsViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_text,
+                        parent,
+                        false
+                    )
+            )
+            else -> {
+                throw IllegalArgumentException("viewType: $viewType is not supported")
+            }
         }
-
-        return viewHolder!!
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return 7
     }
 
     override fun getItemViewType(position: Int) =
         when (position) {
-            0 -> TYPE_COMPLICATIONS
-            1 -> TYPE_TICKS
-            2 -> TYPE_BACKGROUND
-            3 -> TYPE_HANDS
-            4 -> TYPE_ABOUT
-            5 -> TYPE_RATE
+            0 -> TYPE_TITLE
+            1 -> TYPE_COMPLICATIONS
+            2 -> TYPE_TICKS
+            3 -> TYPE_BACKGROUND
+            4 -> TYPE_HANDS
+            5 -> TYPE_ABOUT
+            6 -> TYPE_RATE
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         when (viewHolder.itemViewType) {
+            TYPE_TITLE ->
+                (viewHolder as TitleViewHolder).bind(
+                    R.string.wear_settings
+                )
             TYPE_COMPLICATIONS -> {
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_complications_settings

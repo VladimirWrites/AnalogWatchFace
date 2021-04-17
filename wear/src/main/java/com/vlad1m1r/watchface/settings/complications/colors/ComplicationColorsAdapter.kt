@@ -6,7 +6,7 @@ import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.settings.config.*
+import com.vlad1m1r.watchface.settings.*
 import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
 import kotlin.IllegalArgumentException

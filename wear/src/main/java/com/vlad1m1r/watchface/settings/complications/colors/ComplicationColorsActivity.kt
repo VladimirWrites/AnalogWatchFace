@@ -9,9 +9,9 @@ import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
+import com.vlad1m1r.watchface.settings.*
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
-import com.vlad1m1r.watchface.settings.config.*
 
 const val KEY_COMPLICATION_COLORS_TITLE = "complication_colors_title"
 

@@ -10,8 +10,9 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
-import com.vlad1m1r.watchface.settings.config.*
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
+import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 
 const val KEY_BACKGROUND_TITLE = "background_title"

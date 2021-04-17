@@ -28,23 +28,19 @@ class HandsAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        var viewHolder: RecyclerView.ViewHolder? = null
-
-        when (viewType) {
-            TYPE_TITLE -> viewHolder =
-                TitleViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_title,
-                            parent,
-                            false
-                        )
-                )
+        return when (viewType) {
+            TYPE_TITLE -> TitleViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_title,
+                        parent,
+                        false
+                    )
+            )
             TYPE_HOUR_HAND,
             TYPE_MINUTE_HAND,
             TYPE_SECOND_HAND,
-            TYPE_CENTRAL_CIRCLE -> viewHolder = SettingsViewHolder(
+            TYPE_CENTRAL_CIRCLE -> SettingsViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(
                         R.layout.item_settings_text,
@@ -52,9 +48,10 @@ class HandsAdapter(
                         false
                     )
             )
+            else -> {
+                throw IllegalArgumentException("viewType: $viewType is not supported")
+            }
         }
-
-        return viewHolder!!
     }
 
     override fun getItemCount(): Int {

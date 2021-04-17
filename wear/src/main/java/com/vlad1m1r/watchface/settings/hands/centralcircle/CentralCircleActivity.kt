@@ -8,14 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
-import com.vlad1m1r.watchface.settings.config.HOURS_HAND_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.config.MINUTES_HAND_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.config.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
-import com.vlad1m1r.watchface.settings.config.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
 
 const val KEY_CENTRAL_CIRCLE_TITLE = "central_circle_title"
 

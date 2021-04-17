@@ -13,7 +13,7 @@ import android.widget.ImageView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.WatchFace
 import com.vlad1m1r.watchface.components.COMPLICATION_SUPPORTED_TYPES
-import com.vlad1m1r.watchface.settings.config.*
+import com.vlad1m1r.watchface.settings.COMPLICATION_CONFIG_REQUEST_CODE
 import java.util.concurrent.Executors
 
 class ComplicationPickerActivity : Activity(), View.OnClickListener {

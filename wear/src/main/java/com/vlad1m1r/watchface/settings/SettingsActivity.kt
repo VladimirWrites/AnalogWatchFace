@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.settings.config
+package com.vlad1m1r.watchface.settings
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,15 +29,15 @@ const val COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR_PICKER_REQUEST_CODE = 1045
 const val COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR_PICKER_REQUEST_CODE = 1046
 const val COMPLICATIONS_BACKGROUND_COLOR_PICKER_REQUEST_CODE = 1047
 
-class ConfigActivity : BaseRecyclerActivity() {
+class SettingsActivity : BaseRecyclerActivity() {
 
-    internal lateinit var adapter: ConfigAdapter
+    internal lateinit var adapter: SettingsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        adapter = ConfigAdapter()
+        adapter = SettingsAdapter()
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

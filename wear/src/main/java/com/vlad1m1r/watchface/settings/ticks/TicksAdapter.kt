@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.settings.config.HOUR_TICKS_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.config.MINUTE_TICKS_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.HOUR_TICKS_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.MINUTE_TICKS_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
@@ -34,12 +34,8 @@ class TicksAdapter(
     private lateinit var ticksLayoutPickerViewHolder: TicksLayoutPickerViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        var viewHolder: RecyclerView.ViewHolder? = null
-
-        when (viewType) {
-            TYPE_TITLE -> viewHolder =
-                TitleViewHolder(
+        return when (viewType) {
+            TYPE_TITLE -> TitleViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
                             R.layout.item_settings_title,
@@ -47,8 +43,7 @@ class TicksAdapter(
                             false
                         )
                 )
-            TYPE_TICKS_LAYOUT_PICKER -> {
-                ticksLayoutPickerViewHolder = TicksLayoutPickerViewHolder(
+            TYPE_TICKS_LAYOUT_PICKER -> TicksLayoutPickerViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
                             R.layout.item_settings_ticks_layout_picker,
@@ -57,11 +52,9 @@ class TicksAdapter(
                         ),
                     dataStorage
                 )
-                viewHolder = ticksLayoutPickerViewHolder
-            }
             TYPE_TICKS_INTERACTIVE_MODE,
             TYPE_TICKS_AMBIENT_MODE,
-            TYPE_ADJUST_TO_SQUARE_SCREEN -> viewHolder = SettingsWithSwitchViewHolder(
+            TYPE_ADJUST_TO_SQUARE_SCREEN -> SettingsWithSwitchViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(
                         R.layout.item_settings_switch,
@@ -71,8 +64,7 @@ class TicksAdapter(
             )
 
             TYPE_HOUR_TICKS_COLOR,
-            TYPE_MINUTE_TICKS_COLOR -> viewHolder =
-                ColorPickerViewHolder(
+            TYPE_MINUTE_TICKS_COLOR -> ColorPickerViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
                             R.layout.item_settings_text,
@@ -80,9 +72,10 @@ class TicksAdapter(
                             false
                         )
                 )
+            else -> {
+                throw IllegalArgumentException("viewType: $viewType is not supported")
+            }
         }
-
-        return viewHolder!!
     }
 
     override fun getItemCount(): Int {
