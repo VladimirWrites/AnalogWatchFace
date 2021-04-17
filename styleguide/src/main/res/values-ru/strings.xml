@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Shown on a device under the icon and in the About screen of the watch face and Android app. I am not sure if it makes sense to translate the app name. How is it done for other apps in your language? Maybe having the translation in brackets would be an option: Analog Watch Face (translated name) -->
+    <string name="app_name">Аналоговый циферблат</string>
+    <string name="app_subtitle">❤ Спасибо за скачивание приложения! ❤️</string>
+    <string name="app_description">Это приложение предназначено для упрощённой установки циферблата на ваши часы под управлением Wear OS. Вы можете удалить его после установки циферблата.\n\nПроект с открытым исходным кодом, поэтому если у вас есть опыт программирования, ваша помощь приветствуется!\n\nЕсли вам понравился циферблат, не забудьте поставить ему оценку!</string>
+
+    <!-- This will be shown if a user doesn't have a watch connected to the phone on which this app is installed. -->
+    <string name="app_no_watch">Не удалось найти Wear OS часы, сопряжённые с данным устройством.\nК сожалению, Аналоговый Циферблат доступен только для устройств под управлением Wear OS.\n\nВы также можете установить циферблат из встроенного в часы магазина приложений.</string>
+    <string name="app_install_watch_face">Установить аналоговый циферблат</string>
+    <string name="app_uninstall_app">Удалить аналоговый циферблат</string>
+
+    <!-- Shown if the PlayStore is successfully opened on the watch. -->
+    <string name="app_open_playstore_success_message">Проверьте свои часы!</string>
+
+    <!-- Shown if the PlayStore didn't open on the watch due to some error. -->
+    <string name="app_open_playstore_error_message">Что-то пошло не так! Убедитесь, что Wear OS часы сопряжены с телефоном.</string>
+
+    <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
+(e.g. Edit Complication Day of the week) -->
+    <string name="wear_edit_complication">Редактировать виджет %s</string>
+    <string name="wear_add_complication">Добавить виджет</string>
+    <string name="wear_ticks_layout_picker">Выбрать стиль шкалы</string>
+    <string name="wear_hand_settings">Настройки стрелок</string>
+    <string name="wear_about_app">Про приложение</string>
+    <string name="wear_background_settings">Настройки фона</string>
+    <string name="wear_complications_settings">Настройки виджетов</string>
+    <string name="wear_ticks_settings">Настройки шкалы циферблата</string>
+    <string name="wear_rate_the_watch_face">Оценить циферблат</string>
+    <string name="wear_hours_hand_color">Цвет часовой стрелки</string>
+    <string name="wear_minutes_hand_color">Цвет минутной стрелки</string>
+    <string name="wear_seconds_hand_color">Цвет секундной стрелки</string>
+    <string name="wear_central_circle_color">Цвет центрального круга</string>
+    <string name="wear_smooth_seconds_hand">Непрерывная секундная стрелка</string>
+    <string name="wear_left_background_color">Цвет градиента фона слева</string>
+    <string name="wear_right_background_color">Цвет градиента фона справа</string>
+    <string name="wear_black_ambient_background">Черный фон в Ambient Mode</string>
+    <string name="wear_ticks_in_ambient_mode">Шкала в Ambient Mode</string>
+    <string name="wear_ticks_in_interactive_mode">Шкала в интерактивном режиме</string>
+    <string name="wear_ticks_adjust_to_square_screen">Подстроить шкалу под квадратный экран</string>
+    <string name="wear_hour_ticks_color">Цвет часовой шкалы</string>
+    <string name="wear_minute_ticks_color">Цвет минутной шкалы</string>
+    <string name="wear_complications_in_ambient_mode">Виджеты в Ambient Mode</string>
+    <string name="wear_complications_text_color">Цвет текста виджета</string>
+    <string name="wear_complications_title_color">Цвет заголовка виджета</string>
+    <string name="wear_complications_icon_color">Цвет иконок виджета</string>
+    <string name="wear_complications_border_color">Цвет границы виджета</string>
+    <string name="wear_complications_ranged_value_primary_color">Первичный цвет диапазонных значений виджета</string>
+    <string name="wear_complications_ranged_value_secondary_color">Вторичный цвет диапазонных значений виджета</string>
+    <string name="wear_complications_background_color">Цвет фона виджета</string>
+    <string name="wear_bigger_top_and_bottom_complications">Более широкие верхний и нижний виджеты</string>
+    <string name="wear_bigger_round_complications">Более крупные круглые виджеты</string>
+    <string name="wear_bigger_text_in_complications">Использовать более крупный текст</string>
+    <string name="wear_github_title">GitHub</string>
+    <string name="wear_email_title">Почта</string>
+    <string name="wear_play_store_title">Play Store</string>
+    <string name="wear_view_on_you_phone">Посмотреть на вашем телефоне</string>
+    <string name="wear_complication_day_of_month">День месяца</string>
+    <string name="wear_complication_time_24">Время (24ч.)</string>
+    <string name="wear_complication_time_12">Время (12ч.)</string>
+</resources>

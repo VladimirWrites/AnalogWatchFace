@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Shown on a device under the icon and in the About screen of the watch face and Android app. I am not sure if it makes sense to translate the app name. How is it done for other apps in your language? Maybe having the translation in brackets would be an option: Analog Watch Face (translated name) -->
+    <string name="app_name">Analogowa tarcza zegara</string>
+    <string name="app_subtitle">❤️ Dziękuję za pobranie aplikacji ❤️</string>
+    <string name="app_description">Aplikacja powstała aby instalacja tarczy na twoim zegarku z Wear OS była łatwiejsza. Po zainstalowaniu tarczy możesz usunąć aplikacje ze swojego telefonu.\n\nCały projekt powstaje w oparciu o otwarty kod źródłowy. Jeśli masz doświadczenie w programowaniu możesz śmiało dodać nowe rozwiązania i poprawki.\n\nJeśli tarcza Ci się podoba wystaw jej pozytywną ocenę!</string>
+
+    <!-- This will be shown if a user doesn't have a watch connected to the phone on which this app is installed. -->
+    <string name="app_no_watch">Wygląda na to, że nie posiadasz aktualnie żadnego połączonego urządzenia z WearOS. Tarcza zegarka może zostać zainstalowana wyłącznie na urządzeniach działających na systemie WearOS.\n\nMożesz ręcznie zainstalować tarcze na swoim zegarku wyszukując ją w Google Play.</string>
+    <string name="app_install_watch_face">Zainstaluj tarczę zegarka</string>
+    <string name="app_uninstall_app">Odinstaluj aplikację</string>
+
+    <!-- Shown if the PlayStore is successfully opened on the watch. -->
+    <string name="app_open_playstore_success_message">Sprawdź swój zegarek!</string>
+
+    <!-- Shown if the PlayStore didn't open on the watch due to some error. -->
+    <string name="app_open_playstore_error_message">Wystąpił nieznany błąd. Upewnij się, że twój zegarek jest sparowany z telefonem.</string>
+
+    <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
+(e.g. Edit Complication Day of the week) -->
+    <string name="wear_edit_complication">Edytuj skróty %s</string>
+    <string name="wear_add_complication">Dodaj skrót</string>
+    <string name="wear_ticks_layout_picker">Wybierz układ wskazówek</string>
+    <string name="wear_hand_settings">Ustawienia ręki</string>
+    <string name="wear_about_app">O aplikacji</string>
+    <string name="wear_background_settings">Ustawienia tła</string>
+    <string name="wear_complications_settings">Ustawienia skrótów</string>
+    <string name="wear_ticks_settings">Ustawienia wskazówek</string>
+    <string name="wear_rate_the_watch_face">Oceń tarczę</string>
+    <string name="wear_hours_hand_color">Kolor wskazówki godzin</string>
+    <string name="wear_minutes_hand_color">Kolor wskazówki minut</string>
+    <string name="wear_seconds_hand_color">Kolor wskazówki sekund</string>
+    <string name="wear_central_circle_color">Kolor środkowego okręgu</string>
+    <string name="wear_smooth_seconds_hand">Płynna wskazówka sekund</string>
+    <string name="wear_left_background_color">Kolor lewego tła</string>
+    <string name="wear_right_background_color">Kolor prawego tła</string>
+    <string name="wear_black_ambient_background">Czarne tło w trybie Ambient</string>
+    <string name="wear_ticks_in_ambient_mode">Wskazówki w trybie Ambient</string>
+    <string name="wear_ticks_in_interactive_mode">Wskazówki w trybie aktywnym</string>
+    <string name="wear_ticks_adjust_to_square_screen">Dostosuj wskazówki do kwadratowego ekranu</string>
+    <string name="wear_hour_ticks_color">Kolor wskazówki godzin</string>
+    <string name="wear_minute_ticks_color">Kolor wskazówki minut</string>
+    <string name="wear_complications_in_ambient_mode">Skróty w trybie Ambient</string>
+    <string name="wear_complications_text_color">Kolor tekstu skrótów</string>
+    <string name="wear_complications_title_color">Kolor tytułu skrótów</string>
+    <string name="wear_complications_icon_color">Kolor ikony skrótów</string>
+    <string name="wear_complications_border_color">Kolor ramki skrótów</string>
+    <string name="wear_complications_ranged_value_primary_color">Główny kolor zakresu</string>
+    <string name="wear_complications_ranged_value_secondary_color">Dodatkowy kolor zakresu</string>
+    <string name="wear_complications_background_color">Kolor tła dodatków</string>
+    <string name="wear_bigger_top_and_bottom_complications">Rozszesz Górne i Dolne skróty</string>
+    <string name="wear_bigger_round_complications">Powiększ okrągłe skróty</string>
+    <string name="wear_bigger_text_in_complications">Użyj większego tekstu</string>
+    <string name="wear_github_title">GitHub</string>
+    <string name="wear_email_title">Email</string>
+    <string name="wear_play_store_title">Sklep Google Play</string>
+    <string name="wear_view_on_you_phone">Zobacz na telefonie</string>
+    <string name="wear_complication_day_of_month">Dzień miesiąca</string>
+    <string name="wear_complication_time_24">Czas (24h)</string>
+    <string name="wear_complication_time_12">Czas (12h)</string>
+</resources>
