@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.settings.config.viewholders.*
+import com.vlad1m1r.watchface.settings.base.viewholders.*
 import com.vlad1m1r.watchface.settings.about.AboutActivity
 import com.vlad1m1r.watchface.settings.background.BackgroundActivity
 import com.vlad1m1r.watchface.settings.complications.ComplicationsActivity

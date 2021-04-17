@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.settings.config.viewholders
+package com.vlad1m1r.watchface.settings.base.viewholders
 
 import android.app.Activity
 import android.content.res.ColorStateList

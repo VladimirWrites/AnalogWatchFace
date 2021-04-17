@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.settings.config.viewholders
+package com.vlad1m1r.watchface.settings.base.viewholders
 
 import android.view.View
 import android.widget.TextView

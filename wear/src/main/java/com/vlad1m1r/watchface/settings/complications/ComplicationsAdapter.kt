@@ -9,8 +9,8 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.complications.viewholder.ComplicationsPickerViewHolder
 import com.vlad1m1r.watchface.settings.config.*
-import com.vlad1m1r.watchface.settings.config.viewholders.ColorPickerViewHolder
-import com.vlad1m1r.watchface.settings.config.viewholders.SettingsWithSwitchViewHolder
+import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
+import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import kotlin.IllegalArgumentException
 
 const val TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG = 0

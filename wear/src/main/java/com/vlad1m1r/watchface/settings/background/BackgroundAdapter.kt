@@ -8,8 +8,8 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.config.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.config.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.config.viewholders.ColorPickerViewHolder
-import com.vlad1m1r.watchface.settings.config.viewholders.SettingsWithSwitchViewHolder
+import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
+import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import java.lang.IllegalArgumentException
 
 const val TYPE_COLOR_LEFT = 0
