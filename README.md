@@ -26,12 +26,6 @@ Contributing
 Want to contribute? You are welcome! 
 Just create a pull request!
 
-Credits
--------
-
-+ [Vladimir Jovanovic](https://github.com/VladimirWrites)
-+ [Pete](https://github.com/PRosenb)
-+ [Domi04151309](https://github.com/Domi04151309)
 
 License
 -------
