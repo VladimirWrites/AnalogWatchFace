@@ -9,8 +9,11 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.settings.base.viewholders.*
 import com.vlad1m1r.watchface.settings.about.AboutActivity
 import com.vlad1m1r.watchface.settings.background.BackgroundActivity
+import com.vlad1m1r.watchface.settings.background.KEY_BACKGROUND_TITLE
 import com.vlad1m1r.watchface.settings.complications.ComplicationsActivity
 import com.vlad1m1r.watchface.settings.hands.HandsActivity
+import com.vlad1m1r.watchface.settings.hands.KEY_HANDS_TITLE
+import com.vlad1m1r.watchface.settings.ticks.KEY_TICKS_TITLE
 import com.vlad1m1r.watchface.settings.ticks.TicksActivity
 import java.lang.IllegalArgumentException
 
@@ -97,6 +100,7 @@ class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     val activity = viewHolder.itemView.context as Activity
                     activity.startActivity(
                         Intent(viewHolder.itemView.context, TicksActivity::class.java)
+                            .putExtra(KEY_TICKS_TITLE, R.string.wear_ticks_settings)
                     )
                 }
             }
@@ -108,6 +112,7 @@ class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     val activity = viewHolder.itemView.context as Activity
                     activity.startActivity(
                         Intent(viewHolder.itemView.context, BackgroundActivity::class.java)
+                            .putExtra(KEY_BACKGROUND_TITLE, R.string.wear_background_settings)
                     )
                 }
             }
@@ -119,6 +124,7 @@ class ConfigAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     val activity = viewHolder.itemView.context as Activity
                     activity.startActivity(
                         Intent(viewHolder.itemView.context, HandsActivity::class.java)
+                            .putExtra(KEY_HANDS_TITLE, R.string.wear_hand_settings)
                     )
                 }
             }

@@ -17,6 +17,8 @@ import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import com.vlad1m1r.watchface.settings.config.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
 
+const val KEY_CENTRAL_CIRCLE_TITLE = "central_circle_title"
+
 class CentralCircleActivity : BaseRecyclerActivity() {
 
     private lateinit var colorStorage: ColorStorage
@@ -26,6 +28,8 @@ class CentralCircleActivity : BaseRecyclerActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        val title = intent.getIntExtra(KEY_CENTRAL_CIRCLE_TITLE, 0)
+
         val sharedPref = getSharedPreferences(
             KEY_ANALOG_WATCH_FACE,
             Context.MODE_PRIVATE
@@ -33,7 +37,7 @@ class CentralCircleActivity : BaseRecyclerActivity() {
 
         colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
-        adapter = CentralCircleAdapter(colorStorage)
+        adapter = CentralCircleAdapter(colorStorage, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

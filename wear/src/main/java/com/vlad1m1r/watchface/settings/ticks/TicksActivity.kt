@@ -14,6 +14,8 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 
+const val KEY_TICKS_TITLE = "ticks_title"
+
 class TicksActivity : BaseRecyclerActivity() {
 
     private lateinit var colorStorage: ColorStorage
@@ -23,6 +25,8 @@ class TicksActivity : BaseRecyclerActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        val title = intent.getIntExtra(KEY_TICKS_TITLE, 0)
+
         val sharedPref = getSharedPreferences(
             KEY_ANALOG_WATCH_FACE,
             Context.MODE_PRIVATE
@@ -31,7 +35,7 @@ class TicksActivity : BaseRecyclerActivity() {
 
         colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
-        adapter = TicksAdapter(resources, dataProvider, colorStorage)
+        adapter = TicksAdapter(resources, dataProvider, colorStorage, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

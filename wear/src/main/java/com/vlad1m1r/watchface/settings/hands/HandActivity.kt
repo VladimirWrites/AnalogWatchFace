@@ -15,10 +15,9 @@ import com.vlad1m1r.watchface.settings.config.MINUTES_HAND_COLOR_PICKER_REQUEST_
 import com.vlad1m1r.watchface.settings.config.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
-import com.vlad1m1r.watchface.settings.config.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
 
 const val KEY_HAND_TYPE = "hand_type"
-const val KEY_TITLE = "title"
+const val KEY_HAND_TITLE = "hand_title"
 
 class HandActivity : BaseRecyclerActivity() {
 
@@ -30,7 +29,7 @@ class HandActivity : BaseRecyclerActivity() {
         setContentView(R.layout.activity_list)
 
         val handType = intent.getSerializableExtra(KEY_HAND_TYPE) as HandType
-        val title = intent.getIntExtra(KEY_TITLE, 0)
+        val title = intent.getIntExtra(KEY_HAND_TITLE, 0)
 
         val sharedPref = getSharedPreferences(
             KEY_ANALOG_WATCH_FACE,

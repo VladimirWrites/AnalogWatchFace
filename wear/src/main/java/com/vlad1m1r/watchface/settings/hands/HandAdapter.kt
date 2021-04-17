@@ -79,7 +79,7 @@ class HandAdapter(
         when (viewHolder.itemViewType) {
             TYPE_TITLE ->
                 (viewHolder as TitleViewHolder).bind(
-                    title,
+                    title
                 )
             TYPE_COLOR_HAND ->
                 when(handType) {

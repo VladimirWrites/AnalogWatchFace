@@ -14,6 +14,8 @@ import com.vlad1m1r.watchface.settings.config.*
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 
+const val KEY_BACKGROUND_TITLE = "background_title"
+
 class BackgroundActivity : BaseRecyclerActivity() {
 
     private lateinit var colorStorage: ColorStorage
@@ -23,6 +25,8 @@ class BackgroundActivity : BaseRecyclerActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        val title = intent.getIntExtra(KEY_BACKGROUND_TITLE, 0)
+
         val sharedPref = getSharedPreferences(
             KEY_ANALOG_WATCH_FACE,
             Context.MODE_PRIVATE
@@ -31,7 +35,7 @@ class BackgroundActivity : BaseRecyclerActivity() {
         colorStorage = ColorStorage(this.applicationContext, sharedPref)
         val dataStorage = DataStorage(sharedPref)
 
-        adapter = BackgroundAdapter(colorStorage, dataStorage)
+        adapter = BackgroundAdapter(colorStorage, dataStorage, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true
