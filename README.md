@@ -26,6 +26,13 @@ Contributing
 Want to contribute? You are welcome! 
 Just create a pull request!
 
+Help me with translations
+-------
+
+ - [App localization](https://poeditor.com/join/project?hash=9iy0lPTpkn)
+ - [PlayStore localization](https://poeditor.com/join/project?hash=wRxShKc33w)
+
+Before adding a new language and investing time into translation, please check if it's supported by Wear OS.
 
 License
 -------
