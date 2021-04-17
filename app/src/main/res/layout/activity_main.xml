@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingBottom="@dimen/padding_16"
+                android:paddingBottom="@dimen/padding_32"
                 android:text="@string/app_description"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/white"
