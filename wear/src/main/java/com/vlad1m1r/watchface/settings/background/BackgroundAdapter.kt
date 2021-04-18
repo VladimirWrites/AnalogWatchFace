@@ -1,5 +1,6 @@
 package com.vlad1m1r.watchface.settings.background
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.StringRes
@@ -7,17 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
+import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
+import com.vlad1m1r.watchface.settings.base.viewholders.WatchPreviewViewHolder
 import java.lang.IllegalArgumentException
 
 private const val TYPE_TITLE = 0
-private const val TYPE_COLOR_LEFT = 1
-private const val TYPE_COLOR_RIGHT = 2
-private const val TYPE_BLACK_AMBIENT = 3
+private const val TYPE_PREVIEW = 1
+private const val TYPE_COLOR_LEFT = 2
+private const val TYPE_COLOR_RIGHT = 3
+private const val TYPE_BLACK_AMBIENT = 4
 
 class BackgroundAdapter(
     private val colorStorage: ColorStorage,
@@ -34,6 +38,16 @@ class BackgroundAdapter(
                         parent,
                         false
                     )
+            )
+            TYPE_PREVIEW -> WatchPreviewViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_hand_preview,
+                        parent,
+                        false
+                    ),
+                colorStorage,
+                dataStorage
             )
             TYPE_COLOR_LEFT,
             TYPE_COLOR_RIGHT -> ColorPickerViewHolder(
@@ -59,15 +73,16 @@ class BackgroundAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return 5
     }
 
     override fun getItemViewType(position: Int) =
         when (position) {
             0 -> TYPE_TITLE
-            1 -> TYPE_COLOR_LEFT
-            2 -> TYPE_COLOR_RIGHT
-            3 -> TYPE_BLACK_AMBIENT
+            1 -> TYPE_PREVIEW
+            2 -> TYPE_COLOR_LEFT
+            3 -> TYPE_COLOR_RIGHT
+            4 -> TYPE_BLACK_AMBIENT
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
@@ -77,6 +92,14 @@ class BackgroundAdapter(
                 (viewHolder as TitleViewHolder).bind(
                     title
                 )
+            TYPE_PREVIEW -> {
+                val context = viewHolder.itemView.context
+                val width = (context as Activity).window.decorView.width.toFloat()
+                val height = context.resources.getDimension(R.dimen.item_watch_preview_height)
+                (viewHolder as WatchPreviewViewHolder).bind(
+                    Point(width / 2, height / 2),
+                )
+            }
             TYPE_COLOR_LEFT ->
                 (viewHolder as ColorPickerViewHolder).setData(
                     R.string.wear_left_background_color,
@@ -97,6 +120,7 @@ class BackgroundAdapter(
                     dataStorage.hasBlackAmbientBackground()
                 ) {
                     dataStorage.setHasBlackAmbientBackground(it)
+                    notifyDataSetChanged()
                 }
         }
     }

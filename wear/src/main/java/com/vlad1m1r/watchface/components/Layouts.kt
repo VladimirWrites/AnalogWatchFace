@@ -2,6 +2,7 @@ package com.vlad1m1r.watchface.components
 
 import android.content.Context
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.components.background.Background
 import com.vlad1m1r.watchface.components.hands.Hands
 import com.vlad1m1r.watchface.components.ticks.*
 import com.vlad1m1r.watchface.data.DataStorage

@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vlad1m1r.watchface.settings.hands.hand.WatchPreviewView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/hand_preview"
-        android:layout_margin="@dimen/screen_percentage_05"
-        android:background="@drawable/background_hand_preview"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_watch_preview_height" />
+        android:layout_height="wrap_content">
 
+    <com.vlad1m1r.watchface.settings.base.WatchPreviewView
+            android:id="@+id/hand_preview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_watch_preview_height"
+            android:layout_margin="@dimen/screen_percentage_05"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless" />
 
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_watch_preview_height"
+            android:layout_margin="@dimen/screen_percentage_05"
+            android:background="@drawable/background_hand_preview" />
+
+</FrameLayout>

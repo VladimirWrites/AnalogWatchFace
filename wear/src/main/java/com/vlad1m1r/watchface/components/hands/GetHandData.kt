@@ -5,7 +5,7 @@ import androidx.core.content.ContextCompat
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 
-class PaintDataProvider(
+class GetHandData(
     private val context: Context,
     private val colorStorage: ColorStorage
 ) {

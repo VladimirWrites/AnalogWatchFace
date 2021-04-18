@@ -1,9 +1,11 @@
-package com.vlad1m1r.watchface.settings.hands.hand
+package com.vlad1m1r.watchface.settings.base
 
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
+import com.vlad1m1r.watchface.components.background.DrawBackground
+import com.vlad1m1r.watchface.components.background.GetBackgroundData
 import com.vlad1m1r.watchface.components.hands.*
 import com.vlad1m1r.watchface.model.Point
 
@@ -20,13 +22,17 @@ class WatchPreviewView: View {
     private lateinit var drawMinutesHand: DrawHand
     private lateinit var drawCircle: DrawCircle
 
-    private lateinit var paintDataProvider: PaintDataProvider
+    private lateinit var drawBackground: DrawBackground
+
+    private lateinit var getHandData: GetHandData
+    private lateinit var getBackgroundData: GetBackgroundData
 
     private lateinit var center: Point
     private lateinit var adjustedCenter: Point
 
-    fun initialize(paintDataProvider: PaintDataProvider) {
-        this.paintDataProvider = paintDataProvider
+    fun initialize(getHandData: GetHandData, getBackgroundData: GetBackgroundData) {
+        this.getHandData = getHandData
+        this.getBackgroundData = getBackgroundData
     }
 
 
@@ -34,11 +40,17 @@ class WatchPreviewView: View {
         center: Point
     ) {
         this.center = center
-        this.drawSecondsHand = DrawHand(paintDataProvider.getSecondHandData())
-        this.drawHourHand = DrawHand(paintDataProvider.getHourHandData())
-        this.drawMinutesHand = DrawHand(paintDataProvider.getMinuteHandData())
-        this.drawCircle = DrawCircle(paintDataProvider.getCircleData())
+        this.drawSecondsHand = DrawHand(getHandData.getSecondHandData())
+        this.drawHourHand = DrawHand(getHandData.getHourHandData())
+        this.drawMinutesHand = DrawHand(getHandData.getMinuteHandData())
+        this.drawCircle = DrawCircle(getHandData.getCircleData())
+
+        this.drawBackground = DrawBackground(getBackgroundData())
+        this.drawBackground.setCenter(center)
+
         this.adjustedCenter = Point(center.x/2, center.y)
+
+        refreshMode()
 
         this.setOnClickListener {
             switchMode()
@@ -47,14 +59,22 @@ class WatchPreviewView: View {
 
     private fun switchMode() {
         isInAmbientMode = !isInAmbientMode
+        refreshMode()
+    }
+
+    private fun refreshMode() {
         drawHourHand.setInAmbientMode(isInAmbientMode)
         drawMinutesHand.setInAmbientMode(isInAmbientMode)
         drawSecondsHand.setInAmbientMode(isInAmbientMode)
         drawCircle.setInAmbientMode(isInAmbientMode)
+        drawBackground.setInAmbientMode(isInAmbientMode)
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        if(::drawBackground.isInitialized) {
+            drawBackground(canvas)
+        }
         if(::drawCircle.isInitialized) {
             drawCircle(canvas, adjustedCenter)
         }

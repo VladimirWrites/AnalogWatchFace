@@ -17,7 +17,7 @@ class Hands(
     private val colorStorage: ColorStorage
 ) : WatchView {
 
-    private val paintDataProvider = PaintDataProvider(context, colorStorage)
+    private val paintDataProvider = GetHandData(context, colorStorage)
 
     private var showSecondsHand = true
     private var showMinutesHand = true

@@ -15,6 +15,7 @@ import com.vlad1m1r.watchface.settings.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
+import com.vlad1m1r.watchface.settings.base.viewholders.WatchPreviewViewHolder
 
 
 private const val TYPE_TITLE = 0
@@ -47,7 +48,8 @@ class HandAdapter(
                         parent,
                         false
                     ),
-                colorStorage
+                colorStorage,
+                dataStorage
             )
             TYPE_COLOR_HAND -> ColorPickerViewHolder(
                 LayoutInflater.from(parent.context)
