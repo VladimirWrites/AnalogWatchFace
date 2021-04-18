@@ -52,7 +52,7 @@ class Complications(
     private val context: Context,
     private val dataStorage: DataStorage,
     private val colorStorage: ColorStorage
-) : WatchView(context) {
+) : WatchView {
 
     private val complicationDrawables = mutableMapOf<Int, ComplicationDrawable?>().apply {
         put(LEFT_COMPLICATION_ID, null)
