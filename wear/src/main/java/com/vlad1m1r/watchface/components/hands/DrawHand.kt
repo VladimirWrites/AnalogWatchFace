@@ -7,7 +7,7 @@ import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.inAmbientMode
 import com.vlad1m1r.watchface.utils.inInteractiveMode
 
-class Hand(
+class DrawHand(
     private val handData: HandData
 ) {
 
@@ -22,8 +22,8 @@ class Hand(
         )
     }
 
-    fun draw(canvas: Canvas, rotation:Float, center: Point) {
-        val handLength = center.x * handData.handLengthRatio
+    operator fun invoke(canvas: Canvas, rotation:Float, center: Point, handSpace: Float) {
+        val handLength = handSpace * handData.handLengthRatio
         canvas.rotate(rotation, center.x, center.y)
         canvas.drawLine(
             center.x,

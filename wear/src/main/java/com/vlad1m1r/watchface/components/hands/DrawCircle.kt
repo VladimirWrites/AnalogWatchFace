@@ -6,7 +6,7 @@ import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.inAmbientMode
 import com.vlad1m1r.watchface.utils.inInteractiveMode
 
-class Circle(
+class DrawCircle(
     private val circleData: CircleData
 ) {
 
@@ -21,7 +21,7 @@ class Circle(
         )
     }
 
-    fun draw(canvas: Canvas, center: Point) {
+    operator fun invoke(canvas: Canvas, center: Point) {
         canvas.drawCircle(
             center.x,
             center.y,

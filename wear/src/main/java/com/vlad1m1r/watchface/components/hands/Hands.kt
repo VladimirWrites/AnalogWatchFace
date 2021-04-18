@@ -25,29 +25,29 @@ class Hands(
 
     private var center = Point()
 
-    private lateinit var hourHand: Hand
-    private lateinit var minuteHand: Hand
-    private lateinit var secondsHand: Hand
-    private lateinit var circle: Circle
+    private lateinit var drawHourHand: DrawHand
+    private lateinit var drawMinuteHand: DrawHand
+    private lateinit var drawSecondsHand: DrawHand
+    private lateinit var drawCircle: DrawCircle
 
     init {
         initializeHands()
     }
 
     private fun initializeHands() {
-        hourHand = Hand(
+        drawHourHand = DrawHand(
             paintDataProvider.getHourHandData()
         )
 
-        minuteHand = Hand(
+        drawMinuteHand = DrawHand(
             paintDataProvider.getMinuteHandData()
         )
 
-        secondsHand = Hand(
+        drawSecondsHand = DrawHand(
             paintDataProvider.getSecondHandData()
         )
 
-        circle = Circle(
+        drawCircle = DrawCircle(
             paintDataProvider.getCircleData()
         )
     }
@@ -62,20 +62,20 @@ class Hands(
         val minutesRotation = calendar.minutesRotation()
 
         if(showMinutesHand) {
-            minuteHand.draw(canvas, minutesRotation, center)
+            drawMinuteHand(canvas, minutesRotation, center, center.x)
         }
 
         if(showHoursHand) {
-            hourHand.draw(canvas, hoursRotation, center)
+            drawHourHand(canvas, hoursRotation, center, center.x)
         }
 
         if (showSecondsHand) {
             val secondsRotation = calendar.secondsRotation()
-            secondsHand.draw(canvas, secondsRotation, center)
+            drawSecondsHand(canvas, secondsRotation, center, center.x)
         }
 
         if(showSecondsHand || showHoursHand || showMinutesHand) {
-            circle.draw(canvas, center)
+            drawCircle(canvas, center)
         }
     }
 
@@ -88,12 +88,12 @@ class Hands(
         showMinutesHand = minuteColor != Color.TRANSPARENT
         showHoursHand = hourColor != Color.TRANSPARENT
 
-        hourHand.setInAmbientMode(mode.isAmbient)
-        minuteHand.setInAmbientMode(mode.isAmbient)
-        secondsHand.setInAmbientMode(mode.isAmbient)
+        drawHourHand.setInAmbientMode(mode.isAmbient)
+        drawMinuteHand.setInAmbientMode(mode.isAmbient)
+        drawSecondsHand.setInAmbientMode(mode.isAmbient)
 
-        circle.setInAmbientMode(mode.isAmbient)
-        circle.setInBurnInProtectionMode(mode.isBurnInProtection && mode.isAmbient)
+        drawCircle.setInAmbientMode(mode.isAmbient)
+        drawCircle.setInBurnInProtectionMode(mode.isBurnInProtection && mode.isAmbient)
     }
 
     fun invalidate() {

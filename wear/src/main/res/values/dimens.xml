@@ -53,6 +53,8 @@
     <dimen name="about_app_item_padding">10dp</dimen>
     <dimen name="divider">1dp</dimen>
 
+    <dimen name="item_watch_preview_height">56dp</dimen>
+
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_mini">14sp</dimen>
