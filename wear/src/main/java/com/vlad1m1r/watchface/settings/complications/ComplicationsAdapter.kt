@@ -129,12 +129,6 @@ class ComplicationsAdapter(
                     ) {
                         dataStorage.setHasBiggerComplicationText(it)
                     }
-                    itemView.setPadding(
-                        itemView.paddingLeft,
-                        itemView.paddingTop,
-                        itemView.paddingRight,
-                        itemView.resources.getDimensionPixelSize(R.dimen.bottom_margin)
-                    )
                 }
             }
         }
