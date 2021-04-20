@@ -21,6 +21,7 @@ class WatchPreviewViewHolder(
     private val getBackgroundData = GetBackgroundData(colorStorage, dataStorage)
     private val handPreview = itemView.findViewById<WatchPreviewView>(R.id.hand_preview).apply {
         initialize(paintDataProvider, getBackgroundData)
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
 
     fun bind(center: Point) {
