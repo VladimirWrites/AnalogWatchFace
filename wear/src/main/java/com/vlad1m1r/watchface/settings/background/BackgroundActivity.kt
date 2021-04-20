@@ -11,6 +11,7 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
+import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
@@ -33,10 +34,11 @@ class BackgroundActivity : BaseRecyclerActivity() {
             Context.MODE_PRIVATE
         )
 
-        colorStorage = ColorStorage(this.applicationContext, sharedPref)
         val dataStorage = DataStorage(sharedPref)
+        val sizeStorage = SizeStorage(this.applicationContext, sharedPref)
+        colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
-        adapter = BackgroundAdapter(colorStorage, dataStorage, title)
+        adapter = BackgroundAdapter(colorStorage, dataStorage, sizeStorage, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

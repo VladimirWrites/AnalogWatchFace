@@ -9,10 +9,10 @@ fun Paint.inAmbientMode(@ColorInt color: Int) {
     clearShadowLayer()
 }
 
-fun Paint.inInteractiveMode(@ColorInt color: Int, @ColorInt shadowColor: Int, shadowRadius: Float) {
+fun Paint.inInteractiveMode(@ColorInt color: Int, @ColorInt shadowColor: Int, shadowRadius: Int) {
     this.color = color
     isAntiAlias = true
     setShadowLayer(
-        shadowRadius, 0f, 0f, shadowColor
+        shadowRadius.toFloat(), 0f, 0f, shadowColor
     )
 }

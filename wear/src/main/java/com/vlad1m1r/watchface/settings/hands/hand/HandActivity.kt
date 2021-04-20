@@ -14,6 +14,7 @@ import com.vlad1m1r.watchface.settings.HOURS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.MINUTES_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
+import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 
 const val KEY_HAND_TYPE = "hand_type"
@@ -37,10 +38,10 @@ class HandActivity : BaseRecyclerActivity() {
         )
 
         val dataStorage = DataStorage(sharedPref)
-
+        val sizeStorage = SizeStorage(this.applicationContext, sharedPref)
         colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
-        adapter = HandAdapter(colorStorage, dataStorage, handType, title)
+        adapter = HandAdapter(colorStorage, dataStorage, sizeStorage, handType, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

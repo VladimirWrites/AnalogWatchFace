@@ -9,15 +9,17 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.TicksLayoutType
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.components.ticks.TicksLayout
+import com.vlad1m1r.watchface.data.SizeStorage
 
 class Layouts(
     private val dataStorage: DataStorage,
     private val colorStorage: ColorStorage,
-    private val context: Context
+    private val context: Context,
+    sizeStorage: SizeStorage,
 ) {
     val background = Background(colorStorage, dataStorage)
     val complications = Complications(context, dataStorage, colorStorage)
-    val hands: Hands = Hands(context, colorStorage)
+    val hands: Hands = Hands(context, colorStorage, sizeStorage)
 
     lateinit var ticks: TicksLayout
         private set

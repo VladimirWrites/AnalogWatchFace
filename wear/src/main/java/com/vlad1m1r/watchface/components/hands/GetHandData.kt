@@ -4,64 +4,65 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.SizeStorage
 
 class GetHandData(
     private val context: Context,
-    private val colorStorage: ColorStorage
+    private val colorStorage: ColorStorage,
+    private val sizeStorage: SizeStorage
 ) {
-    private val middleCircleRadius = context.resources.getDimension(R.dimen.middle_circle_radius)
-    private val circleHandGap = context.resources.getDimension(R.dimen.circle_hand_gap)
 
+    private val circleHandGap = context.resources.getDimensionPixelSize(R.dimen.circle_hand_gap)
     private val ambientColor = ContextCompat.getColor(context, R.color.watch_ambient)
-
     private val shadowColor = ContextCompat.getColor(context, R.color.watch_shadow)
-    private val shadowRadius = context.resources.getDimension(R.dimen.shadow_radius)
+    private val shadowRadius = context.resources.getDimensionPixelSize(R.dimen.shadow_radius)
 
     fun getHourHandData(): HandData {
         val hourColor = colorStorage.getHoursHandColor()
-        val handWidthHour = context.resources.getDimension(R.dimen.hand_width_hour)
+        val handWidthHour = sizeStorage.getHoursHandWidth()
         return HandData(
             hourColor,
             ambientColor,
             shadowColor,
             shadowRadius,
             handWidthHour,
-            middleCircleRadius + circleHandGap,
-            0.5f
+            sizeStorage.getCircleRadius() + circleHandGap,
+            sizeStorage.getHoursHandScale()
         )
     }
 
     fun getMinuteHandData(): HandData {
         val minuteColor = colorStorage.getMinutesHandColor()
-        val handWidthMinute = context.resources.getDimension(R.dimen.hand_width_minute)
+        val handWidthMinute = sizeStorage.getMinutesHandWidth()
         return HandData(
             minuteColor,
             ambientColor,
             shadowColor,
             shadowRadius,
             handWidthMinute,
-            middleCircleRadius + circleHandGap,
-            0.75f
+            sizeStorage.getCircleRadius() + circleHandGap,
+            sizeStorage.getMinutesHandScale()
         )
     }
 
     fun getSecondHandData(): HandData {
         val secondColor = colorStorage.getSecondsHandColor()
-        val handWidthSecond = context.resources.getDimension(R.dimen.hand_width_second)
+        val handWidthSecond = sizeStorage.getSecondsHandWidth()
         return HandData(
             secondColor,
             ambientColor,
             shadowColor,
             shadowRadius,
             handWidthSecond,
-            middleCircleRadius,
-            0.875f
+            sizeStorage.getCircleRadius(),
+            sizeStorage.getSecondsHandScale()
         )
     }
 
     fun getCircleData(): CircleData {
         val circleColor = colorStorage.getCentralCircleColor()
-        val handWidthSecond = context.resources.getDimension(R.dimen.hand_width_second)
-        return CircleData(circleColor, ambientColor, shadowColor, shadowRadius, handWidthSecond, middleCircleRadius)
+        val circleWidth = sizeStorage.getCircleWidth()
+        val middleCircleRadius = sizeStorage.getCircleRadius()
+        return CircleData(circleColor, ambientColor, shadowColor, shadowRadius, circleWidth, middleCircleRadius)
     }
 }

@@ -7,8 +7,8 @@ data class HandData(
     @ColorInt val color: Int,
     @ColorInt val colorAmbient: Int,
     @ColorInt  val shadowColor: Int,
-    val shadowRadius: Float,
-    val width: Float,
-    val paddingFromCenter: Float,
+    val shadowRadius: Int,
+    val width: Int,
+    val paddingFromCenter: Int,
     @FloatRange(from = 0.0, to = 1.0) val handLengthRatio: Float
 )

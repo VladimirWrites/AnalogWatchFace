@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
+import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import com.vlad1m1r.watchface.settings.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
 
@@ -31,9 +33,11 @@ class CentralCircleActivity : BaseRecyclerActivity() {
             Context.MODE_PRIVATE
         )
 
+        val dataStorage = DataStorage(sharedPref)
+        val sizeStorage = SizeStorage(this.applicationContext, sharedPref)
         colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
-        adapter = CentralCircleAdapter(colorStorage, title)
+        adapter = CentralCircleAdapter(colorStorage, dataStorage, sizeStorage, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

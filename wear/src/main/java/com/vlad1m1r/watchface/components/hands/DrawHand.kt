@@ -13,12 +13,12 @@ class DrawHand(
 
     private var paint = Paint().apply {
         color = handData.color
-        strokeWidth = handData.width
+        strokeWidth = handData.width.toFloat()
         isAntiAlias = true
         style = Paint.Style.STROKE
         strokeCap = Paint.Cap.ROUND
         setShadowLayer(
-            handData.shadowRadius, 0f, 0f, handData.shadowColor
+            handData.shadowRadius.toFloat(), 0f, 0f, handData.shadowColor
         )
     }
 

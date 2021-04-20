@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.WatchView
@@ -14,10 +15,11 @@ import java.util.*
 
 class Hands(
     context: Context,
-    private val colorStorage: ColorStorage
+    private val colorStorage: ColorStorage,
+    sizeStorage: SizeStorage
 ) : WatchView {
 
-    private val paintDataProvider = GetHandData(context, colorStorage)
+    private val getHandData = GetHandData(context, colorStorage, sizeStorage)
 
     private var showSecondsHand = true
     private var showMinutesHand = true
@@ -36,19 +38,19 @@ class Hands(
 
     private fun initializeHands() {
         drawHourHand = DrawHand(
-            paintDataProvider.getHourHandData()
+            getHandData.getHourHandData()
         )
 
         drawMinuteHand = DrawHand(
-            paintDataProvider.getMinuteHandData()
+            getHandData.getMinuteHandData()
         )
 
         drawSecondsHand = DrawHand(
-            paintDataProvider.getSecondHandData()
+            getHandData.getSecondHandData()
         )
 
         drawCircle = DrawCircle(
-            paintDataProvider.getCircleData()
+            getHandData.getCircleData()
         )
     }
 

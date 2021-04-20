@@ -75,9 +75,6 @@ class WatchPreviewView: View {
         if(::drawBackground.isInitialized) {
             drawBackground(canvas)
         }
-        if(::drawCircle.isInitialized) {
-            drawCircle(canvas, adjustedCenter)
-        }
         if(::drawMinutesHand.isInitialized) {
             drawMinutesHand(canvas, 100f, adjustedCenter, center.x)
         }
@@ -86,6 +83,9 @@ class WatchPreviewView: View {
         }
         if(::drawSecondsHand.isInitialized) {
             drawSecondsHand(canvas, 90f, adjustedCenter, center.x)
+        }
+        if(::drawCircle.isInitialized) {
+            drawCircle(canvas, adjustedCenter)
         }
     }
 }

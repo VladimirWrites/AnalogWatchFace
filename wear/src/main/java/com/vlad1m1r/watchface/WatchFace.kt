@@ -59,6 +59,8 @@ class WatchFace : CanvasWatchFaceService() {
 
         private lateinit var colorStorage: ColorStorage
 
+        private lateinit var sizeStorage: SizeStorage
+
         private var hasSmoothSecondsHand: Boolean = false
 
         private val prefsChangeListener =
@@ -71,7 +73,11 @@ class WatchFace : CanvasWatchFaceService() {
                 }
                 else if (key == KEY_HOURS_HAND_COLOR || key == KEY_MINUTES_HAND_COLOR ||
                     key == KEY_SECONDS_HAND_COLOR || key == KEY_HAS_SECOND_HAND ||
-                    key == KEY_HAS_HANDS || key == KEY_CENTRAL_CIRCLE_COLOR
+                    key == KEY_HAS_HANDS || key == KEY_CENTRAL_CIRCLE_COLOR ||
+                    key == KEY_CIRCLE_WIDTH || key == KEY_CIRCLE_RADIUS ||
+                    key == KEY_HAND_HOURS_WIDTH || key == KEY_HAND_MINUTES_WIDTH ||
+                    key == KEY_HAND_SECONDS_WIDTH || key == KEY_HAND_HOURS_SCALE ||
+                    key == KEY_HAND_MINUTES_SCALE || key == KEY_HAND_SECONDS_SCALE
                 ) {
                     layouts.invalidateHands()
                 }
@@ -108,8 +114,10 @@ class WatchFace : CanvasWatchFaceService() {
 
             colorStorage = ColorStorage(this@WatchFace.applicationContext, sharedPref)
 
+            sizeStorage = SizeStorage(this@WatchFace.applicationContext, sharedPref)
+
             calendar = Calendar.getInstance()
-            layouts = Layouts(dataStorage, colorStorage, this@WatchFace)
+            layouts = Layouts(dataStorage, colorStorage, this@WatchFace, sizeStorage)
 
             setActiveComplications(*COMPLICATION_SUPPORTED_TYPES.keys.toIntArray())
 

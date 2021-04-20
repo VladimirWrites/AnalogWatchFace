@@ -12,12 +12,12 @@ class DrawCircle(
 
     private var paint = Paint().apply {
         color = circleData.color
-        strokeWidth = circleData.width
+        strokeWidth = circleData.width.toFloat()
         isAntiAlias = true
         style = Paint.Style.STROKE
         strokeCap = Paint.Cap.ROUND
         setShadowLayer(
-            circleData.shadowRadius, 0f, 0f, circleData.shadowColor
+            circleData.shadowRadius.toFloat(), 0f, 0f, circleData.shadowColor
         )
     }
 
@@ -25,7 +25,7 @@ class DrawCircle(
         canvas.drawCircle(
             center.x,
             center.y,
-            circleData.radius,
+            circleData.radius.toFloat(),
             paint
         )
     }
@@ -42,7 +42,7 @@ class DrawCircle(
         if (isInBurnInProtectionMode) {
             paint.strokeWidth = 0f
         } else {
-            paint.strokeWidth = circleData.width
+            paint.strokeWidth = circleData.width.toFloat()
         }
     }
 }
