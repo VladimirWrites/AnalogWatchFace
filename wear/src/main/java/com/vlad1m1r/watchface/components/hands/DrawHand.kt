@@ -2,6 +2,7 @@ package com.vlad1m1r.watchface.components.hands
 
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.util.Log
 import androidx.annotation.FloatRange
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.inAmbientMode
@@ -23,13 +24,13 @@ class DrawHand(
     }
 
     operator fun invoke(canvas: Canvas, rotation:Float, center: Point, handSpace: Float) {
-        val handLength = handSpace * handData.handLengthRatio
+        val handLength = (handSpace - handData.paddingFromCenter) * handData.handLengthRatio
         canvas.rotate(rotation, center.x, center.y)
         canvas.drawLine(
             center.x,
             center.y - handData.paddingFromCenter,
             center.x,
-            center.y - handLength,
+            center.y - handData.paddingFromCenter - handLength,
             paint
         )
         canvas.rotate(-rotation, center.x, center.y)

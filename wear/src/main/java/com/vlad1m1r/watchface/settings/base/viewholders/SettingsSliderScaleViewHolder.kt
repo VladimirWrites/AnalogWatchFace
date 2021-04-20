@@ -37,6 +37,6 @@ class SettingsSliderScaleViewHolder(itemView: View): RecyclerView.ViewHolder(ite
         }
     }
 
-    private fun Int.toRealProgress(precision: Int) = (this + 1)/(precision + 1).toFloat()
-    private fun Float.fromRealProgress(precision: Int) = (this*(precision + 1)).toInt() - 1
+    private fun Int.toRealProgress(precision: Int) = (this)/(precision).toFloat()
+    private fun Float.fromRealProgress(precision: Int) = (this*(precision)).toInt()
 }
