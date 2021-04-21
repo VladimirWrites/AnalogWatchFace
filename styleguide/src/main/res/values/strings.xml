@@ -59,24 +59,19 @@
     <string name="wear_complication_day_of_month">Day of Month</string>
     <string name="wear_complication_time_24">Time (24 hours)</string>
     <string name="wear_complication_time_12">Time (12 hours)</string>
-
-    <string name="wear_hours_hand" translatable="false">Hours Hand</string>
-    <string name="wear_minutes_hand" translatable="false">Minutes Hand</string>
-    <string name="wear_seconds_hand" translatable="false">Seconds Hand</string>
-    <string name="wear_central_circle" translatable="false">Central Circle</string>
-    <string name="wear_hand_color" translatable="false">Hand Color</string>
-    <string name="wear_settings" translatable="false">Settings</string>
-
-    <string name="wear_hand_width" translatable="false">Hand Width: %d</string>
-    <string name="wear_hand_scale" translatable="false">Hand Scale: %.2f</string>
-
-    <string name="wear_circle_width" translatable="false">Circle Width: %d</string>
-    <string name="wear_circle_radius" translatable="false">Circle Radius: %d</string>
-
-    <string name="wear_complication_colors" translatable="false">Complication Colors</string>
-    <string name="wear_complication_picker" translatable="false">Complication Picker</string>
-
     <string name="data_github_url" translatable="false">https://github.com/VladimirWrites/AnalogWatchFace/</string>
     <string name="data_email" translatable="false">write@vladimirj.dev</string>
     <string name="data_play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.vlad1m1r.watchface</string>
+    <string name="wear_hours_hand">Hours Hand</string>
+    <string name="wear_minutes_hand">Minutes Hand</string>
+    <string name="wear_seconds_hand">Seconds Hand</string>
+    <string name="wear_central_circle">Central Circle</string>
+    <string name="wear_hand_color">Hand Color</string>
+    <string name="wear_settings">Settings</string>
+    <string name="wear_hand_width">Hand Width: %d</string>
+    <string name="wear_hand_scale">Hand Scale: %.2f</string>
+    <string name="wear_circle_width">Line Width: %d</string>
+    <string name="wear_circle_radius">Circle Radius: %d</string>
+    <string name="wear_complication_colors">Complication Colors</string>
+    <string name="wear_complication_picker">Complication Picker</string>
 </resources>

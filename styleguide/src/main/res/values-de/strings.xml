@@ -17,6 +17,7 @@
     <!-- Shown if the PlayStore didn't open on the watch due to some error. -->
     <string name="app_open_playstore_error_message">Etwas ist schiefgelaufen! Stelle sicher, dass ein Wear OS Gerät mit Deinem Telefon verbunden ist.</string>
 
+    <!-- What is exactly meant by "complication"? -->
     <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
 (e.g. Edit Complication Day of the week) -->
     <string name="wear_edit_complication">Komplikationen bearbeiten %s</string>
@@ -61,4 +62,16 @@
     <string name="wear_complication_day_of_month">Datum</string>
     <string name="wear_complication_time_24">Zeit (24 Stunden)</string>
     <string name="wear_complication_time_12">Zeit (12 Stunden)</string>
+    <string name="wear_hours_hand">Stunden Hand</string>
+    <string name="wear_minutes_hand">Minuten Hand</string>
+    <string name="wear_seconds_hand">Sekundenzeiger</string>
+    <string name="wear_central_circle">Zentraler Kreis</string>
+    <string name="wear_hand_color">Handfarbe</string>
+    <string name="wear_settings">Einstellungen</string>
+    <string name="wear_hand_width">Handbreite: %d</string>
+    <string name="wear_hand_scale">Hand Skala: %.2f</string>
+    <string name="wear_circle_width">Linienbreite: %d</string>
+    <string name="wear_circle_radius">Kreisradius: %d</string>
+    <string name="wear_complication_colors">Komplikation Farben</string>
+    <string name="wear_complication_picker">Komplikationsausleser</string>
 </resources>

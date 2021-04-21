@@ -19,7 +19,7 @@
 
     <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
 (e.g. Edit Complication Day of the week) -->
-    <string name="wear_edit_complication">عدل الاختصارات</string>
+    <string name="wear_edit_complication">عدل الاختصارات %s</string>
     <string name="wear_add_complication">ضيف اختصار</string>
     <string name="wear_ticks_layout_picker">اختر نوع تخطيط علامات التجزئة</string>
     <string name="wear_hand_settings">اعدادات اليد</string>
@@ -59,4 +59,16 @@
     <string name="wear_complication_day_of_month">يوم من الشهر</string>
     <string name="wear_complication_time_24">الوقت (٢٤ ساعة )</string>
     <string name="wear_complication_time_12">الوقت (12 ساعة )</string>
+    <string name="wear_hours_hand">ساعات اليد</string>
+    <string name="wear_minutes_hand">عقرب الدقائق</string>
+    <string name="wear_seconds_hand">عقرب الثواني</string>
+    <string name="wear_central_circle">الدائرة المركزية</string>
+    <string name="wear_hand_color">لون اليد</string>
+    <string name="wear_settings">إعدادات</string>
+    <string name="wear_hand_width">عرض العقرب: %d</string>
+    <string name="wear_hand_scale">مقياس اليد: %.2f</string>
+    <string name="wear_circle_width">عرض الخط: %d</string>
+    <string name="wear_circle_radius">نصف قطر الدائرة: %d</string>
+    <string name="wear_complication_colors">ألوان التعقيد</string>
+    <string name="wear_complication_picker">منتقي المضاعفات</string>
 </resources>

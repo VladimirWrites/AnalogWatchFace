@@ -33,7 +33,11 @@
     <string name="wear_seconds_hand_color">Цвет секундной стрелки</string>
     <string name="wear_central_circle_color">Цвет центрального круга</string>
     <string name="wear_smooth_seconds_hand">Непрерывная секундная стрелка</string>
+
+    <!-- Don't really undestand what that is supposed to mean -->
     <string name="wear_left_background_color">Цвет градиента фона слева</string>
+
+    <!-- Don't really undestand what that is supposed to mean -->
     <string name="wear_right_background_color">Цвет градиента фона справа</string>
     <string name="wear_black_ambient_background">Черный фон в Ambient Mode</string>
     <string name="wear_ticks_in_ambient_mode">Шкала в Ambient Mode</string>
@@ -42,11 +46,17 @@
     <string name="wear_hour_ticks_color">Цвет часовой шкалы</string>
     <string name="wear_minute_ticks_color">Цвет минутной шкалы</string>
     <string name="wear_complications_in_ambient_mode">Виджеты в Ambient Mode</string>
+
+    <!-- Is this singular or plural? Same for othres below -->
     <string name="wear_complications_text_color">Цвет текста виджета</string>
     <string name="wear_complications_title_color">Цвет заголовка виджета</string>
     <string name="wear_complications_icon_color">Цвет иконок виджета</string>
     <string name="wear_complications_border_color">Цвет границы виджета</string>
+
+    <!-- Fuzzy -->
     <string name="wear_complications_ranged_value_primary_color">Первичный цвет диапазонных значений виджета</string>
+
+    <!-- Fuzzy -->
     <string name="wear_complications_ranged_value_secondary_color">Вторичный цвет диапазонных значений виджета</string>
     <string name="wear_complications_background_color">Цвет фона виджета</string>
     <string name="wear_bigger_top_and_bottom_complications">Более широкие верхний и нижний виджеты</string>
@@ -59,4 +69,16 @@
     <string name="wear_complication_day_of_month">День месяца</string>
     <string name="wear_complication_time_24">Время (24ч.)</string>
     <string name="wear_complication_time_12">Время (12ч.)</string>
+    <string name="wear_hours_hand">Часовая стрелка</string>
+    <string name="wear_minutes_hand">Минутная стрелка</string>
+    <string name="wear_seconds_hand">Секундная стрелка</string>
+    <string name="wear_central_circle">Центральный круг</string>
+    <string name="wear_hand_color">Цвет руки</string>
+    <string name="wear_settings">Настройки</string>
+    <string name="wear_hand_width">Ширина руки: %d</string>
+    <string name="wear_hand_scale">Ручная шкала: %.2f</string>
+    <string name="wear_circle_width">Ширина линии: %d</string>
+    <string name="wear_circle_radius">Радиус окружности: %d</string>
+    <string name="wear_complication_colors">Цвета усложнения</string>
+    <string name="wear_complication_picker">Осложнение Пикер</string>
 </resources>

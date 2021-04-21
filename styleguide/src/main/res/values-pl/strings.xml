@@ -59,4 +59,16 @@
     <string name="wear_complication_day_of_month">Dzień miesiąca</string>
     <string name="wear_complication_time_24">Czas (24h)</string>
     <string name="wear_complication_time_12">Czas (12h)</string>
+    <string name="wear_hours_hand">Godziny Ręka</string>
+    <string name="wear_minutes_hand">Protokół Ręka</string>
+    <string name="wear_seconds_hand">Sekundnik</string>
+    <string name="wear_central_circle">Koło centralne</string>
+    <string name="wear_hand_color">Kolor dłoni</string>
+    <string name="wear_settings">Ustawienia</string>
+    <string name="wear_hand_width">Szerokość dłoni: %d</string>
+    <string name="wear_hand_scale">Skala dłoni: %.2f</string>
+    <string name="wear_circle_width">Szerokość linii: %d</string>
+    <string name="wear_circle_radius">Promień okręgu: %d</string>
+    <string name="wear_complication_colors">Kolory komplikacji</string>
+    <string name="wear_complication_picker">Wybierak komplikacji</string>
 </resources>
