@@ -25,8 +25,8 @@ object Versions {
     const val build_tools = "30.0.2"
 
     const val version_code_app = 2501
-    const val version_code_wear = 2602    //Major + Minor + BugFix + 1 for app and 2 for wear
-    const val version_name = "2.6.0"
+    const val version_code_wear = 2612    //Major + Minor + BugFix + 1 for app and 2 for wear
+    const val version_name = "2.6.1"
 }
 
 object Deps {
