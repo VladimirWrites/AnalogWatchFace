@@ -36,22 +36,24 @@ class TicksAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_TITLE -> TitleViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_title,
-                            parent,
-                            false
-                        )
-                )
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_title,
+                        parent,
+                        false
+                    )
+            )
             TYPE_TICKS_LAYOUT_PICKER -> TicksLayoutPickerViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_ticks_layout_picker,
-                            parent,
-                            false
-                        ),
-                    dataStorage
-                )
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_ticks_layout_picker,
+                        parent,
+                        false
+                    ),
+                dataStorage
+            ).apply {
+                ticksLayoutPickerViewHolder = this
+            }
             TYPE_TICKS_INTERACTIVE_MODE,
             TYPE_TICKS_AMBIENT_MODE,
             TYPE_ADJUST_TO_SQUARE_SCREEN -> SettingsWithSwitchViewHolder(
@@ -65,13 +67,13 @@ class TicksAdapter(
 
             TYPE_HOUR_TICKS_COLOR,
             TYPE_MINUTE_TICKS_COLOR -> ColorPickerViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_text,
-                            parent,
-                            false
-                        )
-                )
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_text,
+                        parent,
+                        false
+                    )
+            )
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
             }
@@ -79,7 +81,7 @@ class TicksAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if(res.configuration.isScreenRound) 6 else 7
+        return if (res.configuration.isScreenRound) 6 else 7
     }
 
     override fun getItemViewType(position: Int) =
@@ -95,7 +97,7 @@ class TicksAdapter(
         }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        when(viewHolder.itemViewType) {
+        when (viewHolder.itemViewType) {
             TYPE_TITLE ->
                 (viewHolder as TitleViewHolder).bind(
                     title
