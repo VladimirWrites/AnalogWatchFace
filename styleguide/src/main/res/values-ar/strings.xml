@@ -71,4 +71,5 @@
     <string name="wear_circle_radius">نصف قطر الدائرة: %d</string>
     <string name="wear_complication_colors">ألوان التعقيد</string>
     <string name="wear_complication_picker">منتقي المضاعفات</string>
+    <string name="wear_anti_aliasing_in_ambient_mode">مانع التشويش في الوضع المحيط</string>
 </resources>

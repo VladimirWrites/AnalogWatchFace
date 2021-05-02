@@ -9,13 +9,15 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
+import com.vlad1m1r.watchface.utils.inAmbientMode
+import com.vlad1m1r.watchface.utils.inInteractiveMode
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
 class TicksLayoutOriginal(
     context: Context,
-    dataStorage: DataStorage,
+    private val dataStorage: DataStorage,
     colorStorage: ColorStorage
 ) : TicksLayout(context, dataStorage) {
 
@@ -68,12 +70,12 @@ class TicksLayoutOriginal(
     override fun setMode(mode: Mode) {
         tickPaint.apply {
             if (mode.isAmbient) {
-                inAmbientMode(getLighterGrayscale(watchTickColor))
+                inAmbientMode(getLighterGrayscale(watchTickColor), dataStorage.useAntiAliasingInAmbientMode())
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                 }
             } else {
-                inInteractiveMode(watchTickColor)
+                inInteractiveMode(watchTickColor, shadowColor, shadowRadius)
                 strokeWidth = tickWidth
             }
         }

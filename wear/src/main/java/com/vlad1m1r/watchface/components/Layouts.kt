@@ -19,7 +19,7 @@ class Layouts(
 ) {
     val background = Background(colorStorage, dataStorage)
     val complications = Complications(context, dataStorage, colorStorage)
-    val hands: Hands = Hands(context, colorStorage, sizeStorage)
+    val hands: Hands = Hands(context, colorStorage, dataStorage, sizeStorage)
 
     lateinit var ticks: TicksLayout
         private set

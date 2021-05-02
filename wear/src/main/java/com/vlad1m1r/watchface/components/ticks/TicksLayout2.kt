@@ -9,9 +9,15 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
+import com.vlad1m1r.watchface.utils.inAmbientMode
+import com.vlad1m1r.watchface.utils.inInteractiveMode
 import kotlin.math.*
 
-class TicksLayout2(context: Context, dataStorage: DataStorage, colorStorage: ColorStorage) : TicksLayout(context, dataStorage) {
+class TicksLayout2(
+    context: Context,
+    private val dataStorage: DataStorage,
+    colorStorage: ColorStorage
+) : TicksLayout(context, dataStorage) {
 
     private val tickRadius = context.resources.getDimension(R.dimen.design2_tick_radius)
     private val watchHourTickColor = colorStorage.getHourTicksColor()
@@ -75,25 +81,25 @@ class TicksLayout2(context: Context, dataStorage: DataStorage, colorStorage: Col
     override fun setMode(mode: Mode) {
         tickPaint.apply {
             if (mode.isAmbient) {
-                inAmbientMode(getLighterGrayscale(watchHourTickColor))
+                inAmbientMode(getLighterGrayscale(watchHourTickColor), dataStorage.useAntiAliasingInAmbientMode())
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                     style = Paint.Style.STROKE
                 }
             } else {
-                inInteractiveMode(watchHourTickColor)
+                inInteractiveMode(watchHourTickColor, shadowColor, shadowRadius)
                 style = Paint.Style.FILL
             }
         }
         tickPaintMinute.apply {
             if (mode.isAmbient) {
-                inAmbientMode(getLighterGrayscale(watchMinuteTickColor))
+                inAmbientMode(getLighterGrayscale(watchMinuteTickColor), dataStorage.useAntiAliasingInAmbientMode())
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                     style = Paint.Style.STROKE
                 }
             } else {
-                inInteractiveMode(watchMinuteTickColor)
+                inInteractiveMode(watchMinuteTickColor, shadowColor, shadowRadius)
                 style = Paint.Style.FILL
             }
         }

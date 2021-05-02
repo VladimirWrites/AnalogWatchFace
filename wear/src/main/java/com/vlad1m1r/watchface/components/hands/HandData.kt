@@ -10,5 +10,6 @@ data class HandData(
     val shadowRadius: Int,
     val width: Int,
     val paddingFromCenter: Int,
-    @FloatRange(from = 0.0, to = 1.0) val handLengthRatio: Float
+    @FloatRange(from = 0.0, to = 1.0) val handLengthRatio: Float,
+    val useAntiAliasingInAmbientMode: Boolean
 )

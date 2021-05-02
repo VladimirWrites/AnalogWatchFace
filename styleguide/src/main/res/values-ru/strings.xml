@@ -81,4 +81,5 @@
     <string name="wear_circle_radius">Радиус окружности: %d</string>
     <string name="wear_complication_colors">Цвета усложнения</string>
     <string name="wear_complication_picker">Осложнение Пикер</string>
+    <string name="wear_anti_aliasing_in_ambient_mode">Сглаживание в Ambient Mode</string>
 </resources>

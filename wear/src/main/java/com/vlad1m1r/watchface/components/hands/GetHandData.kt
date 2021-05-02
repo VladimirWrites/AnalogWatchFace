@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.SizeStorage
 
 class GetHandData(
     private val context: Context,
     private val colorStorage: ColorStorage,
+    private val dataStorage: DataStorage,
     private val sizeStorage: SizeStorage
 ) {
 
@@ -27,7 +29,8 @@ class GetHandData(
             shadowRadius,
             handWidthHour,
             sizeStorage.getCircleRadius() + circleHandGap,
-            sizeStorage.getHoursHandScale()
+            sizeStorage.getHoursHandScale(),
+            dataStorage.useAntiAliasingInAmbientMode()
         )
     }
 
@@ -41,7 +44,8 @@ class GetHandData(
             shadowRadius,
             handWidthMinute,
             sizeStorage.getCircleRadius() + circleHandGap,
-            sizeStorage.getMinutesHandScale()
+            sizeStorage.getMinutesHandScale(),
+            dataStorage.useAntiAliasingInAmbientMode()
         )
     }
 
@@ -55,7 +59,8 @@ class GetHandData(
             shadowRadius,
             handWidthSecond,
             sizeStorage.getCircleRadius(),
-            sizeStorage.getSecondsHandScale()
+            sizeStorage.getSecondsHandScale(),
+            dataStorage.useAntiAliasingInAmbientMode()
         )
     }
 
@@ -63,6 +68,14 @@ class GetHandData(
         val circleColor = colorStorage.getCentralCircleColor()
         val circleWidth = sizeStorage.getCircleWidth()
         val middleCircleRadius = sizeStorage.getCircleRadius()
-        return CircleData(circleColor, ambientColor, shadowColor, shadowRadius, circleWidth, middleCircleRadius)
+        return CircleData(
+            circleColor,
+            ambientColor,
+            shadowColor,
+            shadowRadius,
+            circleWidth,
+            middleCircleRadius,
+            dataStorage.useAntiAliasingInAmbientMode()
+        )
     }
 }

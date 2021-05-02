@@ -74,4 +74,5 @@
     <string name="wear_circle_radius">Kreisradius: %d</string>
     <string name="wear_complication_colors">Komplikation Farben</string>
     <string name="wear_complication_picker">Komplikationsausleser</string>
+    <string name="wear_anti_aliasing_in_ambient_mode">Anti-Aliasing im Ambient Mode</string>
 </resources>

@@ -9,9 +9,14 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
+import com.vlad1m1r.watchface.utils.inAmbientMode
+import com.vlad1m1r.watchface.utils.inInteractiveMode
 import kotlin.math.*
 
-class TicksLayout1(context: Context, dataStorage: DataStorage, colorStorage: ColorStorage) : TicksLayout(context, dataStorage) {
+class TicksLayout1(
+    context: Context,
+    private val dataStorage: DataStorage,
+    colorStorage: ColorStorage) : TicksLayout(context, dataStorage) {
 
     private val tickLength = context.resources.getDimension(R.dimen.design1_tick_length)
     private val watchHourTickColor = colorStorage.getHourTicksColor()
@@ -95,23 +100,23 @@ class TicksLayout1(context: Context, dataStorage: DataStorage, colorStorage: Col
     override fun setMode(mode: Mode) {
         tickPaint.apply {
             if (mode.isAmbient) {
-                inAmbientMode(getLighterGrayscale(watchHourTickColor))
+                inAmbientMode(getLighterGrayscale(watchHourTickColor), dataStorage.useAntiAliasingInAmbientMode())
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                 }
             } else {
-                inInteractiveMode(watchHourTickColor)
+                inInteractiveMode(watchHourTickColor, shadowColor, shadowRadius)
                 strokeWidth = tickWidth
             }
         }
         tickPaintMinute.apply {
             if (mode.isAmbient) {
-                inAmbientMode(getLighterGrayscale(watchMinuteTickColor))
+                inAmbientMode(getLighterGrayscale(watchMinuteTickColor), dataStorage.useAntiAliasingInAmbientMode())
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                 }
             } else {
-                inInteractiveMode(watchMinuteTickColor)
+                inInteractiveMode(watchMinuteTickColor, shadowColor, shadowRadius)
                 strokeWidth = tickWidthMinute
             }
         }

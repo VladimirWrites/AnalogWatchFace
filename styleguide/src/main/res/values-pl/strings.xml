@@ -71,4 +71,5 @@
     <string name="wear_circle_radius">Promień okręgu: %d</string>
     <string name="wear_complication_colors">Kolory komplikacji</string>
     <string name="wear_complication_picker">Wybierak komplikacji</string>
+    <string name="wear_anti_aliasing_in_ambient_mode">Antyaliasing w trybie Ambient</string>
 </resources>

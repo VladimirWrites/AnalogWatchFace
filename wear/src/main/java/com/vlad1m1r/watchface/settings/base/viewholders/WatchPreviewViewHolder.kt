@@ -17,7 +17,7 @@ class WatchPreviewViewHolder(
     dataStorage: DataStorage,
     sizeStorage: SizeStorage
 ): RecyclerView.ViewHolder(itemView) {
-    private val paintDataProvider = GetHandData(itemView.context, colorStorage, sizeStorage)
+    private val paintDataProvider = GetHandData(itemView.context, colorStorage, dataStorage, sizeStorage)
     private val getBackgroundData = GetBackgroundData(colorStorage, dataStorage)
     private val handPreview = itemView.findViewById<WatchPreviewView>(R.id.hand_preview).apply {
         initialize(paintDataProvider, getBackgroundData)

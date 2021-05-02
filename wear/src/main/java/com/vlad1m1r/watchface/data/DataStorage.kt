@@ -20,6 +20,8 @@ const val KEY_HAS_BLACK_AMBIENT_BACKGROUND = "has_black_ambient_background"
 
 const val KEY_HAS_BIGGER_COMPLICATION_TEXT = "has_bigger_complication_text"
 
+const val KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE = "use_anti_aliasing_in_ambient_mode"
+
 class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun getTicksLayoutType(): TicksLayoutType {
@@ -93,6 +95,14 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
     fun setHasBiggerComplicationText(hasBiggerComplicationText: Boolean) {
         val editor = sharedPreferences.edit()
         editor.putBoolean(KEY_HAS_BIGGER_COMPLICATION_TEXT, hasBiggerComplicationText)
+        editor.apply()
+    }
+
+    fun useAntiAliasingInAmbientMode() = sharedPreferences.getBoolean(KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE, false)
+
+    fun setUseAntiAliasingInAmbientMode(useAntiAliasingInAmbientMode: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE, useAntiAliasingInAmbientMode)
         editor.apply()
     }
 }

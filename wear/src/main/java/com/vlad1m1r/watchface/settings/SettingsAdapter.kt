@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.base.viewholders.*
 import com.vlad1m1r.watchface.settings.about.AboutActivity
 import com.vlad1m1r.watchface.settings.background.BackgroundActivity
@@ -25,8 +26,11 @@ private const val TYPE_BACKGROUND = 3
 private const val TYPE_RATE = 4
 private const val TYPE_HANDS = 5
 private const val TYPE_ABOUT = 6
+private const val TYPE_ANTI_ALIAS = 7
 
-class SettingsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SettingsAdapter(
+    private val dataStorage: DataStorage
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -67,6 +71,14 @@ class SettingsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         false
                     )
             )
+            TYPE_ANTI_ALIAS -> SettingsWithSwitchViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_switch,
+                        parent,
+                        false
+                    )
+            )
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
             }
@@ -74,7 +86,7 @@ class SettingsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 7
+        return 8
     }
 
     override fun getItemViewType(position: Int) =
@@ -84,8 +96,9 @@ class SettingsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             2 -> TYPE_TICKS
             3 -> TYPE_BACKGROUND
             4 -> TYPE_HANDS
-            5 -> TYPE_ABOUT
-            6 -> TYPE_RATE
+            5 -> TYPE_ANTI_ALIAS
+            6 -> TYPE_ABOUT
+            7 -> TYPE_RATE
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
@@ -142,7 +155,14 @@ class SettingsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     )
                 }
             }
-
+            TYPE_ANTI_ALIAS -> {
+                (viewHolder as SettingsWithSwitchViewHolder).bind(
+                    R.string.wear_anti_aliasing_in_ambient_mode,
+                    dataStorage.useAntiAliasingInAmbientMode()
+                ) {
+                    dataStorage.setUseAntiAliasingInAmbientMode(it)
+                }
+            }
             TYPE_ABOUT -> {
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_about_app

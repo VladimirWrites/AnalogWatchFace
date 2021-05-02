@@ -8,5 +8,6 @@ data class CircleData(
     @ColorInt  val shadowColor: Int,
     val shadowRadius: Int,
     val width: Int,
-    val radius: Int
+    val radius: Int,
+    val useAntiAliasingInAmbientMode: Boolean
 )

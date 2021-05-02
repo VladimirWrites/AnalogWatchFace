@@ -2,12 +2,8 @@ package com.vlad1m1r.watchface.components.hands
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import androidx.annotation.ColorInt
-import androidx.annotation.FloatRange
 import com.nhaarman.mockitokotlin2.*
 import com.vlad1m1r.watchface.model.Point
-import com.vlad1m1r.watchface.utils.inAmbientMode
-import com.vlad1m1r.watchface.utils.inInteractiveMode
 import org.junit.Test
 
 class DrawHandShould {
@@ -52,7 +48,8 @@ class DrawHandShould {
             shadowRadius = 4,
             width = 5,
             paddingFromCenter = 6,
-            handLengthRatio = 0.5f
+            handLengthRatio = 0.5f,
+            useAntiAliasingInAmbientMode = false
         )
         val drawHand = DrawHand(
             handData,

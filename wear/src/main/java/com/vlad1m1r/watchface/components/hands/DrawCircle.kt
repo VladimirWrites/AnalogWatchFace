@@ -23,9 +23,9 @@ class DrawCircle(
 
     fun setInAmbientMode(isInAmbientMode: Boolean) {
         if(isInAmbientMode) {
-            paint.inAmbientMode(circleData.colorAmbient)
+            paint.inAmbientMode(circleData.colorAmbient, circleData.useAntiAliasingInAmbientMode)
         } else {
-            paint.inInteractiveMode(circleData.color, circleData.shadowColor, circleData.shadowRadius)
+            paint.inInteractiveMode(circleData.color, circleData.shadowColor, circleData.shadowRadius.toFloat())
         }
     }
 

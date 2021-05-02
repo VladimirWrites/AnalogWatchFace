@@ -26,7 +26,8 @@ class DrawCircleShould {
             shadowColor = 3,
             shadowRadius = 4,
             width = 5,
-            radius = 6
+            radius = 6,
+            useAntiAliasingInAmbientMode = false
         )
         val drawCircle = DrawCircle(
             circleData,

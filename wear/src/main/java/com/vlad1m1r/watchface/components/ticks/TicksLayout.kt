@@ -35,20 +35,6 @@ abstract class TicksLayout(context: Context, dataStorage: DataStorage): WatchVie
         return 1.0
     }
 
-    protected fun Paint.inAmbientMode(color: Int = ambientColor) {
-        this.color = color
-        isAntiAlias = false
-        clearShadowLayer()
-    }
-
-    protected fun Paint.inInteractiveMode(color: Int) {
-        this.color = color
-        isAntiAlias = true
-        setShadowLayer(
-            shadowRadius, 0f, 0f, shadowColor
-        )
-    }
-
     protected fun shouldAdjustForBurnInProtection(mode: Mode) =
         mode.isAmbient && mode.isBurnInProtection && ((isSquareScreen && shouldAdjustToSquareScreen) || !isSquareScreen)
 }

@@ -24,7 +24,6 @@ import java.util.*
 private const val INTERACTIVE_UPDATE_RATE_SLOW_MS = 1000
 private const val INTERACTIVE_UPDATE_RATE_FAST_MS = 33
 
-
 private const val MESSAGE_UPDATE_ID = 0
 
 class WatchFace : CanvasWatchFaceService() {
@@ -77,7 +76,8 @@ class WatchFace : CanvasWatchFaceService() {
                     key == KEY_CIRCLE_WIDTH || key == KEY_CIRCLE_RADIUS ||
                     key == KEY_HAND_HOURS_WIDTH || key == KEY_HAND_MINUTES_WIDTH ||
                     key == KEY_HAND_SECONDS_WIDTH || key == KEY_HAND_HOURS_SCALE ||
-                    key == KEY_HAND_MINUTES_SCALE || key == KEY_HAND_SECONDS_SCALE
+                    key == KEY_HAND_MINUTES_SCALE || key == KEY_HAND_SECONDS_SCALE ||
+                    key == KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE
                 ) {
                     layouts.invalidateHands()
                 }

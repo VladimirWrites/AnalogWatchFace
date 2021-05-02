@@ -1,9 +1,6 @@
 package com.vlad1m1r.watchface.components.hands
 
 import android.graphics.Canvas
-import android.graphics.Paint
-import android.util.Log
-import androidx.annotation.FloatRange
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.inAmbientMode
 import com.vlad1m1r.watchface.utils.inInteractiveMode
@@ -30,9 +27,9 @@ class DrawHand(
 
     fun setInAmbientMode(isInAmbientMode: Boolean) {
         if(isInAmbientMode) {
-            paint.inAmbientMode(handData.colorAmbient)
+            paint.inAmbientMode(handData.colorAmbient, handData.useAntiAliasingInAmbientMode)
         } else {
-            paint.inInteractiveMode(handData.color, handData.shadowColor, handData.shadowRadius)
+            paint.inInteractiveMode(handData.color, handData.shadowColor, handData.shadowRadius.toFloat())
         }
     }
 }
