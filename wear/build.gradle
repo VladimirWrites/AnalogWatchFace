@@ -80,6 +80,7 @@ dependencies {
 
     testImplementation Deps.junit
     testImplementation Deps.mockito_core
+    testImplementation Deps.mockito_inline
     testImplementation Deps.mockito_kotlin
     testImplementation Deps.truth
 }

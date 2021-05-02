@@ -1,25 +1,16 @@
 package com.vlad1m1r.watchface.components.hands
 
 import android.graphics.Canvas
-import android.graphics.Paint
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.inAmbientMode
 import com.vlad1m1r.watchface.utils.inInteractiveMode
 
 class DrawCircle(
-    private val circleData: CircleData
+    private val circleData: CircleData,
+    handsPaintProvider: HandPaintProvider
 ) {
 
-    private var paint = Paint().apply {
-        color = circleData.color
-        strokeWidth = circleData.width.toFloat()
-        isAntiAlias = true
-        style = Paint.Style.STROKE
-        strokeCap = Paint.Cap.ROUND
-        setShadowLayer(
-            circleData.shadowRadius.toFloat(), 0f, 0f, circleData.shadowColor
-        )
-    }
+    private var paint = handsPaintProvider.getCirclePaint(circleData)
 
     operator fun invoke(canvas: Canvas, center: Point) {
         canvas.drawCircle(

@@ -8,12 +8,13 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
+import com.vlad1m1r.watchface.utils.WatchView
 import kotlin.math.PI
 import kotlin.math.pow
 import kotlin.math.sqrt
 import kotlin.math.tan
 
-abstract class TicksLayout(context: Context, dataStorage: DataStorage) {
+abstract class TicksLayout(context: Context, dataStorage: DataStorage): WatchView {
     protected val shadowColor = ContextCompat.getColor(context, R.color.watch_shadow)
     protected val shadowRadius = context.resources.getDimension(R.dimen.shadow_radius)
     private val ambientColor = ContextCompat.getColor(context, R.color.watch_ambient)
@@ -22,7 +23,6 @@ abstract class TicksLayout(context: Context, dataStorage: DataStorage) {
 
     abstract val centerInvalidated: Boolean
 
-    abstract fun setCenter(center: Point)
     abstract fun draw(canvas: Canvas)
     abstract fun setMode(mode: Mode)
     fun adjustToSquare(tickRotation: Double): Double {

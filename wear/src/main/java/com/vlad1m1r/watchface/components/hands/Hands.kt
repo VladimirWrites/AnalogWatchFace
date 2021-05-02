@@ -37,20 +37,26 @@ class Hands(
     }
 
     private fun initializeHands() {
+        val handPaintProvider = HandPaintProvider()
+
         drawHourHand = DrawHand(
-            getHandData.getHourHandData()
+            getHandData.getHourHandData(),
+            handPaintProvider
         )
 
         drawMinuteHand = DrawHand(
-            getHandData.getMinuteHandData()
+            getHandData.getMinuteHandData(),
+            handPaintProvider
         )
 
         drawSecondsHand = DrawHand(
-            getHandData.getSecondHandData()
+            getHandData.getSecondHandData(),
+            handPaintProvider
         )
 
         drawCircle = DrawCircle(
-            getHandData.getCircleData()
+            getHandData.getCircleData(),
+            handPaintProvider
         )
     }
 

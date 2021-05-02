@@ -11,7 +11,7 @@ object Versions {
     const val constraintLayout = "2.0.4"
 
     const val junit = "4.13.1"
-    const val mockito_core = "3.8.0"
+    const val mockito = "3.9.0"
     const val mockito_kotlin = "2.2.0"
     const val truth = "1.1.2"
 
@@ -37,8 +37,10 @@ object Deps {
     const val wearable = "com.google.android.wearable:wearable:${Versions.wearable}"
 
     const val junit = "junit:junit:${Versions.junit}"
-    const val mockito_core = "org.mockito:mockito-core:${Versions.mockito_core}"
+    const val mockito_core = "org.mockito:mockito-core:${Versions.mockito}"
     const val mockito_kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito_kotlin}"
+    const val mockito_inline = "org.mockito:mockito-inline:${Versions.mockito}"
+
     const val truth = "com.google.truth:truth:${Versions.truth}"
     const val kotlin_test = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
 

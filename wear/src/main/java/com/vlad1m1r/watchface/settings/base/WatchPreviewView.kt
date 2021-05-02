@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
+import com.vlad1m1r.watchface.components.background.BackgroundBitmapProvider
 import com.vlad1m1r.watchface.components.background.DrawBackground
 import com.vlad1m1r.watchface.components.background.GetBackgroundData
 import com.vlad1m1r.watchface.components.hands.*
@@ -30,6 +31,10 @@ class WatchPreviewView: View {
     private lateinit var center: Point
     private lateinit var adjustedCenter: Point
 
+    private lateinit var backgroundBitmapProvider: BackgroundBitmapProvider
+
+    private val handPaintProvider = HandPaintProvider()
+
     fun initialize(getHandData: GetHandData, getBackgroundData: GetBackgroundData) {
         this.getHandData = getHandData
         this.getBackgroundData = getBackgroundData
@@ -40,12 +45,14 @@ class WatchPreviewView: View {
         center: Point
     ) {
         this.center = center
-        this.drawSecondsHand = DrawHand(getHandData.getSecondHandData())
-        this.drawHourHand = DrawHand(getHandData.getHourHandData())
-        this.drawMinutesHand = DrawHand(getHandData.getMinuteHandData())
-        this.drawCircle = DrawCircle(getHandData.getCircleData())
+        this.drawSecondsHand = DrawHand(getHandData.getSecondHandData(), handPaintProvider)
+        this.drawHourHand = DrawHand(getHandData.getHourHandData(), handPaintProvider)
+        this.drawMinutesHand = DrawHand(getHandData.getMinuteHandData(), handPaintProvider)
+        this.drawCircle = DrawCircle(getHandData.getCircleData(), handPaintProvider)
 
-        this.drawBackground = DrawBackground(getBackgroundData())
+        this.backgroundBitmapProvider = BackgroundBitmapProvider(getBackgroundData())
+
+        this.drawBackground = DrawBackground(backgroundBitmapProvider)
         this.drawBackground.setCenter(center)
 
         this.adjustedCenter = Point(center.x/2, center.y)

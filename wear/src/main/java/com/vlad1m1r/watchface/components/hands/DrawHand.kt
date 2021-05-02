@@ -9,19 +9,11 @@ import com.vlad1m1r.watchface.utils.inAmbientMode
 import com.vlad1m1r.watchface.utils.inInteractiveMode
 
 class DrawHand(
-    private val handData: HandData
+    private val handData: HandData,
+    handPaintProvider: HandPaintProvider
 ) {
 
-    private var paint = Paint().apply {
-        color = handData.color
-        strokeWidth = handData.width.toFloat()
-        isAntiAlias = true
-        style = Paint.Style.STROKE
-        strokeCap = Paint.Cap.ROUND
-        setShadowLayer(
-            handData.shadowRadius.toFloat(), 0f, 0f, handData.shadowColor
-        )
-    }
+    private var paint = handPaintProvider.getHandPaint(handData)
 
     operator fun invoke(canvas: Canvas, rotation:Float, center: Point, handSpace: Float) {
         val handLength = (handSpace - handData.paddingFromCenter) * handData.handLengthRatio

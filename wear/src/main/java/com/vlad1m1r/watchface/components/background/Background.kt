@@ -5,12 +5,13 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.model.Mode
+import com.vlad1m1r.watchface.utils.WatchView
 import com.vlad1m1r.watchface.utils.getDarkerGrayscale
 
 class Background(
     private val colorStorage: ColorStorage,
     private val dataStorage: DataStorage
-    ) {
+    ): WatchView {
 
     private var center = Point()
 
@@ -22,8 +23,8 @@ class Background(
 
     private fun initializeDrawBackground() {
         val getBackgroundData = GetBackgroundData(colorStorage, dataStorage)
-        val backgroundData = getBackgroundData()
-        drawBackground = DrawBackground(backgroundData)
+        val backgroundBitmapProvider = BackgroundBitmapProvider(getBackgroundData())
+        drawBackground = DrawBackground(backgroundBitmapProvider)
         drawBackground.setCenter(center)
     }
 
@@ -38,7 +39,7 @@ class Background(
         drawBackground.setInAmbientMode(mode.isAmbient)
     }
 
-    fun setCenter(center: Point) {
+    override fun setCenter(center: Point) {
         this.center = center
         drawBackground.setCenter(center)
     }
