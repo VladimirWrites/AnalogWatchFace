@@ -17,7 +17,6 @@ import kotlin.math.tan
 abstract class TicksLayout(context: Context, dataStorage: DataStorage): WatchView {
     protected val shadowColor = ContextCompat.getColor(context, R.color.watch_shadow)
     protected val shadowRadius = context.resources.getDimension(R.dimen.shadow_radius)
-    private val ambientColor = ContextCompat.getColor(context, R.color.watch_ambient)
     private val isSquareScreen: Boolean = !context.resources.configuration.isScreenRound
     protected val shouldAdjustToSquareScreen: Boolean = dataStorage.shouldAdjustToSquareScreen()
     protected val adjustToSquare = AdjustToSquare()
