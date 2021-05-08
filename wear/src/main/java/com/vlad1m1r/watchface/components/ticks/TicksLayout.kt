@@ -20,20 +20,12 @@ abstract class TicksLayout(context: Context, dataStorage: DataStorage): WatchVie
     private val ambientColor = ContextCompat.getColor(context, R.color.watch_ambient)
     private val isSquareScreen: Boolean = !context.resources.configuration.isScreenRound
     protected val shouldAdjustToSquareScreen: Boolean = dataStorage.shouldAdjustToSquareScreen()
+    protected val adjustToSquare = AdjustToSquare()
 
     abstract val centerInvalidated: Boolean
 
     abstract fun draw(canvas: Canvas)
     abstract fun setMode(mode: Mode)
-    fun adjustToSquare(tickRotation: Double): Double {
-        if ((tickRotation < PI / 4 || tickRotation >= 7 * PI / 4) || (tickRotation >= 3 * PI / 4 && tickRotation < 5 * PI / 4)) {
-            return sqrt(1 + (tan(tickRotation).pow(2)))
-        }
-        if ((tickRotation >= PI / 4 && tickRotation < 3 * PI / 4) || (tickRotation >= 5 * PI / 4 && tickRotation <= 7 * PI / 4)) {
-            return sqrt(1 + (1 / tan(tickRotation).pow(2)))
-        }
-        return 1.0
-    }
 
     protected fun shouldAdjustForBurnInProtection(mode: Mode) =
         mode.isAmbient && mode.isBurnInProtection && ((isSquareScreen && shouldAdjustToSquareScreen) || !isSquareScreen)
