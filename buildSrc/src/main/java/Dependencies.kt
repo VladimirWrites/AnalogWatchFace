@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlin = "1.4.32"
+    const val kotlin = "1.5.0"
 
     const val wearable_support = "2.8.1"
     const val wearable_support_ui = "1.1.0"
@@ -15,7 +15,7 @@ object Versions {
     const val mockito_kotlin = "2.2.0"
     const val truth = "1.1.2"
 
-    const val gradle_android = "4.1.3"
+    const val gradle_android = "4.2.0"
 
     const val jacoco = "0.8.5"
 
