@@ -69,14 +69,15 @@ class TicksLayout1(
             val tickRotation = tickIndex * PI / 30
 
             val adjust = if(shouldAdjustToSquareScreen) adjustToSquare(tickRotation, center) else 1.0
+            val roundCorners = if (shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20) * 10 else 0.0
 
             if (tickIndex % 5 == 0) {
 
-                val innerX = sin(tickRotation) * innerTickRadius * adjust
-                val innerY = -cos(tickRotation) * innerTickRadius * adjust
+                val innerX = sin(tickRotation) * (innerTickRadius - roundCorners) * adjust
+                val innerY = -cos(tickRotation) * (innerTickRadius - roundCorners) * adjust
 
-                val outerX = sin(tickRotation) * outerTickRadius * adjust
-                val outerY = -cos(tickRotation) * outerTickRadius * adjust
+                val outerX = sin(tickRotation) * (outerTickRadius - roundCorners) * adjust
+                val outerY = -cos(tickRotation) * (outerTickRadius - roundCorners) * adjust
 
 
 
@@ -85,10 +86,10 @@ class TicksLayout1(
                     (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaint
                 )
             } else {
-                val innerX = sin(tickRotation) * innerTickRadiusMinute * adjust
-                val innerY = -cos(tickRotation) * innerTickRadiusMinute * adjust
-                val outerX = sin(tickRotation) * outerTickRadius * adjust
-                val outerY = -cos(tickRotation) * outerTickRadius * adjust
+                val innerX = sin(tickRotation) * (innerTickRadiusMinute - roundCorners) * adjust
+                val innerY = -cos(tickRotation) * (innerTickRadiusMinute - roundCorners) * adjust
+                val outerX = sin(tickRotation) * (outerTickRadius - roundCorners) * adjust
+                val outerY = -cos(tickRotation) * (outerTickRadius - roundCorners) * adjust
                 canvas.drawLine(
                     (center.x + innerX).toFloat(), (center.y + innerY).toFloat(),
                     (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaintMinute

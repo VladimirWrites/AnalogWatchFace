@@ -55,11 +55,13 @@ class TicksLayoutOriginal(
     override fun draw(canvas: Canvas) {
         for (tickIndex in 0..11) {
             val tickRotation = tickIndex * PI / 6
-            val adjust = if(shouldAdjustToSquareScreen) adjustToSquare(tickRotation, center) else 1.0
-            val innerX = sin(tickRotation) * innerTickRadius * adjust
-            val innerY = -cos(tickRotation) * innerTickRadius * adjust
-            val outerX = sin(tickRotation) * outerTickRadius * adjust
-            val outerY = -cos(tickRotation) * outerTickRadius * adjust
+            val adjust = if (shouldAdjustToSquareScreen) adjustToSquare(tickRotation, center) else 1.0
+            val roundCorners = if (shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20) * 10 else 0.0
+
+            val innerX = sin(tickRotation) * (innerTickRadius - roundCorners) * adjust
+            val innerY = -cos(tickRotation) * (innerTickRadius - roundCorners) * adjust
+            val outerX = sin(tickRotation) * (outerTickRadius - roundCorners) * adjust
+            val outerY = -cos(tickRotation) * (outerTickRadius - roundCorners) * adjust
             canvas.drawLine(
                 (center.x + innerX).toFloat(), (center.y + innerY).toFloat(),
                 (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaint

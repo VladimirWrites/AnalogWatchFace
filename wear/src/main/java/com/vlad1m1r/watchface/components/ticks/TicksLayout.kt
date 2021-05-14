@@ -20,6 +20,7 @@ abstract class TicksLayout(context: Context, dataStorage: DataStorage): WatchVie
     private val isSquareScreen: Boolean = !context.resources.configuration.isScreenRound
     protected val shouldAdjustToSquareScreen: Boolean = dataStorage.shouldAdjustToSquareScreen()
     protected val adjustToSquare = AdjustToSquare()
+    protected val roundCorners = RoundCorners()
 
     abstract val centerInvalidated: Boolean
 
