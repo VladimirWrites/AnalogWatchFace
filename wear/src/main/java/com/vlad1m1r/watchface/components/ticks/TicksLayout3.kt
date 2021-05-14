@@ -88,7 +88,7 @@ class TicksLayout3(
 
             val tickRotation = tickIndex * PI / 120
 
-            val adjust = if(shouldAdjustToSquareScreen) adjustToSquare(tickRotation) else 1.0
+            val adjust = if(shouldAdjustToSquareScreen) adjustToSquare(tickRotation, center) else 1.0
 
             val sinTickRotation = sin(tickRotation)
             val cosTickRotation = -cos(tickRotation)

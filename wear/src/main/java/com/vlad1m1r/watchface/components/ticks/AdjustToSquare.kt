@@ -1,14 +1,13 @@
 package com.vlad1m1r.watchface.components.ticks
 
-import kotlin.math.PI
-import kotlin.math.pow
-import kotlin.math.sqrt
-import kotlin.math.tan
+import com.vlad1m1r.watchface.model.Point
+import kotlin.math.*
 
 class AdjustToSquare() {
-    operator fun invoke(tickRotation: Double): Double {
-        return if ((tickRotation < PI / 4 || tickRotation >= 7 * PI / 4) || (tickRotation >= 3 * PI / 4 && tickRotation < 5 * PI / 4)) {
-            sqrt(1 + (tan(tickRotation).pow(2)))
+    operator fun invoke(tickRotation: Double, center: Point): Double {
+        val angle = atan(center.x / center.y)
+        return if ((tickRotation < angle || tickRotation >= 2 * PI - angle) || (tickRotation >= PI - angle && tickRotation < PI + angle)) {
+            sqrt(1 + (tan(tickRotation).pow(2))) * center.y / center.x
         } else {
             sqrt(1 + (1 / tan(tickRotation).pow(2)))
         }

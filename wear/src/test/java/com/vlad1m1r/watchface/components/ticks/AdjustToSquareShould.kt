@@ -1,5 +1,6 @@
 package com.vlad1m1r.watchface.components.ticks
 
+import com.vlad1m1r.watchface.model.Point
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -98,6 +99,6 @@ class AdjustToSquareShould(private val tickRotation: Double, private val expecte
 
     @Test
     fun calculateValueToTransformCircleToSquare() {
-        assertEquals(adjustToSquare(tickRotation), expectedResult, 0.000001)
+        assertEquals(adjustToSquare(tickRotation, Point(1f, 1f)), expectedResult, 0.000001)
     }
 }

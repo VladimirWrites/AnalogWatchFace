@@ -59,7 +59,7 @@ class TicksLayout2(
     override fun draw(canvas: Canvas) {
         for (tickIndex in 0..59) {
             val tickRotation = tickIndex * PI / 30
-            val adjust = if(shouldAdjustToSquareScreen) adjustToSquare(tickRotation) else 1.0
+            val adjust = if(shouldAdjustToSquareScreen) adjustToSquare(tickRotation, center) else 1.0
             if (tickIndex % 5 == 0) {
                 val x = sin(tickRotation) * outerTickRadius * adjust
                 val y = -cos(tickRotation) * outerTickRadius * adjust
