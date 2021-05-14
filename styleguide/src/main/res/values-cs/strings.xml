@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Shown on a device under the icon and in the About screen of the watch face and Android app. I am not sure if it makes sense to translate the app name. How is it done for other apps in your language? Maybe having the translation in brackets would be an option: Analog Watch Face (translated name) -->
+    <string name="app_name">Analog Watch Face</string>
+    <string name="app_subtitle">❤ Děkuji že jste si stáhli aplikaci! ❤️</string>
+    <string name="app_description">Tato aplikace slouží k snažší instalaci ciferníku na Vaše Wear OS zařízení. Jakmile je ciferník nainstalován, můžete odinstalovat tuto aplikace z vašeho telefonu.\n\nTento projekt je kompletně open-source, takže jestli máte zkušenosti s programováním můžete k němu klidně přispět!\n\nJestli se Vám líbí tento ciferník, nezapomeňte ho ohodnotit!</string>
+
+    <!-- This will be shown if a user doesn't have a watch connected to the phone on which this app is installed. -->
+    <string name="app_no_watch">Zdá se, že toto zařízení není spárované s žádným zařízením Wear OS.\nJe nám to líto, ale ciferník Analog Watch Face může být nainstalován pouze na zařízení Wear OS.\n\nMůžete zkusit manuálně vyhledat tento ciferník v obchodě Google Play na svém zařízení Wear OS.</string>
+    <string name="app_install_watch_face">Nainstalovat Analog Watch Face</string>
+    <string name="app_uninstall_app">Odinstalovat tuto aplikaci</string>
+
+    <!-- Shown if the PlayStore is successfully opened on the watch. -->
+    <string name="app_open_playstore_success_message">Zkotrolujte svoje hodinky!</string>
+
+    <!-- Shown if the PlayStore didn't open on the watch due to some error. -->
+    <string name="app_open_playstore_error_message">Nastala chyba! Zkontrolujte zda máte Wear OS zařízení spárované s telefonem.</string>
+
+    <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
+(e.g. Edit Complication Day of the week) -->
+    <string name="wear_edit_complication">Změna komplikace %s</string>
+    <string name="wear_add_complication">Přidat komplikaci</string>
+    <string name="wear_ticks_layout_picker">Výběr rozložení indexů</string>
+    <string name="wear_hand_settings">Nastavení ručiček</string>
+    <string name="wear_about_app">O aplikaci</string>
+    <string name="wear_background_settings">Nastavení pozadí ciferníku</string>
+    <string name="wear_complications_settings">Nastavení komplikací</string>
+    <string name="wear_ticks_settings">Nastavení indexů ciferníku</string>
+    <string name="wear_rate_the_watch_face">Ohodnoťte tento Watch Face</string>
+    <string name="wear_hours_hand_color">Barva hodinové ručičky</string>
+    <string name="wear_minutes_hand_color">Barva minutové ručičky</string>
+    <string name="wear_seconds_hand_color">Barva sekundové ručičky</string>
+    <string name="wear_central_circle_color">Barva středu ciferníku</string>
+    <string name="wear_smooth_seconds_hand">Plynulá sekundová ručička</string>
+    <string name="wear_left_background_color">Barva pozadí vlevo</string>
+    <string name="wear_right_background_color">Barva pozadí vpravo</string>
+    <string name="wear_black_ambient_background">Černá barva pozadí v ambientním režimu</string>
+    <string name="wear_ticks_in_ambient_mode">Indexy v ambientním režimu</string>
+    <string name="wear_ticks_in_interactive_mode">Indexy v interaktivním módu</string>
+    <string name="wear_ticks_adjust_to_square_screen">Upravit pozici indexů pro čtveratou obrazovku</string>
+    <string name="wear_hour_ticks_color">Barva indexů hodin</string>
+    <string name="wear_minute_ticks_color">Barva indexů minut</string>
+    <string name="wear_complications_in_ambient_mode">Komplikace v ambientním režimu</string>
+    <string name="wear_complications_text_color">Barva textu komplikací</string>
+    <string name="wear_complications_title_color">Barva titulku komplikací</string>
+    <string name="wear_complications_icon_color">Barva ikony komplikací</string>
+    <string name="wear_complications_border_color">Barva rámečku komplikací</string>
+    <string name="wear_complications_ranged_value_primary_color">Primární barva hodnot s rozsahem u komplikací</string>
+    <string name="wear_complications_ranged_value_secondary_color">Sekundární barva hodnot s rozsahem u komplikací</string>
+    <string name="wear_complications_background_color">Barva pozadí komplikací</string>
+    <string name="wear_bigger_top_and_bottom_complications">Větší spodní a vrchní kompliace</string>
+    <string name="wear_bigger_round_complications">Větší okrouhlé komplikace</string>
+    <string name="wear_bigger_text_in_complications">Použít větší písmo</string>
+    <string name="wear_github_title">GitHub</string>
+    <string name="wear_email_title">E-mail</string>
+    <string name="wear_play_store_title">Obchod Play</string>
+    <string name="wear_view_on_you_phone">Zobrazit na telefonu</string>
+    <string name="wear_complication_day_of_month">Den v měsíci</string>
+    <string name="wear_complication_time_24">Čas (24h formát)</string>
+    <string name="wear_complication_time_12">Čas (12h formát)</string>
+    <string name="wear_hours_hand">Hodinová ručička</string>
+    <string name="wear_minutes_hand">Minutová ručička</string>
+    <string name="wear_seconds_hand">Sekundová ručička</string>
+    <string name="wear_central_circle">Středové kolečko</string>
+    <string name="wear_hand_color">Barva ručičky</string>
+    <string name="wear_settings">Nastavení</string>
+    <string name="wear_hand_width">Tloušťka ručičiky: %d</string>
+    <string name="wear_hand_scale">Měřítko ručičky: %.2f</string>
+    <string name="wear_circle_width">Šířka čáry: %d</string>
+    <string name="wear_circle_radius">Poloměr kruhu: %d</string>
+    <string name="wear_complication_colors">Barvy komplikací</string>
+    <string name="wear_complication_picker">Výběr komplikace</string>
+    <string name="wear_anti_aliasing_in_ambient_mode">Anti-aliasing v ambientním režimu</string>
+</resources>
