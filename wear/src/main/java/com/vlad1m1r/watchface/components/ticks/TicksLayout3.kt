@@ -3,7 +3,6 @@ package com.vlad1m1r.watchface.components.ticks
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.util.Log
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
@@ -69,7 +68,7 @@ class TicksLayout3(
 
     private var center = Point()
     private var outerTickRadius: Float = 0f
-    private var innerTickRadius: Float = 0f
+    private var innerTickRadiusHour: Float = 0f
     private var innerTickRadiusMinute: Float = 0f
     private var innerTickRadiusMilli: Float = 0f
 
@@ -77,7 +76,7 @@ class TicksLayout3(
         centerInvalidated = false
         this.center = center
         this.outerTickRadius = center.x - tickPadding
-        this.innerTickRadius = outerTickRadius - tickLength
+        this.innerTickRadiusHour = outerTickRadius - tickLength
         this.innerTickRadiusMinute = outerTickRadius - tickLengthMinute
         this.innerTickRadiusMilli = outerTickRadius - tickLengthMilli
     }
@@ -89,7 +88,7 @@ class TicksLayout3(
 
             val tickRotation = tickIndex * PI / 120
             val adjust = if (shouldAdjustToSquareScreen) adjustToSquare(tickRotation, center) else 1.0
-            val roundCorners = if (shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20)*10 else 0.0
+            val roundCorners = if (shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20) * 10 else 0.0
 
             val sinTickRotation = sin(tickRotation)
             val cosTickRotation = -cos(tickRotation)
@@ -97,34 +96,16 @@ class TicksLayout3(
             val outerX = sinTickRotation * (outerTickRadius - roundCorners) * adjust
             val outerY = cosTickRotation * (outerTickRadius - roundCorners) * adjust
 
-            when {
-                tickIndex % 20 == 0 -> {
-                    val innerX = sinTickRotation * (innerTickRadius - roundCorners) * adjust
-                    val innerY = cosTickRotation * (innerTickRadius - roundCorners) * adjust
-                    canvas.drawLine(
-                        (center.x + innerX).toFloat(), (center.y + innerY).toFloat(),
-                        (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaint
-                    )
+            val innerTickRadius = if (tickIndex % 20 == 0) innerTickRadiusHour else if (tickIndex % 4 == 0) innerTickRadiusMinute else innerTickRadiusMilli
+            val paint = if (tickIndex % 20 == 0) tickPaint else if (tickIndex % 4 == 0) tickPaintMinute else tickPaintMilli
 
-                }
-                tickIndex % 4 == 0 -> {
-                    val innerX = sinTickRotation * (innerTickRadiusMinute - roundCorners) * adjust
-                    val innerY = cosTickRotation * (innerTickRadiusMinute - roundCorners) * adjust
-                    canvas.drawLine(
-                        (center.x + innerX).toFloat(), (center.y + innerY).toFloat(),
-                        (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaintMinute
-                    )
-                }
-                else -> {
-                    val innerXMilli = sinTickRotation * (innerTickRadiusMilli - roundCorners) * adjust
-                    val innerYMilli = cosTickRotation * (innerTickRadiusMilli - roundCorners) * adjust
+            val innerX = sinTickRotation * (innerTickRadius - roundCorners) * adjust
+            val innerY = cosTickRotation * (innerTickRadius - roundCorners) * adjust
 
-                    canvas.drawLine(
-                        (center.x + innerXMilli).toFloat(), (center.y + innerYMilli).toFloat(),
-                        (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), tickPaintMilli
-                    )
-                }
-            }
+            canvas.drawLine(
+                (center.x + innerX).toFloat(), (center.y + innerY).toFloat(),
+                (center.x + outerX).toFloat(), (center.y + outerY).toFloat(), paint
+            )
         }
     }
 

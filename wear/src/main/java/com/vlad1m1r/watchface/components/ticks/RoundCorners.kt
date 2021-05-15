@@ -18,10 +18,6 @@ class RoundCorners() {
             0.0
         }
 
-        return if( cornerAdjustment == 0.0) {
-            0.0
-        } else {
-            exp(PI / (3 * cornerRadius) * cornerAdjustment) - 1
-        }
+        return exp(PI / (3 * cornerRadius) * cornerAdjustment) - 1
     }
 }
