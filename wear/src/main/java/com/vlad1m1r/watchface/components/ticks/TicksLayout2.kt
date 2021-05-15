@@ -9,8 +9,6 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
-import com.vlad1m1r.watchface.utils.inAmbientMode
-import com.vlad1m1r.watchface.utils.inInteractiveMode
 import kotlin.math.*
 
 class TicksLayout2(
@@ -30,22 +28,8 @@ class TicksLayout2(
     override var centerInvalidated = true
         private set
 
-    private val tickPaint = Paint().apply {
-        color = watchHourTickColor
-        isAntiAlias = true
-        style = Paint.Style.FILL
-        setShadowLayer(
-            shadowRadius, 0f, 0f, shadowColor
-        )
-    }
-    private val tickPaintMinute = Paint().apply {
-        color = watchMinuteTickColor
-        isAntiAlias = true
-        style = Paint.Style.FILL
-        setShadowLayer(
-            shadowRadius, 0f, 0f, shadowColor
-        )
-    }
+    private val tickPaint = tickPaintProvider.getRoundTickPaint(watchHourTickColor)
+    private val tickPaintMinute = tickPaintProvider.getRoundTickPaint(watchMinuteTickColor)
 
     private var center = Point()
     private var outerTickRadius: Float = 0f
@@ -78,25 +62,25 @@ class TicksLayout2(
     override fun setMode(mode: Mode) {
         tickPaint.apply {
             if (mode.isAmbient) {
-                inAmbientMode(getLighterGrayscale(watchHourTickColor), dataStorage.useAntiAliasingInAmbientMode())
+                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchHourTickColor), dataStorage.useAntiAliasingInAmbientMode())
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                     style = Paint.Style.STROKE
                 }
             } else {
-                inInteractiveMode(watchHourTickColor, shadowColor, shadowRadius)
+                tickPaintProvider.inInteractiveMode(this, watchHourTickColor)
                 style = Paint.Style.FILL
             }
         }
         tickPaintMinute.apply {
             if (mode.isAmbient) {
-                inAmbientMode(getLighterGrayscale(watchMinuteTickColor), dataStorage.useAntiAliasingInAmbientMode())
+                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchMinuteTickColor), dataStorage.useAntiAliasingInAmbientMode())
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                     style = Paint.Style.STROKE
                 }
             } else {
-                inInteractiveMode(watchMinuteTickColor, shadowColor, shadowRadius)
+                tickPaintProvider.inInteractiveMode(this, watchMinuteTickColor)
                 style = Paint.Style.FILL
             }
         }

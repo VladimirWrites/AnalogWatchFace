@@ -2,15 +2,12 @@ package com.vlad1m1r.watchface.components.ticks
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Paint
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
-import com.vlad1m1r.watchface.utils.inAmbientMode
-import com.vlad1m1r.watchface.utils.inInteractiveMode
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -31,15 +28,7 @@ class TicksLayoutOriginal(
     override var centerInvalidated = true
         private set
 
-    private val tickPaint = Paint().apply {
-        color = watchTickColor
-        strokeWidth = tickWidth
-        isAntiAlias = true
-        style = Paint.Style.STROKE
-        setShadowLayer(
-            shadowRadius, 0f, 0f, shadowColor
-        )
-    }
+    private val tickPaint = tickPaintProvider.getTickPaint(watchTickColor, tickWidth)
 
     private var center = Point()
     private var outerTickRadius: Float = 0f
@@ -72,12 +61,12 @@ class TicksLayoutOriginal(
     override fun setMode(mode: Mode) {
         tickPaint.apply {
             if (mode.isAmbient) {
-                inAmbientMode(getLighterGrayscale(watchTickColor), dataStorage.useAntiAliasingInAmbientMode())
+                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchTickColor), dataStorage.useAntiAliasingInAmbientMode())
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                 }
             } else {
-                inInteractiveMode(watchTickColor, shadowColor, shadowRadius)
+                tickPaintProvider.inInteractiveMode(this, watchTickColor)
                 strokeWidth = tickWidth
             }
         }
