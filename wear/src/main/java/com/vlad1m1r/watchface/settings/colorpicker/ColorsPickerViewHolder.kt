@@ -11,6 +11,8 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.data.WatchFaceColor
+import com.vlad1m1r.watchface.data.watchFaceColors
 import com.vlad1m1r.watchface.utils.*
 
 class ColorsPickerViewHolder(
@@ -86,7 +88,7 @@ class ColorsPickerViewHolder(
     }
 
     private fun ImageView.setColor(@ColorInt color: Int) {
-        if (color == Color.TRANSPARENT) {
+        if (color == watchFaceColors.find { it.id == 0}!!.color) {
             this.setImageResource(R.drawable.remove_color_ripple)
         } else {
             this.setImageResource(R.drawable.round_color_ripple)
