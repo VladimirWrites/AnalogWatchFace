@@ -1,28 +1,28 @@
 object Versions {
-    const val kotlin = "1.5.0"
+    const val kotlin = "1.5.20"
 
     const val wearable_support = "2.8.1"
     const val wearable_support_ui = "1.1.0"
     const val wearable = "2.8.1"
 
-    const val androidXCoreKtx = "1.3.2"
-    const val androidXAppCompat = "1.2.0"
-    const val material = "1.3.0"
-    const val constraintLayout = "2.0.4"
+    const val androidXCoreKtx = "1.6.0"
+    const val androidXAppCompat = "1.3.1"
+    const val material = "1.4.0"
+    const val constraintLayout = "2.1.0"
 
-    const val junit = "4.13.1"
-    const val mockito = "3.9.0"
+    const val junit = "4.13.2"
+    const val mockito = "3.11.2"
     const val mockito_kotlin = "2.2.0"
-    const val truth = "1.1.2"
+    const val truth = "1.1.3"
 
-    const val gradle_android = "4.2.1"
+    const val gradle_android = "7.0.0"
 
     const val jacoco = "0.8.5"
 
     const val min_sdk = 24
     const val target_sdk = 30
     const val compile_sdk = 30
-    const val build_tools = "30.0.2"
+    const val build_tools = "30.0.3"
 
     const val version_code_app = 2801
     const val version_code_wear = 2802    //Major + Minor + BugFix + 1 for app and 2 for wear
