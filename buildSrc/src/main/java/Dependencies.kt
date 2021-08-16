@@ -17,7 +17,7 @@ object Versions {
 
     const val gradle_android = "7.0.0"
 
-    const val jacoco = "0.8.5"
+    const val jacoco = "0.8.7"
 
     const val min_sdk = 24
     const val target_sdk = 30
