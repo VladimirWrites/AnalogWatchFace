@@ -3,6 +3,7 @@ package com.vlad1m1r.watchface.components
 import android.content.Context
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.components.background.Background
+import com.vlad1m1r.watchface.components.background.BackgroundComplication
 import com.vlad1m1r.watchface.components.hands.Hands
 import com.vlad1m1r.watchface.components.ticks.*
 import com.vlad1m1r.watchface.data.DataStorage
@@ -20,12 +21,14 @@ class Layouts(
     val background = Background(colorStorage, dataStorage)
     val complications = Complications(context, dataStorage, colorStorage)
     val hands: Hands = Hands(context, colorStorage, dataStorage, sizeStorage)
+    val backgroundComplication = BackgroundComplication(context)
 
     lateinit var ticks: TicksLayout
         private set
 
     init {
         complications.setComplicationDrawable(R.drawable.complication_drawable)
+        backgroundComplication.setComplicationDrawable(R.drawable.complication_drawable)
         initTicks()
     }
 
@@ -56,5 +59,9 @@ class Layouts(
 
     fun invalidateComplications() {
         complications.invalidate()
+    }
+
+    fun invalidateBackgroundComplication() {
+        backgroundComplication.invalidate()
     }
 }

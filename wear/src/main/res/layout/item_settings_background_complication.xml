@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+    <TextView
+            android:id="@+id/settings_text"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/screen_percentage_10"
+            android:paddingTop="@dimen/screen_percentage_05"
+            android:paddingEnd="@dimen/screen_percentage_10"
+            android:paddingBottom="0dp"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintBottom_toTopOf="@+id/settings_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+    <ImageView
+            android:id="@+id/settings_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/screen_percentage_10"
+            android:maxHeight="@dimen/screen_percentage_10"
+            android:maxWidth="@dimen/screen_percentage_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/settings_description"
+            app:layout_constraintBottom_toBottomOf="@id/settings_description"
+            app:layout_constraintEnd_toStartOf="@id/settings_description"/>
+
+    <TextView
+            android:id="@+id/settings_description"
+            style="@style/SmallTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_percentage_05"
+            android:layout_marginEnd="@dimen/screen_percentage_10"
+            android:layout_marginBottom="@dimen/screen_percentage_05"
+            android:layout_marginTop="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/settings_icon"
+            app:layout_constraintTop_toBottomOf="@+id/settings_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

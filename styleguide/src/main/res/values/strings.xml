@@ -75,4 +75,6 @@
     <string name="wear_complication_colors">Complication Colors</string>
     <string name="wear_complication_picker">Complication Picker</string>
     <string name="wear_anti_aliasing_in_ambient_mode">Anti-Aliasing in Ambient Mode</string>
+    <string name="wear_add_background_complication" translatable="false">Add Background Complication</string>
+    <string name="wear_edit_background_complication" translatable="false">Edit Background Complication</string>
 </resources>

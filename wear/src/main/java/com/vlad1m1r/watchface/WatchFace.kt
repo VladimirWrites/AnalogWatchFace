@@ -15,6 +15,7 @@ import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
 import com.vlad1m1r.watchface.components.COMPLICATION_SUPPORTED_TYPES
 import com.vlad1m1r.watchface.components.Layouts
+import com.vlad1m1r.watchface.components.background.BACKGROUND_COMPLICATION_ID
 import com.vlad1m1r.watchface.data.*
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
@@ -67,10 +68,10 @@ class WatchFace : CanvasWatchFaceService() {
                 // only update layouts if the changed preference is the preference
                 // to choose the layouts
                 if (key == KEY_WATCH_FACE_TYPE || key == KEY_HOUR_TICKS_COLOR ||
-                    key == KEY_MINUTE_TICKS_COLOR || key == KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN) {
+                    key == KEY_MINUTE_TICKS_COLOR || key == KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN
+                ) {
                     layouts.initTicks()
-                }
-                else if (key == KEY_HOURS_HAND_COLOR || key == KEY_MINUTES_HAND_COLOR ||
+                } else if (key == KEY_HOURS_HAND_COLOR || key == KEY_MINUTES_HAND_COLOR ||
                     key == KEY_SECONDS_HAND_COLOR || key == KEY_HAS_SECOND_HAND ||
                     key == KEY_HAS_HANDS || key == KEY_CENTRAL_CIRCLE_COLOR ||
                     key == KEY_CIRCLE_WIDTH || key == KEY_CIRCLE_RADIUS ||
@@ -80,19 +81,16 @@ class WatchFace : CanvasWatchFaceService() {
                     key == KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE
                 ) {
                     layouts.invalidateHands()
-                }
-                else if (key == KEY_BACKGROUND_LEFT_COLOR || key == KEY_BACKGROUND_RIGHT_COLOR || key == KEY_HAS_BLACK_AMBIENT_BACKGROUND) {
+                } else if (key == KEY_BACKGROUND_LEFT_COLOR || key == KEY_BACKGROUND_RIGHT_COLOR || key == KEY_HAS_BLACK_AMBIENT_BACKGROUND) {
                     layouts.invalidateBackground()
-                }
-                else if (key == KEY_COMPLICATIONS_TEXT_COLOR || key == KEY_COMPLICATIONS_TITLE_COLOR ||
+                } else if (key == KEY_COMPLICATIONS_TEXT_COLOR || key == KEY_COMPLICATIONS_TITLE_COLOR ||
                     key == KEY_COMPLICATIONS_ICON_COLOR || key == KEY_COMPLICATIONS_BORDER_COLOR ||
                     key == KEY_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR || key == KEY_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR ||
                     key == KEY_COMPLICATIONS_BACKGROUND_COLOR || key == KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS ||
                     key == KEY_HAS_BIGGER_COMPLICATION_TEXT
                 ) {
                     layouts.invalidateComplications()
-                }
-                else if(key == KEY_HAS_SMOOTH_SECONDS_HAND) {
+                } else if (key == KEY_HAS_SMOOTH_SECONDS_HAND) {
                     hasSmoothSecondsHand = dataStorage.hasSmoothSecondsHand()
                 }
             }
@@ -119,7 +117,11 @@ class WatchFace : CanvasWatchFaceService() {
             calendar = Calendar.getInstance()
             layouts = Layouts(dataStorage, colorStorage, this@WatchFace, sizeStorage)
 
-            setActiveComplications(*COMPLICATION_SUPPORTED_TYPES.keys.toIntArray())
+            val supportedComplications = COMPLICATION_SUPPORTED_TYPES.keys.toMutableList().apply {
+                add(BACKGROUND_COMPLICATION_ID)
+            }.toIntArray()
+
+            setActiveComplications(*supportedComplications)
 
             updateTimeHandler.sendEmptyMessage(MESSAGE_UPDATE_ID)
 
@@ -182,13 +184,18 @@ class WatchFace : CanvasWatchFaceService() {
 
         override fun onDraw(canvas: Canvas, bounds: Rect) {
             calendar.timeInMillis = System.currentTimeMillis()
-            if (layouts.complications.centerInvalidated || layouts.ticks.centerInvalidated) {
+            if (layouts.complications.centerInvalidated ||
+                layouts.backgroundComplication.centerInvalidated ||
+                layouts.ticks.centerInvalidated
+            ) {
                 val center = Point(canvas.width / 2f, canvas.height / 2f)
                 layouts.complications.setCenter(center)
+                layouts.backgroundComplication.setCenter(center)
                 layouts.ticks.setCenter(center)
             }
             canvas.save()
             layouts.background.draw(canvas)
+            layouts.backgroundComplication.draw(canvas, System.currentTimeMillis())
             if ((mode.isAmbient && dataStorage.hasTicksInAmbientMode()) ||
                 (!mode.isAmbient && dataStorage.hasTicksInInteractiveMode())
             ) {
@@ -203,7 +210,12 @@ class WatchFace : CanvasWatchFaceService() {
 
         override fun onComplicationDataUpdate(watchFaceComplicationId: Int, data: ComplicationData?) {
             super.onComplicationDataUpdate(watchFaceComplicationId, data)
-            layouts.complications.setComplicationData(watchFaceComplicationId, data)
+            if(watchFaceComplicationId == BACKGROUND_COMPLICATION_ID) {
+                layouts.backgroundComplication.setComplicationData(data)
+            } else {
+                layouts.complications.setComplicationData(watchFaceComplicationId, data)
+            }
+
             invalidate()
         }
 
@@ -215,6 +227,7 @@ class WatchFace : CanvasWatchFaceService() {
             layouts.background.setCenter(center)
             layouts.ticks.setCenter(center)
             layouts.complications.setCenter(center)
+            layouts.backgroundComplication.setCenter(center)
             layouts.hands.setCenter(center)
         }
 
@@ -248,6 +261,7 @@ class WatchFace : CanvasWatchFaceService() {
         private fun refreshMode() {
             layouts.background.setMode(mode)
             layouts.complications.setMode(mode)
+            layouts.backgroundComplication.setMode(mode)
             layouts.ticks.setMode(mode)
             layouts.hands.setMode(mode)
         }
