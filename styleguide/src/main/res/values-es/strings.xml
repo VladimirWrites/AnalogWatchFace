@@ -8,7 +8,7 @@
     <string name="app_uninstall_app">Desinstalar esta app</string>
     <string name="app_open_playstore_success_message">¡Revisa tu reloj!</string>
     <string name="app_open_playstore_error_message">¡Algo ha salido mal! Asegúrate de que tienes un dispositivo con Wear OS vinculado a este móvil.</string>
-    <string name="wear_edit_complication">Editar complicacion</string>
+    <string name="wear_edit_complication">Editar complicacion %s</string>
     <string name="wear_add_complication">Agregar complicacion</string>
     <string name="wear_ticks_layout_picker">Escoger diseño de Tick</string>
     <string name="wear_hand_settings">Ajustes de las manecillas</string>
