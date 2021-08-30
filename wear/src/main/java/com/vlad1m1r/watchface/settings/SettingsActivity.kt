@@ -2,6 +2,7 @@ package com.vlad1m1r.watchface.settings
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
@@ -45,6 +46,8 @@ class SettingsActivity : BaseRecyclerActivity() {
             Context.MODE_PRIVATE
         )
         val dataStorage = DataStorage(sharedPref)
+
+        dataStorage.increaseSettingsOpenCount()
 
         adapter = SettingsAdapter(dataStorage)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
