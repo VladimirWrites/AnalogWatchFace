@@ -2,74 +2,76 @@
 <resources>
 
     <!-- Shown on a device under the icon and in the About screen of the watch face and Android app. I am not sure if it makes sense to translate the app name. How is it done for other apps in your language? Maybe having the translation in brackets would be an option: Analog Watch Face (translated name) -->
-    <string name="app_name">Anologe wijzerplaat</string>
-    <string name="app_subtitle">❤ Dank je wel voor het downloaden van de app! ❤️</string>
-    <string name="app_description">Deze app helpt met het installeren van de wijzerplaat op jouw Wear OS horloge. Zodra de wijzerplaat geïnstalleerd is kun je deze app verwijderen.\n\nHet hele project is open source. Mocht je ervaring hebben met programmeren, voel je dan vrij om bij te dragen aan het project!\n\nLaat een beoordeling achter als je deze wijzerplaat fijn vindt!</string>
+    <string name="app_name">Analoge wijzerplaat</string>
+    <string name="app_subtitle">❤ Bedankt voor het downloaden van de app! ❤️</string>
+    <string name="app_description">Deze app helpt bij het installeren van de wijzerplaat op je Wear OS-smartwatch. Zodra de wijzerplaat geïnstalleerd is, kun je deze app verwijderen.\n\nHet hele project is open source. Heb je ervaring met programmeren? Draag dan gerust bij aan het project!\n\nLaat een beoordeling achter als je deze wijzerplaat graag gebruikt!</string>
 
     <!-- This will be shown if a user doesn't have a watch connected to the phone on which this app is installed. -->
-    <string name="app_no_watch">Het lijkt er op zat dit apparaat niet aan een horloge met Wear OS gekoppeld is. \nExcuses voor het ongemak, maar Anologe wijzerplaat kan alleen op apparaten met Wear OS geïnstalleerd worden.\n\nJe kan het ook handmatig instellen vanuit het horloge door deze wijzerplaat op te zoeken in de ingebouwde applicatiewinkel.</string>
-    <string name="app_install_watch_face">Anologe wijzerplaat installeren</string>
-    <string name="app_uninstall_app">Deze app verwijderen</string>
+    <string name="app_no_watch">Het lijkt er op dat dit apparaat niet aan een Wear OS-smartwatch is gekoppeld. \nExcuses voor het ongemak, maar ‘Analoge wijzerplaat’ kan alleen op Wear OS-apparaten geïnstalleerd worden.\n\nJe kunt dit ook handmatig doen door op je smartwatch deze wijzerplaat te zoeken in de ingebouwde appwinkel.</string>
+    <string name="app_install_watch_face">Analoge wijzerplaat installeren</string>
+    <string name="app_uninstall_app">App verwijderen</string>
 
     <!-- Shown if the PlayStore is successfully opened on the watch. -->
-    <string name="app_open_playstore_success_message">Kijk op jouw horloge!</string>
+    <string name="app_open_playstore_success_message">Kijk op je smartwatch!</string>
 
     <!-- Shown if the PlayStore didn't open on the watch due to some error. -->
-    <string name="app_open_playstore_error_message">Er is iets fout gegaan! Zorg ervoor dat er een horloge met Wear OS gekoppeld is aan jouw telefoon.</string>
+    <string name="app_open_playstore_error_message">Er is iets misgegaan! Zorg er voor dat er een Wear OS-smartwatch gekoppeld is aan je telefoon.</string>
 
     <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
 (e.g. Edit Complication Day of the week) -->
     <string name="wear_edit_complication">Complicatie %s wijzigen</string>
     <string name="wear_add_complication">Complicatie toevoegen</string>
-    <string name="wear_ticks_layout_picker">Lay-out wijzerstreepjes kiezen</string>
-    <string name="wear_hand_settings">Instellingen wijzer</string>
+    <string name="wear_ticks_layout_picker">Soort wijzerstreepjes kiezen</string>
+    <string name="wear_hand_settings">Wijzerinstellingen</string>
     <string name="wear_about_app">Over deze app</string>
     <string name="wear_background_settings">Achtergrondinstellingen</string>
-    <string name="wear_complications_settings">Instellingen complicaties</string>
-    <string name="wear_ticks_settings">Instellingen wijzerstreepjes</string>
-    <string name="wear_rate_the_watch_face">Beoordeel wijzerplaat</string>
-    <string name="wear_hours_hand_color">Kleur urenwijzer</string>
-    <string name="wear_minutes_hand_color">Kleur minutenwijzer</string>
-    <string name="wear_seconds_hand_color">Kleur secondenwijzer</string>
-    <string name="wear_central_circle_color">Kleur centrale cirkel</string>
+    <string name="wear_complications_settings">Complicatie-instellingen</string>
+    <string name="wear_ticks_settings">Wijzerstreepjesinstellingen</string>
+    <string name="wear_rate_the_watch_face">Wijzerplaat beoordelen</string>
+    <string name="wear_hours_hand_color">Kleur van uurwijzer</string>
+    <string name="wear_minutes_hand_color">Kleur van minutenwijzer</string>
+    <string name="wear_seconds_hand_color">Kleur van secondenwijzer</string>
+    <string name="wear_central_circle_color">Kleur van centrale cirkel</string>
     <string name="wear_smooth_seconds_hand">Vloeiende secondenwijzer</string>
-    <string name="wear_left_background_color">Achtergrondkleur links</string>
-    <string name="wear_right_background_color">Achtergrondkleur rechts</string>
-    <string name="wear_black_ambient_background">Zwarte achtergrond in ambient-modus</string>
-    <string name="wear_ticks_in_ambient_mode">Wijzerstreepjes in ambient-modus</string>
+    <string name="wear_left_background_color">Achtergrondkleur (links)</string>
+    <string name="wear_right_background_color">Achtergrondkleur (rechts)</string>
+    <string name="wear_black_ambient_background">Zwarte achtergrond in sfeermodus</string>
+    <string name="wear_ticks_in_ambient_mode">Wijzerstreepjes in sfeermodus</string>
     <string name="wear_ticks_in_interactive_mode">Wijzerstreepjes in interactieve modus</string>
-    <string name="wear_ticks_adjust_to_square_screen">Wijzerstreepjes aan vierkant scherm aanpassen</string>
-    <string name="wear_hour_ticks_color">Kleur wijzerstreepjes uren</string>
-    <string name="wear_minute_ticks_color">Kleur wijzerstreepjes minuten</string>
-    <string name="wear_complications_in_ambient_mode">Complicaties in ambient-modus</string>
-    <string name="wear_complications_text_color">Tekstkleur complicatie</string>
-    <string name="wear_complications_title_color">Titelkleur complicatie</string>
-    <string name="wear_complications_icon_color">Icoonkleur complicatie</string>
-    <string name="wear_complications_border_color">Randkleur complicatie</string>
-    <string name="wear_complications_ranged_value_primary_color">Primaire kleur waardenreeks complicatie</string>
-    <string name="wear_complications_ranged_value_secondary_color">Secundaire kleur waardenreeks complicatie</string>
-    <string name="wear_complications_background_color">Achtergrondkleur complicatie</string>
-    <string name="wear_bigger_top_and_bottom_complications">Nog bredere boven- en benedencomplicaties</string>
+    <string name="wear_ticks_adjust_to_square_screen">Wijzerstreepjes aanpassen aan vierkant scherm</string>
+    <string name="wear_hour_ticks_color">Kleur van uurwijzerstreepjes</string>
+    <string name="wear_minute_ticks_color">Kleur van minuutwijzerstreepjes</string>
+    <string name="wear_complications_in_ambient_mode">Complicaties in sfeermodus</string>
+    <string name="wear_complications_text_color">Tekstkleur van complicatie</string>
+    <string name="wear_complications_title_color">Titelkleur van complicatie</string>
+    <string name="wear_complications_icon_color">Pictogramkleur van complicatie</string>
+    <string name="wear_complications_border_color">Randkleur van complicatie</string>
+    <string name="wear_complications_ranged_value_primary_color">Primaire kleur-waardenreeks van complicatie</string>
+    <string name="wear_complications_ranged_value_secondary_color">Secundaire kleur-waardenreeks van complicatie</string>
+    <string name="wear_complications_background_color">Achtergrondkleur van complicatie</string>
+    <string name="wear_bigger_top_and_bottom_complications">Bredere boven- en ondercomplicaties</string>
     <string name="wear_bigger_round_complications">Grotere ronde complicaties</string>
-    <string name="wear_bigger_text_in_complications">Grote tekst gebruiken</string>
+    <string name="wear_bigger_text_in_complications">Grote tekst tonen</string>
     <string name="wear_github_title">GitHub</string>
-    <string name="wear_email_title">E-mail</string>
+    <string name="wear_email_title">E-mailadres</string>
     <string name="wear_play_store_title">Play Store</string>
-    <string name="wear_view_on_you_phone">Op telefoon bekijken</string>
+    <string name="wear_view_on_you_phone">Bekijken op telefoon</string>
     <string name="wear_complication_day_of_month">Dag van de maand</string>
-    <string name="wear_complication_time_24">Tijd (24 uren)</string>
-    <string name="wear_complication_time_12">Tijd (12 uren)</string>
-    <string name="wear_hours_hand">Uren Hand</string>
-    <string name="wear_minutes_hand">Notulen Hand</string>
+    <string name="wear_complication_time_24">24-uursklok</string>
+    <string name="wear_complication_time_12">12-uursklok</string>
+    <string name="wear_hours_hand">Uurwijzer</string>
+    <string name="wear_minutes_hand">Minutenwijzer</string>
     <string name="wear_seconds_hand">Secondenwijzer</string>
-    <string name="wear_central_circle">Centrale Cirkel</string>
-    <string name="wear_hand_color">Hand Kleur</string>
+    <string name="wear_central_circle">Centrale cirkel</string>
+    <string name="wear_hand_color">Wijzerkleur</string>
     <string name="wear_settings">Instellingen</string>
-    <string name="wear_hand_width">Handbreedte: %d</string>
-    <string name="wear_hand_scale">Hand Scale: %.2f</string>
+    <string name="wear_hand_width">Wijzerbreedte: %d</string>
+    <string name="wear_hand_scale">Wijzergrootte: %.2f</string>
     <string name="wear_circle_width">Lijndikte: %d</string>
-    <string name="wear_circle_radius">Cirkel Radius: %d</string>
-    <string name="wear_complication_colors">Complicatie Kleuren</string>
+    <string name="wear_circle_radius">Cirkeldoorsnede: %d</string>
+    <string name="wear_complication_colors">Complicatiekleuren</string>
     <string name="wear_complication_picker">Complicatiekiezer</string>
-    <string name="wear_anti_aliasing_in_ambient_mode">Anti-Aliasing in ambient-modus</string>
+    <string name="wear_anti_aliasing_in_ambient_mode">Anti-kartelvorming in sfeermodus</string>
+    <string name="wear_add_background_complication">Achtergrond Complicatie toevoegen</string>
+    <string name="wear_edit_background_complication">Achtergrond Complicatie bewerken</string>
 </resources>

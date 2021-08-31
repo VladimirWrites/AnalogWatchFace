@@ -82,4 +82,6 @@
     <string name="wear_complication_colors">Цвета усложнения</string>
     <string name="wear_complication_picker">Осложнение Пикер</string>
     <string name="wear_anti_aliasing_in_ambient_mode">Сглаживание в Ambient Mode</string>
+    <string name="wear_add_background_complication">Добавить фоновое осложнение</string>
+    <string name="wear_edit_background_complication">Редактировать фон oсложнение</string>
 </resources>

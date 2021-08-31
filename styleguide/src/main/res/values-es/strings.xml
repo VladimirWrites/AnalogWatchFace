@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Shown on a device under the icon and in the About screen of the watch face and Android app. I am not sure if it makes sense to translate the app name. How is it done for other apps in your language? Maybe having the translation in brackets would be an option: Analog Watch Face (translated name) -->
     <string name="app_name">Analog Watch Face</string>
     <string name="app_subtitle">¡Gracias por descargar la app! 💖</string>
     <string name="app_description">Esta app está aquí para hacerte más fácil instalar la esfera en tu reloj Wear OS. Una vez que  hayas instalado la esfera en tu reloj puedes desinstalar esta app de tu móvil.\n\nEste proyecto es de código abierto, así que si tienes experiencia programando, ¡siéntete libre de contribuir!\n\nSi te gusta esta esfera, recuerda que puedes valorarla en Google Play.</string>
+
+    <!-- This will be shown if a user doesn't have a watch connected to the phone on which this app is installed. -->
     <string name="app_no_watch">Parece que no tienes ningún dispositivo con Wear OS vinculado a este móvil.\nLo sentimos, pero Analog Watch Face solo se puede instalar en dispositivos con Wear OS.\n\nTambién puedes instalar directamente esta esfera, buscándola en desde el reloj mismo en Google Play.</string>
     <string name="app_install_watch_face">Instalar Analog Watch Face</string>
     <string name="app_uninstall_app">Desinstalar esta app</string>
+
+    <!-- Shown if the PlayStore is successfully opened on the watch. -->
     <string name="app_open_playstore_success_message">¡Revisa tu reloj!</string>
+
+    <!-- Shown if the PlayStore didn't open on the watch due to some error. -->
     <string name="app_open_playstore_error_message">¡Algo ha salido mal! Asegúrate de que tienes un dispositivo con Wear OS vinculado a este móvil.</string>
+
+    <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
+(e.g. Edit Complication Day of the week) -->
     <string name="wear_edit_complication">Editar complicacion %s</string>
     <string name="wear_add_complication">Agregar complicacion</string>
     <string name="wear_ticks_layout_picker">Escoger diseño de Tick</string>
@@ -61,4 +72,6 @@
     <string name="wear_complication_colors">Colores de la complicación</string>
     <string name="wear_complication_picker">Selector de complicación</string>
     <string name="wear_anti_aliasing_in_ambient_mode">Suavizado en Modo Ambiente</string>
+    <string name="wear_add_background_complication">Añadir complicación de fondo</string>
+    <string name="wear_edit_background_complication">Editar Complicación de fondo</string>
 </resources>
