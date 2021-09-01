@@ -54,6 +54,7 @@ class Complications(
     private val colorStorage: ColorStorage
 ) : WatchView {
 
+    var bottomInset: Int = 0
     private val complicationDrawables = mutableMapOf<Int, ComplicationDrawable?>().apply {
         put(LEFT_COMPLICATION_ID, null)
         put(RIGHT_COMPLICATION_ID, null)
@@ -140,7 +141,7 @@ class Complications(
 
     private fun setBoundsToTopBottomComplications(centerX: Float, centerY: Float, wider: Boolean) {
 
-        val height = if(dataStorage.shouldAdjustToSquareScreen()) {
+        val height = if (dataStorage.shouldAdjustToSquareScreen()) {
             centerY.toInt()
         } else {
             centerX.toInt()
@@ -176,16 +177,16 @@ class Complications(
             if (complicationData[BOTTOM_COMPLICATION_ID]?.type == ComplicationData.TYPE_LONG_TEXT) {
                 Rect(
                     horizontalOffsetLarge,
-                    centerY.toInt() + verticalOffsetLarge,
+                    centerY.toInt() + verticalOffsetLarge - bottomInset / 4,
                     horizontalOffsetLarge + widthOfComplicationLarge,
-                    centerY.toInt() + verticalOffsetLarge + heightOfComplicationLarge
+                    centerY.toInt() + verticalOffsetLarge + heightOfComplicationLarge - bottomInset / 4
                 )
             } else {
                 Rect(
                     horizontalOffsetSmall,
-                    centerY.toInt() + verticalOffsetSmall,
+                    centerY.toInt() + verticalOffsetSmall - bottomInset / 4,
                     horizontalOffsetSmall + sizeOfComplicationSmall,
-                    centerY.toInt() + verticalOffsetSmall + sizeOfComplicationSmall
+                    centerY.toInt() + verticalOffsetSmall + sizeOfComplicationSmall - bottomInset / 4
                 )
             }
 
@@ -232,7 +233,7 @@ class Complications(
                     setTextSizeAmbient(1000)
                 } else {
                     val defaultTextSize = context.resources.getDimensionPixelSize(R.dimen.text_size_normal)
-                    
+
                     setTitleSizeActive(defaultTextSize) //Complication will show the biggest size it can fit
                     setTextSizeActive(defaultTextSize)
                     setTitleSizeAmbient(defaultTextSize)

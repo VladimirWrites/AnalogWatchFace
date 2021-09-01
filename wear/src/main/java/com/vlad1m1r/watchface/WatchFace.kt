@@ -4,10 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.graphics.Canvas
 import android.graphics.Rect
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
+import android.os.*
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.watchface.CanvasWatchFaceService
 import android.support.wearable.watchface.WatchFaceService
@@ -21,6 +18,7 @@ import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import java.lang.ref.WeakReference
 import java.util.*
+import android.view.WindowInsets
 
 private const val INTERACTIVE_UPDATE_RATE_SLOW_MS = 1000
 private const val INTERACTIVE_UPDATE_RATE_FAST_MS = 33
@@ -217,6 +215,19 @@ class WatchFace : CanvasWatchFaceService() {
             }
 
             invalidate()
+        }
+
+        @Suppress("deprecation")
+        override fun onApplyWindowInsets(insets: WindowInsets) {
+            super.onApplyWindowInsets(insets)
+
+            val systemWindowBottomInsets = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                insets.getInsets(WindowInsets.Type.systemBars()).bottom
+            } else {
+                insets.systemWindowInsetBottom
+            }
+
+            layouts.setBottomInset(systemWindowBottomInsets)
         }
 
         override fun onSurfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {

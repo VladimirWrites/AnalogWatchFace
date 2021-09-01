@@ -8,9 +8,7 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
+import kotlin.math.*
 
 class TicksLayoutOriginal(
     context: Context,
@@ -44,7 +42,12 @@ class TicksLayoutOriginal(
     override fun draw(canvas: Canvas) {
         for (tickIndex in 0..11) {
             val tickRotation = tickIndex * PI / 6
-            val adjust = if (shouldAdjustToSquareScreen) adjustToSquare(tickRotation, center) else 1.0
+            val adjust = adjustTicks(tickRotation,
+                center,
+                bottomInset,
+                isSquareScreen,
+                shouldAdjustToSquareScreen
+            )
             val roundCorners = if (shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20) * 10 else 0.0
 
             val innerX = sin(tickRotation) * (innerTickRadius - roundCorners) * adjust

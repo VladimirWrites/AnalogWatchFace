@@ -23,6 +23,8 @@ class Layouts(
     val hands: Hands = Hands(context, colorStorage, dataStorage, sizeStorage)
     val backgroundComplication = BackgroundComplication(context)
 
+    private var bottomInset = 0
+
     lateinit var ticks: TicksLayout
         private set
 
@@ -47,6 +49,7 @@ class Layouts(
                 TicksLayout3(context, dataStorage, colorStorage)
             }
         }
+        ticks.bottomInset = bottomInset
     }
 
     fun invalidateHands() {
@@ -63,5 +66,11 @@ class Layouts(
 
     fun invalidateBackgroundComplication() {
         backgroundComplication.invalidate()
+    }
+
+    fun setBottomInset(bottomInset: Int) {
+        this.bottomInset = bottomInset
+        this.ticks.bottomInset = bottomInset
+        this.complications.bottomInset = bottomInset
     }
 }
