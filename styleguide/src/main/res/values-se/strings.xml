@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Shown on a device under the icon and in the About screen of the watch face and Android app. I am not sure if it makes sense to translate the app name. How is it done for other apps in your language? Maybe having the translation in brackets would be an option: Analog Watch Face (translated name) -->
+    <string name="app_name">Analog urtavla</string>
+    <string name="app_subtitle">Tack för att du laddat ner appen! ❤️</string>
+    <string name="app_description">Den här appen finns för att underlätta att ändra urtavla på din Wear OS klocka.\nNär urtavlan är installerad på klockan kan du radera den från din telefon.\n\nHela detta projektet är öppen källkod, så om du har erfarenhet av programmering får du gärna hjälpa till!\n\nOm du tycker om att använda den här urtavlan, glöm inte bort att betygsätta den!</string>
+
+    <!-- This will be shown if a user doesn't have a watch connected to the phone on which this app is installed. -->
+    <string name="app_no_watch">Det verkar som att den här enheten inte har en Wear OS klocka parad.\nUrsäkta besväret, men denna appen kan bara installeras på en Wear OS enhet.\n\nDu kan också installera den manuellt genom att leta upp denna urtavlan på den inbyggda play-butiken i klockan.</string>
+    <string name="app_install_watch_face">Installera Analog urtavla</string>
+    <string name="app_uninstall_app">Avinstallera appen</string>
+
+    <!-- Shown if the PlayStore is successfully opened on the watch. -->
+    <string name="app_open_playstore_success_message">Kolla på din klocka!</string>
+
+    <!-- Shown if the PlayStore didn't open on the watch due to some error. -->
+    <string name="app_open_playstore_error_message">Något gick fel! Kontrollera att du har en Wear OS enhet parad med telefonen.</string>
+
+    <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
+(e.g. Edit Complication Day of the week) -->
+    <string name="wear_edit_complication">Ändra widget %s</string>
+    <string name="wear_add_complication">Lägg till widget</string>
+    <string name="wear_ticks_layout_picker">Index utförande</string>
+    <string name="wear_hand_settings">Inställningar visare</string>
+    <string name="wear_about_app">Om appen</string>
+    <string name="wear_background_settings">Bakgrundsinställningar</string>
+    <string name="wear_complications_settings">Widget inställningar</string>
+    <string name="wear_ticks_settings">Index inställningar</string>
+    <string name="wear_rate_the_watch_face">Betygsätt urtavlan</string>
+    <string name="wear_hours_hand_color">Färg timvisare</string>
+    <string name="wear_minutes_hand_color">Färg minutvisare</string>
+    <string name="wear_seconds_hand_color">Färg sekundvisare</string>
+    <string name="wear_central_circle_color">Färg cirkelcentrum</string>
+    <string name="wear_smooth_seconds_hand">Flytande sekundvisare</string>
+    <string name="wear_left_background_color">Bakgrundsfärg vänster</string>
+    <string name="wear_right_background_color">Bakgrundsfärg höger</string>
+    <string name="wear_black_ambient_background">Svart bakgrund i Ambient läge</string>
+    <string name="wear_ticks_in_ambient_mode">Index i Ambient läge</string>
+    <string name="wear_ticks_in_interactive_mode">Index i Interactive Mode</string>
+    <string name="wear_ticks_adjust_to_square_screen">Justera index för kvadratisk skärm</string>
+    <string name="wear_hour_ticks_color">Indexfärg, timmar</string>
+    <string name="wear_minute_ticks_color">Indexfärg, minuter</string>
+    <string name="wear_complications_in_ambient_mode">Widgets i Ambient läge</string>
+    <string name="wear_complications_text_color">Widgetfärg text</string>
+    <string name="wear_complications_title_color">Widgetfärg rubrik</string>
+    <string name="wear_complications_icon_color">Widgetfärg ikon</string>
+    <string name="wear_complications_border_color">Widgetfärg ram</string>
+    <string name="wear_complications_ranged_value_primary_color">Widgetnivå färg 1</string>
+    <string name="wear_complications_ranged_value_secondary_color">Widgetnivå färg 2</string>
+    <string name="wear_complications_background_color">Widgetfärg bakgrund</string>
+    <string name="wear_bigger_top_and_bottom_complications">Bredare widget uppe och nere</string>
+    <string name="wear_bigger_round_complications">Större rund widget</string>
+    <string name="wear_bigger_text_in_complications">Använd större text</string>
+    <string name="wear_github_title">GitHub</string>
+    <string name="wear_email_title">Email</string>
+    <string name="wear_play_store_title">Play Store</string>
+    <string name="wear_view_on_you_phone">Visa på din telefon</string>
+    <string name="wear_complication_day_of_month">Dagens datum</string>
+    <string name="wear_complication_time_24">Tid (24h)</string>
+    <string name="wear_complication_time_12">Tid (12h)</string>
+    <string name="wear_hours_hand">Timvisare</string>
+    <string name="wear_minutes_hand">Minutvisare</string>
+    <string name="wear_seconds_hand">Sekundvisare</string>
+    <string name="wear_central_circle">Cirkelcentrum</string>
+    <string name="wear_hand_color">Färg visare</string>
+    <string name="wear_settings">Inställningar</string>
+    <string name="wear_hand_width">Bredd visare</string>
+    <string name="wear_hand_scale">Skala visare</string>
+    <string name="wear_circle_width">Linjebredd</string>
+    <string name="wear_circle_radius">Cirkelradie</string>
+    <string name="wear_complication_colors">Färg funktioner</string>
+    <string name="wear_complication_picker">Funktionsväljare</string>
+    <string name="wear_anti_aliasing_in_ambient_mode">Kantutjämning i Ambient läge</string>
+    <string name="wear_add_background_complication">Lägg till bakgrundswidget</string>
+    <string name="wear_edit_background_complication">Ändra bakgrundswidget</string>
+</resources>
