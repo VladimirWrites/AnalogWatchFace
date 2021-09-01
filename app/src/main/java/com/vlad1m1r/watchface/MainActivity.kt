@@ -41,7 +41,7 @@ class MainActivity : Activity() {
 
         uninstallApp.setOnClickListener { uninstallApp() }
 
-        if (isWearOsAppAvailable()) {
+        if (isWearAppAvailable()) {
             subtitle.visibility = View.VISIBLE
             gitHub.visibility = View.VISIBLE
             email.visibility = View.VISIBLE
@@ -77,13 +77,22 @@ class MainActivity : Activity() {
         startActivity(browserIntent)
     }
 
-    private fun isWearOsAppAvailable(): Boolean {
-        return try {
+    private fun isWearAppAvailable(): Boolean {
+        val hasWearOsApp = try {
             packageManager.getPackageInfo("com.google.android.wearable.app", PackageManager.GET_META_DATA)
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false
         }
+
+        val hasSamsungWearableApp = try {
+            packageManager.getPackageInfo("com.samsung.android.app.watchmanager", PackageManager.GET_META_DATA)
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
+
+        return hasWearOsApp || hasSamsungWearableApp
     }
 
     private fun openUriOnWear(uri: String) {
