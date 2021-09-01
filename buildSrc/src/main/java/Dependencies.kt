@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlin = "1.5.20"
+    const val kotlin = "1.5.30"
 
     const val wearable_support = "2.8.1"
     const val wearable_support_ui = "1.1.0"
@@ -11,7 +11,7 @@ object Versions {
     const val constraintLayout = "2.1.0"
 
     const val junit = "4.13.2"
-    const val mockito = "3.11.2"
+    const val mockito = "3.12.4"
     const val mockito_kotlin = "2.2.0"
     const val truth = "1.1.3"
 
