@@ -22,9 +22,12 @@ class GetHandData(
     fun getHourHandData(): HandData {
         val hourColor = colorStorage.getHoursHandColor()
         val handWidthHour = sizeStorage.getHoursHandWidth()
+
+        val ambientHourColor = if(hourColor.isColorTransparent()) { hourColor } else { ambientColor }
+
         return HandData(
             hourColor,
-            ambientColor,
+            ambientHourColor,
             shadowColor,
             shadowRadius,
             handWidthHour,
@@ -37,9 +40,12 @@ class GetHandData(
     fun getMinuteHandData(): HandData {
         val minuteColor = colorStorage.getMinutesHandColor()
         val handWidthMinute = sizeStorage.getMinutesHandWidth()
+
+        val ambientMinuteColor = if(minuteColor.isColorTransparent()) { minuteColor } else { ambientColor }
+
         return HandData(
             minuteColor,
-            ambientColor,
+            ambientMinuteColor,
             shadowColor,
             shadowRadius,
             handWidthMinute,
@@ -52,9 +58,12 @@ class GetHandData(
     fun getSecondHandData(): HandData {
         val secondColor = colorStorage.getSecondsHandColor()
         val handWidthSecond = sizeStorage.getSecondsHandWidth()
+
+        val ambientSecondColor = if(secondColor.isColorTransparent()) { secondColor } else { ambientColor }
+
         return HandData(
             secondColor,
-            ambientColor,
+            ambientSecondColor,
             shadowColor,
             shadowRadius,
             handWidthSecond,
@@ -68,9 +77,12 @@ class GetHandData(
         val circleColor = colorStorage.getCentralCircleColor()
         val circleWidth = sizeStorage.getCircleWidth()
         val middleCircleRadius = sizeStorage.getCircleRadius()
+
+        val ambientCircleColor = if(circleColor.isColorTransparent()) { circleColor } else { ambientColor }
+
         return CircleData(
             circleColor,
-            ambientColor,
+            ambientCircleColor,
             shadowColor,
             shadowRadius,
             circleWidth,
@@ -78,4 +90,6 @@ class GetHandData(
             dataStorage.useAntiAliasingInAmbientMode()
         )
     }
+
+    private fun Int.isColorTransparent(): Boolean = this == 0
 }
