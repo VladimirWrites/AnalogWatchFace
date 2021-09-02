@@ -25,6 +25,7 @@ class BackgroundComplication(
     var isVisible = false
 
     fun setMode(mode: Mode) {
+        isVisible = !(mode.isAmbient && (mode.isLowBitAmbient || mode.isBurnInProtection))
         complicationDrawable?.apply {
             setInAmbientMode(mode.isAmbient)
             setLowBitAmbient(mode.isLowBitAmbient)
@@ -56,7 +57,7 @@ class BackgroundComplication(
     }
 
     fun draw(canvas: Canvas, currentTime: Long) {
-        if(isVisible) {
+        if (isVisible) {
             complicationDrawable?.draw(canvas, currentTime)
         }
     }
