@@ -13,6 +13,8 @@ import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.utils.WatchView
 import com.vlad1m1r.watchface.utils.getDarkerGrayscale
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 const val LEFT_COMPLICATION_ID = 100
 const val RIGHT_COMPLICATION_ID = 101
@@ -48,8 +50,8 @@ val COMPLICATION_SUPPORTED_TYPES = mapOf(
     )
 )
 
-class Complications(
-    private val context: Context,
+class Complications @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val dataStorage: DataStorage,
     private val colorStorage: ColorStorage
 ) : WatchView {

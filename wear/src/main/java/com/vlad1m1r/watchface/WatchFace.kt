@@ -43,8 +43,11 @@ class WatchFace : CanvasWatchFaceService() {
     @Inject
     lateinit var colorStorage: ColorStorage
 
+    @Inject
+    lateinit var layouts: Layouts
+
     override fun onCreateEngine(): CanvasWatchFaceService.Engine {
-        return Engine()
+        return Engine(layouts)
     }
 
     private class EngineHandler(engine: Engine) : Handler(Looper.getMainLooper()) {
@@ -59,9 +62,9 @@ class WatchFace : CanvasWatchFaceService() {
         }
     }
 
-    inner class Engine : CanvasWatchFaceService.Engine(false) {
-
-        private lateinit var layouts: Layouts
+    inner class Engine(
+        private val layouts: Layouts
+    ) : CanvasWatchFaceService.Engine(false) {
 
         private lateinit var calendar: Calendar
 
@@ -115,7 +118,6 @@ class WatchFace : CanvasWatchFaceService() {
             hasSmoothSecondsHand = dataStorage.hasSmoothSecondsHand()
 
             calendar = Calendar.getInstance()
-            layouts = Layouts(dataStorage, colorStorage, this@WatchFace, sizeStorage)
 
             val supportedComplications = COMPLICATION_SUPPORTED_TYPES.keys.toMutableList().apply {
                 add(BACKGROUND_COMPLICATION_ID)
@@ -242,11 +244,7 @@ class WatchFace : CanvasWatchFaceService() {
 
             val center = Point(width / 2f, height / 2f)
 
-            layouts.background.setCenter(center)
-            layouts.ticks.setCenter(center)
-            layouts.complications.setCenter(center)
-            layouts.backgroundComplication.setCenter(center)
-            layouts.hands.setCenter(center)
+            layouts.setCenter(center)
         }
 
         private fun updateTimer() {

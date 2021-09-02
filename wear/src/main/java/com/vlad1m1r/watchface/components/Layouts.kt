@@ -1,29 +1,22 @@
 package com.vlad1m1r.watchface.components
 
-import android.content.Context
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.components.background.Background
 import com.vlad1m1r.watchface.components.background.BackgroundComplication
 import com.vlad1m1r.watchface.components.hands.Hands
 import com.vlad1m1r.watchface.components.ticks.*
-import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.TicksLayoutType
-import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.components.ticks.TicksLayout
-import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Mode
+import com.vlad1m1r.watchface.model.Point
+import javax.inject.Inject
 
-class Layouts(
-    private val dataStorage: DataStorage,
-    private val colorStorage: ColorStorage,
-    private val context: Context,
-    sizeStorage: SizeStorage,
+class Layouts @Inject constructor(
+    val background: Background,
+    val complications: Complications,
+    val hands: Hands,
+    val backgroundComplication: BackgroundComplication,
+    private val getTicks: GetTicks
 ) {
-    val background = Background(colorStorage, dataStorage)
-    val complications = Complications(context, dataStorage, colorStorage)
-    val hands: Hands = Hands(context, colorStorage, dataStorage, sizeStorage)
-    val backgroundComplication = BackgroundComplication(context)
-
     private var bottomInset = 0
 
     lateinit var ticks: TicksLayout
@@ -36,20 +29,7 @@ class Layouts(
     }
 
     fun initTicks() {
-        ticks = when (dataStorage.getTicksLayoutType()) {
-            TicksLayoutType.ORIGINAL -> {
-                TicksLayoutOriginal(context, dataStorage, colorStorage)
-            }
-            TicksLayoutType.TICKS_LAYOUT_1 -> {
-                TicksLayout1(context, dataStorage, colorStorage)
-            }
-            TicksLayoutType.TICKS_LAYOUT_2 -> {
-                TicksLayout2(context, dataStorage, colorStorage)
-            }
-            TicksLayoutType.TICKS_LAYOUT_3 -> {
-                TicksLayout3(context, dataStorage, colorStorage)
-            }
-        }
+        ticks = getTicks()
         ticks.bottomInset = bottomInset
     }
 
@@ -81,5 +61,13 @@ class Layouts(
         backgroundComplication.setMode(mode)
         ticks.setMode(mode)
         hands.setMode(mode)
+    }
+
+    fun setCenter(center: Point) {
+        background.setCenter(center)
+        ticks.setCenter(center)
+        complications.setCenter(center)
+        backgroundComplication.setCenter(center)
+        hands.setCenter(center)
     }
 }

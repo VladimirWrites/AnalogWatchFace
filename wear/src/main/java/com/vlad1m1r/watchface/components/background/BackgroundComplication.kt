@@ -8,13 +8,15 @@ import android.support.wearable.complications.rendering.ComplicationDrawable
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.utils.WatchView
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 const val BACKGROUND_COMPLICATION_ID = 200
 
 val BACKGROUND_COMPLICATION_SUPPORTED_TYPES = intArrayOf(ComplicationData.TYPE_LARGE_IMAGE)
 
-class BackgroundComplication(
-    private val context: Context,
+class BackgroundComplication @Inject constructor(
+    @ApplicationContext private val context: Context,
 ) : WatchView {
 
     private var complicationDrawable: ComplicationDrawable? = null

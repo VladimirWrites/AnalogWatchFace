@@ -12,10 +12,12 @@ import com.vlad1m1r.watchface.utils.WatchView
 import com.vlad1m1r.watchface.utils.hoursRotation
 import com.vlad1m1r.watchface.utils.minutesRotation
 import com.vlad1m1r.watchface.utils.secondsRotation
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.*
+import javax.inject.Inject
 
-class Hands(
-    context: Context,
+class Hands @Inject constructor(
+    @ApplicationContext context: Context,
     private val colorStorage: ColorStorage,
     dataStorage: DataStorage,
     sizeStorage: SizeStorage

@@ -6,12 +6,12 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.utils.WatchView
-import com.vlad1m1r.watchface.utils.getDarkerGrayscale
+import javax.inject.Inject
 
-class Background(
+class Background @Inject constructor(
     private val colorStorage: ColorStorage,
     private val dataStorage: DataStorage
-    ): WatchView {
+) : WatchView {
 
     private var center = Point()
 
