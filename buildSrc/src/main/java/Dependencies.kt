@@ -22,7 +22,6 @@ object Versions {
     const val min_sdk = 24
     const val target_sdk = 30
     const val compile_sdk = 30
-    const val build_tools = "30.0.3"
 
     const val version_code_app = 21001
     const val version_code_wear = 21002    //Major + Minor + BugFix + 1 for app and 2 for wear
