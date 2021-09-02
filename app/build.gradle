@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion Versions.compile_sdk
+    compileSdk Versions.compile_sdk
     defaultConfig {
         applicationId "com.vlad1m1r.watchface"
-        minSdkVersion Versions.min_sdk
-        targetSdkVersion Versions.target_sdk
+        minSdk Versions.min_sdk
+        targetSdk Versions.target_sdk
         versionCode Versions.version_code_app
         versionName Versions.version_name
     }
