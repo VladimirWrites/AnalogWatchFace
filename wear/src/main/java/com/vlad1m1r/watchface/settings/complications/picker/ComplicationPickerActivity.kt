@@ -1,6 +1,5 @@
 package com.vlad1m1r.watchface.settings.complications.picker
 
-import android.app.Activity
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
@@ -10,13 +9,16 @@ import android.support.wearable.complications.ProviderChooserIntent
 import android.support.wearable.complications.ProviderInfoRetriever
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.WatchFace
 import com.vlad1m1r.watchface.components.COMPLICATION_SUPPORTED_TYPES
 import com.vlad1m1r.watchface.settings.COMPLICATION_CONFIG_REQUEST_CODE
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 
-class ComplicationPickerActivity : Activity(), View.OnClickListener {
+@AndroidEntryPoint
+class ComplicationPickerActivity : AppCompatActivity(), View.OnClickListener {
 
     private var selectedComplication: ComplicationLocation? = null
     private lateinit var leftComplication: ImageView

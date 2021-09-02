@@ -19,12 +19,14 @@ import com.vlad1m1r.watchface.model.Point
 import java.lang.ref.WeakReference
 import java.util.*
 import android.view.WindowInsets
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val INTERACTIVE_UPDATE_RATE_SLOW_MS = 1000
 private const val INTERACTIVE_UPDATE_RATE_FAST_MS = 33
 
 private const val MESSAGE_UPDATE_ID = 0
 
+@AndroidEntryPoint
 class WatchFace : CanvasWatchFaceService() {
 
     override fun onCreateEngine(): CanvasWatchFaceService.Engine {

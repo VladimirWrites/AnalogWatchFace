@@ -15,9 +15,11 @@ import com.vlad1m1r.watchface.settings.FACE_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.HOUR_TICKS_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.MINUTE_TICKS_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 const val KEY_TICKS_TITLE = "ticks_title"
 
+@AndroidEntryPoint
 class TicksActivity : BaseRecyclerActivity() {
 
     private lateinit var colorStorage: ColorStorage

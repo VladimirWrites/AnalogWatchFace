@@ -10,9 +10,11 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 const val KEY_COMPLICATIONS_TITLE = "complications_title"
 
+@AndroidEntryPoint
 class ComplicationsActivity : BaseRecyclerActivity() {
 
     private lateinit var adapter: ComplicationsAdapter

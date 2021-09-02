@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 const val KEY_SELECTED_COLOR = "selected_color"
 
 private const val KEY_SHOW_NO_COLOR = "show_no_color"
 private const val KEY_ALREADY_SELECTED_COLOR = "already_selected_color"
 
+@AndroidEntryPoint
 class ColorPickerActivity : BaseRecyclerActivity() {
 
     private lateinit var adapter: ColorPickerAdapter

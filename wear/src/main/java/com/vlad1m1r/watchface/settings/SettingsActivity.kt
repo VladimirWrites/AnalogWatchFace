@@ -10,6 +10,7 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 const val COMPLICATION_CONFIG_REQUEST_CODE = 1001
 const val FACE_PICKER_REQUEST_CODE = 1002
@@ -33,6 +34,7 @@ const val COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR_PICKER_REQUEST_CODE = 1045
 const val COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR_PICKER_REQUEST_CODE = 1046
 const val COMPLICATIONS_BACKGROUND_COLOR_PICKER_REQUEST_CODE = 1047
 
+@AndroidEntryPoint
 class SettingsActivity : BaseRecyclerActivity() {
 
     internal lateinit var adapter: SettingsAdapter

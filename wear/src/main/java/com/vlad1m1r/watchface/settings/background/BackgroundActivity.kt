@@ -25,10 +25,12 @@ import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.COMPLICATION_CONFIG_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 
 const val KEY_BACKGROUND_TITLE = "background_title"
 
+@AndroidEntryPoint
 class BackgroundActivity : BaseRecyclerActivity() {
 
     private lateinit var colorStorage: ColorStorage

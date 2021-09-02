@@ -11,7 +11,9 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TicksLayoutPickerActivity : BaseRecyclerActivity() {
 
     private lateinit var adapter: TickLayoutPickerAdapter
