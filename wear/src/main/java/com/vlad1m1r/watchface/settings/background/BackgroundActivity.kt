@@ -38,9 +38,6 @@ class BackgroundActivity : BaseRecyclerActivity() {
     lateinit var dataStorage: DataStorage
 
     @Inject
-    lateinit var sizeStorage: SizeStorage
-
-    @Inject
     lateinit var colorStorage: ColorStorage
 
     private lateinit var adapter: BackgroundAdapter
@@ -52,7 +49,7 @@ class BackgroundActivity : BaseRecyclerActivity() {
 
         val title = intent.getIntExtra(KEY_BACKGROUND_TITLE, 0)
 
-        adapter = BackgroundAdapter(colorStorage, dataStorage, sizeStorage, title) {
+        adapter = BackgroundAdapter(colorStorage, dataStorage, title) {
             launchComplicationHelperActivity()
         }
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {

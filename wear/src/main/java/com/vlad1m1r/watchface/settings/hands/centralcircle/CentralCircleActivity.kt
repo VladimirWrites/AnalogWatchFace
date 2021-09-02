@@ -23,9 +23,6 @@ const val KEY_CENTRAL_CIRCLE_TITLE = "central_circle_title"
 class CentralCircleActivity : BaseRecyclerActivity() {
 
     @Inject
-    lateinit var dataStorage: DataStorage
-
-    @Inject
     lateinit var sizeStorage: SizeStorage
 
     @Inject
@@ -39,7 +36,7 @@ class CentralCircleActivity : BaseRecyclerActivity() {
 
         val title = intent.getIntExtra(KEY_CENTRAL_CIRCLE_TITLE, 0)
 
-        adapter = CentralCircleAdapter(colorStorage, dataStorage, sizeStorage, title)
+        adapter = CentralCircleAdapter(colorStorage, sizeStorage, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

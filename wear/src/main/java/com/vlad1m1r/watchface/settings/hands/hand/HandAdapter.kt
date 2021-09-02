@@ -47,10 +47,7 @@ class HandAdapter(
                         R.layout.item_settings_hand_preview,
                         parent,
                         false
-                    ),
-                colorStorage,
-                dataStorage,
-                sizeStorage
+                    )
             )
             TYPE_COLOR_HAND -> ColorPickerViewHolder(
                 LayoutInflater.from(parent.context)

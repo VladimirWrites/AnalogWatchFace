@@ -9,12 +9,21 @@ import com.vlad1m1r.watchface.components.background.DrawBackground
 import com.vlad1m1r.watchface.components.background.GetBackgroundData
 import com.vlad1m1r.watchface.components.hands.*
 import com.vlad1m1r.watchface.model.Point
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class WatchPreviewView: View {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle)
+
+    @Inject
+    lateinit var drawBackground: DrawBackground
+
+    @Inject
+    lateinit var getHandData: GetHandData
 
     private var isInAmbientMode = false
 
@@ -23,23 +32,10 @@ class WatchPreviewView: View {
     private lateinit var drawMinutesHand: DrawHand
     private lateinit var drawCircle: DrawCircle
 
-    private lateinit var drawBackground: DrawBackground
-
-    private lateinit var getHandData: GetHandData
-    private lateinit var getBackgroundData: GetBackgroundData
-
     private lateinit var center: Point
     private lateinit var adjustedCenter: Point
 
-    private lateinit var backgroundBitmapProvider: BackgroundBitmapProvider
-
     private val handPaintProvider = HandPaintProvider()
-
-    fun initialize(getHandData: GetHandData, getBackgroundData: GetBackgroundData) {
-        this.getHandData = getHandData
-        this.getBackgroundData = getBackgroundData
-    }
-
 
     fun invalidate(
         center: Point
@@ -50,11 +46,7 @@ class WatchPreviewView: View {
         this.drawMinutesHand = DrawHand(getHandData.getMinuteHandData(), handPaintProvider)
         this.drawCircle = DrawCircle(getHandData.getCircleData(), handPaintProvider)
 
-        this.backgroundBitmapProvider = BackgroundBitmapProvider(getBackgroundData())
-
-        this.drawBackground = DrawBackground(backgroundBitmapProvider)
         this.drawBackground.setCenter(center)
-
         this.adjustedCenter = Point(center.x/2, center.y)
 
         refreshMode()

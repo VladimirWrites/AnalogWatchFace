@@ -25,7 +25,6 @@ private const val TYPE_CENTRAL_CIRCLE_RADIUS = 4
 
 class CentralCircleAdapter(
     private val colorStorage: ColorStorage,
-    private val dataStorage: DataStorage,
     private val sizeStorage: SizeStorage,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -47,10 +46,7 @@ class CentralCircleAdapter(
                         R.layout.item_settings_hand_preview,
                         parent,
                         false
-                    ),
-                colorStorage,
-                dataStorage,
-                sizeStorage
+                    )
             )
             TYPE_COLOR_CENTRAL_CIRCLE -> ColorPickerViewHolder(
                 LayoutInflater.from(parent.context)

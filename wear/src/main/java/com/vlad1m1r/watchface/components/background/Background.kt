@@ -9,8 +9,7 @@ import com.vlad1m1r.watchface.utils.WatchView
 import javax.inject.Inject
 
 class Background @Inject constructor(
-    private val colorStorage: ColorStorage,
-    private val dataStorage: DataStorage
+    private val drawBackground: DrawBackground
 ) : WatchView {
 
     private var center = Point()
@@ -19,12 +18,7 @@ class Background @Inject constructor(
         initializeDrawBackground()
     }
 
-    private lateinit var drawBackground: DrawBackground
-
     private fun initializeDrawBackground() {
-        val getBackgroundData = GetBackgroundData(colorStorage, dataStorage)
-        val backgroundBitmapProvider = BackgroundBitmapProvider(getBackgroundData())
-        drawBackground = DrawBackground(backgroundBitmapProvider)
         drawBackground.setCenter(center)
     }
 

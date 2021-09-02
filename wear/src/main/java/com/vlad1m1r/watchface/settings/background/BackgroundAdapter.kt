@@ -27,7 +27,6 @@ private const val TYPE_BACKGROUND_COMPLICATION = 5
 class BackgroundAdapter(
     private val colorStorage: ColorStorage,
     private val dataStorage: DataStorage,
-    private val sizeStorage: SizeStorage,
     @StringRes private val title: Int,
     private val openBackgroundComplicationPicker: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -52,10 +51,7 @@ class BackgroundAdapter(
                         R.layout.item_settings_hand_preview,
                         parent,
                         false
-                    ),
-                colorStorage,
-                dataStorage,
-                sizeStorage
+                    )
             )
             TYPE_COLOR_LEFT,
             TYPE_COLOR_RIGHT -> ColorPickerViewHolder(

@@ -17,13 +17,9 @@ import java.util.*
 import javax.inject.Inject
 
 class Hands @Inject constructor(
-    @ApplicationContext context: Context,
     private val colorStorage: ColorStorage,
-    dataStorage: DataStorage,
-    sizeStorage: SizeStorage
+    private val  getHandData: GetHandData
 ) : WatchView {
-
-    private val getHandData = GetHandData(context, colorStorage, dataStorage, sizeStorage)
 
     private var showSecondsHand = true
     private var showMinutesHand = true
