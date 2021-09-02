@@ -1,6 +1,7 @@
-package com.vlad1m1r.watchface.components.ticks
+package com.vlad1m1r.watchface.components.ticks.usecase
 
 import com.vlad1m1r.watchface.model.Point
+import javax.inject.Inject
 import kotlin.math.*
 
 /*
@@ -13,7 +14,7 @@ This allows us to translate the ticks from the edge to the watch face to the edg
 distance from the center, in Polar coordinate system, by the result of this method.
 */
 
-class AdjustToChin() {
+class AdjustToChin @Inject constructor() {
     operator fun invoke(tickRotation: Double, center: Point, bottomInset: Int): Double {
         val angle = acos((center.x - bottomInset) / center.x)
         return if (tickRotation > PI - angle && tickRotation < PI + angle) {

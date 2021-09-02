@@ -3,6 +3,9 @@ package com.vlad1m1r.watchface.components.ticks
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
+import com.vlad1m1r.watchface.components.ticks.usecase.AdjustTicks
+import com.vlad1m1r.watchface.components.ticks.usecase.AdjustToChin
+import com.vlad1m1r.watchface.components.ticks.usecase.AdjustToSquare
 import com.vlad1m1r.watchface.model.Point
 import org.junit.Test
 

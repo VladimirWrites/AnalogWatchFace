@@ -1,18 +1,14 @@
 package com.vlad1m1r.watchface.components.hands
 
-import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.WatchView
 import com.vlad1m1r.watchface.utils.hoursRotation
 import com.vlad1m1r.watchface.utils.minutesRotation
 import com.vlad1m1r.watchface.utils.secondsRotation
-import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.*
 import javax.inject.Inject
 
