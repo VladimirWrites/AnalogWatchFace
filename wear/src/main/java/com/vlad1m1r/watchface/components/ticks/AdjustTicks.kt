@@ -1,7 +1,6 @@
 package com.vlad1m1r.watchface.components.ticks
 
 import com.vlad1m1r.watchface.model.Point
-import kotlin.math.*
 
 class AdjustTicks(
     private val adjustToSquare: AdjustToSquare,

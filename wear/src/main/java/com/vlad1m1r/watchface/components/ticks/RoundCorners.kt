@@ -3,6 +3,12 @@ package com.vlad1m1r.watchface.components.ticks
 import com.vlad1m1r.watchface.model.Point
 import kotlin.math.*
 
+/*
+It's used for adding round corners to a rectangular watch face.
+The result of this method should be subtracted from the distance dimension of the position of the ticks
+in Polar coordinate system.
+*/
+
 class RoundCorners() {
     operator fun invoke(tickRotation: Double, center: Point, cornerRadius: Double = 0.0): Double {
         val angle = atan(center.x / center.y)
