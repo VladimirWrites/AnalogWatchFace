@@ -16,13 +16,24 @@ import com.vlad1m1r.watchface.settings.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 const val KEY_HAND_TYPE = "hand_type"
 const val KEY_HAND_TITLE = "hand_title"
 
+@AndroidEntryPoint
 class HandActivity : BaseRecyclerActivity() {
 
-    private lateinit var colorStorage: ColorStorage
+    @Inject
+    lateinit var dataStorage: DataStorage
+
+    @Inject
+    lateinit var sizeStorage: SizeStorage
+
+    @Inject
+    lateinit var colorStorage: ColorStorage
+
     private lateinit var adapter: HandAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,15 +42,6 @@ class HandActivity : BaseRecyclerActivity() {
 
         val handType = intent.getSerializableExtra(KEY_HAND_TYPE) as HandType
         val title = intent.getIntExtra(KEY_HAND_TITLE, 0)
-
-        val sharedPref = getSharedPreferences(
-            KEY_ANALOG_WATCH_FACE,
-            Context.MODE_PRIVATE
-        )
-
-        val dataStorage = DataStorage(sharedPref)
-        val sizeStorage = SizeStorage(this.applicationContext, sharedPref)
-        colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
         adapter = HandAdapter(colorStorage, dataStorage, sizeStorage, handType, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {

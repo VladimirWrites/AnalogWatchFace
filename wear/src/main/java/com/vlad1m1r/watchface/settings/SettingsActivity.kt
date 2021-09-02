@@ -11,6 +11,7 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 const val COMPLICATION_CONFIG_REQUEST_CODE = 1001
 const val FACE_PICKER_REQUEST_CODE = 1002
@@ -37,17 +38,14 @@ const val COMPLICATIONS_BACKGROUND_COLOR_PICKER_REQUEST_CODE = 1047
 @AndroidEntryPoint
 class SettingsActivity : BaseRecyclerActivity() {
 
+    @Inject
+    lateinit var dataStorage: DataStorage
+
     internal lateinit var adapter: SettingsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-
-        val sharedPref = getSharedPreferences(
-            KEY_ANALOG_WATCH_FACE,
-            Context.MODE_PRIVATE
-        )
-        val dataStorage = DataStorage(sharedPref)
 
         dataStorage.increaseSettingsOpenCount()
 

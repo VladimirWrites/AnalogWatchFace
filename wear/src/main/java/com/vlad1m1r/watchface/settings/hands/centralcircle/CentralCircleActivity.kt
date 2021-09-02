@@ -14,12 +14,23 @@ import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import com.vlad1m1r.watchface.settings.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 const val KEY_CENTRAL_CIRCLE_TITLE = "central_circle_title"
 
+@AndroidEntryPoint
 class CentralCircleActivity : BaseRecyclerActivity() {
 
-    private lateinit var colorStorage: ColorStorage
+    @Inject
+    lateinit var dataStorage: DataStorage
+
+    @Inject
+    lateinit var sizeStorage: SizeStorage
+
+    @Inject
+    lateinit var colorStorage: ColorStorage
+
     private lateinit var adapter: CentralCircleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,15 +38,6 @@ class CentralCircleActivity : BaseRecyclerActivity() {
         setContentView(R.layout.activity_list)
 
         val title = intent.getIntExtra(KEY_CENTRAL_CIRCLE_TITLE, 0)
-
-        val sharedPref = getSharedPreferences(
-            KEY_ANALOG_WATCH_FACE,
-            Context.MODE_PRIVATE
-        )
-
-        val dataStorage = DataStorage(sharedPref)
-        val sizeStorage = SizeStorage(this.applicationContext, sharedPref)
-        colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
         adapter = CentralCircleAdapter(colorStorage, dataStorage, sizeStorage, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {

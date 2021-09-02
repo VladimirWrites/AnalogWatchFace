@@ -11,6 +11,7 @@ import com.vlad1m1r.watchface.data.TicksLayoutType
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.components.ticks.TicksLayout
 import com.vlad1m1r.watchface.data.SizeStorage
+import com.vlad1m1r.watchface.model.Mode
 
 class Layouts(
     private val dataStorage: DataStorage,
@@ -72,5 +73,13 @@ class Layouts(
         this.bottomInset = bottomInset
         this.ticks.bottomInset = bottomInset
         this.complications.bottomInset = bottomInset
+    }
+
+    fun setMode(mode: Mode) {
+        background.setMode(mode)
+        complications.setMode(mode)
+        backgroundComplication.setMode(mode)
+        ticks.setMode(mode)
+        hands.setMode(mode)
     }
 }

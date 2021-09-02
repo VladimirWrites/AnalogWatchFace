@@ -27,13 +27,22 @@ import com.vlad1m1r.watchface.settings.COMPLICATION_CONFIG_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
+import javax.inject.Inject
 
 const val KEY_BACKGROUND_TITLE = "background_title"
 
 @AndroidEntryPoint
 class BackgroundActivity : BaseRecyclerActivity() {
 
-    private lateinit var colorStorage: ColorStorage
+    @Inject
+    lateinit var dataStorage: DataStorage
+
+    @Inject
+    lateinit var sizeStorage: SizeStorage
+
+    @Inject
+    lateinit var colorStorage: ColorStorage
+
     private lateinit var adapter: BackgroundAdapter
     private lateinit var providerInfoRetriever: ProviderInfoRetriever
 
@@ -42,15 +51,6 @@ class BackgroundActivity : BaseRecyclerActivity() {
         setContentView(R.layout.activity_list)
 
         val title = intent.getIntExtra(KEY_BACKGROUND_TITLE, 0)
-
-        val sharedPref = getSharedPreferences(
-            KEY_ANALOG_WATCH_FACE,
-            Context.MODE_PRIVATE
-        )
-
-        val dataStorage = DataStorage(sharedPref)
-        val sizeStorage = SizeStorage(this.applicationContext, sharedPref)
-        colorStorage = ColorStorage(this.applicationContext, sharedPref)
 
         adapter = BackgroundAdapter(colorStorage, dataStorage, sizeStorage, title) {
             launchComplicationHelperActivity()
