@@ -29,8 +29,6 @@ object Versions {
 }
 
 object Deps {
-    const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-
     const val wearable_support = "com.google.android.support:wearable:${Versions.wearable_support}"
     const val wearable_support_ui = "androidx.wear:wear:${Versions.wearable_support_ui}"
     const val wearable = "com.google.android.wearable:wearable:${Versions.wearable}"

@@ -30,8 +30,6 @@ android {
 dependencies {
     implementation project(path: ':styleguide')
 
-    implementation Deps.kotlin_stdlib
-
     implementation Deps.wearable_support
 
     implementation Deps.androidXCoreKtx

@@ -72,8 +72,6 @@ task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'cre
 dependencies {
     implementation project(path: ':styleguide')
 
-    implementation Deps.kotlin_stdlib
-
     implementation Deps.wearable_support_ui
     implementation Deps.wearable_support
     compileOnly Deps.wearable
