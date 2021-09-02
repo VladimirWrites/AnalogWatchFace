@@ -121,14 +121,14 @@ class TicksAdapter(
                     R.string.wear_hour_ticks_color,
                     HOUR_TICKS_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getHourTicksColor(),
-                    false
+                    true
                 )
             TYPE_MINUTE_TICKS_COLOR ->
                 (viewHolder as ColorPickerViewHolder).setData(
                     R.string.wear_minute_ticks_color,
                     MINUTE_TICKS_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getMinuteTicksColor(),
-                    false
+                    true
                 )
             TYPE_ADJUST_TO_SQUARE_SCREEN ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
