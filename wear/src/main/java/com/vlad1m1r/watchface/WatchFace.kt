@@ -206,10 +206,15 @@ class WatchFace : CanvasWatchFaceService() {
             canvas.restore()
         }
 
-        override fun onComplicationDataUpdate(watchFaceComplicationId: Int, data: ComplicationData?) {
+        override fun onComplicationDataUpdate(watchFaceComplicationId: Int, data: ComplicationData) {
             super.onComplicationDataUpdate(watchFaceComplicationId, data)
             if(watchFaceComplicationId == BACKGROUND_COMPLICATION_ID) {
-                layouts.backgroundComplication.setComplicationData(data)
+                if(data.largeImage != null) {
+                    layouts.backgroundComplication.isVisible = true
+                    layouts.backgroundComplication.setComplicationData(data)
+                } else {
+                    layouts.backgroundComplication.isVisible = false
+                }
             } else {
                 layouts.complications.setComplicationData(watchFaceComplicationId, data)
             }

@@ -22,16 +22,14 @@ class BackgroundComplication(
     var centerInvalidated = true
         private set
 
+    var isVisible = false
+
     fun setMode(mode: Mode) {
         complicationDrawable?.apply {
             setInAmbientMode(mode.isAmbient)
             setLowBitAmbient(mode.isLowBitAmbient)
             setBurnInProtection(mode.isBurnInProtection)
         }
-    }
-
-    fun getComplicationDrawable(): ComplicationDrawable {
-        return complicationDrawable ?: throw IllegalArgumentException("Unsupported ComplicationDrawable")
     }
 
     fun setComplicationData(complicationData: ComplicationData?) {
@@ -45,6 +43,8 @@ class BackgroundComplication(
         complicationDrawable = (context.getDrawable(drawableResId) as ComplicationDrawable).apply {
             setContext(context)
             complicationData?.let { setComplicationData(it) }
+            setBorderColorActive(0)
+            setBorderColorAmbient(0)
         }
 
         centerInvalidated = true
@@ -56,7 +56,9 @@ class BackgroundComplication(
     }
 
     fun draw(canvas: Canvas, currentTime: Long) {
-        complicationDrawable?.draw(canvas, currentTime)
+        if(isVisible) {
+            complicationDrawable?.draw(canvas, currentTime)
+        }
     }
 
     private fun setBoundsToBackgroundComplication(centerX: Float, centerY: Float) {
