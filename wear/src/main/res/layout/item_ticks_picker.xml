@@ -8,8 +8,9 @@
             android:id="@+id/watch_face_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="?selectableItemBackgroundBorderless"
             android:padding="@dimen/screen_percentage_10"
             android:scaleType="centerInside"
-            tools:src="@drawable/ticks_1"/>
+            tools:src="@drawable/ticks_1" />
 </FrameLayout>
 

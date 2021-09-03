@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.rendering.ComplicationDrawable
+import androidx.appcompat.content.res.AppCompatResources
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.utils.WatchView
@@ -43,7 +44,7 @@ class BackgroundComplication @Inject constructor(
     }
 
     fun setComplicationDrawable(drawableResId: Int) {
-        complicationDrawable = (context.getDrawable(drawableResId) as ComplicationDrawable).apply {
+        complicationDrawable = (AppCompatResources.getDrawable(context, drawableResId) as ComplicationDrawable).apply {
             setContext(context)
             complicationData?.let { setComplicationData(it) }
             setBorderColorActive(0)

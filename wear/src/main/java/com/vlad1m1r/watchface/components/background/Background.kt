@@ -1,8 +1,6 @@
 package com.vlad1m1r.watchface.components.background
 
 import android.graphics.*
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.utils.WatchView

@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.rendering.ComplicationDrawable
+import androidx.appcompat.content.res.AppCompatResources
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
@@ -94,7 +95,7 @@ class Complications @Inject constructor(
     fun setComplicationDrawable(drawableResId: Int) {
         complicationDrawables.keys.forEach { complicationId ->
             complicationDrawables[complicationId] =
-                (context.getDrawable(drawableResId) as ComplicationDrawable).apply {
+                (AppCompatResources.getDrawable(context, drawableResId) as ComplicationDrawable).apply {
                     setContext(context)
                     complicationData[complicationId]?.let { setComplicationData(it) }
                 }

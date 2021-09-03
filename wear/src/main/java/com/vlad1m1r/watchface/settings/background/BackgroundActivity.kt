@@ -1,7 +1,6 @@
 package com.vlad1m1r.watchface.settings.background
 
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.wearable.complications.ComplicationHelperActivity
@@ -13,14 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.WatchFace
-import com.vlad1m1r.watchface.components.COMPLICATION_SUPPORTED_TYPES
 import com.vlad1m1r.watchface.components.background.BACKGROUND_COMPLICATION_ID
 import com.vlad1m1r.watchface.components.background.BACKGROUND_COMPLICATION_SUPPORTED_TYPES
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
-import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
-import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.COMPLICATION_CONFIG_REQUEST_CODE

@@ -20,7 +20,7 @@ class BackgroundBitmapProvider @Inject constructor(
     fun getAmbientBitmap() = ambientBitmap
     fun getNormalBitmap() = normalBitmap
 
-    fun getBackgroundBitmap(leftColor: Int, rightColor: Int, center: Point): Bitmap {
+    private fun getBackgroundBitmap(leftColor: Int, rightColor: Int, center: Point): Bitmap {
         val gradient = LinearGradient(
             0f,
             center.y * 2,

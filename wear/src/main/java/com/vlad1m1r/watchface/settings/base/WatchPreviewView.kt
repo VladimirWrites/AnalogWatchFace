@@ -4,9 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
-import com.vlad1m1r.watchface.components.background.BackgroundBitmapProvider
 import com.vlad1m1r.watchface.components.background.DrawBackground
-import com.vlad1m1r.watchface.components.background.GetBackgroundData
 import com.vlad1m1r.watchface.components.hands.*
 import com.vlad1m1r.watchface.model.Point
 import dagger.hilt.android.AndroidEntryPoint

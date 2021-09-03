@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.settings.colorpicker.ColorPickerActivity
@@ -19,9 +20,9 @@ class ColorPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     fun setData(@StringRes title: Int, requestCode: Int, @ColorInt currentColor: Int, showNoColor: Boolean) {
         val colorDrawable =
             if (currentColor == Color.TRANSPARENT) {
-                itemView.context.getDrawable(R.drawable.remove_color_small)
+                AppCompatResources.getDrawable(itemView.context, R.drawable.remove_color_small)
             } else {
-                (itemView.context.getDrawable(R.drawable.round_color_small) as GradientDrawable).apply {
+                (AppCompatResources.getDrawable(itemView.context, R.drawable.round_color_small) as GradientDrawable).apply {
                     color = ColorStateList.valueOf(currentColor)
                 }
             }

@@ -65,10 +65,10 @@
     <string name="wear_central_circle">Cirkelcentrum</string>
     <string name="wear_hand_color">Färg visare</string>
     <string name="wear_settings">Inställningar</string>
-    <string name="wear_hand_width">Bredd visare</string>
-    <string name="wear_hand_scale">Skala visare</string>
-    <string name="wear_circle_width">Linjebredd</string>
-    <string name="wear_circle_radius">Cirkelradie</string>
+    <string name="wear_hand_width">Bredd visare %d</string>
+    <string name="wear_hand_scale">Skala visare %.2f</string>
+    <string name="wear_circle_width">Linjebredd: %d</string>
+    <string name="wear_circle_radius">Cirkelradie: %d</string>
     <string name="wear_complication_colors">Färg funktioner</string>
     <string name="wear_complication_picker">Funktionsväljare</string>
     <string name="wear_anti_aliasing_in_ambient_mode">Kantutjämning i Ambient läge</string>

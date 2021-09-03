@@ -4,7 +4,6 @@ import android.graphics.drawable.Icon
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 

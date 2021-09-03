@@ -1,14 +1,11 @@
 package com.vlad1m1r.watchface.settings
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
