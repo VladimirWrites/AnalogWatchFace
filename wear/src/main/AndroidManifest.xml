@@ -15,6 +15,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.MyTheme"
             android:directBootAware="true"
+            android:name=".WearApplication"
             tools:ignore="GoogleAppIndexingWarning">
         <meta-data
                 android:name="com.google.android.wearable.standalone"

@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlin = "1.5.20"
+    const val kotlin = "1.5.21"
 
     const val wearable_support = "2.8.1"
     const val wearable_support_ui = "1.1.0"
@@ -10,12 +10,14 @@ object Versions {
     const val material = "1.4.0"
     const val constraintLayout = "2.1.0"
 
+    const val hilt = "2.38.1"
+
     const val junit = "4.13.2"
     const val mockito = "3.12.4"
     const val mockito_kotlin = "2.2.0"
     const val truth = "1.1.3"
 
-    const val gradle_android = "7.0.1"
+    const val gradle_android = "7.0.2"
 
     const val jacoco = "0.8.7"
 
@@ -33,6 +35,11 @@ object Deps {
     const val wearable_support_ui = "androidx.wear:wear:${Versions.wearable_support_ui}"
     const val wearable = "com.google.android.wearable:wearable:${Versions.wearable}"
 
+    const val hilt_android = "com.google.dagger:hilt-android:${Versions.hilt}"
+    const val hilt_compiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
+    const val hilt_android_compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+    const val hilt_test = "com.google.dagger:hilt-android-testing:${Versions.hilt}"
+
     const val junit = "junit:junit:${Versions.junit}"
     const val mockito_core = "org.mockito:mockito-core:${Versions.mockito}"
     const val mockito_kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito_kotlin}"
@@ -43,6 +50,7 @@ object Deps {
 
     const val android_gradle_plugin = "com.android.tools.build:gradle:${Versions.gradle_android}"
     const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    const val hilt_android_plugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
 
     const val androidXCoreKtx = "androidx.core:core-ktx:${Versions.androidXCoreKtx}"
     const val androidXAppCompat = "androidx.appcompat:appcompat:${Versions.androidXAppCompat}"

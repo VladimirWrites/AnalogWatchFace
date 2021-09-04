@@ -2,8 +2,9 @@ package com.vlad1m1r.watchface.components.background
 
 import android.graphics.*
 import com.vlad1m1r.watchface.model.Point
+import javax.inject.Inject
 
-class DrawBackground(
+class DrawBackground @Inject constructor(
     private val backgroundBitmapProvider: BackgroundBitmapProvider
 ) {
     private var isInAmbientMode = false

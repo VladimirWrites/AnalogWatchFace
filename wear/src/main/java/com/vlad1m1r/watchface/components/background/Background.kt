@@ -1,17 +1,14 @@
 package com.vlad1m1r.watchface.components.background
 
 import android.graphics.*
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.utils.WatchView
-import com.vlad1m1r.watchface.utils.getDarkerGrayscale
+import javax.inject.Inject
 
-class Background(
-    private val colorStorage: ColorStorage,
-    private val dataStorage: DataStorage
-    ): WatchView {
+class Background @Inject constructor(
+    private val drawBackground: DrawBackground
+) : WatchView {
 
     private var center = Point()
 
@@ -19,12 +16,7 @@ class Background(
         initializeDrawBackground()
     }
 
-    private lateinit var drawBackground: DrawBackground
-
     private fun initializeDrawBackground() {
-        val getBackgroundData = GetBackgroundData(colorStorage, dataStorage)
-        val backgroundBitmapProvider = BackgroundBitmapProvider(getBackgroundData())
-        drawBackground = DrawBackground(backgroundBitmapProvider)
         drawBackground.setCenter(center)
     }
 

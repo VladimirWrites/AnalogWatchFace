@@ -7,7 +7,6 @@ import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
@@ -25,7 +24,6 @@ private const val TYPE_CENTRAL_CIRCLE_RADIUS = 4
 
 class CentralCircleAdapter(
     private val colorStorage: ColorStorage,
-    private val dataStorage: DataStorage,
     private val sizeStorage: SizeStorage,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -47,10 +45,7 @@ class CentralCircleAdapter(
                         R.layout.item_settings_hand_preview,
                         parent,
                         false
-                    ),
-                colorStorage,
-                dataStorage,
-                sizeStorage
+                    )
             )
             TYPE_COLOR_CENTRAL_CIRCLE -> ColorPickerViewHolder(
                 LayoutInflater.from(parent.context)

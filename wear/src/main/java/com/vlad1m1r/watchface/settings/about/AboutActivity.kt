@@ -1,20 +1,22 @@
 package com.vlad1m1r.watchface.settings.about
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.wear.activity.ConfirmationActivity
 import com.google.android.wearable.input.RotaryEncoderHelper
 import com.google.android.wearable.intent.RemoteIntent
 import com.vlad1m1r.watchface.BuildConfig
 import com.vlad1m1r.watchface.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
-class AboutActivity : Activity() {
+@AndroidEntryPoint
+class AboutActivity : AppCompatActivity() {
 
     private lateinit var scrollView: ScrollView
     private lateinit var versionName: TextView

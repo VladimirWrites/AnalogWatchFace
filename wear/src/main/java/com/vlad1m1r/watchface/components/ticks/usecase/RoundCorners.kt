@@ -1,6 +1,7 @@
-package com.vlad1m1r.watchface.components.ticks
+package com.vlad1m1r.watchface.components.ticks.usecase
 
 import com.vlad1m1r.watchface.model.Point
+import javax.inject.Inject
 import kotlin.math.*
 
 /*
@@ -9,7 +10,7 @@ The result of this method should be subtracted from the distance dimension of th
 in Polar coordinate system.
 */
 
-class RoundCorners() {
+class RoundCorners @Inject constructor() {
     operator fun invoke(tickRotation: Double, center: Point, cornerRadius: Double = 0.0): Double {
         val angle = atan(center.x / center.y)
         val cornerAdjustment = if (tickRotation > angle - cornerRadius && tickRotation < angle + cornerRadius) {

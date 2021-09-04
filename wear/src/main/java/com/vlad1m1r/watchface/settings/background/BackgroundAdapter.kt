@@ -10,7 +10,6 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.components.background.SettingsBackgroundComplicationViewHolder
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
@@ -27,7 +26,6 @@ private const val TYPE_BACKGROUND_COMPLICATION = 5
 class BackgroundAdapter(
     private val colorStorage: ColorStorage,
     private val dataStorage: DataStorage,
-    private val sizeStorage: SizeStorage,
     @StringRes private val title: Int,
     private val openBackgroundComplicationPicker: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -52,10 +50,7 @@ class BackgroundAdapter(
                         R.layout.item_settings_hand_preview,
                         parent,
                         false
-                    ),
-                colorStorage,
-                dataStorage,
-                sizeStorage
+                    )
             )
             TYPE_COLOR_LEFT,
             TYPE_COLOR_RIGHT -> ColorPickerViewHolder(

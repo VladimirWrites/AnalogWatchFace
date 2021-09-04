@@ -1,6 +1,5 @@
 package com.vlad1m1r.watchface.settings.complications
 
-import android.content.Context
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -8,15 +7,22 @@ import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 const val KEY_COMPLICATIONS_TITLE = "complications_title"
 
+@AndroidEntryPoint
 class ComplicationsActivity : BaseRecyclerActivity() {
 
+    @Inject
+    lateinit var dataStorage: DataStorage
+
+    @Inject
+    lateinit var colorStorage: ColorStorage
+
     private lateinit var adapter: ComplicationsAdapter
-    private lateinit var colorStorage: ColorStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,14 +30,7 @@ class ComplicationsActivity : BaseRecyclerActivity() {
 
         val title = intent.getIntExtra(KEY_COMPLICATIONS_TITLE, 0)
 
-        val sharedPref = getSharedPreferences(
-            KEY_ANALOG_WATCH_FACE,
-            Context.MODE_PRIVATE
-        )
-        val dataProvider = DataStorage(sharedPref)
-        colorStorage = ColorStorage(this.applicationContext, sharedPref)
-
-        adapter = ComplicationsAdapter(dataProvider, title)
+        adapter = ComplicationsAdapter(dataStorage, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

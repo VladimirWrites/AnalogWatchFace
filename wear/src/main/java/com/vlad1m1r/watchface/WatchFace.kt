@@ -1,6 +1,7 @@
 package com.vlad1m1r.watchface
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.graphics.Canvas
 import android.graphics.Rect
@@ -19,16 +20,34 @@ import com.vlad1m1r.watchface.model.Point
 import java.lang.ref.WeakReference
 import java.util.*
 import android.view.WindowInsets
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 private const val INTERACTIVE_UPDATE_RATE_SLOW_MS = 1000
 private const val INTERACTIVE_UPDATE_RATE_FAST_MS = 33
 
 private const val MESSAGE_UPDATE_ID = 0
 
+@AndroidEntryPoint
 class WatchFace : CanvasWatchFaceService() {
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
+    @Inject
+    lateinit var dataStorage: DataStorage
+
+    @Inject
+    lateinit var sizeStorage: SizeStorage
+
+    @Inject
+    lateinit var colorStorage: ColorStorage
+
+    @Inject
+    lateinit var layouts: Layouts
+
     override fun onCreateEngine(): CanvasWatchFaceService.Engine {
-        return Engine()
+        return Engine(layouts)
     }
 
     private class EngineHandler(engine: Engine) : Handler(Looper.getMainLooper()) {
@@ -43,21 +62,15 @@ class WatchFace : CanvasWatchFaceService() {
         }
     }
 
-    inner class Engine : CanvasWatchFaceService.Engine(false) {
-
-        private lateinit var layouts: Layouts
+    inner class Engine(
+        private val layouts: Layouts
+    ) : CanvasWatchFaceService.Engine(false) {
 
         private lateinit var calendar: Calendar
 
         private val updateTimeHandler = EngineHandler(this)
 
         private val mode: Mode = Mode()
-
-        private lateinit var dataStorage: DataStorage
-
-        private lateinit var colorStorage: ColorStorage
-
-        private lateinit var sizeStorage: SizeStorage
 
         private var hasSmoothSecondsHand: Boolean = false
 
@@ -101,19 +114,10 @@ class WatchFace : CanvasWatchFaceService() {
                     .setAcceptsTapEvents(true)
                     .build()
             )
-            val sharedPref = getSharedPreferences(
-                KEY_ANALOG_WATCH_FACE,
-                Context.MODE_PRIVATE
-            )
-            dataStorage = DataStorage(sharedPref)
+
             hasSmoothSecondsHand = dataStorage.hasSmoothSecondsHand()
 
-            colorStorage = ColorStorage(this@WatchFace.applicationContext, sharedPref)
-
-            sizeStorage = SizeStorage(this@WatchFace.applicationContext, sharedPref)
-
             calendar = Calendar.getInstance()
-            layouts = Layouts(dataStorage, colorStorage, this@WatchFace, sizeStorage)
 
             val supportedComplications = COMPLICATION_SUPPORTED_TYPES.keys.toMutableList().apply {
                 add(BACKGROUND_COMPLICATION_ID)
@@ -123,7 +127,7 @@ class WatchFace : CanvasWatchFaceService() {
 
             updateTimeHandler.sendEmptyMessage(MESSAGE_UPDATE_ID)
 
-            sharedPref.registerOnSharedPreferenceChangeListener(prefsChangeListener)
+            sharedPreferences.registerOnSharedPreferenceChangeListener(prefsChangeListener)
         }
 
         override fun onDestroy() {
@@ -151,7 +155,7 @@ class WatchFace : CanvasWatchFaceService() {
             super.onAmbientModeChanged(inAmbientMode)
 
             mode.isAmbient = isInAmbientMode
-            refreshMode()
+            layouts.setMode(mode)
 
             updateTimer()
         }
@@ -163,7 +167,7 @@ class WatchFace : CanvasWatchFaceService() {
                 properties.getBoolean(WatchFaceService.PROPERTY_LOW_BIT_AMBIENT, false)
             mode.isBurnInProtection =
                 properties.getBoolean(WatchFaceService.PROPERTY_BURN_IN_PROTECTION, false)
-            refreshMode()
+            layouts.setMode(mode)
         }
 
         override fun onTapCommand(tapType: Int, x: Int, y: Int, eventTime: Long) {
@@ -240,11 +244,7 @@ class WatchFace : CanvasWatchFaceService() {
 
             val center = Point(width / 2f, height / 2f)
 
-            layouts.background.setCenter(center)
-            layouts.ticks.setCenter(center)
-            layouts.complications.setCenter(center)
-            layouts.backgroundComplication.setCenter(center)
-            layouts.hands.setCenter(center)
+            layouts.setCenter(center)
         }
 
         private fun updateTimer() {
@@ -272,14 +272,6 @@ class WatchFace : CanvasWatchFaceService() {
             } else {
                 INTERACTIVE_UPDATE_RATE_SLOW_MS
             }
-        }
-
-        private fun refreshMode() {
-            layouts.background.setMode(mode)
-            layouts.complications.setMode(mode)
-            layouts.backgroundComplication.setMode(mode)
-            layouts.ticks.setMode(mode)
-            layouts.hands.setMode(mode)
         }
     }
 }

@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.StringRes
-import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 

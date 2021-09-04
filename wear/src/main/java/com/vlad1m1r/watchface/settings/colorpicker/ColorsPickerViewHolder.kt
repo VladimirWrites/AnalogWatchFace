@@ -1,7 +1,6 @@
 package com.vlad1m1r.watchface.settings.colorpicker
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RippleDrawable
@@ -11,7 +10,6 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.data.WatchFaceColor
 import com.vlad1m1r.watchface.data.watchFaceColors
 import com.vlad1m1r.watchface.utils.*
 

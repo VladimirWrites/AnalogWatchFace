@@ -7,9 +7,11 @@ import androidx.core.content.ContextCompat
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.utils.inAmbientMode
 import com.vlad1m1r.watchface.utils.inInteractiveMode
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class TickPaintProvider(
-    context: Context
+class TickPaintProvider @Inject constructor(
+    @ApplicationContext context: Context
 ) {
 
     private val shadowColor = ContextCompat.getColor(context, R.color.watch_shadow)

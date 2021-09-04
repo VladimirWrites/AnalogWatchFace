@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 const val KEY_HANDS_TITLE = "hands_title"
 
+@AndroidEntryPoint
 class HandsActivity : BaseRecyclerActivity() {
 
     private lateinit var adapter: HandsAdapter

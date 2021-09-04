@@ -1,20 +1,28 @@
-package com.vlad1m1r.watchface.components.ticks
+package com.vlad1m1r.watchface.components.ticks.layout
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.components.ticks.usecase.AdjustTicks
+import com.vlad1m1r.watchface.components.ticks.usecase.RoundCorners
+import com.vlad1m1r.watchface.components.ticks.TickPaintProvider
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlin.math.*
 
-class TicksLayout3(
-    context: Context,
+class TicksLayout3 @Inject constructor(
+    @ApplicationContext context: Context,
+    colorStorage: ColorStorage,
     private val dataStorage: DataStorage,
-    colorStorage: ColorStorage
+    override val  tickPaintProvider: TickPaintProvider,
+    override val adjustTicks: AdjustTicks,
+    override val roundCorners: RoundCorners
 ) : TicksLayout(context, dataStorage) {
 
     private val tickLength = context.resources.getDimension(R.dimen.design3_tick_length)
@@ -30,9 +38,6 @@ class TicksLayout3(
 
     private val tickBurnInPadding = context.resources.getDimension(R.dimen.design3_tick_padding)
     private var tickPadding = tickBurnInPadding
-
-    override var centerInvalidated = true
-        private set
 
     private val tickPaint = tickPaintProvider.getTickPaint(watchHourTickColor, tickWidth).apply {
         strokeCap = Paint.Cap.ROUND

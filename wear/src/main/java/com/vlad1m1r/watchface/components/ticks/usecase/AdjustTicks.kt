@@ -1,8 +1,9 @@
-package com.vlad1m1r.watchface.components.ticks
+package com.vlad1m1r.watchface.components.ticks.usecase
 
 import com.vlad1m1r.watchface.model.Point
+import javax.inject.Inject
 
-class AdjustTicks(
+class AdjustTicks @Inject constructor(
     private val adjustToSquare: AdjustToSquare,
     private val adjustToChin: AdjustToChin
 ) {

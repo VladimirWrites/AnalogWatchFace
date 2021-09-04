@@ -2,17 +2,10 @@ package com.vlad1m1r.watchface.components.background
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Paint
-import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import com.vlad1m1r.watchface.components.hands.CircleData
-import com.vlad1m1r.watchface.components.hands.DrawCircle
-import com.vlad1m1r.watchface.components.hands.HandPaintProvider
 import org.junit.Test
-
-import org.junit.Assert.*
 
 class DrawBackgroundShould {
 

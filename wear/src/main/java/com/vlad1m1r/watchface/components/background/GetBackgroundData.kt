@@ -4,8 +4,9 @@ import android.graphics.Color
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.utils.getDarkerGrayscale
+import javax.inject.Inject
 
-class GetBackgroundData(
+class GetBackgroundData @Inject constructor(
     private val colorStorage: ColorStorage,
     private val dataStorage: DataStorage
 ) {

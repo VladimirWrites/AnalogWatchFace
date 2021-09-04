@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.rendering.ComplicationDrawable
+import androidx.appcompat.content.res.AppCompatResources
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
@@ -13,6 +14,8 @@ import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.utils.WatchView
 import com.vlad1m1r.watchface.utils.getDarkerGrayscale
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 const val LEFT_COMPLICATION_ID = 100
 const val RIGHT_COMPLICATION_ID = 101
@@ -48,8 +51,8 @@ val COMPLICATION_SUPPORTED_TYPES = mapOf(
     )
 )
 
-class Complications(
-    private val context: Context,
+class Complications @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val dataStorage: DataStorage,
     private val colorStorage: ColorStorage
 ) : WatchView {
@@ -92,7 +95,7 @@ class Complications(
     fun setComplicationDrawable(drawableResId: Int) {
         complicationDrawables.keys.forEach { complicationId ->
             complicationDrawables[complicationId] =
-                (context.getDrawable(drawableResId) as ComplicationDrawable).apply {
+                (AppCompatResources.getDrawable(context, drawableResId) as ComplicationDrawable).apply {
                     setContext(context)
                     complicationData[complicationId]?.let { setComplicationData(it) }
                 }

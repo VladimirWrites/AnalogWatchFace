@@ -6,9 +6,11 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.SizeStorage
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class GetHandData(
-    private val context: Context,
+class GetHandData @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val colorStorage: ColorStorage,
     private val dataStorage: DataStorage,
     private val sizeStorage: SizeStorage

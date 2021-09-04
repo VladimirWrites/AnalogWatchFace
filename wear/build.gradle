@@ -1,6 +1,11 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'jacoco'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'jacoco'
+    id 'dagger.hilt.android.plugin'
+}
+
 
 jacoco {
     toolVersion = Versions.jacoco
@@ -75,6 +80,9 @@ dependencies {
     implementation Deps.wearable_support_ui
     implementation Deps.wearable_support
     compileOnly Deps.wearable
+
+    implementation Deps.hilt_android
+    kapt Deps.hilt_compiler
 
     testImplementation Deps.junit
     testImplementation Deps.mockito_core
