@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Shown on a device under the icon and in the About screen of the watch face and Android app. I am not sure if it makes sense to translate the app name. How is it done for other apps in your language? Maybe having the translation in brackets would be an option: Analog Watch Face (translated name) -->
+    <string name="app_name">Quadrante Analogico</string>
+    <string name="app_subtitle">Grazie per aver scaricato l\'app!</string>
+    <string name="app_description">Questa app è qui per semplificare l\'installazione del quadrante sul tuo orologio Wear OS. Una volta installato il quadrante, potrai disinstallare questa app dal tuo telefono.\n\nL\'intero progetto è \"open-source\", quindi se hai esperienza di programmazione sentiti libero di contribuire!\n\nSe ti piace questo quadrante, non dimenticare di recensirlo!</string>
+
+    <!-- This will be shown if a user doesn't have a watch connected to the phone on which this app is installed. -->
+    <string name="app_no_watch">Sembra che questo dispositivo non abbia un orologio Wear OS associato.\nCi scusiamo per l\'inconveniente, ma Quadrante Analogico può essere installato solo su dispositivi Wear OS.\n\nPuoi anche farlo manualmente dall\'orologio cercando questo quadrante nello store integrato.</string>
+    <string name="app_install_watch_face">Installa Quadrante Analogico</string>
+    <string name="app_uninstall_app">Disinstalla questa app</string>
+
+    <!-- Shown if the PlayStore is successfully opened on the watch. -->
+    <string name="app_open_playstore_success_message">Controlla il tuo orologio!</string>
+
+    <!-- Shown if the PlayStore didn't open on the watch due to some error. -->
+    <string name="app_open_playstore_error_message">Qualcosa è andato storto! Assicurati di avere un dispositivo Wear OS accoppiato con il telefono.</string>
+
+    <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
+(e.g. Edit Complication Day of the week) -->
+    <string name="wear_edit_complication">Modifica Complicazione %s</string>
+    <string name="wear_add_complication">Aggiungi Complicazione</string>
+    <string name="wear_ticks_layout_picker">Cambia Stile Tacche</string>
+    <string name="wear_hand_settings">Opzioni Lancette</string>
+    <string name="wear_about_app">Info App</string>
+    <string name="wear_background_settings">Opzioni Sfondo</string>
+    <string name="wear_complications_settings">Opzioni Complicazioni</string>
+    <string name="wear_ticks_settings">Opzioni Tacche</string>
+    <string name="wear_rate_the_watch_face">Recensisci il Quadrante</string>
+    <string name="wear_hours_hand_color">Colore Lancetta Ore</string>
+    <string name="wear_minutes_hand_color">Colore Lancetta Minuti</string>
+    <string name="wear_seconds_hand_color">Colore Lancetta Secondi</string>
+    <string name="wear_central_circle_color">Colore Cerchio Centrale</string>
+    <string name="wear_smooth_seconds_hand">Lancetta Secondi Fluida</string>
+    <string name="wear_left_background_color">Colore Sinistro Sfondo</string>
+    <string name="wear_right_background_color">Colore Destro Sfondo</string>
+    <string name="wear_black_ambient_background">Sfondo Nero in Modalità Ambient</string>
+    <string name="wear_ticks_in_ambient_mode">Tacche in Modalità Ambient</string>
+    <string name="wear_ticks_in_interactive_mode">Tacche in Modalità Normale</string>
+    <string name="wear_ticks_adjust_to_square_screen">Ottimizza Tacche per Sfondi Quadrati</string>
+    <string name="wear_hour_ticks_color">Colore Lancetta Ore</string>
+    <string name="wear_minute_ticks_color">Colore Lancetta Minuti</string>
+    <string name="wear_complications_in_ambient_mode">Complicazioni in Modalità Ambient</string>
+    <string name="wear_complications_text_color">Colore Testo Complicazioni</string>
+    <string name="wear_complications_title_color">Colore Titolo Complicazioni</string>
+    <string name="wear_complications_icon_color">Colore Icona Complicazioni</string>
+    <string name="wear_complications_border_color">Colore Bordo Complicazioni</string>
+    <string name="wear_complications_ranged_value_primary_color">Colore Primario Gamma Complicazioni</string>
+    <string name="wear_complications_ranged_value_secondary_color">Colore Secondario Gamma Complicazioni</string>
+    <string name="wear_complications_background_color">Colore Sfondo Complicazioni</string>
+    <string name="wear_bigger_top_and_bottom_complications">Complicazioni Inf/Sup più Larghe</string>
+    <string name="wear_bigger_round_complications">Complicazioni Rotonde più Grandi</string>
+    <string name="wear_bigger_text_in_complications">Caratteri Più Grandi</string>
+    <string name="wear_github_title">GitHub</string>
+    <string name="wear_email_title">Email</string>
+    <string name="wear_play_store_title">Play Store</string>
+    <string name="wear_view_on_you_phone">Visualizza sul telefono</string>
+    <string name="wear_complication_day_of_month">Giorno del Mese</string>
+    <string name="wear_complication_time_24">Tempo (24 ore)</string>
+    <string name="wear_complication_time_12">Tempo (12 ore)</string>
+    <string name="wear_hours_hand">Lancetta Ore</string>
+    <string name="wear_minutes_hand">Lancetta Minuti</string>
+    <string name="wear_seconds_hand">Lancetta Secondi</string>
+    <string name="wear_central_circle">Cerchio Centrale</string>
+    <string name="wear_hand_color">Colore Lancetta</string>
+    <string name="wear_settings">Impostazioni</string>
+    <string name="wear_hand_width">Larghezza Lancetta: %d</string>
+    <string name="wear_hand_scale">Scala Lancetta: %.2f</string>
+    <string name="wear_circle_width">Larghezza Linea: %d</string>
+    <string name="wear_circle_radius">Raggio Cerchio: %d</string>
+    <string name="wear_complication_colors">Colore Complicazione</string>
+    <string name="wear_complication_picker">Scegli Complicazione</string>
+    <string name="wear_anti_aliasing_in_ambient_mode">Anti-Aliasing in Modalità Ambient</string>
+    <string name="wear_add_background_complication">Aggiungi Complicazione Sfondo</string>
+    <string name="wear_edit_background_complication">Modifica Complicazione Sfondo</string>
+</resources>
