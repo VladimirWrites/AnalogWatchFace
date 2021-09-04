@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Shown on a device under the icon and in the About screen of the watch face and Android app. I am not sure if it makes sense to translate the app name. How is it done for other apps in your language? Maybe having the translation in brackets would be an option: Analog Watch Face (translated name) -->
+    <string name="app_name">Cadran Analogique</string>
+    <string name="app_subtitle">Merci d\'avoir téléchargé l\'application !</string>
+    <string name="app_description">Cette application va vous aider à installer le cadran sur votre montre Wear OS. Une fois le cadran installé vous pouvez désinstaller cette application de votre téléphone.\n\nLe projet est open-source, donc si vous avez des compétences de codage, libre à vous de contribuer !\n\nSi vous appréciez ce cadran, n\'hésitez pas à le noter !</string>
+
+    <!-- This will be shown if a user doesn't have a watch connected to the phone on which this app is installed. -->
+    <string name="app_no_watch">Il semble que ce téléphone ne soit apparié avec aucune montre.\nDésolé pour la gêne occasionnée mais le cadran ne peut être installé que sur un appareil Wear OS.\n\nVous pouvez aussi le faire manuellement depuis la montre en recherchant le cadran dans le magasin intégré.</string>
+    <string name="app_install_watch_face">Installer le Cadran Analogique</string>
+    <string name="app_uninstall_app">Désinstaller l\'application</string>
+
+    <!-- Shown if the PlayStore is successfully opened on the watch. -->
+    <string name="app_open_playstore_success_message">Contrôlez votre montre!</string>
+
+    <!-- Shown if the PlayStore didn't open on the watch due to some error. -->
+    <string name="app_open_playstore_error_message">Quelque chose s\'est mal déroulé ! Assurez-vous d\'avoir un appareil Wear OS apparié avec le téléphone.</string>
+
+    <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
+(e.g. Edit Complication Day of the week) -->
+    <string name="wear_edit_complication">Modifier la Complication %s</string>
+    <string name="wear_add_complication">Ajouter une Complication</string>
+    <string name="wear_ticks_layout_picker">Choisir une disposition des graduations</string>
+    <string name="wear_hand_settings">Paramètres Aiguilles</string>
+    <string name="wear_about_app">A propos de l\'application</string>
+    <string name="wear_background_settings">Paramètres arrière plan</string>
+    <string name="wear_complications_settings">Paramètres des complications</string>
+    <string name="wear_ticks_settings">Paramètres des graduations</string>
+    <string name="wear_rate_the_watch_face">Évaluer le Cadran</string>
+    <string name="wear_hours_hand_color">Couleur Aiguille Heures</string>
+    <string name="wear_minutes_hand_color">Couleur Aiguille Minutes</string>
+    <string name="wear_seconds_hand_color">Couleur Aiguille Secondes</string>
+    <string name="wear_central_circle_color">Couleur Cercle Central</string>
+    <string name="wear_smooth_seconds_hand">Aiguille des Secondes Lisse</string>
+    <string name="wear_left_background_color">Couleur Fond Gauche</string>
+    <string name="wear_right_background_color">Couleur Fond Droit</string>
+    <string name="wear_black_ambient_background">Fond Noir en Mode Ambiant</string>
+    <string name="wear_ticks_in_ambient_mode">Graduations en Mode Ambiant</string>
+    <string name="wear_ticks_in_interactive_mode">Graduations en Mode Interactive</string>
+    <string name="wear_ticks_adjust_to_square_screen">Ajuster Graduations pour quadriller l\'écran</string>
+    <string name="wear_hour_ticks_color">Heures Graduations Couleur</string>
+    <string name="wear_minute_ticks_color">Minutes Graduations Couleur</string>
+    <string name="wear_complications_in_ambient_mode">Complications en Mode Ambiant</string>
+    <string name="wear_complications_text_color">Complication Texte Couleur</string>
+    <string name="wear_complications_title_color">Complication Titre Couleur</string>
+    <string name="wear_complications_icon_color">Complication Icône Couleur</string>
+    <string name="wear_complications_border_color">Complication Bordure Couleur</string>
+    <string name="wear_complications_ranged_value_primary_color">Complication Couleur Primaire Gamme</string>
+    <string name="wear_complications_ranged_value_secondary_color">Complication Couleur Secondaire Gamme</string>
+    <string name="wear_complications_background_color">Couleur de Fond de la Complication</string>
+    <string name="wear_bigger_top_and_bottom_complications">Complications Sup/Inf Plus Larges</string>
+    <string name="wear_bigger_round_complications">Agrandir Complications Rondes</string>
+    <string name="wear_bigger_text_in_complications">Plus Grand Texte</string>
+    <string name="wear_github_title">GitHub</string>
+    <string name="wear_email_title">Email</string>
+    <string name="wear_play_store_title">Play Store</string>
+
+    <!-- I believe this is "View on your* phone" ? -->
+    <string name="wear_view_on_you_phone">Afficher sur votre téléphone</string>
+    <string name="wear_complication_day_of_month">Jour du Mois</string>
+    <string name="wear_complication_time_24">Temps (24 heures)</string>
+    <string name="wear_complication_time_12">Temps (12 heures)</string>
+    <string name="wear_hours_hand">Aiguille des Heures</string>
+    <string name="wear_minutes_hand">Aiguille des Minutes</string>
+    <string name="wear_seconds_hand">Aiguille des Secondes</string>
+    <string name="wear_central_circle">Cercle Central</string>
+    <string name="wear_hand_color">Couleur de la Aiguille</string>
+    <string name="wear_settings">Réglages</string>
+    <string name="wear_hand_width">Largeur de la Aiguille: %d</string>
+    <string name="wear_hand_scale">Échelle de la Aiguille: %.2f</string>
+    <string name="wear_circle_width">Largeur de la Ligne : %d</string>
+    <string name="wear_circle_radius">Rayon du Cercle: %d</string>
+    <string name="wear_complication_colors">Couleurs de la Complication</string>
+    <string name="wear_complication_picker">Sélecteur de Complications</string>
+    <string name="wear_anti_aliasing_in_ambient_mode">Anti-Aliasing en Mode Ambiant</string>
+    <string name="wear_add_background_complication">Ajouter Complication de Fond</string>
+    <string name="wear_edit_background_complication">Editer Complication de Fond</string>
+</resources>
