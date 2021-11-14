@@ -24,6 +24,8 @@ const val KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE = "use_anti_aliasing_in_ambient_
 
 const val KEY_SETTINGS_OPEN_COUNT = "settings_open_count"
 
+const val KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE = "has_center_circle_in_ambient_mode"
+
 class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun getTicksLayoutType(): TicksLayoutType {
@@ -114,6 +116,14 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
         val settingsOpenCount = sharedPreferences.getLong(KEY_SETTINGS_OPEN_COUNT, 0)
         val editor = sharedPreferences.edit()
         editor.putLong(KEY_SETTINGS_OPEN_COUNT, settingsOpenCount + 1)
+        editor.apply()
+    }
+
+    fun hasCenterCircleInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE, true)
+
+    fun setHasCenterCircleInAmbientMode(ticksInAmbientMode: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE, ticksInAmbientMode)
         editor.apply()
     }
 }

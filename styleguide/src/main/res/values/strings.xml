@@ -32,6 +32,7 @@
     <string name="wear_minutes_hand_color">Minutes Hand Color</string>
     <string name="wear_seconds_hand_color">Seconds Hand Color</string>
     <string name="wear_central_circle_color">Central Circle Color</string>
+    <string name="wear_central_circle_in_ambient_mode" translatable="false">Center Circle in Ambient Mode</string>
     <string name="wear_smooth_seconds_hand">Smooth Seconds Hand</string>
     <string name="wear_left_background_color">Background Color Left</string>
     <string name="wear_right_background_color">Background Color Right</string>

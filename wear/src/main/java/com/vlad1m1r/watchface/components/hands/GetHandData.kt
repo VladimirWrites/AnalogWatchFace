@@ -80,7 +80,16 @@ class GetHandData @Inject constructor(
         val circleWidth = sizeStorage.getCircleWidth()
         val middleCircleRadius = sizeStorage.getCircleRadius()
 
-        val ambientCircleColor = if(circleColor.isColorTransparent()) { circleColor } else { ambientColor }
+        val ambientCircleColor =
+            if(dataStorage.hasCenterCircleInAmbientMode()) {
+                if (circleColor.isColorTransparent()) {
+                    circleColor
+                } else {
+                    ambientColor
+                }
+            } else {
+                ContextCompat.getColor(context, R.color.transparent)
+            }
 
         return CircleData(
             circleColor,
