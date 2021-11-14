@@ -7,13 +7,11 @@ import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
-import com.vlad1m1r.watchface.settings.base.viewholders.SettingsSliderViewHolder
-import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
-import com.vlad1m1r.watchface.settings.base.viewholders.WatchPreviewViewHolder
+import com.vlad1m1r.watchface.settings.base.viewholders.*
 import java.lang.IllegalArgumentException
 
 private const val TYPE_TITLE = 0
@@ -21,10 +19,12 @@ private const val TYPE_PREVIEW = 1
 private const val TYPE_COLOR_CENTRAL_CIRCLE = 2
 private const val TYPE_CENTRAL_CIRCLE_WIDTH = 3
 private const val TYPE_CENTRAL_CIRCLE_RADIUS = 4
+private const val TYPE_CENTRAL_CIRCLE_IN_AMBIENT_MODE = 5
 
 class CentralCircleAdapter(
     private val colorStorage: ColorStorage,
     private val sizeStorage: SizeStorage,
+    private val dataStorage: DataStorage,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -71,6 +71,14 @@ class CentralCircleAdapter(
                         false
                     )
             )
+            TYPE_CENTRAL_CIRCLE_IN_AMBIENT_MODE -> SettingsWithSwitchViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_switch,
+                        parent,
+                        false
+                    )
+            )
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
             }
@@ -79,7 +87,7 @@ class CentralCircleAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 6
     }
 
     override fun getItemViewType(position: Int) =
@@ -89,6 +97,7 @@ class CentralCircleAdapter(
             2 -> TYPE_COLOR_CENTRAL_CIRCLE
             3 -> TYPE_CENTRAL_CIRCLE_WIDTH
             4 -> TYPE_CENTRAL_CIRCLE_RADIUS
+            5 -> TYPE_CENTRAL_CIRCLE_IN_AMBIENT_MODE
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
@@ -131,6 +140,14 @@ class CentralCircleAdapter(
                 sizeStorage.setCircleRadius(circleRadius)
                 notifyDataSetChanged()
             }
+
+            TYPE_CENTRAL_CIRCLE_IN_AMBIENT_MODE ->
+                (viewHolder as SettingsWithSwitchViewHolder).bind(
+                    R.string.wear_central_circle_in_ambient_mode,
+                    dataStorage.hasCenterCircleInAmbientMode()
+                ) {
+                    dataStorage.setHasCenterCircleInAmbientMode(it)
+                }
         }
     }
 }
