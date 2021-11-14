@@ -1,8 +1,10 @@
 package com.vlad1m1r.watchface.settings.hands.centralcircle
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
@@ -10,7 +12,6 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Point
-import com.vlad1m1r.watchface.settings.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.*
 import java.lang.IllegalArgumentException
@@ -27,7 +28,8 @@ class CentralCircleAdapter(
     private val sizeStorage: SizeStorage,
     private val dataStorage: DataStorage,
     private val navigator: Navigator,
-    @StringRes private val title: Int
+    @StringRes private val title: Int,
+    private val centralCircleColorLauncher: ActivityResultLauncher<Intent>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -118,11 +120,11 @@ class CentralCircleAdapter(
                     Point(width / 2, height / 2),
                 )
             }
-            TYPE_COLOR_CENTRAL_CIRCLE -> (viewHolder as ColorPickerViewHolder).setData(
+            TYPE_COLOR_CENTRAL_CIRCLE -> (viewHolder as ColorPickerViewHolder).bind(
                 R.string.wear_central_circle_color,
-                CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE,
                 colorStorage.getCentralCircleColor(),
-                true
+                true,
+                centralCircleColorLauncher
             )
             TYPE_CENTRAL_CIRCLE_WIDTH -> (viewHolder as SettingsSliderViewHolder).setData(
                 R.string.wear_circle_width,

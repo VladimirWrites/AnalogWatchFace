@@ -8,6 +8,9 @@ import android.support.wearable.complications.ComplicationHelperActivity
 import android.support.wearable.complications.ComplicationProviderInfo
 import android.support.wearable.complications.ProviderChooserIntent
 import android.support.wearable.complications.ProviderInfoRetriever
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,12 +21,9 @@ import com.vlad1m1r.watchface.components.background.BACKGROUND_COMPLICATION_ID
 import com.vlad1m1r.watchface.components.background.BACKGROUND_COMPLICATION_SUPPORTED_TYPES
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
-import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.COMPLICATION_CONFIG_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
+import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 import javax.inject.Inject
@@ -32,6 +32,8 @@ private const val KEY_BACKGROUND_TITLE = "background_title"
 
 @AndroidEntryPoint
 class BackgroundActivity : BaseRecyclerActivity() {
+
+    private lateinit var complicationHelperActivityLauncher: ActivityResultLauncher<Intent>
 
     @Inject
     lateinit var dataStorage: DataStorage
@@ -51,7 +53,32 @@ class BackgroundActivity : BaseRecyclerActivity() {
 
         val title = intent.getIntExtra(KEY_BACKGROUND_TITLE, 0)
 
-        adapter = BackgroundAdapter(colorStorage, dataStorage, navigator, title) {
+        val leftBackgroundColorLauncher = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val leftBackgroundColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setBackgroundLeftColor(leftBackgroundColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        val rightBackgroundColorLauncher = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val rightBackgroundColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setBackgroundRightColor(rightBackgroundColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        complicationHelperActivityLauncher = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val complicationProviderInfo =
+                    result.data?.getParcelableExtra<ComplicationProviderInfo>(ProviderChooserIntent.EXTRA_PROVIDER_INFO)
+                updateComplicationViews(complicationProviderInfo)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        adapter = BackgroundAdapter(colorStorage, dataStorage, navigator, title, leftBackgroundColorLauncher, rightBackgroundColorLauncher) {
             launchComplicationHelperActivity()
         }
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
@@ -76,29 +103,6 @@ class BackgroundActivity : BaseRecyclerActivity() {
                 ComponentName(this@BackgroundActivity, WatchFace::class.java),
                 BACKGROUND_COMPLICATION_ID
             )
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE -> {
-                    val backgroundLeftColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setBackgroundLeftColor(backgroundLeftColor)
-                }
-                BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE -> {
-                    val backgroundRightColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setBackgroundRightColor(backgroundRightColor)
-                }
-                COMPLICATION_CONFIG_REQUEST_CODE -> {
-                    val complicationProviderInfo =
-                        data?.getParcelableExtra<ComplicationProviderInfo>(ProviderChooserIntent.EXTRA_PROVIDER_INFO)
-                    updateComplicationViews(complicationProviderInfo)
-                }
-
-            }
-            adapter.notifyDataSetChanged()
         }
     }
 
@@ -129,14 +133,13 @@ class BackgroundActivity : BaseRecyclerActivity() {
 
     private fun launchComplicationHelperActivity() {
 
-        startActivityForResult(
+        complicationHelperActivityLauncher.launch(
             ComplicationHelperActivity.createProviderChooserHelperIntent(
                 this,
                 ComponentName(this, WatchFace::class.java),
                 BACKGROUND_COMPLICATION_ID,
                 *BACKGROUND_COMPLICATION_SUPPORTED_TYPES
-            ),
-            COMPLICATION_CONFIG_REQUEST_CODE
+            )
         )
     }
 

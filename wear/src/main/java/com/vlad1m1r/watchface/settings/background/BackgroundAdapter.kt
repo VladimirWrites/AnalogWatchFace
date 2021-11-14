@@ -1,9 +1,11 @@
 package com.vlad1m1r.watchface.settings.background
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.drawable.Icon
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
@@ -11,8 +13,6 @@ import com.vlad1m1r.watchface.components.background.SettingsBackgroundComplicati
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Point
-import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.*
 import java.lang.IllegalArgumentException
@@ -29,6 +29,8 @@ class BackgroundAdapter(
     private val dataStorage: DataStorage,
     private val navigator: Navigator,
     @StringRes private val title: Int,
+    private val leftBackgroundColorLauncher: ActivityResultLauncher<Intent>,
+    private val rightBackgroundColorLauncher: ActivityResultLauncher<Intent>,
     private val openBackgroundComplicationPicker: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -116,18 +118,18 @@ class BackgroundAdapter(
                 )
             }
             TYPE_COLOR_LEFT ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_left_background_color,
-                    BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getBackgroundLeftColor(),
-                    false
+                    false,
+                    leftBackgroundColorLauncher
                 )
             TYPE_COLOR_RIGHT ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_right_background_color,
-                    BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getBackgroundRightColor(),
-                    false
+                    false,
+                    rightBackgroundColorLauncher
                 )
             TYPE_BLACK_AMBIENT ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(

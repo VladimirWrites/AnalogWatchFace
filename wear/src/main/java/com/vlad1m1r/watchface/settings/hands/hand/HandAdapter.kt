@@ -1,8 +1,10 @@
 package com.vlad1m1r.watchface.settings.hands.hand
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
@@ -10,10 +12,7 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Point
-import com.vlad1m1r.watchface.settings.HOURS_HAND_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.MINUTES_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.Navigator
-import com.vlad1m1r.watchface.settings.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.viewholders.*
 
 private const val TYPE_TITLE = 0
@@ -29,7 +28,10 @@ class HandAdapter(
     private val sizeStorage: SizeStorage,
     private val navigator: Navigator,
     private val handType: HandType,
-    @StringRes private val title: Int
+    @StringRes private val title: Int,
+    private val hoursHandColorLauncher: ActivityResultLauncher<Intent>,
+    private val minutesHandColorLauncher: ActivityResultLauncher<Intent>,
+    private val secondsHandColorLauncher: ActivityResultLauncher<Intent>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -120,23 +122,23 @@ class HandAdapter(
             }
             TYPE_COLOR_HAND ->
                 when (handType) {
-                    HandType.HOURS -> (viewHolder as ColorPickerViewHolder).setData(
+                    HandType.HOURS -> (viewHolder as ColorPickerViewHolder).bind(
                         R.string.wear_hand_color,
-                        HOURS_HAND_COLOR_PICKER_REQUEST_CODE,
                         colorStorage.getHoursHandColor(),
-                        true
+                        true,
+                        hoursHandColorLauncher
                     )
-                    HandType.MINUTES -> (viewHolder as ColorPickerViewHolder).setData(
+                    HandType.MINUTES -> (viewHolder as ColorPickerViewHolder).bind(
                         R.string.wear_hand_color,
-                        MINUTES_HAND_COLOR_PICKER_REQUEST_CODE,
                         colorStorage.getMinutesHandColor(),
-                        true
+                        true,
+                        minutesHandColorLauncher
                     )
-                    HandType.SECONDS -> (viewHolder as ColorPickerViewHolder).setData(
+                    HandType.SECONDS -> (viewHolder as ColorPickerViewHolder).bind(
                         R.string.wear_hand_color,
-                        SECONDS_HAND_COLOR_PICKER_REQUEST_CODE,
                         colorStorage.getSecondsHandColor(),
-                        true
+                        true,
+                        secondsHandColorLauncher
                     )
                 }
             TYPE_HAND_WIDTH -> (viewHolder as SettingsSliderViewHolder).setData(

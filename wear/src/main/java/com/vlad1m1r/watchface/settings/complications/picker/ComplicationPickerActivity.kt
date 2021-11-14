@@ -10,11 +10,13 @@ import android.support.wearable.complications.ProviderChooserIntent
 import android.support.wearable.complications.ProviderInfoRetriever
 import android.view.View
 import android.widget.ImageView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.WatchFace
 import com.vlad1m1r.watchface.components.COMPLICATION_SUPPORTED_TYPES
-import com.vlad1m1r.watchface.settings.COMPLICATION_CONFIG_REQUEST_CODE
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 
@@ -28,6 +30,8 @@ class ComplicationPickerActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var bottomComplication: ImageView
 
     private lateinit var providerInfoRetriever: ProviderInfoRetriever
+
+    private lateinit var complicationHelperActivityLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +65,14 @@ class ComplicationPickerActivity : AppCompatActivity(), View.OnClickListener {
                 *COMPLICATION_SUPPORTED_TYPES.keys.toIntArray()
             )
         }
+
+        complicationHelperActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val complicationProviderInfo =
+                    result.data?.getParcelableExtra<ComplicationProviderInfo>(ProviderChooserIntent.EXTRA_PROVIDER_INFO)
+                updateComplicationViews(complicationProviderInfo)
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -72,19 +84,6 @@ class ComplicationPickerActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                COMPLICATION_CONFIG_REQUEST_CODE -> {
-                    val complicationProviderInfo =
-                        data?.getParcelableExtra<ComplicationProviderInfo>(ProviderChooserIntent.EXTRA_PROVIDER_INFO)
-                    updateComplicationViews(complicationProviderInfo)
-                }
-            }
-        }
-    }
-
     override fun onDestroy() {
         providerInfoRetriever.release()
         super.onDestroy()
@@ -93,14 +92,13 @@ class ComplicationPickerActivity : AppCompatActivity(), View.OnClickListener {
     private fun launchComplicationHelperActivity(complicationLocation: ComplicationLocation) {
         selectedComplication = complicationLocation
 
-        startActivityForResult(
+        complicationHelperActivityLauncher.launch(
             ComplicationHelperActivity.createProviderChooserHelperIntent(
                 this,
                 ComponentName(this, WatchFace::class.java),
                 complicationLocation.id,
                 *COMPLICATION_SUPPORTED_TYPES.getValue(complicationLocation.id)
-            ),
-            COMPLICATION_CONFIG_REQUEST_CODE
+            )
         )
     }
 

@@ -1,7 +1,9 @@
 package com.vlad1m1r.watchface.settings.complications.colors
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
@@ -23,7 +25,14 @@ private const val TYPE_COMPLICATIONS_BACKGROUND_COLOR = 7
 class ComplicationColorsAdapter(
     private val colorStorage: ColorStorage,
     private val navigator: Navigator,
-    @StringRes private val title: Int
+    @StringRes private val title: Int,
+    private val complicationsTextColorLauncher: ActivityResultLauncher<Intent>,
+    private val complicationsTitleColorLauncher: ActivityResultLauncher<Intent>,
+    private val complicationsIconColorLauncher: ActivityResultLauncher<Intent>,
+    private val complicationsBorderColorLauncher: ActivityResultLauncher<Intent>,
+    private val complicationsRangedValuePrimaryColorLauncher: ActivityResultLauncher<Intent>,
+    private val complicationsRangedValueSecondaryColorLauncher: ActivityResultLauncher<Intent>,
+    private val complicationsBackgroundColorLauncher: ActivityResultLauncher<Intent>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -82,53 +91,53 @@ class ComplicationColorsAdapter(
                     title
                 )
             TYPE_COMPLICATIONS_TEXT_COLOR ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_text_color,
-                    COMPLICATIONS_TEXT_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsTextColor(),
-                    true
+                    true,
+                    complicationsTextColorLauncher
                 )
             TYPE_COMPLICATIONS_TITLE_COLOR ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_title_color,
-                    COMPLICATIONS_TITLE_COLOR_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsTitleColor(),
-                    true
+                    true,
+                    complicationsTitleColorLauncher
                 )
             TYPE_COMPLICATIONS_ICON_COLOR ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_icon_color,
-                    COMPLICATIONS_ICON_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsIconColor(),
-                    true
+                    true,
+                    complicationsIconColorLauncher
                 )
             TYPE_COMPLICATIONS_BORDER_COLOR ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_border_color,
-                    COMPLICATIONS_BORDER_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsBorderColor(),
-                    true
+                    true,
+                    complicationsBorderColorLauncher
                 )
             TYPE_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_ranged_value_primary_color,
-                    COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsRangedValuePrimaryColor(),
-                    true
+                    true,
+                    complicationsRangedValuePrimaryColorLauncher
                 )
             TYPE_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_ranged_value_secondary_color,
-                    COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsRangedValueSecondaryColor(),
-                    true
+                    true,
+                    complicationsRangedValueSecondaryColorLauncher
                 )
             TYPE_COMPLICATIONS_BACKGROUND_COLOR ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_background_color,
-                    COMPLICATIONS_BACKGROUND_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getComplicationsBackgroundColor(),
-                    true
+                    true,
+                    complicationsBackgroundColorLauncher
                 )
         }
     }

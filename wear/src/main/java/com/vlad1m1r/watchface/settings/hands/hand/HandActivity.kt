@@ -3,6 +3,8 @@ package com.vlad1m1r.watchface.settings.hands.hand
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,10 +13,7 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.SizeStorage
-import com.vlad1m1r.watchface.settings.HOURS_HAND_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.MINUTES_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.Navigator
-import com.vlad1m1r.watchface.settings.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +46,41 @@ class HandActivity : BaseRecyclerActivity() {
         val handType = intent.getSerializableExtra(KEY_HAND_TYPE) as HandType
         val title = intent.getIntExtra(KEY_HAND_TITLE, 0)
 
-        adapter = HandAdapter(colorStorage, dataStorage, sizeStorage, navigator, handType, title)
+        val hoursHandColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val hoursHandColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setHoursHandColor(hoursHandColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        val minutesHandColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val minutesHandColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setMinutesHandColor(minutesHandColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        val secondsHandColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val secondsHandColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setSecondsHandColor(secondsHandColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        adapter = HandAdapter(
+            colorStorage,
+            dataStorage,
+            sizeStorage,
+            navigator,
+            handType,
+            title,
+            hoursHandColorLauncher,
+            minutesHandColorLauncher,
+            secondsHandColorLauncher
+        )
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true
@@ -55,27 +88,6 @@ class HandActivity : BaseRecyclerActivity() {
         }
 
         wearableRecyclerView.adapter = adapter
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                HOURS_HAND_COLOR_PICKER_REQUEST_CODE -> {
-                    val hoursColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setHoursHandColor(hoursColor)
-                }
-                MINUTES_HAND_COLOR_PICKER_REQUEST_CODE -> {
-                    val minutesColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setMinutesHandColor(minutesColor)
-                }
-                SECONDS_HAND_COLOR_PICKER_REQUEST_CODE -> {
-                    val secondsColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setSecondsHandColor(secondsColor)
-                }
-            }
-            adapter.notifyDataSetChanged()
-        }
     }
 
     companion object {

@@ -3,6 +3,8 @@ package com.vlad1m1r.watchface.settings.complications.colors
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +36,74 @@ class ComplicationColorsActivity : BaseRecyclerActivity() {
 
         val title = intent.getIntExtra(KEY_COMPLICATION_COLORS_TITLE, 0)
 
-        adapter = ComplicationColorsAdapter(colorStorage, navigator, title)
+        val complicationsTextColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val complicationsTextColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setComplicationsTextColor(complicationsTextColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        val complicationsTitleColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val complicationsTitleColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setComplicationsTitleColor(complicationsTitleColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        val complicationsIconColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val complicationsIconColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setComplicationsIconColor(complicationsIconColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        val complicationsBorderColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val complicationsBorderColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setComplicationsBorderColor(complicationsBorderColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        val complicationsRangedValuePrimaryColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val complicationsRangedValuePrimaryColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setComplicationsRangedValuePrimaryColor(complicationsRangedValuePrimaryColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        val complicationsRangedValueSecondaryColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val complicationsRangedValueSecondaryColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setComplicationsRangedValueSecondaryColor(complicationsRangedValueSecondaryColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        val complicationsBackgroundColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val complicationsBackgroundColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
+                colorStorage.setComplicationsBackgroundColor(complicationsBackgroundColor)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        adapter = ComplicationColorsAdapter(
+            colorStorage,
+            navigator,
+            title,
+            complicationsTextColorLauncher,
+            complicationsTitleColorLauncher,
+            complicationsIconColorLauncher,
+            complicationsBorderColorLauncher,
+            complicationsRangedValuePrimaryColorLauncher,
+            complicationsRangedValueSecondaryColorLauncher,
+            complicationsBackgroundColorLauncher
+        )
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true
@@ -42,43 +111,6 @@ class ComplicationColorsActivity : BaseRecyclerActivity() {
         }
 
         wearableRecyclerView.adapter = adapter
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                COMPLICATIONS_TEXT_COLOR_PICKER_REQUEST_CODE -> {
-                    val complicationsTextColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setComplicationsTextColor(complicationsTextColor)
-                }
-                COMPLICATIONS_TITLE_COLOR_COLOR_PICKER_REQUEST_CODE -> {
-                    val complicationsTitleColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setComplicationsTitleColor(complicationsTitleColor)
-                }
-                COMPLICATIONS_ICON_COLOR_PICKER_REQUEST_CODE -> {
-                    val complicationsIconColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setComplicationsIconColor(complicationsIconColor)
-                }
-                COMPLICATIONS_BORDER_COLOR_PICKER_REQUEST_CODE -> {
-                    val complicationsBorderColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setComplicationsBorderColor(complicationsBorderColor)
-                }
-                COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR_PICKER_REQUEST_CODE -> {
-                    val complicationsRangedValuePrimaryColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setComplicationsRangedValuePrimaryColor(complicationsRangedValuePrimaryColor)
-                }
-                COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR_PICKER_REQUEST_CODE -> {
-                    val complicationsRangedValueSecondaryColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setComplicationsRangedValueSecondaryColor(complicationsRangedValueSecondaryColor)
-                }
-                COMPLICATIONS_BACKGROUND_COLOR_PICKER_REQUEST_CODE -> {
-                    val complicationsBackgroundColor = data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setComplicationsBackgroundColor(complicationsBackgroundColor)
-                }
-            }
-            adapter.notifyDataSetChanged()
-        }
     }
 
     companion object {

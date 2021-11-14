@@ -1,15 +1,15 @@
 package com.vlad1m1r.watchface.settings.ticks
 
+import android.content.Intent
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.settings.HOUR_TICKS_COLOR_PICKER_REQUEST_CODE
-import com.vlad1m1r.watchface.settings.MINUTE_TICKS_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
@@ -30,7 +30,10 @@ class TicksAdapter(
     private val dataStorage: DataStorage,
     private val colorStorage: ColorStorage,
     private val navigator: Navigator,
-    @StringRes private val title: Int
+    @StringRes private val title: Int,
+    private val watchFacePickerLauncher: ActivityResultLauncher<Intent>,
+    private val hourTickColorLauncher: ActivityResultLauncher<Intent>,
+    private val minuteTickColorLauncher: ActivityResultLauncher<Intent>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var ticksLayoutPickerViewHolder: TicksLayoutPickerViewHolder
@@ -106,6 +109,10 @@ class TicksAdapter(
                 (viewHolder as TitleViewHolder).bind(
                     title
                 )
+            TYPE_TICKS_LAYOUT_PICKER ->
+                (viewHolder as TicksLayoutPickerViewHolder).bind(
+                    watchFacePickerLauncher
+                )
             TYPE_TICKS_AMBIENT_MODE ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
                     R.string.wear_ticks_in_ambient_mode,
@@ -121,18 +128,18 @@ class TicksAdapter(
                     dataStorage.setHasTicksInInteractiveMode(it)
                 }
             TYPE_HOUR_TICKS_COLOR ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_hour_ticks_color,
-                    HOUR_TICKS_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getHourTicksColor(),
-                    true
+                    true,
+                    hourTickColorLauncher
                 )
             TYPE_MINUTE_TICKS_COLOR ->
-                (viewHolder as ColorPickerViewHolder).setData(
+                (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_minute_ticks_color,
-                    MINUTE_TICKS_COLOR_PICKER_REQUEST_CODE,
                     colorStorage.getMinuteTicksColor(),
-                    true
+                    true,
+                    minuteTickColorLauncher
                 )
             TYPE_ADJUST_TO_SQUARE_SCREEN ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(

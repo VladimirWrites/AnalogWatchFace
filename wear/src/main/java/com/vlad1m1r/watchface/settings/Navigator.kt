@@ -1,6 +1,9 @@
 package com.vlad1m1r.watchface.settings
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import com.vlad1m1r.watchface.settings.about.AboutActivity
@@ -32,15 +35,14 @@ class Navigator @Inject constructor() {
     }
 
     fun goToColorPickerActivityForResult(
-        activity: Activity,
+        activityResultLauncher: ActivityResultLauncher<Intent>,
+        context: Context,
         showNoColor: Boolean,
-        @ColorInt preselectedColor: Int,
-        requestCode: Int
+        @ColorInt preselectedColor: Int
     ) {
-        val intent = ColorPickerActivity.newInstance(activity, showNoColor, preselectedColor)
-        activity.startActivityForResult(
-            intent,
-            requestCode
+        val intent = ColorPickerActivity.newInstance(context, showNoColor, preselectedColor)
+        activityResultLauncher.launch(
+            intent
         )
     }
 
@@ -90,10 +92,12 @@ class Navigator @Inject constructor() {
         )
     }
 
-    fun goToTicksLayoutPickerActivityForResult(activity: Activity, requestCode: Int) {
-        activity.startActivityForResult(
-            TicksLayoutPickerActivity.newInstance(activity),
-            requestCode
+    fun goToTicksLayoutPickerActivityForResult(
+        activityResultLauncher: ActivityResultLauncher<Intent>,
+        context: Context
+    ) {
+        activityResultLauncher.launch(
+            TicksLayoutPickerActivity.newInstance(context)
         )
     }
 }
