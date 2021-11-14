@@ -1,22 +1,12 @@
 package com.vlad1m1r.watchface.settings
 
 import android.app.Activity
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.base.viewholders.*
-import com.vlad1m1r.watchface.settings.about.AboutActivity
-import com.vlad1m1r.watchface.settings.background.BackgroundActivity
-import com.vlad1m1r.watchface.settings.background.KEY_BACKGROUND_TITLE
-import com.vlad1m1r.watchface.settings.complications.ComplicationsActivity
-import com.vlad1m1r.watchface.settings.complications.KEY_COMPLICATIONS_TITLE
-import com.vlad1m1r.watchface.settings.hands.HandsActivity
-import com.vlad1m1r.watchface.settings.hands.KEY_HANDS_TITLE
-import com.vlad1m1r.watchface.settings.ticks.KEY_TICKS_TITLE
-import com.vlad1m1r.watchface.settings.ticks.TicksActivity
 import java.lang.IllegalArgumentException
 
 private const val TYPE_TITLE = 0
@@ -29,7 +19,8 @@ private const val TYPE_ABOUT = 6
 private const val TYPE_ANTI_ALIAS = 7
 
 class SettingsAdapter(
-    private val dataStorage: DataStorage
+    private val dataStorage: DataStorage,
+    private val navigator: Navigator
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -113,10 +104,7 @@ class SettingsAdapter(
                     R.string.wear_complications_settings
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, ComplicationsActivity::class.java)
-                            .putExtra(KEY_COMPLICATIONS_TITLE, R.string.wear_complications_settings)
-                    )
+                    navigator.goToComplicationsActivity(activity, R.string.wear_complications_settings)
                 }
             }
 
@@ -125,10 +113,7 @@ class SettingsAdapter(
                     R.string.wear_ticks_settings
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, TicksActivity::class.java)
-                            .putExtra(KEY_TICKS_TITLE, R.string.wear_ticks_settings)
-                    )
+                    navigator.goToTicksActivity(activity, R.string.wear_ticks_settings)
                 }
             }
 
@@ -137,10 +122,7 @@ class SettingsAdapter(
                     R.string.wear_background_settings
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, BackgroundActivity::class.java)
-                            .putExtra(KEY_BACKGROUND_TITLE, R.string.wear_background_settings)
-                    )
+                    navigator.goToBackgroundActivity(activity, R.string.wear_background_settings)
                 }
             }
 
@@ -149,10 +131,7 @@ class SettingsAdapter(
                     R.string.wear_hand_settings
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, HandsActivity::class.java)
-                            .putExtra(KEY_HANDS_TITLE, R.string.wear_hand_settings)
-                    )
+                    navigator.goToHandsActivity(activity, R.string.wear_hand_settings)
                 }
             }
             TYPE_ANTI_ALIAS -> {
@@ -168,9 +147,7 @@ class SettingsAdapter(
                     R.string.wear_about_app
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, AboutActivity::class.java)
-                    )
+                    navigator.goToAboutActivity(activity)
                 }
             }
         }

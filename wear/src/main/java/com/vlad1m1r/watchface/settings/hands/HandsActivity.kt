@@ -1,17 +1,25 @@
 package com.vlad1m1r.watchface.settings.hands
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-const val KEY_HANDS_TITLE = "hands_title"
+private const val KEY_HANDS_TITLE = "hands_title"
 
 @AndroidEntryPoint
 class HandsActivity : BaseRecyclerActivity() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private lateinit var adapter: HandsAdapter
 
@@ -21,7 +29,7 @@ class HandsActivity : BaseRecyclerActivity() {
 
         val title = intent.getIntExtra(KEY_HANDS_TITLE, 0)
 
-        adapter = HandsAdapter(title)
+        adapter = HandsAdapter(navigator, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true
@@ -29,5 +37,15 @@ class HandsActivity : BaseRecyclerActivity() {
         }
 
         wearableRecyclerView.adapter = adapter
+    }
+
+    companion object {
+        fun newInstance(
+            context: Context,
+            @StringRes title: Int
+        ): Intent {
+            return Intent(context, HandsActivity::class.java)
+                .putExtra(KEY_HANDS_TITLE, title)
+        }
     }
 }

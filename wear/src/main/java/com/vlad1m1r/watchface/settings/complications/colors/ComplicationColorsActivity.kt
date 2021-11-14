@@ -1,7 +1,9 @@
 package com.vlad1m1r.watchface.settings.complications.colors
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
@@ -13,7 +15,7 @@ import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-const val KEY_COMPLICATION_COLORS_TITLE = "complication_colors_title"
+private const val KEY_COMPLICATION_COLORS_TITLE = "complication_colors_title"
 
 @AndroidEntryPoint
 class ComplicationColorsActivity : BaseRecyclerActivity() {
@@ -23,13 +25,16 @@ class ComplicationColorsActivity : BaseRecyclerActivity() {
     @Inject
     lateinit var colorStorage: ColorStorage
 
+    @Inject
+    lateinit var navigator: Navigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
         val title = intent.getIntExtra(KEY_COMPLICATION_COLORS_TITLE, 0)
 
-        adapter = ComplicationColorsAdapter(colorStorage, title)
+        adapter = ComplicationColorsAdapter(colorStorage, navigator, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true
@@ -73,6 +78,16 @@ class ComplicationColorsActivity : BaseRecyclerActivity() {
                 }
             }
             adapter.notifyDataSetChanged()
+        }
+    }
+
+    companion object {
+        fun newInstance(
+            context: Context,
+            @StringRes title: Int
+        ): Intent {
+            return Intent(context, ComplicationColorsActivity::class.java)
+                .putExtra(KEY_COMPLICATION_COLORS_TITLE, title)
         }
     }
 }

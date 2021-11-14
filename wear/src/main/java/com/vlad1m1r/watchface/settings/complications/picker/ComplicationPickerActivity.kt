@@ -1,6 +1,7 @@
 package com.vlad1m1r.watchface.settings.complications.picker
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.wearable.complications.ComplicationHelperActivity
@@ -146,6 +147,14 @@ class ComplicationPickerActivity : AppCompatActivity(), View.OnClickListener {
             ComplicationLocation.TOP -> topComplication
             ComplicationLocation.BOTTOM -> bottomComplication
             else -> null
+        }
+    }
+
+    companion object {
+        fun newInstance(
+            context: Context
+        ): Intent {
+            return Intent(context, ComplicationPickerActivity::class.java)
         }
     }
 }

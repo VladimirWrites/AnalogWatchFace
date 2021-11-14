@@ -11,9 +11,12 @@ import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.settings.colorpicker.ColorPickerActivity
+import com.vlad1m1r.watchface.settings.Navigator
 
-class ColorPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ColorPickerViewHolder(
+    itemView: View,
+    private val navigator: Navigator
+) : RecyclerView.ViewHolder(itemView) {
 
     private val activity = itemView.context as Activity
 
@@ -31,10 +34,8 @@ class ColorPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
             setText(title)
             setCompoundDrawablesWithIntrinsicBounds(null, null, colorDrawable, null)
             setOnClickListener {
-                val intent = ColorPickerActivity.newInstance(activity, showNoColor, currentColor)
-                activity.startActivityForResult(
-                    intent,
-                    requestCode
+                navigator.goToColorPickerActivityForResult(
+                    activity, showNoColor, currentColor, requestCode
                 )
             }
         }

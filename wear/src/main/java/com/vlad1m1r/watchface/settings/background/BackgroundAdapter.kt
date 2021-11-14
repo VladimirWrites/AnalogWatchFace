@@ -13,6 +13,7 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.*
 import java.lang.IllegalArgumentException
 
@@ -26,6 +27,7 @@ private const val TYPE_BACKGROUND_COMPLICATION = 5
 class BackgroundAdapter(
     private val colorStorage: ColorStorage,
     private val dataStorage: DataStorage,
+    private val navigator: Navigator,
     @StringRes private val title: Int,
     private val openBackgroundComplicationPicker: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -59,7 +61,8 @@ class BackgroundAdapter(
                         R.layout.item_settings_text,
                         parent,
                         false
-                    )
+                    ),
+                navigator
             )
             TYPE_BLACK_AMBIENT -> SettingsWithSwitchViewHolder(
                 LayoutInflater.from(parent.context)

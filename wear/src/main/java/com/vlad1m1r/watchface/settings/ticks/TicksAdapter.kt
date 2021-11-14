@@ -10,6 +10,7 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.HOUR_TICKS_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.MINUTE_TICKS_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
@@ -28,6 +29,7 @@ class TicksAdapter(
     private val res: Resources,
     private val dataStorage: DataStorage,
     private val colorStorage: ColorStorage,
+    private val navigator: Navigator,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -50,7 +52,8 @@ class TicksAdapter(
                         parent,
                         false
                     ),
-                dataStorage
+                dataStorage,
+                navigator
             ).apply {
                 ticksLayoutPickerViewHolder = this
             }
@@ -72,7 +75,8 @@ class TicksAdapter(
                         R.layout.item_settings_text,
                         parent,
                         false
-                    )
+                    ),
+                navigator
             )
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")

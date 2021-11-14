@@ -22,6 +22,7 @@ private const val TYPE_COMPLICATIONS_BACKGROUND_COLOR = 7
 
 class ComplicationColorsAdapter(
     private val colorStorage: ColorStorage,
+    private val navigator: Navigator,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -48,7 +49,8 @@ class ComplicationColorsAdapter(
                             R.layout.item_settings_text,
                             parent,
                             false
-                        )
+                        ),
+                    navigator
                 )
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")

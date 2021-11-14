@@ -11,6 +11,7 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.*
 import java.lang.IllegalArgumentException
 
@@ -25,6 +26,7 @@ class CentralCircleAdapter(
     private val colorStorage: ColorStorage,
     private val sizeStorage: SizeStorage,
     private val dataStorage: DataStorage,
+    private val navigator: Navigator,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -53,7 +55,8 @@ class CentralCircleAdapter(
                         R.layout.item_settings_text,
                         parent,
                         false
-                    )
+                    ),
+                navigator
             )
             TYPE_CENTRAL_CIRCLE_WIDTH -> SettingsSliderViewHolder(
                 LayoutInflater.from(parent.context)

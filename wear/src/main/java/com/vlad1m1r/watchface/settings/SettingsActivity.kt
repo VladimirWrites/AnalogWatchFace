@@ -38,6 +38,9 @@ class SettingsActivity : BaseRecyclerActivity() {
     @Inject
     lateinit var dataStorage: DataStorage
 
+    @Inject
+    lateinit var navigator: Navigator
+
     internal lateinit var adapter: SettingsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +49,7 @@ class SettingsActivity : BaseRecyclerActivity() {
 
         dataStorage.increaseSettingsOpenCount()
 
-        adapter = SettingsAdapter(dataStorage)
+        adapter = SettingsAdapter(dataStorage, navigator)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

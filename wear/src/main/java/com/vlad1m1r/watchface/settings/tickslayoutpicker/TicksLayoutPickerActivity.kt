@@ -1,5 +1,7 @@
 package com.vlad1m1r.watchface.settings.tickslayoutpicker
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -39,5 +41,13 @@ class TicksLayoutPickerActivity : BaseRecyclerActivity() {
         snapHelper.attachToRecyclerView(wearableRecyclerView)
 
         wearableRecyclerView.adapter = adapter
+    }
+
+    companion object {
+        fun newInstance(
+            context: Context
+        ): Intent {
+            return Intent(context, TicksLayoutPickerActivity::class.java)
+        }
     }
 }

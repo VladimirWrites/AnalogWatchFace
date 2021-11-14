@@ -1,12 +1,14 @@
 package com.vlad1m1r.watchface.settings.background
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.wearable.complications.ComplicationHelperActivity
 import android.support.wearable.complications.ComplicationProviderInfo
 import android.support.wearable.complications.ProviderChooserIntent
 import android.support.wearable.complications.ProviderInfoRetriever
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
@@ -20,12 +22,13 @@ import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import com.vlad1m1r.watchface.settings.BACKGROUND_LEFT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.BACKGROUND_RIGHT_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.COMPLICATION_CONFIG_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
-const val KEY_BACKGROUND_TITLE = "background_title"
+private const val KEY_BACKGROUND_TITLE = "background_title"
 
 @AndroidEntryPoint
 class BackgroundActivity : BaseRecyclerActivity() {
@@ -36,6 +39,9 @@ class BackgroundActivity : BaseRecyclerActivity() {
     @Inject
     lateinit var colorStorage: ColorStorage
 
+    @Inject
+    lateinit var navigator: Navigator
+
     private lateinit var adapter: BackgroundAdapter
     private lateinit var providerInfoRetriever: ProviderInfoRetriever
 
@@ -45,7 +51,7 @@ class BackgroundActivity : BaseRecyclerActivity() {
 
         val title = intent.getIntExtra(KEY_BACKGROUND_TITLE, 0)
 
-        adapter = BackgroundAdapter(colorStorage, dataStorage, title) {
+        adapter = BackgroundAdapter(colorStorage, dataStorage, navigator, title) {
             launchComplicationHelperActivity()
         }
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
@@ -132,5 +138,15 @@ class BackgroundActivity : BaseRecyclerActivity() {
             ),
             COMPLICATION_CONFIG_REQUEST_CODE
         )
+    }
+
+    companion object {
+        fun newInstance(
+            context: Context,
+            @StringRes title: Int
+        ): Intent {
+            return Intent(context, BackgroundActivity::class.java)
+                .putExtra(KEY_BACKGROUND_TITLE, title)
+        }
     }
 }

@@ -1,7 +1,9 @@
 package com.vlad1m1r.watchface.settings.hands.centralcircle
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
@@ -12,10 +14,11 @@ import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import com.vlad1m1r.watchface.settings.CENTRAL_CIRCLE_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.Navigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-const val KEY_CENTRAL_CIRCLE_TITLE = "central_circle_title"
+private const val KEY_CENTRAL_CIRCLE_TITLE = "central_circle_title"
 
 @AndroidEntryPoint
 class CentralCircleActivity : BaseRecyclerActivity() {
@@ -29,6 +32,9 @@ class CentralCircleActivity : BaseRecyclerActivity() {
     @Inject
     lateinit var colorStorage: ColorStorage
 
+    @Inject
+    lateinit var navigator: Navigator
+
     private lateinit var adapter: CentralCircleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +43,7 @@ class CentralCircleActivity : BaseRecyclerActivity() {
 
         val title = intent.getIntExtra(KEY_CENTRAL_CIRCLE_TITLE, 0)
 
-        adapter = CentralCircleAdapter(colorStorage, sizeStorage, dataStorage, title)
+        adapter = CentralCircleAdapter(colorStorage, sizeStorage, dataStorage, navigator, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true
@@ -57,6 +63,16 @@ class CentralCircleActivity : BaseRecyclerActivity() {
                 }
             }
             adapter.notifyDataSetChanged()
+        }
+    }
+
+    companion object {
+        fun newInstance(
+            context: Context,
+            @StringRes title: Int
+        ): Intent {
+            return Intent(context, CentralCircleActivity::class.java)
+                .putExtra(KEY_CENTRAL_CIRCLE_TITLE, title)
         }
     }
 }

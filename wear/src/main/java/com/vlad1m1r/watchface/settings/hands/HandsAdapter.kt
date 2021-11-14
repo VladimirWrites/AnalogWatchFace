@@ -7,14 +7,10 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
-import com.vlad1m1r.watchface.settings.hands.centralcircle.CentralCircleActivity
-import com.vlad1m1r.watchface.settings.hands.centralcircle.KEY_CENTRAL_CIRCLE_TITLE
-import com.vlad1m1r.watchface.settings.hands.hand.HandActivity
 import com.vlad1m1r.watchface.settings.hands.hand.HandType
-import com.vlad1m1r.watchface.settings.hands.hand.KEY_HAND_TITLE
-import com.vlad1m1r.watchface.settings.hands.hand.KEY_HAND_TYPE
 import java.lang.IllegalArgumentException
 
 private const val TYPE_TITLE = 0
@@ -24,6 +20,7 @@ private const val TYPE_SECOND_HAND = 3
 private const val TYPE_CENTRAL_CIRCLE = 4
 
 class HandsAdapter(
+    private val navigator: Navigator,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -79,11 +76,7 @@ class HandsAdapter(
                     R.string.wear_hours_hand
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, HandActivity::class.java)
-                            .putExtra(KEY_HAND_TYPE, HandType.HOURS)
-                            .putExtra(KEY_HAND_TITLE, R.string.wear_hours_hand)
-                    )
+                    navigator.goToHandActivity(activity, R.string.wear_hours_hand, HandType.HOURS)
                 }
             }
             TYPE_MINUTE_HAND -> {
@@ -91,11 +84,7 @@ class HandsAdapter(
                     R.string.wear_minutes_hand
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, HandActivity::class.java)
-                            .putExtra(KEY_HAND_TYPE, HandType.MINUTES)
-                            .putExtra(KEY_HAND_TITLE, R.string.wear_minutes_hand)
-                    )
+                    navigator.goToHandActivity(activity, R.string.wear_minutes_hand, HandType.MINUTES)
                 }
             }
             TYPE_SECOND_HAND -> {
@@ -103,11 +92,7 @@ class HandsAdapter(
                     R.string.wear_seconds_hand
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, HandActivity::class.java)
-                            .putExtra(KEY_HAND_TYPE, HandType.SECONDS)
-                            .putExtra(KEY_HAND_TITLE, R.string.wear_seconds_hand)
-                    )
+                    navigator.goToHandActivity(activity, R.string.wear_seconds_hand, HandType.SECONDS)
                 }
             }
             TYPE_CENTRAL_CIRCLE -> {
@@ -115,10 +100,7 @@ class HandsAdapter(
                     R.string.wear_central_circle
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, CentralCircleActivity::class.java)
-                            .putExtra(KEY_CENTRAL_CIRCLE_TITLE, R.string.wear_central_circle)
-                    )
+                    navigator.goToCentralCircleActivity(activity, R.string.wear_central_circle)
                 }
             }
         }

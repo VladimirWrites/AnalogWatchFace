@@ -1,19 +1,16 @@
 package com.vlad1m1r.watchface.settings.complications
 
 import android.app.Activity
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
+import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
-import com.vlad1m1r.watchface.settings.complications.colors.ComplicationColorsActivity
-import com.vlad1m1r.watchface.settings.complications.colors.KEY_COMPLICATION_COLORS_TITLE
-import com.vlad1m1r.watchface.settings.complications.picker.ComplicationPickerActivity
 import kotlin.IllegalArgumentException
 
 private const val TYPE_TITLE = 0
@@ -25,6 +22,7 @@ private const val TYPE_BIGGER_TEXT = 5
 
 class ComplicationsAdapter(
     private val dataStorage: DataStorage,
+    private val navigator: Navigator,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -90,19 +88,14 @@ class ComplicationsAdapter(
                     R.string.wear_complication_picker
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, ComplicationPickerActivity::class.java)
-                    )
+                    navigator.goToComplicationsPickerActivity(activity)
                 }
             TYPE_COMPLICATION_COLORS ->
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_complication_colors
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    activity.startActivity(
-                        Intent(viewHolder.itemView.context, ComplicationColorsActivity::class.java)
-                            .putExtra(KEY_COMPLICATION_COLORS_TITLE, R.string.wear_complication_colors)
-                    )
+                    navigator.goToComplicationColorsActivity(activity, R.string.wear_complication_colors)
                 }
             TYPE_COMPLICATIONS_AMBIENT_MODE ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(

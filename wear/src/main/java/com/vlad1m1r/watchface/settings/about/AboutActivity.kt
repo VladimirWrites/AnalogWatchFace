@@ -1,5 +1,6 @@
 package com.vlad1m1r.watchface.settings.about
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -56,5 +57,13 @@ class AboutActivity : AppCompatActivity() {
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .setData(Uri.parse(uri))
         RemoteIntent.startRemoteActivity(this, intent, null)
+    }
+
+    companion object {
+        fun newInstance(
+            context: Context
+        ): Intent {
+            return Intent(context, AboutActivity::class.java)
+        }
     }
 }

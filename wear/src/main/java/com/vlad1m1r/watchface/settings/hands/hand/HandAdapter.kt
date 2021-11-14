@@ -12,6 +12,7 @@ import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.HOURS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.MINUTES_HAND_COLOR_PICKER_REQUEST_CODE
+import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.SECONDS_HAND_COLOR_PICKER_REQUEST_CODE
 import com.vlad1m1r.watchface.settings.base.viewholders.*
 
@@ -26,6 +27,7 @@ class HandAdapter(
     private val colorStorage: ColorStorage,
     private val dataStorage: DataStorage,
     private val sizeStorage: SizeStorage,
+    private val navigator: Navigator,
     private val handType: HandType,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -55,7 +57,8 @@ class HandAdapter(
                         R.layout.item_settings_text,
                         parent,
                         false
-                    )
+                    ),
+                navigator
             )
             TYPE_HAND_WIDTH -> SettingsSliderViewHolder(
                 LayoutInflater.from(parent.context)
