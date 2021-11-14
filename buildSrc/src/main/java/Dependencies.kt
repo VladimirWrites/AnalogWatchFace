@@ -1,29 +1,28 @@
 object Versions {
-    const val kotlin = "1.5.21"
+    const val kotlin = "1.5.31"
 
     const val wearable_support = "2.8.1"
-    const val wearable_support_ui = "1.1.0"
+    const val wearable_support_ui = "1.2.0"
     const val wearable = "2.8.1"
 
-    const val androidXCoreKtx = "1.6.0"
+    const val androidXCoreKtx = "1.7.0"
     const val androidXAppCompat = "1.3.1"
     const val material = "1.4.0"
-    const val constraintLayout = "2.1.0"
+    const val constraintLayout = "2.1.1"
 
-    const val hilt = "2.38.1"
+    const val hilt = "2.40.1"
 
     const val junit = "4.13.2"
-    const val mockito = "3.12.4"
-    const val mockito_kotlin = "2.2.0"
+    const val mockito = "4.0.0"
     const val truth = "1.1.3"
 
-    const val gradle_android = "7.0.2"
+    const val gradle_android = "7.0.3"
 
     const val jacoco = "0.8.7"
 
     const val min_sdk = 24
-    const val target_sdk = 30
-    const val compile_sdk = 30
+    const val target_sdk = 31
+    const val compile_sdk = 31
 
     const val version_code_app = 21131
     const val version_code_wear = 21132    //Major + Minor + BugFix + 1 for app and 2 for wear
@@ -42,7 +41,7 @@ object Deps {
 
     const val junit = "junit:junit:${Versions.junit}"
     const val mockito_core = "org.mockito:mockito-core:${Versions.mockito}"
-    const val mockito_kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito_kotlin}"
+    const val mockito_kotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockito}"
     const val mockito_inline = "org.mockito:mockito-inline:${Versions.mockito}"
 
     const val truth = "com.google.truth:truth:${Versions.truth}"
@@ -52,8 +51,8 @@ object Deps {
     const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val hilt_android_plugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
 
-    const val androidXCoreKtx = "androidx.core:core-ktx:${Versions.androidXCoreKtx}"
-    const val androidXAppCompat = "androidx.appcompat:appcompat:${Versions.androidXAppCompat}"
+    const val androidx_core_ktx = "androidx.core:core-ktx:${Versions.androidXCoreKtx}"
+    const val androidx_app_compat = "androidx.appcompat:appcompat:${Versions.androidXAppCompat}"
     const val material = "com.google.android.material:material:${Versions.material}"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val constraint_layout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 }

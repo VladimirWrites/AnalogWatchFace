@@ -2,12 +2,12 @@ package com.vlad1m1r.watchface.components.hands
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import com.vlad1m1r.watchface.model.Point
 import org.junit.Test
+import org.mockito.kotlin.any
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class DrawCircleShould {
 

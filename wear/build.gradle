@@ -80,6 +80,7 @@ dependencies {
     implementation Deps.wearable_support_ui
     implementation Deps.wearable_support
     compileOnly Deps.wearable
+    implementation Deps.constraint_layout
 
     implementation Deps.hilt_android
     kapt Deps.hilt_compiler

@@ -2,9 +2,9 @@ package com.vlad1m1r.watchface.components.hands
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import com.nhaarman.mockitokotlin2.*
 import com.vlad1m1r.watchface.model.Point
 import org.junit.Test
+import org.mockito.kotlin.*
 
 class DrawHandShould {
 
