@@ -10,6 +10,7 @@ import android.support.wearable.complications.ComplicationData
 import android.support.wearable.watchface.CanvasWatchFaceService
 import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
+import android.util.Log
 import android.view.SurfaceHolder
 import com.vlad1m1r.watchface.components.COMPLICATION_SUPPORTED_TYPES
 import com.vlad1m1r.watchface.components.Layouts
@@ -20,6 +21,7 @@ import com.vlad1m1r.watchface.model.Point
 import java.lang.ref.WeakReference
 import java.util.*
 import android.view.WindowInsets
+import com.vlad1m1r.watchface.utils.sanitize
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -210,8 +212,11 @@ class WatchFace : CanvasWatchFaceService() {
             canvas.restore()
         }
 
-        override fun onComplicationDataUpdate(watchFaceComplicationId: Int, data: ComplicationData) {
-            super.onComplicationDataUpdate(watchFaceComplicationId, data)
+        override fun onComplicationDataUpdate(watchFaceComplicationId: Int, complicationData: ComplicationData) {
+            super.onComplicationDataUpdate(watchFaceComplicationId, complicationData)
+
+            val data = complicationData.sanitize(this@WatchFace)
+
             if(watchFaceComplicationId == BACKGROUND_COMPLICATION_ID) {
                 if(data.largeImage != null) {
                     layouts.backgroundComplication.isVisible = true
