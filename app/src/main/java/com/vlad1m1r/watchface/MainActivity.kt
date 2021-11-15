@@ -6,17 +6,17 @@ import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.ResultReceiver
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.wear.remote.interactions.RemoteActivityHelper
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.wearable.intent.RemoteIntent
+import com.google.common.util.concurrent.FutureCallback
+import com.google.common.util.concurrent.Futures
+import com.google.common.util.concurrent.MoreExecutors
 
 class MainActivity : Activity() {
     private lateinit var root: View
@@ -98,19 +98,24 @@ class MainActivity : Activity() {
     private fun openUriOnWear(uri: String) {
 
         val intent = Intent(Intent.ACTION_VIEW)
+            .addCategory(Intent.CATEGORY_DEFAULT)
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .setData(Uri.parse(uri))
 
-        RemoteIntent.startRemoteActivity(this, intent, object : ResultReceiver(Handler(Looper.getMainLooper())) {
-            override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
-                super.onReceiveResult(resultCode, resultData)
-                if (resultCode == RemoteIntent.RESULT_OK) {
+        val result = RemoteActivityHelper(this).startRemoteActivity(intent)
+
+        Futures.addCallback(
+            result, object : FutureCallback<Any?> {
+                override fun onSuccess(result: Any?) {
                     showMessage(R.string.app_open_playstore_success_message)
-                } else {
+                }
+
+                override fun onFailure(t: Throwable) {
                     showMessage(R.string.app_open_playstore_error_message)
                 }
-            }
-        })
+
+            }, MoreExecutors.directExecutor()
+        )
     }
 
     private fun showMessage(@StringRes message: Int) {

@@ -4,9 +4,10 @@ object Versions {
     const val wearable_support = "2.8.1"
     const val wearable_support_ui = "1.2.0"
     const val wearable = "2.8.1"
+    const val wear_remote_interactions = "1.0.0"
 
-    const val androidXCoreKtx = "1.7.0"
-    const val androidXAppCompat = "1.3.1"
+    const val androidx_core_ktx = "1.7.0"
+    const val androidx_app_compat = "1.3.1"
     const val material = "1.4.0"
     const val constraintLayout = "2.1.1"
 
@@ -34,6 +35,8 @@ object Deps {
     const val wearable_support_ui = "androidx.wear:wear:${Versions.wearable_support_ui}"
     const val wearable = "com.google.android.wearable:wearable:${Versions.wearable}"
 
+    const val wear_remote_interactions = "androidx.wear:wear-remote-interactions:${Versions.wear_remote_interactions}"
+
     const val hilt_android = "com.google.dagger:hilt-android:${Versions.hilt}"
     const val hilt_compiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
     const val hilt_android_compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
@@ -51,8 +54,8 @@ object Deps {
     const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val hilt_android_plugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
 
-    const val androidx_core_ktx = "androidx.core:core-ktx:${Versions.androidXCoreKtx}"
-    const val androidx_app_compat = "androidx.appcompat:appcompat:${Versions.androidXAppCompat}"
+    const val androidx_core_ktx = "androidx.core:core-ktx:${Versions.androidx_core_ktx}"
+    const val androidx_app_compat = "androidx.appcompat:appcompat:${Versions.androidx_app_compat}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val constraint_layout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 }

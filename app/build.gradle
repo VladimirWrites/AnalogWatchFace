@@ -30,11 +30,9 @@ android {
 dependencies {
     implementation project(path: ':styleguide')
 
-    implementation Deps.wearable_support
-    implementation Deps.wearable
-
     implementation Deps.androidx_core_ktx
     implementation Deps.androidx_app_compat
     implementation Deps.material
     implementation Deps.constraint_layout
+    implementation Deps.wear_remote_interactions
 }
