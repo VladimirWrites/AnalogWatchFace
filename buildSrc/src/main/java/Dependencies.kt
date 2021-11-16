@@ -25,9 +25,9 @@ object Versions {
     const val target_sdk = 31
     const val compile_sdk = 31
 
-    const val version_code_app = 21211
-    const val version_code_wear = 21212    //Major + Minor + BugFix + 1 for app and 2 for wear
-    const val version_name = "2.12.1"
+    const val version_code_app = 21221
+    const val version_code_wear = 21222    //Major + Minor + BugFix + 1 for app and 2 for wear
+    const val version_name = "2.12.2"
 }
 
 object Deps {
