@@ -1,5 +1,6 @@
 package com.vlad1m1r.watchface
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
@@ -7,6 +8,8 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.os.*
 import android.support.wearable.complications.ComplicationData
+import android.support.wearable.complications.ComplicationProviderInfo
+import android.support.wearable.complications.ProviderInfoRetriever
 import android.support.wearable.watchface.CanvasWatchFaceService
 import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
@@ -23,6 +26,7 @@ import java.util.*
 import android.view.WindowInsets
 import com.vlad1m1r.watchface.utils.sanitize
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.Executors
 import javax.inject.Inject
 
 private const val INTERACTIVE_UPDATE_RATE_SLOW_MS = 1000
@@ -68,6 +72,7 @@ class WatchFace : CanvasWatchFaceService() {
         private val layouts: Layouts
     ) : CanvasWatchFaceService.Engine(false) {
 
+        private lateinit var providerInfoRetriever: ProviderInfoRetriever
         private lateinit var calendar: Calendar
 
         private val updateTimeHandler = EngineHandler(this)
@@ -111,6 +116,25 @@ class WatchFace : CanvasWatchFaceService() {
         override fun onCreate(holder: SurfaceHolder) {
             super.onCreate(holder)
 
+            providerInfoRetriever = ProviderInfoRetriever(this@WatchFace, Executors.newCachedThreadPool()).apply {
+                init()
+                retrieveProviderInfo(
+                    object : ProviderInfoRetriever.OnProviderInfoReceivedCallback() {
+                        override fun onProviderInfoReceived(
+                            watchFaceComplicationId: Int,
+                            complicationProviderInfo: ComplicationProviderInfo?
+                        ) {
+                            dataStorage.setComplicationProviderName(
+                                watchFaceComplicationId,
+                                complicationProviderInfo?.providerName ?: ""
+                            )
+                        }
+                    },
+                    ComponentName(this@WatchFace, WatchFace::class.java),
+                    *COMPLICATION_SUPPORTED_TYPES.keys.toIntArray()
+                )
+            }
+
             setWatchFaceStyle(
                 WatchFaceStyle.Builder(this@WatchFace)
                     .setAcceptsTapEvents(true)
@@ -133,6 +157,7 @@ class WatchFace : CanvasWatchFaceService() {
         }
 
         override fun onDestroy() {
+            providerInfoRetriever.release()
             updateTimeHandler.removeMessages(MESSAGE_UPDATE_ID)
             val sharedPref = getSharedPreferences(
                 KEY_ANALOG_WATCH_FACE,
@@ -215,7 +240,7 @@ class WatchFace : CanvasWatchFaceService() {
         override fun onComplicationDataUpdate(watchFaceComplicationId: Int, complicationData: ComplicationData) {
             super.onComplicationDataUpdate(watchFaceComplicationId, complicationData)
 
-            val data = complicationData.sanitize(this@WatchFace)
+            val data = complicationData.sanitize(this@WatchFace, dataStorage.getComplicationProviderName(watchFaceComplicationId))
 
             if(watchFaceComplicationId == BACKGROUND_COMPLICATION_ID) {
                 if(data.largeImage != null) {

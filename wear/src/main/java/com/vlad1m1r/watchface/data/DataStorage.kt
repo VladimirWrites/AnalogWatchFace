@@ -1,6 +1,7 @@
 package com.vlad1m1r.watchface.data
 
 import android.content.SharedPreferences
+import com.vlad1m1r.watchface.settings.complications.picker.ComplicationLocation
 
 const val KEY_ANALOG_WATCH_FACE = "analog_watch_face_key"
 
@@ -25,6 +26,8 @@ const val KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE = "use_anti_aliasing_in_ambient_
 const val KEY_SETTINGS_OPEN_COUNT = "settings_open_count"
 
 const val KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE = "has_center_circle_in_ambient_mode"
+
+const val KEY_COMPLICATION_PROVIDER_NAME = "complication_provider_name"
 
 class DataStorage(private val sharedPreferences: SharedPreferences) {
 
@@ -126,4 +129,13 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
         editor.putBoolean(KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE, ticksInAmbientMode)
         editor.apply()
     }
+
+    fun setComplicationProviderName(complicationId: Int, complicationProviderName: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString(KEY_COMPLICATION_PROVIDER_NAME + complicationId, complicationProviderName)
+        editor.apply()
+    }
+
+    fun getComplicationProviderName(complicationId: Int) = sharedPreferences.getString(KEY_COMPLICATION_PROVIDER_NAME + complicationId, "")
+
 }

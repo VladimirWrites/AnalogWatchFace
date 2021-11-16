@@ -17,11 +17,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.WatchFace
 import com.vlad1m1r.watchface.components.COMPLICATION_SUPPORTED_TYPES
+import com.vlad1m1r.watchface.data.DataStorage
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ComplicationPickerActivity : AppCompatActivity(), View.OnClickListener {
+
+    @Inject
+    lateinit var dataStorage: DataStorage
 
     private var selectedComplication: ComplicationLocation? = null
     private lateinit var leftComplication: ImageView
@@ -109,6 +114,12 @@ class ComplicationPickerActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setComplication(complicationProviderInfo: ComplicationProviderInfo?, watchFaceComplicationId: Int) {
+
+        dataStorage.setComplicationProviderName(
+            watchFaceComplicationId,
+            complicationProviderInfo?.providerName ?: ""
+        )
+
         val complicationLocation =
             ComplicationLocation.getFromId(
                 watchFaceComplicationId

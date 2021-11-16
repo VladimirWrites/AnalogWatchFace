@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="heart_rate">პულსი</string>
+    <string name="home_spo2_title">სისხლში ჟანგბადის დონე</string>
+</resources>
