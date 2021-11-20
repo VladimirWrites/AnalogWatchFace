@@ -10,11 +10,11 @@
 
     <!-- Read data from samsung health -->
     <uses-permission android:name="com.samsung.android.wear.shealth.healthdataprovider.permission.READ" />
+
     <!-- For API 30+, we need to query packages to display icons from them in complications -->
-    <!--I don't know which one to query so I just hope that one of these works-->
-    <queries>
-        <package android:name="com.samsung.android.wear.shealth" />
-    </queries>
+    <uses-permission
+            android:name="android.permission.QUERY_ALL_PACKAGES"
+            tools:ignore="QueryAllPackagesPermission" />
 
     <application
             android:allowBackup="true"
