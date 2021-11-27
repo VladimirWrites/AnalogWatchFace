@@ -248,6 +248,7 @@ class WatchFace : CanvasWatchFaceService() {
                     layouts.backgroundComplication.setComplicationData(data)
                 } else {
                     layouts.backgroundComplication.isVisible = false
+                    layouts.backgroundComplication.setComplicationData(null)
                 }
             } else {
                 layouts.complications.setComplicationData(watchFaceComplicationId, data)
