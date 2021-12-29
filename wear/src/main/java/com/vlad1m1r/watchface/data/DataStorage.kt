@@ -97,14 +97,6 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
         editor.apply()
     }
 
-    fun hasBiggerComplicationText() = sharedPreferences.getBoolean(KEY_HAS_BIGGER_COMPLICATION_TEXT, false)
-
-    fun setHasBiggerComplicationText(hasBiggerComplicationText: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_HAS_BIGGER_COMPLICATION_TEXT, hasBiggerComplicationText)
-        editor.apply()
-    }
-
     fun useAntiAliasingInAmbientMode() = sharedPreferences.getBoolean(KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE, false)
 
     fun setUseAntiAliasingInAmbientMode(useAntiAliasingInAmbientMode: Boolean) {

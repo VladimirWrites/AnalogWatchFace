@@ -9,8 +9,8 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.model.Mode
+import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.WatchView
 import com.vlad1m1r.watchface.utils.getDarkerGrayscale
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
@@ -95,7 +95,10 @@ class Complications @Inject constructor(
     fun setComplicationDrawable(drawableResId: Int) {
         complicationDrawables.keys.forEach { complicationId ->
             complicationDrawables[complicationId] =
-                (AppCompatResources.getDrawable(context, drawableResId) as ComplicationDrawable).apply {
+                (AppCompatResources.getDrawable(
+                    context,
+                    drawableResId
+                ) as ComplicationDrawable).apply {
                     setContext(context)
                     complicationData[complicationId]?.let { setComplicationData(it) }
                 }
@@ -229,19 +232,11 @@ class Complications @Inject constructor(
     private fun invalidateTextSize() {
         COMPLICATION_SUPPORTED_TYPES.keys.forEach {
             complicationDrawables[it]?.apply {
-                if (dataStorage.hasBiggerComplicationText()) {
-                    setTitleSizeActive(1000) //Complication will show the biggest size it can fit
-                    setTextSizeActive(1000)
-                    setTitleSizeAmbient(1000)
-                    setTextSizeAmbient(1000)
-                } else {
-                    val defaultTextSize = context.resources.getDimensionPixelSize(R.dimen.text_size_normal)
-
-                    setTitleSizeActive(defaultTextSize) //Complication will show the biggest size it can fit
-                    setTextSizeActive(defaultTextSize)
-                    setTitleSizeAmbient(defaultTextSize)
-                    setTextSizeAmbient(defaultTextSize)
-                }
+                val defaultTextSize = context.resources.getDimensionPixelSize(R.dimen.text_size_normal)
+                setTitleSizeActive(defaultTextSize)
+                setTextSizeActive(defaultTextSize)
+                setTitleSizeAmbient(defaultTextSize)
+                setTextSizeAmbient(defaultTextSize)
             }
         }
     }

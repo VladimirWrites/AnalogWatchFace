@@ -11,14 +11,12 @@ import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
-import kotlin.IllegalArgumentException
 
 private const val TYPE_TITLE = 0
 private const val TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG = 1
 private const val TYPE_COMPLICATION_COLORS = 2
 private const val TYPE_COMPLICATIONS_AMBIENT_MODE = 3
 private const val TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS = 4
-private const val TYPE_BIGGER_TEXT = 5
 
 class ComplicationsAdapter(
     private val dataStorage: DataStorage,
@@ -29,15 +27,15 @@ class ComplicationsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_TITLE -> TitleViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_title,
-                            parent,
-                            false
-                        )
-                )
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_title,
+                        parent,
+                        false
+                    )
+            )
             TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG,
-            TYPE_COMPLICATION_COLORS-> SettingsViewHolder(
+            TYPE_COMPLICATION_COLORS -> SettingsViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(
                         R.layout.item_settings_text,
@@ -46,8 +44,7 @@ class ComplicationsAdapter(
                     )
             )
             TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS,
-            TYPE_COMPLICATIONS_AMBIENT_MODE,
-            TYPE_BIGGER_TEXT ->
+            TYPE_COMPLICATIONS_AMBIENT_MODE ->
                 SettingsWithSwitchViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
@@ -63,7 +60,7 @@ class ComplicationsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return 5
     }
 
     override fun getItemViewType(position: Int) =
@@ -73,7 +70,6 @@ class ComplicationsAdapter(
             2 -> TYPE_COMPLICATION_COLORS
             3 -> TYPE_COMPLICATIONS_AMBIENT_MODE
             4 -> TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS
-            5 -> TYPE_BIGGER_TEXT
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
@@ -95,7 +91,10 @@ class ComplicationsAdapter(
                     R.string.wear_complication_colors
                 ) {
                     val activity = viewHolder.itemView.context as Activity
-                    navigator.goToComplicationColorsActivity(activity, R.string.wear_complication_colors)
+                    navigator.goToComplicationColorsActivity(
+                        activity,
+                        R.string.wear_complication_colors
+                    )
                 }
             TYPE_COMPLICATIONS_AMBIENT_MODE ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
@@ -111,16 +110,6 @@ class ComplicationsAdapter(
                         dataStorage.hasBiggerTopAndBottomComplications(),
                     ) {
                         dataStorage.setHasBiggerTopAndBottomComplications(it)
-                    }
-                }
-            }
-            TYPE_BIGGER_TEXT -> {
-                (viewHolder as SettingsWithSwitchViewHolder).apply {
-                    bind(
-                        R.string.wear_bigger_text_in_complications,
-                        dataStorage.hasBiggerComplicationText(),
-                    ) {
-                        dataStorage.setHasBiggerComplicationText(it)
                     }
                 }
             }

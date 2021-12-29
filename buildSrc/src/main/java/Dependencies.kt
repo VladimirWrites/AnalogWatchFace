@@ -17,7 +17,7 @@ object Versions {
     const val mockito = "4.0.0"
     const val truth = "1.1.3"
 
-    const val gradle_android = "7.0.3"
+    const val gradle_android = "7.0.4"
 
     const val jacoco = "0.8.7"
 
