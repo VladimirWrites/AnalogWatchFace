@@ -96,7 +96,8 @@ class WatchFace : CanvasWatchFaceService() {
                     key == KEY_HAND_HOURS_WIDTH || key == KEY_HAND_MINUTES_WIDTH ||
                     key == KEY_HAND_SECONDS_WIDTH || key == KEY_HAND_HOURS_SCALE ||
                     key == KEY_HAND_MINUTES_SCALE || key == KEY_HAND_SECONDS_SCALE ||
-                    key == KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE || key == KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE
+                    key == KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE || key == KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE ||
+                    key == KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE
                 ) {
                     layouts.invalidateHands()
                 } else if (key == KEY_BACKGROUND_LEFT_COLOR || key == KEY_BACKGROUND_RIGHT_COLOR || key == KEY_HAS_BLACK_AMBIENT_BACKGROUND) {

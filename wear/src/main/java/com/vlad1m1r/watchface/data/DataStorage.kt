@@ -29,6 +29,7 @@ const val KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE = "has_center_circle_in_ambient_
 
 const val KEY_COMPLICATION_PROVIDER_NAME = "complication_provider_name"
 
+const val KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE = "should_keep_hand_color_in_ambient_mode"
 class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun getTicksLayoutType(): TicksLayoutType {
@@ -129,5 +130,13 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
     }
 
     fun getComplicationProviderName(complicationId: Int) = sharedPreferences.getString(KEY_COMPLICATION_PROVIDER_NAME + complicationId, "")
+
+    fun shouldKeepHandColorInAmbientMode() = sharedPreferences.getBoolean(KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE, false)
+
+    fun setShouldKeepHandColorInAmbientMode(shouldKeepHandColorInAmbientMode: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE, shouldKeepHandColorInAmbientMode)
+        editor.apply()
+    }
 
 }

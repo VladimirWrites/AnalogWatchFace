@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +22,9 @@ class HandsActivity : BaseRecyclerActivity() {
     @Inject
     lateinit var navigator: Navigator
 
+    @Inject
+    lateinit var dataStorage: DataStorage
+
     private lateinit var adapter: HandsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +33,7 @@ class HandsActivity : BaseRecyclerActivity() {
 
         val title = intent.getIntExtra(KEY_HANDS_TITLE, 0)
 
-        adapter = HandsAdapter(navigator, title)
+        adapter = HandsAdapter(navigator, dataStorage, title)
         wearableRecyclerView = findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

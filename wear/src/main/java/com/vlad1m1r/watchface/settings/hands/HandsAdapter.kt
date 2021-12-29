@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsViewHolder
+import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
 import com.vlad1m1r.watchface.settings.hands.hand.HandType
 import java.lang.IllegalArgumentException
@@ -18,9 +20,11 @@ private const val TYPE_HOUR_HAND = 1
 private const val TYPE_MINUTE_HAND = 2
 private const val TYPE_SECOND_HAND = 3
 private const val TYPE_CENTRAL_CIRCLE = 4
+private const val TYPE_KEEP_COLOR_IN_AMBIENT_MODE = 5
 
 class HandsAdapter(
     private val navigator: Navigator,
+    private val dataStorage: DataStorage,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -45,6 +49,14 @@ class HandsAdapter(
                         false
                     )
             )
+            TYPE_KEEP_COLOR_IN_AMBIENT_MODE -> SettingsWithSwitchViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(
+                        R.layout.item_settings_switch,
+                        parent,
+                        false
+                    )
+            )
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
             }
@@ -52,7 +64,7 @@ class HandsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 6
     }
 
     override fun getItemViewType(position: Int) =
@@ -62,6 +74,7 @@ class HandsAdapter(
             2 -> TYPE_MINUTE_HAND
             3 -> TYPE_SECOND_HAND
             4 -> TYPE_CENTRAL_CIRCLE
+            5 -> TYPE_KEEP_COLOR_IN_AMBIENT_MODE
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
@@ -101,6 +114,14 @@ class HandsAdapter(
                 ) {
                     val activity = viewHolder.itemView.context as Activity
                     navigator.goToCentralCircleActivity(activity, R.string.wear_central_circle)
+                }
+            }
+            TYPE_KEEP_COLOR_IN_AMBIENT_MODE -> {
+                (viewHolder as SettingsWithSwitchViewHolder).bind(
+                    R.string.wear_keep_hands_color_in_ambient_mode,
+                    dataStorage.shouldKeepHandColorInAmbientMode()
+                ) {
+                    dataStorage.setShouldKeepHandColorInAmbientMode(it)
                 }
             }
         }
