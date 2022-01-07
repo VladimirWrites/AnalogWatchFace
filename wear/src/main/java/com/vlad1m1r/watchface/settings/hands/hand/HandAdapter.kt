@@ -149,7 +149,11 @@ class HandAdapter(
                     HandType.SECONDS -> sizeStorage.getSecondsHandWidth()
                 },
                 1,
-                10
+                when (handType) {
+                    HandType.HOURS -> 20
+                    HandType.MINUTES -> 20
+                    HandType.SECONDS -> 10
+                }
             ) { handWidth ->
                 when (handType) {
                     HandType.HOURS -> sizeStorage.setHoursHandWidth(handWidth)
