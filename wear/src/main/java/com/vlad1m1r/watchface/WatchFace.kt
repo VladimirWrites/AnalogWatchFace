@@ -1,7 +1,11 @@
 package com.vlad1m1r.watchface
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.graphics.Canvas
@@ -15,17 +19,19 @@ import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
 import android.util.Log
 import android.view.SurfaceHolder
+import android.view.WindowInsets
 import com.vlad1m1r.watchface.components.COMPLICATION_SUPPORTED_TYPES
 import com.vlad1m1r.watchface.components.Layouts
 import com.vlad1m1r.watchface.components.background.BACKGROUND_COMPLICATION_ID
 import com.vlad1m1r.watchface.data.*
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
-import java.lang.ref.WeakReference
-import java.util.*
-import android.view.WindowInsets
+import com.vlad1m1r.watchface.utils.Device
 import com.vlad1m1r.watchface.utils.sanitize
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.ref.WeakReference
+import java.time.LocalDateTime
+import java.util.*
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
@@ -33,6 +39,7 @@ private const val INTERACTIVE_UPDATE_RATE_SLOW_MS = 1000
 private const val INTERACTIVE_UPDATE_RATE_FAST_MS = 33
 
 private const val MESSAGE_UPDATE_ID = 0
+private const val TAG = "AnalogWatchFace"
 
 @AndroidEntryPoint
 class WatchFace : CanvasWatchFaceService() {
@@ -177,6 +184,7 @@ class WatchFace : CanvasWatchFaceService() {
             super.onTimeTick()
             calendar.timeZone = TimeZone.getDefault()
             invalidate()
+            handleGalaxyWatch4WearOSJanuaryBug()
         }
 
         override fun onAmbientModeChanged(inAmbientMode: Boolean) {
@@ -305,5 +313,46 @@ class WatchFace : CanvasWatchFaceService() {
                 INTERACTIVE_UPDATE_RATE_SLOW_MS
             }
         }
+
+        // ------------------------------------
+        // Samsung January WearOS update bug fix
+        // Don't forget to remove SCHEDULE_EXACT_ALARM permission when removing this ****
+        // ------------------------------------
+        private val galaxyWatch4BugPendingIntent = PendingIntent.getService(
+            this@WatchFace,
+            1,
+            Intent(this@WatchFace, WatchFace::class.java),
+            PendingIntent.FLAG_IMMUTABLE,
+        )
+        private val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        private var nextGalaxyWatch4BugAlarmTargetMinute: Int? = null
+
+        @SuppressLint("NewApi")
+        private fun handleGalaxyWatch4WearOSJanuaryBug() {
+            try {
+                if (Device.isGalaxyWatch4BuggyWearOSVersion && isInAmbientMode) {
+                    val now = LocalDateTime.now()
+                    val seconds = now.second
+                    val targetMinute = now.minute + 1
+
+                    if (nextGalaxyWatch4BugAlarmTargetMinute != targetMinute) {
+                        nextGalaxyWatch4BugAlarmTargetMinute = targetMinute
+
+                        val delay = (60 - seconds) * 1000L
+
+                        alarmManager.setAlarmClock(
+                            AlarmManager.AlarmClockInfo(
+                                System.currentTimeMillis() + delay,
+                                galaxyWatch4BugPendingIntent,
+                            ),
+                            galaxyWatch4BugPendingIntent,
+                        )
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error while handling january WearOS bug", e)
+            }
+        }
+        // ------------------------------------
     }
 }
