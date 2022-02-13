@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlin = "1.5.31"
+    const val kotlin = "1.6.10"
 
     const val wearable_support = "2.8.1"
     const val wearable_support_ui = "1.2.0"
@@ -7,23 +7,23 @@ object Versions {
     const val wear_remote_interactions = "1.0.0"
 
     const val androidx_core_ktx = "1.7.0"
-    const val androidx_app_compat = "1.3.1"
-    const val material = "1.4.0"
-    const val constraintLayout = "2.1.1"
+    const val androidx_app_compat = "1.4.1"
+    const val material = "1.5.0"
+    const val constraintLayout = "2.1.3"
 
-    const val hilt = "2.40.1"
+    const val hilt = "2.40.5"
 
     const val junit = "4.13.2"
-    const val mockito = "4.0.0"
+    const val mockito = "4.3.1"
     const val truth = "1.1.3"
 
-    const val gradle_android = "7.0.4"
+    const val gradle_android = "7.1.1"
 
     const val jacoco = "0.8.7"
 
     const val min_sdk = 24
-    const val target_sdk = 31
-    const val compile_sdk = 31
+    const val target_sdk = 32
+    const val compile_sdk = 32
 
     const val version_code_app = 21401
     const val version_code_wear = 21402    //Major + Minor + BugFix + 1 for app and 2 for wear
