@@ -38,14 +38,7 @@ class HandAdapter(
 
         return when (viewType) {
             TYPE_TITLE -> TitleViewHolder(parent)
-            TYPE_PREVIEW -> WatchPreviewViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_hand_preview,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_PREVIEW -> WatchPreviewViewHolder(parent)
             TYPE_COLOR_HAND -> ColorPickerViewHolder(parent, navigator)
             TYPE_HAND_WIDTH -> SettingsSliderViewHolder(parent)
             TYPE_HAND_SCALE -> SettingsSliderScaleViewHolder(parent)

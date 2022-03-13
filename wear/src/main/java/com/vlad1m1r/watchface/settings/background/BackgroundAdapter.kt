@@ -41,14 +41,7 @@ class BackgroundAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_TITLE -> TitleViewHolder(parent)
-            TYPE_PREVIEW -> WatchPreviewViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_hand_preview,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_PREVIEW -> WatchPreviewViewHolder(parent)
             TYPE_COLOR_LEFT,
             TYPE_COLOR_RIGHT -> ColorPickerViewHolder(parent, navigator)
             TYPE_BLACK_AMBIENT -> SettingsWithSwitchViewHolder(parent)

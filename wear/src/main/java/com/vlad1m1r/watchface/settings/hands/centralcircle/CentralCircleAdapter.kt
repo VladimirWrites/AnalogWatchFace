@@ -36,14 +36,7 @@ class CentralCircleAdapter(
 
         return when (viewType) {
             TYPE_TITLE -> TitleViewHolder(parent)
-            TYPE_PREVIEW -> WatchPreviewViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_hand_preview,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_PREVIEW -> WatchPreviewViewHolder(parent)
             TYPE_COLOR_CENTRAL_CIRCLE -> ColorPickerViewHolder(parent, navigator)
             TYPE_CENTRAL_CIRCLE_WIDTH,
             TYPE_CENTRAL_CIRCLE_RADIUS -> SettingsSliderViewHolder(parent)
