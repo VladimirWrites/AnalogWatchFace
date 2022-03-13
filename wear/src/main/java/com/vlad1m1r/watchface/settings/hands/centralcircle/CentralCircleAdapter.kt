@@ -52,22 +52,8 @@ class CentralCircleAdapter(
                     )
             )
             TYPE_COLOR_CENTRAL_CIRCLE -> ColorPickerViewHolder(parent, navigator)
-            TYPE_CENTRAL_CIRCLE_WIDTH -> SettingsSliderViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_slider,
-                        parent,
-                        false
-                    )
-            )
-            TYPE_CENTRAL_CIRCLE_RADIUS -> SettingsSliderViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_slider,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_CENTRAL_CIRCLE_WIDTH,
+            TYPE_CENTRAL_CIRCLE_RADIUS -> SettingsSliderViewHolder(parent)
             TYPE_CENTRAL_CIRCLE_IN_AMBIENT_MODE -> SettingsWithSwitchViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(

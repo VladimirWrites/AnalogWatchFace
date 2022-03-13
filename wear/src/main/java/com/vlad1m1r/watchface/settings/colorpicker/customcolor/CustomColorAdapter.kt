@@ -45,14 +45,7 @@ class CustomColorAdapter(
             )
             TYPE_RED_COLOR_SCALE,
             TYPE_GREEN_COLOR_SCALE,
-            TYPE_BLUE_COLOR_SCALE -> SettingsSliderViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_slider,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_BLUE_COLOR_SCALE -> SettingsSliderViewHolder(parent)
             TYPE_CONFIRM -> SettingsButtonViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(
