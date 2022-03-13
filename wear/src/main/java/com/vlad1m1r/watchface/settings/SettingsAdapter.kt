@@ -40,12 +40,7 @@ class SettingsAdapter(
             TYPE_HANDS -> SettingsViewHolder(parent)
 
             TYPE_RATE -> RateViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_rate,
-                        parent,
-                        false
-                    ),
+                parent,
                 RateApp(parent.context)
             )
             TYPE_ANTI_ALIAS -> SettingsWithSwitchViewHolder(
