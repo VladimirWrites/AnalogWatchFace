@@ -25,14 +25,7 @@ class SettingsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            TYPE_TITLE -> TitleViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_title,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_TITLE -> TitleViewHolder(parent)
             TYPE_COMPLICATIONS,
             TYPE_TICKS,
             TYPE_BACKGROUND,

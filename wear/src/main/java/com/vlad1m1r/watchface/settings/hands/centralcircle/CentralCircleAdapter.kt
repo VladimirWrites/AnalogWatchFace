@@ -35,14 +35,7 @@ class CentralCircleAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return when (viewType) {
-            TYPE_TITLE -> TitleViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_title,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_TITLE -> TitleViewHolder(parent)
             TYPE_PREVIEW -> WatchPreviewViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(
@@ -54,6 +47,7 @@ class CentralCircleAdapter(
             TYPE_COLOR_CENTRAL_CIRCLE -> ColorPickerViewHolder(parent, navigator)
             TYPE_CENTRAL_CIRCLE_WIDTH,
             TYPE_CENTRAL_CIRCLE_RADIUS -> SettingsSliderViewHolder(parent)
+            TYPE_CENTRAL_CIRCLE_IN_AMBIENT_MODE -> SettingsWithSwitchViewHolder(parent)
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
             }

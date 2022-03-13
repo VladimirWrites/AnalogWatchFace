@@ -37,14 +37,7 @@ class ComplicationColorsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            TYPE_TITLE -> TitleViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_title,
-                            parent,
-                            false
-                        )
-                )
+            TYPE_TITLE -> TitleViewHolder(parent)
             TYPE_COMPLICATIONS_TEXT_COLOR,
             TYPE_COMPLICATIONS_TITLE_COLOR,
             TYPE_COMPLICATIONS_ICON_COLOR,
