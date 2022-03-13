@@ -56,14 +56,7 @@ class HandAdapter(
             TYPE_COLOR_HAND -> ColorPickerViewHolder(parent, navigator)
             TYPE_HAND_WIDTH -> SettingsSliderViewHolder(parent)
             TYPE_HAND_SCALE -> SettingsSliderScaleViewHolder(parent)
-            TYPE_SMOOTH_HAND -> SettingsWithSwitchViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_switch,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_SMOOTH_HAND -> SettingsWithSwitchViewHolder(parent)
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
             }

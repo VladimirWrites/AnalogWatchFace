@@ -42,14 +42,7 @@ class HandsAdapter(
             TYPE_MINUTE_HAND,
             TYPE_SECOND_HAND,
             TYPE_CENTRAL_CIRCLE -> SettingsViewHolder(parent)
-            TYPE_KEEP_COLOR_IN_AMBIENT_MODE -> SettingsWithSwitchViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_switch,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_KEEP_COLOR_IN_AMBIENT_MODE -> SettingsWithSwitchViewHolder(parent)
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
             }

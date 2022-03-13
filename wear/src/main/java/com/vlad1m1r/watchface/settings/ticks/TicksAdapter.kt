@@ -62,15 +62,7 @@ class TicksAdapter(
             }
             TYPE_TICKS_INTERACTIVE_MODE,
             TYPE_TICKS_AMBIENT_MODE,
-            TYPE_ADJUST_TO_SQUARE_SCREEN -> SettingsWithSwitchViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_switch,
-                        parent,
-                        false
-                    )
-            )
-
+            TYPE_ADJUST_TO_SQUARE_SCREEN -> SettingsWithSwitchViewHolder(parent)
             TYPE_HOUR_TICKS_COLOR,
             TYPE_MINUTE_TICKS_COLOR -> ColorPickerViewHolder(parent, navigator)
             else -> {

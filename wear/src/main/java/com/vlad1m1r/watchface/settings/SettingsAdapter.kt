@@ -43,14 +43,7 @@ class SettingsAdapter(
                 parent,
                 RateApp(parent.context)
             )
-            TYPE_ANTI_ALIAS -> SettingsWithSwitchViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_switch,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_ANTI_ALIAS -> SettingsWithSwitchViewHolder(parent)
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
             }
