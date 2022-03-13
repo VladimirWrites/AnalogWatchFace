@@ -108,6 +108,7 @@
         <activity android:name="com.vlad1m1r.watchface.settings.complications.ComplicationsActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.complications.picker.ComplicationPickerActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.complications.colors.ComplicationColorsActivity"/>
+        <activity android:name="com.vlad1m1r.watchface.settings.confirm.ConfirmDeleteColorActivity"/>
         <activity android:name="androidx.wear.activity.ConfirmationActivity" />
     </application>
 

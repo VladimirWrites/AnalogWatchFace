@@ -7,12 +7,15 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.CustomColorStorage
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import com.vlad1m1r.watchface.settings.colorpicker.customcolor.KEY_NEW_COLOR
+import com.vlad1m1r.watchface.settings.confirm.KEY_CHOICE
+import com.vlad1m1r.watchface.settings.confirm.KEY_COLOR_TO_DELETE
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -41,8 +44,12 @@ class ColorPickerActivity : BaseRecyclerActivity() {
         }
 
         override fun colorDeleted(color: Int) {
-            customColorStorage.removeCustomColor(color)
-            adapter.refreshData()
+            navigator.goToConfirmDeleteColor(
+                confirmDeleteColorLauncher,
+                this@ColorPickerActivity,
+                R.string.wear_custom_color_delete,
+                color
+            )
         }
     }
 
@@ -53,6 +60,20 @@ class ColorPickerActivity : BaseRecyclerActivity() {
                     val color = result.data!!.getIntExtra(KEY_NEW_COLOR, 0)
                     customColorStorage.addCustomColor(color)
                     adapter.refreshData()
+                }
+            }
+        }
+
+    private val confirmDeleteColorLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                if (result.data!!.hasExtra(KEY_CHOICE)) {
+                    val accepted = result.data!!.getBooleanExtra(KEY_CHOICE, false)
+                    if(accepted) {
+                        val color = result.data!!.getIntExtra(KEY_COLOR_TO_DELETE, 0)
+                        customColorStorage.removeCustomColor(color)
+                        adapter.refreshData()
+                    }
                 }
             }
         }
@@ -77,6 +98,7 @@ class ColorPickerActivity : BaseRecyclerActivity() {
                 layoutManager = GridLayoutManager(context, 3)
                 isEdgeItemsCenteringEnabled = true
                 isCircularScrollingGestureEnabled = false
+                clipToPadding = false
                 setPaddingRelative(
                     resources.getDimensionPixelSize(R.dimen.screen_percentage_05),
                     0,

@@ -85,4 +85,5 @@
     <string name="wear_custom_color_green" translatable="false">Green: %d</string>
     <string name="wear_custom_color_blue" translatable="false">Blue: %d</string>
     <string name="wear_custom_color_confirm" translatable="false">Confirm</string>
+    <string name="wear_custom_color_delete" translatable="false">Delete color?</string>
 </resources>

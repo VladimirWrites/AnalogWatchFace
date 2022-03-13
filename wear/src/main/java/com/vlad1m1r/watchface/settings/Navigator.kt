@@ -13,6 +13,7 @@ import com.vlad1m1r.watchface.settings.colorpicker.customcolor.CustomColorActivi
 import com.vlad1m1r.watchface.settings.complications.ComplicationsActivity
 import com.vlad1m1r.watchface.settings.complications.colors.ComplicationColorsActivity
 import com.vlad1m1r.watchface.settings.complications.picker.ComplicationPickerActivity
+import com.vlad1m1r.watchface.settings.confirm.ConfirmDeleteColorActivity
 import com.vlad1m1r.watchface.settings.hands.HandsActivity
 import com.vlad1m1r.watchface.settings.hands.centralcircle.CentralCircleActivity
 import com.vlad1m1r.watchface.settings.hands.hand.HandActivity
@@ -108,6 +109,17 @@ class Navigator @Inject constructor() {
     ) {
         activityResultLauncher.launch(
             CustomColorActivity.newInstance(context)
+        )
+    }
+
+    fun goToConfirmDeleteColor(
+        activityResultLauncher: ActivityResultLauncher<Intent>,
+        context: Context,
+        @StringRes text: Int,
+        @ColorInt color: Int
+    ) {
+        activityResultLauncher.launch(
+            ConfirmDeleteColorActivity.newInstance(context, text, color)
         )
     }
 }
