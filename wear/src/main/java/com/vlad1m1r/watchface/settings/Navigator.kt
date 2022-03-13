@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import com.vlad1m1r.watchface.settings.about.AboutActivity
 import com.vlad1m1r.watchface.settings.background.BackgroundActivity
 import com.vlad1m1r.watchface.settings.colorpicker.ColorPickerActivity
+import com.vlad1m1r.watchface.settings.colorpicker.customcolor.CustomColorActivity
 import com.vlad1m1r.watchface.settings.complications.ComplicationsActivity
 import com.vlad1m1r.watchface.settings.complications.colors.ComplicationColorsActivity
 import com.vlad1m1r.watchface.settings.complications.picker.ComplicationPickerActivity
@@ -98,6 +99,15 @@ class Navigator @Inject constructor() {
     ) {
         activityResultLauncher.launch(
             TicksLayoutPickerActivity.newInstance(context)
+        )
+    }
+
+    fun goToAddCustomColor(
+        activityResultLauncher: ActivityResultLauncher<Intent>,
+        context: Context
+    ) {
+        activityResultLauncher.launch(
+            CustomColorActivity.newInstance(context)
         )
     }
 }

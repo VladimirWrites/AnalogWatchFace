@@ -27,6 +27,8 @@ const val KEY_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR = "complications_ranged_v
 const val KEY_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR = "complications_ranged_value_secondary_color"
 const val KEY_COMPLICATIONS_BACKGROUND_COLOR = "complications_background_color"
 
+private const val KEY_CUSTOM_COLORS = "custom_colors"
+
 class ColorStorage(private val context: Context, private val sharedPreferences: SharedPreferences) {
 
     private fun hasBlackBackground() = sharedPreferences.getBoolean(KEY_HAS_BLACK_BACKGROUND, false)
@@ -291,6 +293,20 @@ class ColorStorage(private val context: Context, private val sharedPreferences: 
     fun setComplicationsBackgroundColor(@ColorInt color: Int) {
         val editor = sharedPreferences.edit()
         editor.putInt(KEY_COMPLICATIONS_BACKGROUND_COLOR, color)
+        editor.apply()
+    }
+
+    fun getCustomColors(): List<Int> {
+        return sharedPreferences.getString(KEY_CUSTOM_COLORS, "")!!.split("#").map {
+            it.toInt()
+        }
+    }
+
+    fun addCustomColor(color: Int) {
+        val colors = getCustomColors().toMutableList()
+        colors.add(color)
+        val editor = sharedPreferences.edit()
+        editor.putStringSet(KEY_CUSTOM_COLORS, colors.map { it.toString() }.toSet())
         editor.apply()
     }
 }

@@ -12,4 +12,4 @@
         android:drawablePadding="@dimen/screen_percentage_05"
         android:textSize="@dimen/text_size_normal"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        style="@style/ButtonStyle"/>
+        style="@style/RateButtonStyle"/>

@@ -2,10 +2,7 @@ package com.vlad1m1r.watchface.data.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.KEY_ANALOG_WATCH_FACE
-import com.vlad1m1r.watchface.data.SizeStorage
+import com.vlad1m1r.watchface.data.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -52,5 +49,13 @@ object StorageModule {
         sharedPreferences: SharedPreferences
     ): SizeStorage {
         return SizeStorage(appContext, sharedPreferences)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCustomColorStorage(
+        sharedPreferences: SharedPreferences
+    ): CustomColorStorage {
+        return CustomColorStorage(sharedPreferences)
     }
 }

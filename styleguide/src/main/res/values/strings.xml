@@ -79,4 +79,10 @@
     <string name="wear_anti_aliasing_in_ambient_mode">Anti-Aliasing in Ambient Mode</string>
     <string name="wear_add_background_complication">Add Background Complication</string>
     <string name="wear_edit_background_complication">Edit Background Complication</string>
+
+    <string name="wear_add_custom_color" translatable="false">Add Custom Color</string>
+    <string name="wear_custom_color_red" translatable="false">Red: %d</string>
+    <string name="wear_custom_color_green" translatable="false">Green: %d</string>
+    <string name="wear_custom_color_blue" translatable="false">Blue: %d</string>
+    <string name="wear_custom_color_confirm" translatable="false">Confirm</string>
 </resources>

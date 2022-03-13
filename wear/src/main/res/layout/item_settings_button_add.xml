@@ -3,11 +3,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/screen_percentage_05">
-    <ImageView
-            android:id="@+id/color"
+
+    <Button
+            android:id="@+id/settings_button"
             android:layout_width="@dimen/item_color_picker_height"
             android:layout_height="@dimen/item_color_picker_height"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:background="@drawable/round_add_ripple"
+            android:theme="@style/ButtonStyle" />
 </FrameLayout>
-
-

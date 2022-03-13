@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/color"
+        android:layout_marginHorizontal="@dimen/screen_percentage_05"
+        android:layout_marginVertical="@dimen/screen_percentage_05"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_color_picker_height" />

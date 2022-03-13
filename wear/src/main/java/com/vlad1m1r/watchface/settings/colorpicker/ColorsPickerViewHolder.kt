@@ -1,6 +1,7 @@
 package com.vlad1m1r.watchface.settings.colorpicker
 
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RippleDrawable
@@ -10,53 +11,31 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.data.watchFaceColors
-import com.vlad1m1r.watchface.utils.*
+import com.vlad1m1r.watchface.utils.getDistanceBetweenColors
 
 class ColorsPickerViewHolder(
     itemView: View,
-    private val onColorSelected: OnColorSelected,
+    private val onColorAction: OnColorAction,
     private val preselectedColor: Int
 ) : RecyclerView.ViewHolder(itemView) {
 
-    private val firstColorView = itemView.findViewById<ImageView>(R.id.first_color)
-    private val secondColorView = itemView.findViewById<ImageView>(R.id.second_color)
-    private val thirdColorView = itemView.findViewById<ImageView>(R.id.third_color)
+    private val colorView = itemView.findViewById<ImageView>(R.id.color)
 
-    fun setColors(
-        @ColorInt firstColor: Int?,
-        @ColorInt secondColor: Int,
-        @ColorInt thirdColor: Int
+    fun bind(
+        @ColorInt color: Int
     ) {
 
-        if (firstColor == null) {
-            firstColorView.visibility = View.INVISIBLE
-            firstColorView.setOnClickListener {}
-        } else {
-            firstColorView.visibility = View.VISIBLE
-            firstColorView.setColor(firstColor)
-            firstColorView.setOnClickListener { onColorSelected.colorSelected(firstColor) }
-            if (firstColor == preselectedColor) {
-                firstColorView.selectColor(firstColor)
-            } else {
-                firstColorView.deselectColor(firstColor)
-            }
+        colorView.visibility = View.VISIBLE
+        colorView.setColor(color)
+        colorView.setOnClickListener { onColorAction.colorSelected(color) }
+        colorView.setOnLongClickListener {
+            onColorAction.colorDeleted(color)
+            true
         }
-
-        secondColorView.setColor(secondColor)
-        secondColorView.setOnClickListener { onColorSelected.colorSelected(secondColor) }
-        if (secondColor == preselectedColor) {
-            secondColorView.selectColor(secondColor)
+        if (color == preselectedColor) {
+            colorView.selectColor(color)
         } else {
-            secondColorView.deselectColor(secondColor)
-        }
-
-        thirdColorView.setColor(thirdColor)
-        thirdColorView.setOnClickListener { onColorSelected.colorSelected(thirdColor) }
-        if (thirdColor == preselectedColor) {
-            thirdColorView.selectColor(thirdColor)
-        } else {
-            thirdColorView.deselectColor(thirdColor)
+            colorView.deselectColor(color)
         }
     }
 
@@ -86,7 +65,7 @@ class ColorsPickerViewHolder(
     }
 
     private fun ImageView.setColor(@ColorInt color: Int) {
-        if (color == watchFaceColors.find { it.id == 0}!!.color) {
+        if (color == Color.parseColor("#00000000")) {
             this.setImageResource(R.drawable.remove_color_ripple)
         } else {
             this.setImageResource(R.drawable.round_color_ripple)
@@ -96,9 +75,10 @@ class ColorsPickerViewHolder(
     }
 
     private fun getStrokeColor(@ColorInt color: Int): Int {
-        val lightShadeOfGray = ContextCompat.getColor(itemView.context, R.color.item_color_picker_light_stroke_color)
+        val lightShadeOfGray =
+            ContextCompat.getColor(itemView.context, R.color.item_color_picker_light_stroke_color)
         val distance = getDistanceBetweenColors(color, lightShadeOfGray)
-        return if(distance > 90) {
+        return if (distance > 90) {
             lightShadeOfGray
         } else {
             ContextCompat.getColor(itemView.context, R.color.item_color_picker_dark_stroke_color)

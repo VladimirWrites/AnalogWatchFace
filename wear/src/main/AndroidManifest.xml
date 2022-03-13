@@ -101,6 +101,7 @@
         <activity android:name="com.vlad1m1r.watchface.settings.hands.hand.HandActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.hands.centralcircle.CentralCircleActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.colorpicker.ColorPickerActivity"/>
+        <activity android:name="com.vlad1m1r.watchface.settings.colorpicker.customcolor.CustomColorActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.about.AboutActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.background.BackgroundActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.ticks.TicksActivity"/>
