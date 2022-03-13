@@ -11,13 +11,14 @@ object Versions {
     const val material = "1.5.0"
     const val constraintLayout = "2.1.3"
 
-    const val hilt = "2.40.5"
+    const val hilt = "2.41"
 
     const val junit = "4.13.2"
-    const val mockito = "4.3.1"
+    const val mockito = "4.4.0"
+    const val mockito_kotlin = "4.0.0"
     const val truth = "1.1.3"
 
-    const val gradle_android = "7.1.1"
+    const val gradle_android = "7.1.2"
 
     const val jacoco = "0.8.7"
 
@@ -44,7 +45,7 @@ object Deps {
 
     const val junit = "junit:junit:${Versions.junit}"
     const val mockito_core = "org.mockito:mockito-core:${Versions.mockito}"
-    const val mockito_kotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockito}"
+    const val mockito_kotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockito_kotlin}"
     const val mockito_inline = "org.mockito:mockito-inline:${Versions.mockito}"
 
     const val truth = "com.google.truth:truth:${Versions.truth}"
