@@ -28,9 +28,11 @@ class ColorsPickerViewHolder(
         colorView.visibility = View.VISIBLE
         colorView.setColor(color)
         colorView.setOnClickListener { onColorAction.colorSelected(color) }
-        colorView.setOnLongClickListener {
-            onColorAction.colorDeleted(color)
-            true
+        if (color != Color.parseColor("#00000000")) {
+            colorView.setOnLongClickListener {
+                onColorAction.colorDeleted(color)
+                true
+            }
         }
         if (color == preselectedColor) {
             colorView.selectColor(color)
