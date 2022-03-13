@@ -36,14 +36,8 @@ class SettingsAdapter(
             TYPE_COMPLICATIONS,
             TYPE_TICKS,
             TYPE_BACKGROUND,
-            TYPE_HANDS -> SettingsViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_text,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_ABOUT,
+            TYPE_HANDS -> SettingsViewHolder(parent)
 
             TYPE_RATE -> RateViewHolder(
                 LayoutInflater.from(parent.context)
@@ -53,14 +47,6 @@ class SettingsAdapter(
                         false
                     ),
                 RateApp(parent.context)
-            )
-            TYPE_ABOUT -> SettingsViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_text,
-                        parent,
-                        false
-                    )
             )
             TYPE_ANTI_ALIAS -> SettingsWithSwitchViewHolder(
                 LayoutInflater.from(parent.context)

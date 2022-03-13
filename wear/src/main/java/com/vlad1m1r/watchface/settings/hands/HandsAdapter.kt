@@ -41,14 +41,7 @@ class HandsAdapter(
             TYPE_HOUR_HAND,
             TYPE_MINUTE_HAND,
             TYPE_SECOND_HAND,
-            TYPE_CENTRAL_CIRCLE -> SettingsViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_text,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_CENTRAL_CIRCLE -> SettingsViewHolder(parent)
             TYPE_KEEP_COLOR_IN_AMBIENT_MODE -> SettingsWithSwitchViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(

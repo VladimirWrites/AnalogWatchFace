@@ -35,14 +35,7 @@ class ComplicationsAdapter(
                     )
             )
             TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG,
-            TYPE_COMPLICATION_COLORS -> SettingsViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_text,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_COMPLICATION_COLORS -> SettingsViewHolder(parent)
             TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS,
             TYPE_COMPLICATIONS_AMBIENT_MODE ->
                 SettingsWithSwitchViewHolder(
