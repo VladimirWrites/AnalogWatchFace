@@ -53,15 +53,7 @@ class HandAdapter(
                         false
                     )
             )
-            TYPE_COLOR_HAND -> ColorPickerViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_text,
-                        parent,
-                        false
-                    ),
-                navigator
-            )
+            TYPE_COLOR_HAND -> ColorPickerViewHolder(parent, navigator)
             TYPE_HAND_WIDTH -> SettingsSliderViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(

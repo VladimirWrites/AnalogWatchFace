@@ -72,15 +72,7 @@ class TicksAdapter(
             )
 
             TYPE_HOUR_TICKS_COLOR,
-            TYPE_MINUTE_TICKS_COLOR -> ColorPickerViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_text,
-                        parent,
-                        false
-                    ),
-                navigator
-            )
+            TYPE_MINUTE_TICKS_COLOR -> ColorPickerViewHolder(parent, navigator)
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
             }

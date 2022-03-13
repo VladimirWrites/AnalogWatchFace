@@ -51,15 +51,7 @@ class CentralCircleAdapter(
                         false
                     )
             )
-            TYPE_COLOR_CENTRAL_CIRCLE -> ColorPickerViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_text,
-                        parent,
-                        false
-                    ),
-                navigator
-            )
+            TYPE_COLOR_CENTRAL_CIRCLE -> ColorPickerViewHolder(parent, navigator)
             TYPE_CENTRAL_CIRCLE_WIDTH -> SettingsSliderViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(

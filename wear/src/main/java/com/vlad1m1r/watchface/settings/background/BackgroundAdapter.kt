@@ -57,15 +57,7 @@ class BackgroundAdapter(
                     )
             )
             TYPE_COLOR_LEFT,
-            TYPE_COLOR_RIGHT -> ColorPickerViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_text,
-                        parent,
-                        false
-                    ),
-                navigator
-            )
+            TYPE_COLOR_RIGHT -> ColorPickerViewHolder(parent, navigator)
             TYPE_BLACK_AMBIENT -> SettingsWithSwitchViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(

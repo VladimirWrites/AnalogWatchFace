@@ -4,7 +4,9 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.ColorInt
@@ -15,9 +17,16 @@ import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.settings.Navigator
 
 class ColorPickerViewHolder(
-    itemView: View,
+    parent: ViewGroup,
     private val navigator: Navigator
-) : RecyclerView.ViewHolder(itemView) {
+) : RecyclerView.ViewHolder(
+    LayoutInflater.from(parent.context)
+        .inflate(
+            R.layout.item_settings_text,
+            parent,
+            false
+        ),
+) {
 
     fun bind(@StringRes title: Int, @ColorInt currentColor: Int, showNoColor: Boolean, activityResultLauncher: ActivityResultLauncher<Intent>) {
         val colorDrawable =

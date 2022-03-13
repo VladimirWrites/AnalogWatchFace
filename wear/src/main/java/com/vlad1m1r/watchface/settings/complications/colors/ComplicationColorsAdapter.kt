@@ -51,16 +51,7 @@ class ComplicationColorsAdapter(
             TYPE_COMPLICATIONS_BORDER_COLOR,
             TYPE_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR,
             TYPE_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR,
-            TYPE_COMPLICATIONS_BACKGROUND_COLOR ->
-                ColorPickerViewHolder(
-                    LayoutInflater.from(parent.context)
-                        .inflate(
-                            R.layout.item_settings_text,
-                            parent,
-                            false
-                        ),
-                    navigator
-                )
+            TYPE_COMPLICATIONS_BACKGROUND_COLOR -> ColorPickerViewHolder(parent, navigator)
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
             }
