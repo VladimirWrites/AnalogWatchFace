@@ -62,14 +62,7 @@ class HandAdapter(
                         false
                     )
             )
-            TYPE_HAND_SCALE -> SettingsSliderScaleViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_slider,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_HAND_SCALE -> SettingsSliderScaleViewHolder(parent)
             TYPE_SMOOTH_HAND -> SettingsWithSwitchViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(
