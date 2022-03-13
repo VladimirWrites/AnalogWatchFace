@@ -1,7 +1,9 @@
 package com.vlad1m1r.watchface.settings.ticks.viewholders
 
 import android.content.Intent
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,10 +13,17 @@ import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.Navigator
 
 class TicksLayoutPickerViewHolder(
-    itemView: View,
+    parent: ViewGroup,
     private val dataStorage: DataStorage,
     private val navigator: Navigator
-) : RecyclerView.ViewHolder(itemView) {
+) : RecyclerView.ViewHolder(
+    LayoutInflater.from(parent.context)
+        .inflate(
+            R.layout.item_settings_ticks_layout_picker,
+            parent,
+            false
+        )
+) {
 
     fun bind(activityResultLauncher: ActivityResultLauncher<Intent>) {
         itemView.findViewById<ConstraintLayout>(R.id.settings_watch_face_picker).apply {

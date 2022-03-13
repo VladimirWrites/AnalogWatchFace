@@ -41,16 +41,7 @@ class TicksAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_TITLE -> TitleViewHolder(parent)
-            TYPE_TICKS_LAYOUT_PICKER -> TicksLayoutPickerViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_ticks_layout_picker,
-                        parent,
-                        false
-                    ),
-                dataStorage,
-                navigator
-            ).apply {
+            TYPE_TICKS_LAYOUT_PICKER -> TicksLayoutPickerViewHolder(parent, dataStorage, navigator).apply {
                 ticksLayoutPickerViewHolder = this
             }
             TYPE_TICKS_INTERACTIVE_MODE,
