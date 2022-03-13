@@ -28,14 +28,7 @@ class CustomColorAdapter(
 
         return when (viewType) {
             TYPE_TITLE -> TitleViewHolder(parent)
-            TYPE_COLOR_PREVIEW -> ColorsPreviewViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(
-                        R.layout.item_settings_color_preview,
-                        parent,
-                        false
-                    )
-            )
+            TYPE_COLOR_PREVIEW -> ColorsPreviewViewHolder(parent)
             TYPE_RED_COLOR_SCALE,
             TYPE_GREEN_COLOR_SCALE,
             TYPE_BLUE_COLOR_SCALE -> SettingsSliderViewHolder(parent)
