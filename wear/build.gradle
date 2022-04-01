@@ -2,13 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'jacoco'
     id 'dagger.hilt.android.plugin'
-}
-
-
-jacoco {
-    toolVersion = Versions.jacoco
 }
 
 android {
@@ -48,39 +42,28 @@ android {
     }
 }
 
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-    jacoco.excludes = ['jdk.internal.*']
-}
-
-task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
-
-    reports {
-        csv.enabled = false
-        xml.enabled = true
-        html.enabled = true
-    }
-
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/androidTest/java"
-
-    getSourceDirectories().setFrom(files([mainSrc]))
-    getClassDirectories().setFrom(files([debugTree], [kotlinDebugTree]))
-    getExecutionData().setFrom(fileTree(dir: "$buildDir", includes: [
-            "jacoco/testDebugUnitTest.exec",
-            "outputs/code-coverage/connected/*coverage.ec"
-    ]))
-}
-
 dependencies {
     implementation project(path: ':styleguide')
 
-    implementation Deps.wearable_support_ui
-    implementation Deps.wearable_support
     compileOnly Deps.wearable
     implementation Deps.constraint_layout
+    implementation Deps.androidx_app_compat
+
+    implementation "androidx.wear.watchface:watchface:1.1.0"
+    implementation "androidx.wear.watchface:watchface-complications-data:1.1.0"
+    implementation "androidx.wear.watchface:watchface-client:1.1.0"
+    implementation "androidx.wear.watchface:watchface-complications-data-source:1.1.0"
+    implementation "androidx.wear.watchface:watchface-complications-rendering:1.1.0"
+    implementation "androidx.wear.watchface:watchface-data:1.1.0"
+    implementation "androidx.wear.watchface:watchface-editor:1.1.0"
+    implementation "androidx.wear.watchface:watchface-style:1.1.0"
+    implementation "androidx.wear:wear:1.2.0"
+    implementation "androidx.core:core-ktx:1.8.0"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
     implementation Deps.hilt_android
     kapt Deps.hilt_compiler

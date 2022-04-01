@@ -9,7 +9,7 @@
         <item name="android:colorBackground">@color/primary_color_dark</item>
     </style>
 
-    <style name="SwitchStyle" parent="Widget.Wear.RoundSwitch">
+    <style name="SwitchStyle" parent="Widget.AppCompat.CompoundButton.Switch">
         <item name="android:padding">@dimen/activity_config_padding</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:switchPadding">8dp</item>
@@ -18,7 +18,7 @@
         <item name="android:gravity">start|center_vertical</item>
     </style>
 
-    <style name="RateButtonStyle" parent="Widget.WearDiag.Button">
+    <style name="RateButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:padding">@dimen/activity_config_padding</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">false</item>
@@ -27,14 +27,14 @@
         <item name="android:gravity">start|center_vertical</item>
     </style>
 
-    <style name="TextStyle" parent="Widget.WearDiag.TextView">
+    <style name="TextStyle" parent="Widget.AppCompat.TextView">
         <item name="android:padding">@dimen/activity_config_padding</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
     </style>
 
-    <style name="SmallTextStyle" parent="Widget.WearDiag.TextView">
+    <style name="SmallTextStyle" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/text_size_small</item>

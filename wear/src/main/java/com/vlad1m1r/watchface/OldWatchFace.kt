@@ -1,5 +1,5 @@
 package com.vlad1m1r.watchface
-
+/**
 import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -42,7 +42,7 @@ private const val MESSAGE_UPDATE_ID = 0
 private const val TAG = "AnalogWatchFace"
 
 @AndroidEntryPoint
-class WatchFace : CanvasWatchFaceService() {
+class OldWatchFace : CanvasWatchFaceService() {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -124,7 +124,7 @@ class WatchFace : CanvasWatchFaceService() {
         override fun onCreate(holder: SurfaceHolder) {
             super.onCreate(holder)
 
-            providerInfoRetriever = ProviderInfoRetriever(this@WatchFace, Executors.newCachedThreadPool()).apply {
+            providerInfoRetriever = ProviderInfoRetriever(this@OldWatchFace, Executors.newCachedThreadPool()).apply {
                 init()
                 retrieveProviderInfo(
                     object : ProviderInfoRetriever.OnProviderInfoReceivedCallback() {
@@ -138,13 +138,13 @@ class WatchFace : CanvasWatchFaceService() {
                             )
                         }
                     },
-                    ComponentName(this@WatchFace, WatchFace::class.java),
+                    ComponentName(this@OldWatchFace, OldWatchFace::class.java),
                     *COMPLICATION_SUPPORTED_TYPES.keys.toIntArray()
                 )
             }
 
             setWatchFaceStyle(
-                WatchFaceStyle.Builder(this@WatchFace)
+                WatchFaceStyle.Builder(this@OldWatchFace)
                     .setAcceptsTapEvents(true)
                     .build()
             )
@@ -249,7 +249,7 @@ class WatchFace : CanvasWatchFaceService() {
         override fun onComplicationDataUpdate(watchFaceComplicationId: Int, complicationData: ComplicationData) {
             super.onComplicationDataUpdate(watchFaceComplicationId, complicationData)
 
-            val data = complicationData.sanitize(this@WatchFace, dataStorage.getComplicationProviderName(watchFaceComplicationId))
+            val data = complicationData.sanitize(this@OldWatchFace, dataStorage.getComplicationProviderName(watchFaceComplicationId))
 
             if(watchFaceComplicationId == BACKGROUND_COMPLICATION_ID) {
                 if(data.largeImage != null) {
@@ -319,9 +319,9 @@ class WatchFace : CanvasWatchFaceService() {
         // Don't forget to remove SCHEDULE_EXACT_ALARM permission when removing this ****
         // ------------------------------------
         private val galaxyWatch4BugPendingIntent = PendingIntent.getService(
-            this@WatchFace,
+            this@OldWatchFace,
             1,
-            Intent(this@WatchFace, WatchFace::class.java),
+            Intent(this@OldWatchFace, OldWatchFace::class.java),
             PendingIntent.FLAG_IMMUTABLE,
         )
         private val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
@@ -356,3 +356,4 @@ class WatchFace : CanvasWatchFaceService() {
         // ------------------------------------
     }
 }
+        **/

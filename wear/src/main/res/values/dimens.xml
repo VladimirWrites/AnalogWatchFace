@@ -65,4 +65,6 @@
     <dimen name="text_size_mini">14sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
 
+    <dimen name="screen_percentage_05">8sp</dimen>
+
 </resources>

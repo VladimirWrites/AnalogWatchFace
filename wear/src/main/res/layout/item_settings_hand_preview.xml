@@ -7,13 +7,13 @@
             android:id="@+id/hand_preview"
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_watch_preview_height"
-            android:layout_margin="@dimen/screen_percentage_05"
+            android:layout_margin="8dp"
             android:foreground="?android:attr/selectableItemBackgroundBorderless" />
 
     <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_watch_preview_height"
-            android:layout_margin="@dimen/screen_percentage_05"
+            android:layout_margin="8dp"
             android:background="@drawable/background_hand_preview" />
 
 </FrameLayout>

@@ -1,0 +1,80 @@
+package com.vlad1m1r.watchface
+
+import android.view.SurfaceHolder
+import androidx.wear.watchface.*
+import androidx.wear.watchface.style.CurrentUserStyleRepository
+import androidx.wear.watchface.style.UserStyleSchema
+import com.vlad1m1r.watchface.components.Layouts
+import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.CustomColorStorage
+import com.vlad1m1r.watchface.data.DataStorage
+import com.vlad1m1r.watchface.data.SizeStorage
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
+@AndroidEntryPoint
+class AnalogWatchFace : WatchFaceService() {
+
+    @Inject
+    lateinit var dataStorage: DataStorage
+
+    @Inject
+    lateinit var sizeStorage: SizeStorage
+
+    @Inject
+    lateinit var colorStorage: ColorStorage
+
+    @Inject
+    lateinit var customColorStorage: CustomColorStorage
+
+    @Inject
+    lateinit var layouts: Layouts
+
+    // Used by Watch Face APIs to construct user setting options and repository.
+    override fun createUserStyleSchema(): UserStyleSchema =
+        createUserStyleSchema(context = applicationContext)
+
+    // Creates all complication user settings and adds them to the existing user settings
+    // repository.
+    override fun createComplicationSlotsManager(
+        currentUserStyleRepository: CurrentUserStyleRepository
+    ): ComplicationSlotsManager = createComplicationSlotManager(
+        context = applicationContext,
+        currentUserStyleRepository = currentUserStyleRepository
+    )
+
+    override suspend fun createWatchFace(
+        surfaceHolder: SurfaceHolder,
+        watchState: WatchState,
+        complicationSlotsManager: ComplicationSlotsManager,
+        currentUserStyleRepository: CurrentUserStyleRepository
+    ): WatchFace {
+        // Creates class that renders the watch face.
+
+        val renderer = AnalogWatchCanvasRenderer(
+            context = applicationContext,
+            surfaceHolder = surfaceHolder,
+            watchState = watchState,
+            complicationSlotsManager = complicationSlotsManager,
+            currentUserStyleRepository = currentUserStyleRepository,
+            canvasType = CanvasType.HARDWARE,
+            dataStorage = dataStorage,
+            colorStorage = colorStorage,
+            sizeStorage = sizeStorage,
+            customColorStorage = customColorStorage,
+            layouts = layouts.apply {
+                setBottomInset(watchState.chinHeight)
+            }
+        )
+
+        // Creates the watch face.
+        return WatchFace(
+            watchFaceType = WatchFaceType.ANALOG,
+            renderer = renderer
+        )
+    }
+
+    companion object {
+        const val TAG = "AnalogWatchFaceService"
+    }
+}

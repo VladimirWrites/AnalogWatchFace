@@ -15,7 +15,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/screen_percentage_10"
+                android:layout_marginTop="16dp"
                 android:src="@mipmap/ic_launcher" />
 
         <TextView
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/screen_percentage_10"
+                android:layout_marginTop="16dp"
                 app:drawableBottomCompat="@drawable/ic_arrow_down"
                 android:text="@string/wear_view_on_you_phone"
                 android:textColor="@color/white"
@@ -61,9 +61,9 @@
                 android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:gravity="center"
                 android:textSize="@dimen/text_size_normal"
-                android:paddingStart="@dimen/screen_percentage_15"
+                android:paddingStart="24dp"
                 android:paddingTop="@dimen/about_app_item_padding"
-                android:paddingEnd="@dimen/screen_percentage_15"
+                android:paddingEnd="24dp"
                 android:paddingBottom="@dimen/about_app_item_padding"
                 android:text="@string/wear_github_title"
                 android:textColor="@color/white" />
@@ -82,9 +82,9 @@
                 android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:gravity="center"
                 android:textSize="@dimen/text_size_normal"
-                android:paddingStart="@dimen/screen_percentage_15"
+                android:paddingStart="24dp"
                 android:paddingTop="@dimen/about_app_item_padding"
-                android:paddingEnd="@dimen/screen_percentage_15"
+                android:paddingEnd="24dp"
                 android:paddingBottom="@dimen/about_app_item_padding"
                 android:text="@string/wear_email_title"
                 android:textColor="@color/white" />
@@ -103,9 +103,9 @@
                 android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:gravity="center"
                 android:textSize="@dimen/text_size_normal"
-                android:paddingStart="@dimen/screen_percentage_15"
+                android:paddingStart="24dp"
                 android:paddingTop="@dimen/about_app_item_padding"
-                android:paddingEnd="@dimen/screen_percentage_15"
+                android:paddingEnd="24dp"
                 android:paddingBottom="@dimen/about_app_item_padding"
                 android:text="@string/wear_play_store_title"
                 android:textColor="@color/white" />

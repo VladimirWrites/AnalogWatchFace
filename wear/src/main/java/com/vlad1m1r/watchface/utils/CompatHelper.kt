@@ -18,18 +18,19 @@ fun ComplicationData.sanitize(context: Context, complicationProviderName: String
     try {
         if (Device.isSamsungGalaxy) {
             val shortText = when {
-                isSamsungHeartRateBadComplicationData(context, complicationProviderName) -> context.getSamsungDataFromKey("heart_rate") ?: "?"
-                isSamsungSpo2BadComplicationData(context, complicationProviderName) -> context.getSamsungDataFromKey("spo2")
+//                isSamsungHeartRateBadComplicationData(context, complicationProviderName) -> context.getSamsungDataFromKey("heart_rate") ?: "?"
+//                isSamsungSpo2BadComplicationData(context, complicationProviderName) -> context.getSamsungDataFromKey("spo2")
                 else -> ""
             }
 
             return if (shortText == "") this
             else {
-                val builder = ComplicationData.Builder(ComplicationData.TYPE_SHORT_TEXT)
-                    .setTapAction(tapAction)
-                    .setShortText(ComplicationText.plainText(shortText))
-                    .setIcon(icon)
-                builder.build()
+                this
+//                val builder = ComplicationData.Builder(ComplicationData.TYPE_SHORT_TEXT)
+//                    .setTapAction(tapAction)
+//                    .setShortText(ComplicationText.plainText(shortText))
+//                    .setIcon(icon)
+//                builder.build()
             }
         }
         return this
@@ -61,16 +62,16 @@ private fun Context.getSamsungDataFromKey(key: String): String? {
     return null
 }
 
-@SuppressLint("NewApi")
-private fun ComplicationData.isSamsungHeartRateBadComplicationData(context: Context, complicationProviderName: String?): Boolean {
-    return icon != null &&
-            icon.resPackage == "com.samsung.android.wear.shealth" &&
-            context.resources.getString(R.string.heart_rate) == complicationProviderName
-}
-
-@SuppressLint("NewApi")
-private fun ComplicationData.isSamsungSpo2BadComplicationData(context: Context, complicationProviderName: String?): Boolean {
-    return icon != null &&
-            icon.resPackage == "com.samsung.android.wear.shealth" &&
-            context.resources.getString(R.string.home_spo2_title) == complicationProviderName
-}
+//@SuppressLint("NewApi")
+//private fun ComplicationData.isSamsungHeartRateBadComplicationData(context: Context, complicationProviderName: String?): Boolean {
+//    return icon != null &&
+//            icon.resPackage == "com.samsung.android.wear.shealth" &&
+//            context.resources.getString(R.string.heart_rate) == complicationProviderName
+//}
+//
+//@SuppressLint("NewApi")
+//private fun ComplicationData.isSamsungSpo2BadComplicationData(context: Context, complicationProviderName: String?): Boolean {
+//    return icon != null &&
+//            icon.resPackage == "com.samsung.android.wear.shealth" &&
+//            context.resources.getString(R.string.home_spo2_title) == complicationProviderName
+//}
