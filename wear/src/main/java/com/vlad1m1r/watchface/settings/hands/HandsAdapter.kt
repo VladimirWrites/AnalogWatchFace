@@ -1,10 +1,9 @@
 package com.vlad1m1r.watchface.settings.hands
 
 import android.app.Activity
-import android.content.Intent
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
@@ -13,6 +12,7 @@ import com.vlad1m1r.watchface.settings.base.viewholders.SettingsViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
 import com.vlad1m1r.watchface.settings.hands.hand.HandType
+import com.vlad1m1r.watchface.utils.getActivityContext
 import java.lang.IllegalArgumentException
 
 private const val TYPE_TITLE = 0
@@ -58,6 +58,7 @@ class HandsAdapter(
         }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        val activity = viewHolder.itemView.context.getActivityContext() as FragmentActivity
         when (viewHolder.itemViewType) {
             TYPE_TITLE ->
                 (viewHolder as TitleViewHolder).bind(
@@ -67,32 +68,28 @@ class HandsAdapter(
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_hours_hand
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
-                    navigator.goToHandActivity(activity, R.string.wear_hours_hand, HandType.HOURS)
+                    navigator.goToHandFragment(activity, R.string.wear_hours_hand, HandType.HOURS)
                 }
             }
             TYPE_MINUTE_HAND -> {
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_minutes_hand
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
-                    navigator.goToHandActivity(activity, R.string.wear_minutes_hand, HandType.MINUTES)
+                    navigator.goToHandFragment(activity, R.string.wear_minutes_hand, HandType.MINUTES)
                 }
             }
             TYPE_SECOND_HAND -> {
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_seconds_hand
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
-                    navigator.goToHandActivity(activity, R.string.wear_seconds_hand, HandType.SECONDS)
+                    navigator.goToHandFragment(activity, R.string.wear_seconds_hand, HandType.SECONDS)
                 }
             }
             TYPE_CENTRAL_CIRCLE -> {
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_central_circle
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
-                    navigator.goToCentralCircleActivity(activity, R.string.wear_central_circle)
+                    navigator.goToCentralCircleFragment(activity, R.string.wear_central_circle)
                 }
             }
             TYPE_KEEP_COLOR_IN_AMBIENT_MODE -> {

@@ -9,6 +9,7 @@ import com.vlad1m1r.watchface.utils.WatchView
 import com.vlad1m1r.watchface.utils.hoursRotation
 import com.vlad1m1r.watchface.utils.minutesRotation
 import com.vlad1m1r.watchface.utils.secondsRotation
+import java.time.ZonedDateTime
 import java.util.*
 import javax.inject.Inject
 
@@ -75,6 +76,29 @@ class Hands @Inject constructor(
 
         if (showSecondsHand) {
             val secondsRotation = calendar.secondsRotation()
+            drawSecondsHand(canvas, secondsRotation, center, center.x)
+        }
+
+        if(showSecondsHand || showHoursHand || showMinutesHand) {
+            drawCircle(canvas, center)
+        }
+    }
+
+    fun draw(canvas: Canvas, zonedDateTime: ZonedDateTime) {
+
+        val hoursRotation = zonedDateTime.hoursRotation()
+        val minutesRotation = zonedDateTime.minutesRotation()
+
+        if(showMinutesHand) {
+            drawMinuteHand(canvas, minutesRotation, center, center.x)
+        }
+
+        if(showHoursHand) {
+            drawHourHand(canvas, hoursRotation, center, center.x)
+        }
+
+        if (showSecondsHand) {
+            val secondsRotation = zonedDateTime.secondsRotation()
             drawSecondsHand(canvas, secondsRotation, center, center.x)
         }
 

@@ -11,14 +11,14 @@
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:gravity="center_vertical"
-            android:paddingStart="@dimen/screen_percentage_10"
-            android:paddingEnd="@dimen/screen_percentage_10"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textSize="@dimen/text_size_small" />
 
     <SeekBar
             android:id="@+id/settings_seekbar"
             android:gravity="center"
-            android:padding="@dimen/screen_percentage_05"
+            android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

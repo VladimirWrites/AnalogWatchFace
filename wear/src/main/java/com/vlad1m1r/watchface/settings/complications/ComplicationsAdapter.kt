@@ -1,9 +1,8 @@
 package com.vlad1m1r.watchface.settings.complications
 
-import android.app.Activity
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
@@ -11,6 +10,7 @@ import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
+import com.vlad1m1r.watchface.utils.getActivityContext
 
 private const val TYPE_TITLE = 0
 private const val TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG = 1
@@ -52,6 +52,7 @@ class ComplicationsAdapter(
         }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        val activity = viewHolder.itemView.context.getActivityContext() as FragmentActivity
         when (viewHolder.itemViewType) {
             TYPE_TITLE ->
                 (viewHolder as TitleViewHolder).bind(
@@ -61,15 +62,13 @@ class ComplicationsAdapter(
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_complication_picker
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
-                    navigator.goToComplicationsPickerActivity(activity)
+                    navigator.goToComplicationsPickerFragment(activity)
                 }
             TYPE_COMPLICATION_COLORS ->
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_complication_colors
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
-                    navigator.goToComplicationColorsActivity(
+                    navigator.goToComplicationColorsFragment(
                         activity,
                         R.string.wear_complication_colors
                     )

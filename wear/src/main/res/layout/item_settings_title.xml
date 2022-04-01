@@ -11,17 +11,17 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textStyle="bold"
-            android:paddingStart="@dimen/screen_percentage_10"
-            android:paddingTop="@dimen/screen_percentage_05"
-            android:paddingEnd="@dimen/screen_percentage_10"
-            android:paddingBottom="@dimen/screen_percentage_05"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
             android:textSize="@dimen/text_size_large" />
 
     <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginStart="@dimen/screen_percentage_05"
-            android:layout_marginEnd="@dimen/screen_percentage_05"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@color/accent_color" />
 </LinearLayout>
 

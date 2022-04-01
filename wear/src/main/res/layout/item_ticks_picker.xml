@@ -9,7 +9,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?selectableItemBackgroundBorderless"
-            android:padding="@dimen/screen_percentage_10"
+            android:padding="16dp"
             android:scaleType="centerInside"
             tools:src="@drawable/ticks_1" />
 </FrameLayout>

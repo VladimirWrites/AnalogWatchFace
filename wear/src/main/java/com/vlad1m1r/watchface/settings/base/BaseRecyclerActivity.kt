@@ -1,12 +1,13 @@
 package com.vlad1m1r.watchface.settings.base
 
 import android.view.MotionEvent
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.wear.widget.WearableRecyclerView
 import com.google.android.wearable.input.RotaryEncoderHelper
 import kotlin.math.roundToInt
 
-open class BaseRecyclerActivity : AppCompatActivity() {
+open class BaseRecyclerActivity : ComponentActivity() {
 
     protected lateinit var wearableRecyclerView: WearableRecyclerView
 

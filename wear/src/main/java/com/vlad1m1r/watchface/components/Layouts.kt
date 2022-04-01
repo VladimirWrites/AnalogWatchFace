@@ -2,7 +2,6 @@ package com.vlad1m1r.watchface.components
 
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.components.background.Background
-import com.vlad1m1r.watchface.components.background.BackgroundComplication
 import com.vlad1m1r.watchface.components.hands.Hands
 import com.vlad1m1r.watchface.components.ticks.*
 import com.vlad1m1r.watchface.components.ticks.layout.TicksLayout
@@ -12,9 +11,9 @@ import javax.inject.Inject
 
 class Layouts @Inject constructor(
     val background: Background,
-    val complications: Complications,
+    //val complications: Complications,
     val hands: Hands,
-    val backgroundComplication: BackgroundComplication,
+    //val backgroundComplication: BackgroundComplication,
     private val getTicks: GetTicks
 ) {
     private var bottomInset = 0
@@ -23,8 +22,8 @@ class Layouts @Inject constructor(
         private set
 
     init {
-        complications.setComplicationDrawable(R.drawable.complication_drawable)
-        backgroundComplication.setComplicationDrawable(R.drawable.complication_drawable)
+//        complications.setComplicationDrawable(R.drawable.complication_drawable)
+//        backgroundComplication.setComplicationDrawable(R.drawable.complication_drawable)
         initTicks()
     }
 
@@ -43,23 +42,23 @@ class Layouts @Inject constructor(
     }
 
     fun invalidateComplications() {
-        complications.invalidate()
+        //complications.invalidate()
     }
 
     fun invalidateBackgroundComplication() {
-        backgroundComplication.invalidate()
+        //backgroundComplication.invalidate()
     }
 
     fun setBottomInset(bottomInset: Int) {
         this.bottomInset = bottomInset
         this.ticks.bottomInset = bottomInset
-        this.complications.bottomInset = bottomInset
+        //this.complications.bottomInset = bottomInset
     }
 
     fun setMode(mode: Mode) {
         background.setMode(mode)
-        complications.setMode(mode)
-        backgroundComplication.setMode(mode)
+//        complications.setMode(mode)
+//        backgroundComplication.setMode(mode)
         ticks.setMode(mode)
         hands.setMode(mode)
     }
@@ -67,8 +66,8 @@ class Layouts @Inject constructor(
     fun setCenter(center: Point) {
         background.setCenter(center)
         ticks.setCenter(center)
-        complications.setCenter(center)
-        backgroundComplication.setCenter(center)
+//        complications.setCenter(center)
+//        backgroundComplication.setCenter(center)
         hands.setCenter(center)
     }
 }

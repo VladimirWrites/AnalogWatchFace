@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.ColorStorage
@@ -14,6 +15,7 @@ import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.*
+import com.vlad1m1r.watchface.utils.getActivityContext
 import java.lang.IllegalArgumentException
 
 private const val TYPE_TITLE = 0
@@ -70,9 +72,9 @@ class CentralCircleAdapter(
                     title
                 )
             TYPE_PREVIEW -> {
-                val context = viewHolder.itemView.context
-                val width = (context as Activity).window.decorView.width.toFloat()
-                val height = context.resources.getDimension(R.dimen.item_watch_preview_height)
+                val activity = viewHolder.itemView.context.getActivityContext() as FragmentActivity
+                val width = activity.window.decorView.width.toFloat()
+                val height = activity.resources.getDimension(R.dimen.item_watch_preview_height)
                 (viewHolder as WatchPreviewViewHolder).bind(
                     Point(width / 2, height / 2),
                 )

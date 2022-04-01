@@ -1,12 +1,13 @@
 package com.vlad1m1r.watchface.settings
 
 import android.app.Activity
-import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.base.viewholders.*
+import com.vlad1m1r.watchface.utils.getActivityContext
 import java.lang.IllegalArgumentException
 
 private const val TYPE_TITLE = 0
@@ -61,6 +62,7 @@ class SettingsAdapter(
         }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        val activity = viewHolder.itemView.context.getActivityContext() as FragmentActivity
         when (viewHolder.itemViewType) {
             TYPE_TITLE ->
                 (viewHolder as TitleViewHolder).bind(
@@ -70,8 +72,7 @@ class SettingsAdapter(
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_complications_settings
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
-                    navigator.goToComplicationsActivity(activity, R.string.wear_complications_settings)
+                    navigator.goToComplicationsFragments(activity, R.string.wear_complications_settings)
                 }
             }
 
@@ -79,8 +80,7 @@ class SettingsAdapter(
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_ticks_settings
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
-                    navigator.goToTicksActivity(activity, R.string.wear_ticks_settings)
+                    navigator.goToTicksFragment(activity, R.string.wear_ticks_settings)
                 }
             }
 
@@ -88,7 +88,6 @@ class SettingsAdapter(
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_background_settings
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
                     navigator.goToBackgroundActivity(activity, R.string.wear_background_settings)
                 }
             }
@@ -97,8 +96,7 @@ class SettingsAdapter(
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_hand_settings
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
-                    navigator.goToHandsActivity(activity, R.string.wear_hand_settings)
+                    navigator.goToHandsFragments(activity, R.string.wear_hand_settings)
                 }
             }
             TYPE_ANTI_ALIAS -> {
@@ -113,7 +111,6 @@ class SettingsAdapter(
                 (viewHolder as SettingsViewHolder).bind(
                     R.string.wear_about_app
                 ) {
-                    val activity = viewHolder.itemView.context as Activity
                     navigator.goToAboutActivity(activity)
                 }
             }

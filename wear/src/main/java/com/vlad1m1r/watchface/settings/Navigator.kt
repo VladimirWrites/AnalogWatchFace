@@ -1,39 +1,37 @@
 package com.vlad1m1r.watchface.settings
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import com.vlad1m1r.watchface.settings.about.AboutActivity
-import com.vlad1m1r.watchface.settings.background.BackgroundActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.settings.about.AboutFragment
+import com.vlad1m1r.watchface.settings.background.BackgroundFragment
 import com.vlad1m1r.watchface.settings.colorpicker.ColorPickerActivity
 import com.vlad1m1r.watchface.settings.colorpicker.customcolor.CustomColorActivity
-import com.vlad1m1r.watchface.settings.complications.ComplicationsActivity
-import com.vlad1m1r.watchface.settings.complications.colors.ComplicationColorsActivity
-import com.vlad1m1r.watchface.settings.complications.picker.ComplicationPickerActivity
+import com.vlad1m1r.watchface.settings.complications.ComplicationsFragment
+import com.vlad1m1r.watchface.settings.complications.colors.ComplicationColorsFragment
+import com.vlad1m1r.watchface.settings.complications.picker.ComplicationPickerFragment
 import com.vlad1m1r.watchface.settings.confirm.ConfirmDeleteColorActivity
-import com.vlad1m1r.watchface.settings.hands.HandsActivity
-import com.vlad1m1r.watchface.settings.hands.centralcircle.CentralCircleActivity
-import com.vlad1m1r.watchface.settings.hands.hand.HandActivity
+import com.vlad1m1r.watchface.settings.hands.HandsFragment
+import com.vlad1m1r.watchface.settings.hands.centralcircle.CentralCircleFragment
+import com.vlad1m1r.watchface.settings.hands.hand.HandFragment
 import com.vlad1m1r.watchface.settings.hands.hand.HandType
-import com.vlad1m1r.watchface.settings.ticks.TicksActivity
+import com.vlad1m1r.watchface.settings.ticks.TicksFragment
 import com.vlad1m1r.watchface.settings.tickslayoutpicker.TicksLayoutPickerActivity
 import javax.inject.Inject
 
 class Navigator @Inject constructor() {
 
-    fun goToAboutActivity(activity: Activity) {
-        activity.startActivity(
-            AboutActivity.newInstance(activity)
-        )
+    fun goToAboutActivity(activity: FragmentActivity) {
+        navigateToFragment(activity, AboutFragment())
     }
 
-    fun goToBackgroundActivity(activity: Activity, @StringRes title: Int) {
-        activity.startActivity(
-            BackgroundActivity.newInstance(activity, title)
-        )
+    fun goToBackgroundActivity(activity: FragmentActivity, @StringRes title: Int) {
+        navigateToFragment(activity, BackgroundFragment(title))
     }
 
     fun goToColorPickerActivityForResult(
@@ -48,50 +46,36 @@ class Navigator @Inject constructor() {
         )
     }
 
-    fun goToComplicationsActivity(activity: Activity, @StringRes title: Int) {
-        activity.startActivity(
-            ComplicationsActivity.newInstance(activity, title)
-        )
+    fun goToComplicationsFragments(activity: FragmentActivity, @StringRes title: Int) {
+        navigateToFragment(activity, ComplicationsFragment(title))
     }
 
-    fun goToComplicationsPickerActivity(activity: Activity) {
-        activity.startActivity(
-            ComplicationPickerActivity.newInstance(activity)
-        )
+    fun goToComplicationsPickerFragment(activity: FragmentActivity) {
+        navigateToFragment(activity, ComplicationPickerFragment())
     }
 
-    fun goToComplicationColorsActivity(activity: Activity, @StringRes title: Int) {
-        activity.startActivity(
-            ComplicationColorsActivity.newInstance(activity, title)
-        )
+    fun goToComplicationColorsFragment(activity: FragmentActivity, @StringRes title: Int) {
+        navigateToFragment(activity, ComplicationColorsFragment(title))
     }
 
-    fun goToCentralCircleActivity(activity: Activity, @StringRes title: Int) {
-        activity.startActivity(
-            CentralCircleActivity.newInstance(activity, title)
-        )
+    fun goToCentralCircleFragment(activity: FragmentActivity, @StringRes title: Int) {
+        navigateToFragment(activity, CentralCircleFragment(title))
     }
 
-    fun goToHandActivity(
-        activity: Activity,
+    fun goToHandFragment(
+        activity: FragmentActivity,
         @StringRes title: Int,
         handType: HandType
     ) {
-        activity.startActivity(
-            HandActivity.newInstance(activity, title, handType)
-        )
+        navigateToFragment(activity, HandFragment(title, handType))
     }
 
-    fun goToHandsActivity(activity: Activity, @StringRes title: Int) {
-        activity.startActivity(
-            HandsActivity.newInstance(activity, title)
-        )
+    fun goToHandsFragments(activity: FragmentActivity, @StringRes title: Int) {
+        navigateToFragment(activity, HandsFragment(title))
     }
 
-    fun goToTicksActivity(activity: Activity, @StringRes title: Int) {
-        activity.startActivity(
-            TicksActivity.newInstance(activity, title)
-        )
+    fun goToTicksFragment(activity: FragmentActivity, @StringRes title: Int) {
+        navigateToFragment(activity, TicksFragment(title))
     }
 
     fun goToTicksLayoutPickerActivityForResult(
@@ -122,4 +106,25 @@ class Navigator @Inject constructor() {
             ConfirmDeleteColorActivity.newInstance(context, text, color)
         )
     }
+
+    fun goToSettingsFragment(
+        activity: FragmentActivity
+    ) {
+        navigateToFragment(activity, SettingsFragment(), false)
+    }
+
+    private fun navigateToFragment(
+        activity: FragmentActivity,
+        fragment: Fragment,
+        addToBackstack: Boolean = true
+    ) {
+        activity.supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, fragment).apply {
+                if (addToBackstack) {
+                    addToBackStack(null)
+                }
+            }
+            .commit()
+    }
+
 }
