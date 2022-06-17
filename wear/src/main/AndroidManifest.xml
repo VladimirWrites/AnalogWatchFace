@@ -13,9 +13,17 @@
     <uses-permission android:name="com.samsung.android.wear.shealth.healthdataprovider.permission.READ" />
 
     <!-- For API 30+, we need to query packages to display icons from them in complications -->
-    <uses-permission
-            android:name="android.permission.QUERY_ALL_PACKAGES"
-            tools:ignore="QueryAllPackagesPermission" />
+    <!--I don't know which one to query so I just hope that one of these works-->
+    <queries>
+        <package android:name="com.samsung.android.wear.shealth" />
+        <package android:name="com.samsung.android.wear" />
+        <package android:name="com.samsung.android" />
+        <package android:name="com.sec.android.app.shealth" />
+        <package android:name="com.samsung.android.app.watchmanager" />
+        <package android:name="com.samsung.android.app.watchmanager2" />
+        <package android:name="com.samsung.android.service.health" />
+        <package android:name="de.ludetis.wear2moonphase" />
+    </queries>
 
     <application
             android:allowBackup="true"
