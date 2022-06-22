@@ -23,6 +23,7 @@
         <package android:name="com.samsung.android.app.watchmanager2" />
         <package android:name="com.samsung.android.service.health" />
         <package android:name="de.ludetis.wear2moonphase" />
+        <package android:name="com.ppltalkin.phonebatterylevel" />
     </queries>
 
     <application
