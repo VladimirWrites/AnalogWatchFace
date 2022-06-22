@@ -74,4 +74,12 @@
     <string name="wear_anti_aliasing_in_ambient_mode">Anti-kartelvorming in sfeermodus</string>
     <string name="wear_add_background_complication">Achtergrond Complicatie toevoegen</string>
     <string name="wear_edit_background_complication">Achtergrond Complicatie bewerken</string>
+    <string name="wear_central_circle_in_ambient_mode">Cirkel centreren in sfeermodus</string>
+    <string name="wear_keep_hands_color_in_ambient_mode">Wijzerkleuren behouden in sfeermodus</string>
+    <string name="wear_add_custom_color">Aangepaste kleur toevoegen</string>
+    <string name="wear_custom_color_red">Rood: %d</string>
+    <string name="wear_custom_color_green">Groen: %d</string>
+    <string name="wear_custom_color_blue">Blauw: %d</string>
+    <string name="wear_custom_color_confirm">Bevestigen</string>
+    <string name="wear_custom_color_delete">Wil je de kleur verwijderen?</string>
 </resources>
