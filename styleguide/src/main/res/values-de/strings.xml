@@ -4,10 +4,10 @@
     <!-- Shown on a device under the icon and in the About screen of the watch face and Android app. I am not sure if it makes sense to translate the app name. How is it done for other apps in your language? Maybe having the translation in brackets would be an option: Analog Watch Face (translated name) -->
     <string name="app_name">"Analog Watch Face"</string>
     <string name="app_subtitle">"Danke, dass Du die App heruntergeladen hast!"</string>
-    <string name="app_description">"Diese App ist da um das Installieren des Zifferblattes auf Deiner Wear OS Uhr einfacher zu machen. Sobald das Zifferblatt installiert ist, kannst Du diese App von deinem Smartphone deinstallieren. Das gesamte Projekt ist Open-Source, also wenn Du Programmier-Erfahrung hast fühle Dich frei etwas beizutragen! Wenn Dir dieses Zifferblatt gefällt, vergiss nicht es zu bewerten!"</string>
+    <string name="app_description">"Diese App ist da um das Installieren des Zifferblattes auf Deiner Wear OS Uhr einfacher zu machen. Sobald das Zifferblatt installiert ist, kannst Du diese App von deinem Smartphone deinstallieren.\n\nDas gesamte Projekt ist Open-Source, also wenn Du Programmier-Erfahrung hast fühle Dich frei etwas beizutragen!\n\nWenn Dir dieses Zifferblatt gefällt, vergiss nicht es zu bewerten!"</string>
 
     <!-- This will be shown if a user doesn't have a watch connected to the phone on which this app is installed. -->
-    <string name="app_no_watch">"Es scheint als wäre keine Wear OS Uhr mit diesem Gerät verbunden. Entschuldigung für die Unannehmlichkeiten, aber Analog Watch Face kann nur auf Wear OS Geräten installiert werden. Du kannst es aber auch manuell von der Uhr aus machen, indem Du nach diesem Zifferblatt in dem eingebauten Store suchst."</string>
+    <string name="app_no_watch">"Es scheint als wäre keine Wear OS Uhr mit diesem Gerät verbunden.\nEntschuldigung für die Unannehmlichkeiten, aber Analog Watch Face kann nur auf Wear OS Geräten installiert werden.\n\nDu kannst es aber auch manuell von der Uhr aus machen, indem Du nach diesem Zifferblatt in dem eingebauten Store suchst."</string>
     <string name="app_install_watch_face">"Analoges Zifferblatt installieren"</string>
     <string name="app_uninstall_app">"Diese App deinstallieren"</string>
 
