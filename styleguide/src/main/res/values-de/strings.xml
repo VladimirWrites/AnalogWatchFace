@@ -2,79 +2,86 @@
 <resources>
 
     <!-- Shown on a device under the icon and in the About screen of the watch face and Android app. I am not sure if it makes sense to translate the app name. How is it done for other apps in your language? Maybe having the translation in brackets would be an option: Analog Watch Face (translated name) -->
-    <string name="app_name">Analoges Ziffernblatt</string>
-    <string name="app_subtitle">Danke, dass Du die App heruntergeladen hast!</string>
-    <string name="app_description">Diese App ist da um das installieren des Ziffernblattes auf deiner Wear OS Uhr einfacher zu machen. Sobald das Ziffernblatt installiert ist, kannst Du diese App von deinem Smartphone deinstallieren.\n\nDas gesamte Projekt ist Open-Source, also wenn Du Programmier-Erfahrung hast fühle Dich frei etwas beizutragen!\n\nWenn Dir dieses Ziffernblatt gefällt, vergiss nicht es zu bewerten!</string>
+    <string name="app_name">"Analog Watch Face"</string>
+    <string name="app_subtitle">"Danke, dass Du die App heruntergeladen hast!"</string>
+    <string name="app_description">"Diese App ist da um das Installieren des Zifferblattes auf Deiner Wear OS Uhr einfacher zu machen. Sobald das Zifferblatt installiert ist, kannst Du diese App von deinem Smartphone deinstallieren. Das gesamte Projekt ist Open-Source, also wenn Du Programmier-Erfahrung hast fühle Dich frei etwas beizutragen! Wenn Dir dieses Zifferblatt gefällt, vergiss nicht es zu bewerten!"</string>
 
     <!-- This will be shown if a user doesn't have a watch connected to the phone on which this app is installed. -->
-    <string name="app_no_watch">Es scheint als wäre kein Wear OS Uhr mit diesem Gerät verbunden.\nEntschuldigung für die Unannehmlichkeiten, aber Analog Watch Face kann nur auf Wear OS Geräten installiert werden.\n\nDu kannst es aber auch manuell von der Uhr aus machen, indem Du nach diesem Ziffernblatt in dem eingebauten Store suchst.</string>
-    <string name="app_install_watch_face">Analoges Ziffernblatt installieren</string>
-    <string name="app_uninstall_app">Diese App deinstallieren</string>
+    <string name="app_no_watch">"Es scheint als wäre keine Wear OS Uhr mit diesem Gerät verbunden. Entschuldigung für die Unannehmlichkeiten, aber Analog Watch Face kann nur auf Wear OS Geräten installiert werden. Du kannst es aber auch manuell von der Uhr aus machen, indem Du nach diesem Zifferblatt in dem eingebauten Store suchst."</string>
+    <string name="app_install_watch_face">"Analoges Zifferblatt installieren"</string>
+    <string name="app_uninstall_app">"Diese App deinstallieren"</string>
 
     <!-- Shown if the PlayStore is successfully opened on the watch. -->
-    <string name="app_open_playstore_success_message">Schau auf Deine Uhr!</string>
+    <string name="app_open_playstore_success_message">"Schau auf Deine Uhr!"</string>
 
     <!-- Shown if the PlayStore didn't open on the watch due to some error. -->
-    <string name="app_open_playstore_error_message">Etwas ist schiefgelaufen! Stelle sicher, dass ein Wear OS Gerät mit Deinem Telefon verbunden ist.</string>
+    <string name="app_open_playstore_error_message">"Etwas ist schiefgelaufen! Stelle sicher, dass ein Wear OS Gerät mit Deinem Telefon verbunden ist."</string>
 
     <!-- What is exactly meant by "complication"? -->
-    <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider
-(e.g. Edit Complication Day of the week) -->
-    <string name="wear_edit_complication">Komplikationen bearbeiten %s</string>
-    <string name="wear_add_complication">Komplikation hinzufügen</string>
+    <!-- This can be shown when editing complication in the following format: Edit Complication NameOfComplicationProvider (e.g. Edit Complication Day of the week) -->
+    <string name="wear_edit_complication">"Komplikationen bearbeiten %s"</string>
+    <string name="wear_add_complication">"Komplikation hinzufügen"</string>
 
     <!-- What is "ticks" supposed to mean. Is it the ticking of the watch or something else? -->
-    <string name="wear_ticks_layout_picker">Skala-Layout auswählen</string>
-    <string name="wear_hand_settings">Hand Einstellungen</string>
-    <string name="wear_about_app">Über diese App</string>
-    <string name="wear_background_settings">Hintergrund Einstellungen</string>
-    <string name="wear_complications_settings">Komplikationen Einstellungen</string>
-    <string name="wear_ticks_settings">Skala Einstellungen</string>
-    <string name="wear_rate_the_watch_face">Bewerte das Ziffernblatt</string>
-    <string name="wear_hours_hand_color">Farbe Stundenzeiger</string>
-    <string name="wear_minutes_hand_color">Farbe Minutenzeiger</string>
-    <string name="wear_seconds_hand_color">Farbe Sekundenzeiger</string>
-    <string name="wear_central_circle_color">Farbe mittlerer Kreis</string>
-    <string name="wear_smooth_seconds_hand">Flüssiger Sekundenzeiger</string>
-    <string name="wear_left_background_color">Hintergrundfarbe links</string>
-    <string name="wear_right_background_color">Hintergrundfarbe rechts</string>
-    <string name="wear_black_ambient_background">Schwarzer Hintergrund im Ambient Mode</string>
-    <string name="wear_ticks_in_ambient_mode">Skala im Ambient Mode</string>
-    <string name="wear_ticks_in_interactive_mode">Skala im interaktiven Modus</string>
-    <string name="wear_ticks_adjust_to_square_screen">Skala an quadratisches Display anpassen</string>
-    <string name="wear_hour_ticks_color">Stundenskala Farbe</string>
-    <string name="wear_minute_ticks_color">Minutenskala Farbe</string>
-    <string name="wear_complications_in_ambient_mode">Komplikationen im Ambient Mode</string>
-    <string name="wear_complications_text_color">Komplikation Text Farbe</string>
-    <string name="wear_complications_title_color">Komplikation Titel Farbe</string>
-    <string name="wear_complications_icon_color">Komplikation Symbol Farbe</string>
-    <string name="wear_complications_border_color">Komplikation Rahmenfarbe</string>
-    <string name="wear_complications_ranged_value_primary_color">Komplikation Bereichs-Wert Primäre Farbe</string>
-    <string name="wear_complications_ranged_value_secondary_color">Komplikation Bereichs-Wert Sekundäre Farbe</string>
-    <string name="wear_complications_background_color">Komplikation Hintergrundfarbe</string>
-    <string name="wear_bigger_top_and_bottom_complications">Noch breitere Komplikationen oben und unten</string>
-    <string name="wear_bigger_round_complications">Größere runde Komplikationen</string>
-    <string name="wear_bigger_text_in_complications">Größeren Text verwenden</string>
-    <string name="wear_github_title">GitHub</string>
-    <string name="wear_email_title">E-Mail</string>
-    <string name="wear_play_store_title">Play Store</string>
-    <string name="wear_view_on_you_phone">Auf Smartphone anzeigen</string>
-    <string name="wear_complication_day_of_month">Datum</string>
-    <string name="wear_complication_time_24">Zeit (24 Stunden)</string>
-    <string name="wear_complication_time_12">Zeit (12 Stunden)</string>
-    <string name="wear_hours_hand">Stunden Hand</string>
-    <string name="wear_minutes_hand">Minuten Hand</string>
-    <string name="wear_seconds_hand">Sekundenzeiger</string>
-    <string name="wear_central_circle">Zentraler Kreis</string>
-    <string name="wear_hand_color">Handfarbe</string>
-    <string name="wear_settings">Einstellungen</string>
-    <string name="wear_hand_width">Handbreite: %d</string>
-    <string name="wear_hand_scale">Hand Skala: %.2f</string>
-    <string name="wear_circle_width">Linienbreite: %d</string>
-    <string name="wear_circle_radius">Kreisradius: %d</string>
-    <string name="wear_complication_colors">Komplikation Farben</string>
-    <string name="wear_complication_picker">Komplikationsausleser</string>
-    <string name="wear_anti_aliasing_in_ambient_mode">Anti-Aliasing im Ambient Mode</string>
-    <string name="wear_add_background_complication">Hintergrundkomplikation hinzufügen</string>
-    <string name="wear_edit_background_complication">Bearbeiten Hintergrund Komplikation</string>
+    <string name="wear_ticks_layout_picker">"Skala-Layout auswählen"</string>
+    <string name="wear_hand_settings">"Zeiger Einstellungen"</string>
+    <string name="wear_about_app">"Über diese App"</string>
+    <string name="wear_background_settings">"Hintergrund Einstellungen"</string>
+    <string name="wear_complications_settings">"Komplikationen Einstellungen"</string>
+    <string name="wear_ticks_settings">"Skala Einstellungen"</string>
+    <string name="wear_rate_the_watch_face">"Bewerte das Zifferblatt"</string>
+    <string name="wear_hours_hand_color">"Farbe Stundenzeiger"</string>
+    <string name="wear_minutes_hand_color">"Farbe Minutenzeiger"</string>
+    <string name="wear_seconds_hand_color">"Farbe Sekundenzeiger"</string>
+    <string name="wear_central_circle_color">"Farbe zentraler Kreis"</string>
+    <string name="wear_smooth_seconds_hand">"Stetiger Sekundenzeiger"</string>
+    <string name="wear_left_background_color">"Hintergrundfarbe links"</string>
+    <string name="wear_right_background_color">"Hintergrundfarbe rechts"</string>
+    <string name="wear_black_ambient_background">"Schwarzer Hintergrund im Ambient Mode"</string>
+    <string name="wear_ticks_in_ambient_mode">"Skala im Ambient Mode"</string>
+    <string name="wear_ticks_in_interactive_mode">"Skala im interaktiven Modus"</string>
+    <string name="wear_ticks_adjust_to_square_screen">"Skala an quadratisches Display anpassen"</string>
+    <string name="wear_hour_ticks_color">"Farbe Stundenskala"</string>
+    <string name="wear_minute_ticks_color">"Farbe Minutenskala"</string>
+    <string name="wear_complications_in_ambient_mode">"Komplikationen im Ambient Mode"</string>
+    <string name="wear_complications_text_color">"Farbe Komplikationstext"</string>
+    <string name="wear_complications_title_color">"Farbe Komplikationstitel"</string>
+    <string name="wear_complications_icon_color">"Farbe Komplikationssymbol"</string>
+    <string name="wear_complications_border_color">"Farbe Komplikationsrahmen"</string>
+    <string name="wear_complications_ranged_value_primary_color">"Primärfarbe Komplikations-Bereichswert"</string>
+    <string name="wear_complications_ranged_value_secondary_color">"Sekundärfarbe Komplikations-Bereichswert"</string>
+    <string name="wear_complications_background_color">"Hintergrundfarbe Komplikation"</string>
+    <string name="wear_bigger_top_and_bottom_complications">"Noch breitere Komplikationen oben und unten"</string>
+    <string name="wear_bigger_round_complications">"Größere runde Komplikationen"</string>
+    <string name="wear_bigger_text_in_complications">"Größeren Text verwenden"</string>
+    <string name="wear_github_title">"GitHub"</string>
+    <string name="wear_email_title">"E-Mail"</string>
+    <string name="wear_play_store_title">"Play Store"</string>
+    <string name="wear_view_on_you_phone">"Auf Smartphone anzeigen"</string>
+    <string name="wear_complication_day_of_month">"Datum"</string>
+    <string name="wear_complication_time_24">"Zeit (24 Stunden)"</string>
+    <string name="wear_complication_time_12">"Zeit (12 Stunden)"</string>
+    <string name="wear_hours_hand">"Stundenzeiger"</string>
+    <string name="wear_minutes_hand">"Minutenzeiger"</string>
+    <string name="wear_seconds_hand">"Sekundenzeiger"</string>
+    <string name="wear_central_circle">"Zentraler Kreis"</string>
+    <string name="wear_hand_color">"Zeigerfarbe"</string>
+    <string name="wear_settings">"Einstellungen"</string>
+    <string name="wear_hand_width">"Zeigerbreite: %d"</string>
+    <string name="wear_hand_scale">"Zeigerskala: %.2f"</string>
+    <string name="wear_circle_width">"Linienbreite: %d"</string>
+    <string name="wear_circle_radius">"Kreisradius: %d"</string>
+    <string name="wear_complication_colors">"Komplikationsfarben"</string>
+    <string name="wear_complication_picker">"Komplikationsauswahl"</string>
+    <string name="wear_anti_aliasing_in_ambient_mode">"Anti-Aliasing im Ambient Mode"</string>
+    <string name="wear_add_background_complication">"Hintergrundkomplikation hinzufügen"</string>
+    <string name="wear_edit_background_complication">"Hintergrundkomplikation bearbeiten"</string>
+    <string name="wear_central_circle_in_ambient_mode">"Zentraler Kreis im Ambient Mode"</string>
+    <string name="wear_keep_hands_color_in_ambient_mode">"Zeigerfarbe im Ambient Mode beibehalten"</string>
+    <string name="wear_add_custom_color">"Eigene Farbe hinzufügen"</string>
+    <string name="wear_custom_color_red">"Rot: %d"</string>
+    <string name="wear_custom_color_green">"Grün: %d"</string>
+    <string name="wear_custom_color_blue">"Blau: %d"</string>
+    <string name="wear_custom_color_confirm">"Bestätigen"</string>
+    <string name="wear_custom_color_delete">"Farbe löschen?"</string>
 </resources>
