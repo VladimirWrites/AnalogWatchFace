@@ -7,6 +7,17 @@ import androidx.wear.watchface.style.WatchFaceLayer
 
 fun createUserStyleSchema(context: Context): UserStyleSchema {
 
+    val hasBlackBackground = UserStyleSetting.BooleanUserStyleSetting(
+        UserStyleSetting.Id(WATCH_BACKGROUND_MODIFIED),
+        context.resources,
+        R.string.wear_black_ambient_background,
+        R.string.wear_background_settings,
+        null,
+        listOf(WatchFaceLayer.BASE),
+        false,
+    )
+
+
     val backgroundModified = UserStyleSetting.BooleanUserStyleSetting(
         UserStyleSetting.Id(WATCH_BACKGROUND_MODIFIED),
         context.resources,
@@ -14,7 +25,7 @@ fun createUserStyleSchema(context: Context): UserStyleSchema {
         R.string.wear_background_settings,
         null,
         listOf(WatchFaceLayer.BASE),
-        false
+        false,
     )
 
     val handsModified = UserStyleSetting.BooleanUserStyleSetting(
