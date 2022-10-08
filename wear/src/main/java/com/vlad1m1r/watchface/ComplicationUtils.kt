@@ -164,8 +164,3 @@ private fun getBottomBounds(centerX: Float, centerY: Float, wider: Boolean, bott
         centerY.toInt() + verticalOffsetSmall + sizeOfComplicationSmall - bottomInset / 4
     )
 }
-
-private fun Rect.toRectF(centerX: Float, centerY: Float): RectF {
-
-}
-

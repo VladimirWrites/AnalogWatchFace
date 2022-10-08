@@ -18,11 +18,11 @@ object Versions {
     const val mockito_kotlin = "4.0.0"
     const val truth = "1.1.3"
 
-    const val gradle_android = "7.2.0"
+    const val gradle_android = "7.3.0"
 
     const val min_sdk = 26
-    const val target_sdk = 32
-    const val compile_sdk = 32
+    const val target_sdk = 33
+    const val compile_sdk = 33
 
     const val version_code_app = 30001
     const val version_code_wear = 30002    //Major + Minor + BugFix + 1 for app and 2 for wear

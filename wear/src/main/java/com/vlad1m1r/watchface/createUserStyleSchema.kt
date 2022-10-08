@@ -5,14 +5,6 @@ import androidx.wear.watchface.style.UserStyleSchema
 import androidx.wear.watchface.style.UserStyleSetting
 import androidx.wear.watchface.style.WatchFaceLayer
 
-const val WATCH_BACKGROUND_MODIFIED = "WATCH_BACKGROUND_MODIFIED"
-
-const val WATCH_HANDS_MODIFIED = "WATCH_HANDS_MODIFIED"
-
-const val WATCH_COMPLICATION_MODIFIED = "WATCH_COMPLICATION_MODIFIED"
-
-const val WATCH_TICKS_MODIFIED = "WATCH_TICKS_MODIFIED"
-
 fun createUserStyleSchema(context: Context): UserStyleSchema {
 
     val backgroundModified = UserStyleSetting.BooleanUserStyleSetting(
