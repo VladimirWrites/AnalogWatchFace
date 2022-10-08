@@ -120,26 +120,26 @@ class AnalogWatchCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: AnalogSharedAssets
     ) {
-//        if (
-//            layouts.ticks.centerInvalidated
-//        ) {
-//            val center = Point(canvas.width / 2f, canvas.height / 2f)
-//            layouts.setCenter(center)
-//        }
+        if (
+            layouts.ticks.centerInvalidated
+        ) {
+            val center = Point(canvas.width / 2f, canvas.height / 2f)
+            layouts.setCenter(center)
+        }
 
-        //layouts.background.draw(canvas)
+        layouts.background.draw(canvas)
 
         if (renderParameters.drawMode != DrawMode.AMBIENT || dataStorage.hasComplicationsInAmbientMode()) {
             drawComplications(canvas, zonedDateTime)
         }
 
-//        if ((renderParameters.drawMode == DrawMode.AMBIENT && dataStorage.hasTicksInAmbientMode()) ||
-//            (renderParameters.drawMode != DrawMode.AMBIENT && dataStorage.hasTicksInInteractiveMode())
-//        ) {
-//            layouts.ticks.draw(canvas)
-//        }
-//
-//        layouts.hands.draw(canvas, zonedDateTime)
+        if ((renderParameters.drawMode == DrawMode.AMBIENT && dataStorage.hasTicksInAmbientMode()) ||
+            (renderParameters.drawMode != DrawMode.AMBIENT && dataStorage.hasTicksInInteractiveMode())
+        ) {
+            layouts.ticks.draw(canvas)
+        }
+
+        layouts.hands.draw(canvas, zonedDateTime)
     }
 
     override fun renderHighlightLayer(

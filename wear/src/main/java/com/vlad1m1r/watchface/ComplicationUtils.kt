@@ -13,7 +13,6 @@ import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import com.vlad1m1r.watchface.model.Point
 import kotlin.math.max
 import kotlin.math.min
 
@@ -57,7 +56,7 @@ fun createComplicationSlotManager(
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(),
 
         bounds = ComplicationSlotBounds(
-            getLeftBounds(minDimen/2f, maxDimen/2f).toRectF()
+            getLeftBounds(minDimen/2f, maxDimen/2f).customToRectF(minDimen/2f, maxDimen/2f)
         )
     ).build()
 
@@ -67,7 +66,7 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Right.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(),
         bounds = ComplicationSlotBounds(
-            getRightBounds(minDimen/2f, maxDimen/2f).toRectF()
+            getRightBounds(minDimen/2f, maxDimen/2f).customToRectF(minDimen/2f, maxDimen/2f)
         )
     ).build()
 
@@ -78,8 +77,9 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Top.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(),
         bounds = ComplicationSlotBounds(
-            getTopBounds(minDimen/2f, maxDimen/2f, false).toRectF()
+            getTopBounds(minDimen/2f, maxDimen/2f, false).customToRectF(minDimen/2f, maxDimen/2f)
         )
+
     ).build()
 
     val bottomComplication = ComplicationSlot.createRoundRectComplicationSlotBuilder(
@@ -88,7 +88,7 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Bottom.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(),
         bounds = ComplicationSlotBounds(
-            getBottomBounds(minDimen/2f, maxDimen/2f, false).toRectF()
+            getBottomBounds(minDimen/2f, maxDimen/2f, false).customToRectF(minDimen/2f, maxDimen/2f)
         )
     ).build()
 
@@ -164,3 +164,9 @@ private fun getBottomBounds(centerX: Float, centerY: Float, wider: Boolean, bott
         centerY.toInt() + verticalOffsetSmall + sizeOfComplicationSmall - bottomInset / 4
     )
 }
+
+private fun Rect.customToRectF(centerX: Float, centerY: Float): RectF {
+    return RectF(this.left/(2*centerX), this.top/(2*centerY), this.right/(2*centerX), this.bottom/(2*centerY))
+}
+
+
