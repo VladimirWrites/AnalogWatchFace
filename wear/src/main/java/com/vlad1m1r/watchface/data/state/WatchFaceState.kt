@@ -4,4 +4,5 @@ data class WatchFaceState(
     val backgroundState: BackgroundState,
     val ticksState: TicksState,
     val handsState: HandsState,
+    val complicationsState: ComplicationsState
 )

@@ -41,6 +41,16 @@ val HANDS_HAS_IN_INTERACTIVE = UserStyleSetting.Id("hands_has_in_interactive")
 val HANDS_KEEP_COLOR_IN_AMBIENT_MODE = UserStyleSetting.Id("hands_keep_color_in_ambient_mode")
 val HANDS_HAS = UserStyleSetting.Id("hands_has")
 
+val COMPLICATION_HAS_IN_AMBIENT_MODE = UserStyleSetting.Id("complication_has_in_ambient_mode")
+val COMPLICATION_HAS_BIGGER_TOP_AND_BOTTOM = UserStyleSetting.Id("complication_has_bigger_top_and_bottom")
+val COMPLICATION_TEXT_COLOR = UserStyleSetting.Id("complication_text_color")
+val COMPLICATION_TITLE_COLOR = UserStyleSetting.Id("complication_title_color")
+val COMPLICATION_ICON_COLOR = UserStyleSetting.Id("complication_icon_color")
+val COMPLICATION_BORDER_COLOR = UserStyleSetting.Id("complication_border_color")
+val COMPLICATION_RANGED_VALUE_PRIMARY_COLOR = UserStyleSetting.Id("complication_ranged_primary_color")
+val COMPLICATION_RANGED_VALUE_SECONDARY_COLOR = UserStyleSetting.Id("complication_ranged_secondary_color")
+val COMPLICATION_BACKGROUND_COLOR = UserStyleSetting.Id("complication_background_color")
+
 val WATCH_USE_ANTIALIASING = UserStyleSetting.Id("watch_use_antialiasing")
 
 fun UserStyle.toWatchFaceState(): WatchFaceState {
@@ -48,6 +58,7 @@ fun UserStyle.toWatchFaceState(): WatchFaceState {
         this.toBackgroundState(),
         this.toTicksState(),
         this.toHandsState(),
+        this.toComplicationsState()
     )
 }
 
@@ -116,6 +127,20 @@ private fun UserStyle.toCircleState(): CircleState {
         this.getAsIntOption(HAND_CIRCLE_WIDTH),
         this.getAsIntOption(HAND_CIRCLE_RADIUS),
         this.getAsBooleanOption(HAND_CIRCLE_HAS_IN_AMBIENT_MODE)
+    )
+}
+
+private fun UserStyle.toComplicationsState(): ComplicationsState {
+    return ComplicationsState(
+        this.getAsBooleanOption(COMPLICATION_HAS_IN_AMBIENT_MODE),
+        this.getAsBooleanOption(COMPLICATION_HAS_BIGGER_TOP_AND_BOTTOM),
+        this.getAsColorOption(COMPLICATION_TEXT_COLOR),
+        this.getAsColorOption(COMPLICATION_TITLE_COLOR),
+        this.getAsColorOption(COMPLICATION_ICON_COLOR),
+        this.getAsColorOption(COMPLICATION_BORDER_COLOR),
+        this.getAsColorOption(COMPLICATION_RANGED_VALUE_PRIMARY_COLOR),
+        this.getAsColorOption(COMPLICATION_RANGED_VALUE_SECONDARY_COLOR),
+        this.getAsColorOption(COMPLICATION_BACKGROUND_COLOR)
     )
 }
 

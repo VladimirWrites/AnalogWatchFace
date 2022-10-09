@@ -11,9 +11,7 @@ import javax.inject.Inject
 
 class Layouts @Inject constructor(
     val background: Background,
-    //val complications: Complications,
     val hands: Hands,
-    //val backgroundComplication: BackgroundComplication,
     private val getTicks: GetTicks
 ) {
     private var bottomInset = 0
@@ -37,8 +35,6 @@ class Layouts @Inject constructor(
 
     fun setMode(mode: Mode) {
         background.setMode(mode)
-//        complications.setMode(mode)
-//        backgroundComplication.setMode(mode)
         ticks.setMode(mode)
         hands.setMode(mode)
     }
@@ -46,8 +42,6 @@ class Layouts @Inject constructor(
     fun setCenter(center: Point) {
         background.setCenter(center)
         ticks.setCenter(center)
-//        complications.setCenter(center)
-//        backgroundComplication.setCenter(center)
         hands.setCenter(center)
     }
 }

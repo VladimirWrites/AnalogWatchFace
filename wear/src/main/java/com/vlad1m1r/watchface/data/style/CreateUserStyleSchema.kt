@@ -11,7 +11,8 @@ class CreateUserStyleSchema @Inject constructor(
     private val createHoursHandStyleSettings: CreateHoursHandStyleSettings,
     private val createHandCircleStyleSettings: CreateHandCircleStyleSettings,
     private val createGeneralHandStyleSettings: CreateGeneralHandStyleSettings,
-    private val createGeneralStyleSettings: CreateGeneralStyleSettings
+    private val createGeneralStyleSettings: CreateGeneralStyleSettings,
+    private val createComplicationStyleSettings: CreateComplicationStyleSettings
 ) {
     operator fun invoke(): UserStyleSchema {
         return UserStyleSchema(
@@ -22,7 +23,8 @@ class CreateUserStyleSchema @Inject constructor(
                     createHoursHandStyleSettings() +
                     createHandCircleStyleSettings() +
                     createGeneralHandStyleSettings() +
-                    createGeneralStyleSettings()
+                    createGeneralStyleSettings() +
+                    createComplicationStyleSettings()
         )
     }
 }

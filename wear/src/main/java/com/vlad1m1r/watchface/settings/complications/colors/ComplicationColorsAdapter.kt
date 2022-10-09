@@ -11,6 +11,7 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.settings.*
 import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
+import com.vlad1m1r.watchface.settings.hands.hand.WatchFaceStateHolder
 import kotlin.IllegalArgumentException
 
 private const val TYPE_TITLE = 0
@@ -23,7 +24,7 @@ private const val TYPE_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR = 6
 private const val TYPE_COMPLICATIONS_BACKGROUND_COLOR = 7
 
 class ComplicationColorsAdapter(
-    private val colorStorage: ColorStorage,
+    private val stateHolder: WatchFaceStateHolder,
     private val navigator: Navigator,
     @StringRes private val title: Int,
     private val complicationsTextColorLauncher: ActivityResultLauncher<Intent>,
@@ -77,49 +78,49 @@ class ComplicationColorsAdapter(
             TYPE_COMPLICATIONS_TEXT_COLOR ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_text_color,
-                    colorStorage.getComplicationsTextColor(),
+                    stateHolder.currentState.complicationsState.textColor,
                     true,
                     complicationsTextColorLauncher
                 )
             TYPE_COMPLICATIONS_TITLE_COLOR ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_title_color,
-                    colorStorage.getComplicationsTitleColor(),
+                    stateHolder.currentState.complicationsState.titleColor,
                     true,
                     complicationsTitleColorLauncher
                 )
             TYPE_COMPLICATIONS_ICON_COLOR ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_icon_color,
-                    colorStorage.getComplicationsIconColor(),
+                    stateHolder.currentState.complicationsState.iconColor,
                     true,
                     complicationsIconColorLauncher
                 )
             TYPE_COMPLICATIONS_BORDER_COLOR ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_border_color,
-                    colorStorage.getComplicationsBorderColor(),
+                    stateHolder.currentState.complicationsState.borderColor,
                     true,
                     complicationsBorderColorLauncher
                 )
             TYPE_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_ranged_value_primary_color,
-                    colorStorage.getComplicationsRangedValuePrimaryColor(),
+                    stateHolder.currentState.complicationsState.rangedValuePrimaryColor,
                     true,
                     complicationsRangedValuePrimaryColorLauncher
                 )
             TYPE_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_ranged_value_secondary_color,
-                    colorStorage.getComplicationsRangedValueSecondaryColor(),
+                    stateHolder.currentState.complicationsState.rangedValueSecondaryColor,
                     true,
                     complicationsRangedValueSecondaryColorLauncher
                 )
             TYPE_COMPLICATIONS_BACKGROUND_COLOR ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_complications_background_color,
-                    colorStorage.getComplicationsBackgroundColor(),
+                    stateHolder.currentState.complicationsState.backgroundColor,
                     true,
                     complicationsBackgroundColorLauncher
                 )

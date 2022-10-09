@@ -4,6 +4,7 @@ import android.view.SurfaceHolder
 import androidx.wear.watchface.*
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyleSchema
+import com.vlad1m1r.watchface.components.Complications
 import com.vlad1m1r.watchface.components.Layouts
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.CustomColorStorage
@@ -30,6 +31,9 @@ class AnalogWatchFace : WatchFaceService() {
 
     @Inject
     lateinit var layouts: Layouts
+
+    @Inject
+    lateinit var complications: Complications
 
     @Inject
     lateinit var createUserStyleSchema: CreateUserStyleSchema
@@ -60,7 +64,7 @@ class AnalogWatchFace : WatchFaceService() {
             complicationSlotsManager = complicationSlotsManager,
             currentUserStyleRepository = currentUserStyleRepository,
             canvasType = CanvasType.HARDWARE,
-            dataStorage = dataStorage,
+            complications = complications,
             layouts = layouts.apply {
                 setBottomInset(watchState.chinHeight)
             }

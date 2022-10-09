@@ -23,7 +23,6 @@ fun createComplicationSlotManager(
 
     val screenWidthDp = context.resources.configuration.screenWidthDp
     val screenHeightDp = context.resources.configuration.screenHeightDp
-
     val minDimen = min(screenWidthDp, screenHeightDp).toFloat()
     val maxDimen = max(screenWidthDp, screenHeightDp).toFloat()
 

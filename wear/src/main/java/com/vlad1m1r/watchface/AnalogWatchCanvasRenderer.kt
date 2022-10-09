@@ -7,8 +7,12 @@ import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
+import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
+import androidx.wear.watchface.complications.rendering.ComplicationDrawable
+import androidx.wear.watchface.complications.rendering.ComplicationStyle
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyle
+import com.vlad1m1r.watchface.components.Complications
 import com.vlad1m1r.watchface.components.Layouts
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.state.WatchFaceState
@@ -26,8 +30,8 @@ class AnalogWatchCanvasRenderer(
     private val complicationSlotsManager: ComplicationSlotsManager,
     currentUserStyleRepository: CurrentUserStyleRepository,
     canvasType: Int,
-    private val dataStorage: DataStorage,
-    private val layouts: Layouts
+    private val layouts: Layouts,
+    private val complications: Complications,
 ) : Renderer.CanvasRenderer2<AnalogWatchCanvasRenderer.AnalogSharedAssets>(
     surfaceHolder,
     currentUserStyleRepository,
@@ -62,12 +66,14 @@ class AnalogWatchCanvasRenderer(
     private fun updateWatchFaceData(userStyle: UserStyle) {
         val watchFaceState = userStyle.toWatchFaceState()
         this.state = watchFaceState
+
         layouts.setState(watchFaceState)
     }
 
     private fun drawComplications(canvas: Canvas, zonedDateTime: ZonedDateTime) {
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
             if (complication.enabled) {
+                complications.applyComplicationState(complication, state.complicationsState)
                 complication.render(canvas, zonedDateTime, renderParameters)
             }
         }
@@ -102,7 +108,7 @@ class AnalogWatchCanvasRenderer(
 
             layouts.background.draw(canvas)
 
-            if (renderParameters.drawMode != DrawMode.AMBIENT || dataStorage.hasComplicationsInAmbientMode()) {
+            if (renderParameters.drawMode != DrawMode.AMBIENT || state.complicationsState.hasInAmbientMode) {
                 drawComplications(canvas, zonedDateTime)
             }
 

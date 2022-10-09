@@ -21,9 +21,6 @@ class ComplicationColorsFragment(@StringRes private val title: Int) : BaseRecycl
     private lateinit var adapter: ComplicationColorsAdapter
 
     @Inject
-    lateinit var colorStorage: ColorStorage
-
-    @Inject
     lateinit var navigator: Navigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,7 +29,10 @@ class ComplicationColorsFragment(@StringRes private val title: Int) : BaseRecycl
         val complicationsTextColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val complicationsTextColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setComplicationsTextColor(complicationsTextColor)
+
+                val newComplicationState = getStateHolder().currentState.complicationsState.copy(textColor = complicationsTextColor)
+                getStateHolder().setComplicationsState(newComplicationState)
+
                 adapter.notifyDataSetChanged()
             }
         }
@@ -40,7 +40,10 @@ class ComplicationColorsFragment(@StringRes private val title: Int) : BaseRecycl
         val complicationsTitleColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val complicationsTitleColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setComplicationsTitleColor(complicationsTitleColor)
+
+                val newComplicationState = getStateHolder().currentState.complicationsState.copy(titleColor = complicationsTitleColor)
+                getStateHolder().setComplicationsState(newComplicationState)
+
                 adapter.notifyDataSetChanged()
             }
         }
@@ -48,7 +51,10 @@ class ComplicationColorsFragment(@StringRes private val title: Int) : BaseRecycl
         val complicationsIconColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val complicationsIconColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setComplicationsIconColor(complicationsIconColor)
+
+                val newComplicationState = getStateHolder().currentState.complicationsState.copy(iconColor = complicationsIconColor)
+                getStateHolder().setComplicationsState(newComplicationState)
+
                 adapter.notifyDataSetChanged()
             }
         }
@@ -56,7 +62,10 @@ class ComplicationColorsFragment(@StringRes private val title: Int) : BaseRecycl
         val complicationsBorderColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val complicationsBorderColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setComplicationsBorderColor(complicationsBorderColor)
+
+                val newComplicationState = getStateHolder().currentState.complicationsState.copy(borderColor = complicationsBorderColor)
+                getStateHolder().setComplicationsState(newComplicationState)
+
                 adapter.notifyDataSetChanged()
             }
         }
@@ -64,7 +73,10 @@ class ComplicationColorsFragment(@StringRes private val title: Int) : BaseRecycl
         val complicationsRangedValuePrimaryColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val complicationsRangedValuePrimaryColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setComplicationsRangedValuePrimaryColor(complicationsRangedValuePrimaryColor)
+
+                val newComplicationState = getStateHolder().currentState.complicationsState.copy(rangedValuePrimaryColor = complicationsRangedValuePrimaryColor)
+                getStateHolder().setComplicationsState(newComplicationState)
+
                 adapter.notifyDataSetChanged()
             }
         }
@@ -72,7 +84,10 @@ class ComplicationColorsFragment(@StringRes private val title: Int) : BaseRecycl
         val complicationsRangedValueSecondaryColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val complicationsRangedValueSecondaryColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setComplicationsRangedValueSecondaryColor(complicationsRangedValueSecondaryColor)
+
+                val newComplicationState = getStateHolder().currentState.complicationsState.copy(rangedValueSecondaryColor = complicationsRangedValueSecondaryColor)
+                getStateHolder().setComplicationsState(newComplicationState)
+
                 adapter.notifyDataSetChanged()
             }
         }
@@ -80,13 +95,16 @@ class ComplicationColorsFragment(@StringRes private val title: Int) : BaseRecycl
         val complicationsBackgroundColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val complicationsBackgroundColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setComplicationsBackgroundColor(complicationsBackgroundColor)
+
+                val newComplicationState = getStateHolder().currentState.complicationsState.copy(backgroundColor = complicationsBackgroundColor)
+                getStateHolder().setComplicationsState(newComplicationState)
+
                 adapter.notifyDataSetChanged()
             }
         }
 
         adapter = ComplicationColorsAdapter(
-            colorStorage,
+            getStateHolder(),
             navigator,
             title,
             complicationsTextColorLauncher,

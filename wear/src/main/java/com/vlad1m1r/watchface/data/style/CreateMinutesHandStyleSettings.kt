@@ -27,7 +27,7 @@ class CreateMinutesHandStyleSettings @Inject constructor(
             null,
             Int.MIN_VALUE.toLong(),
             Int.MAX_VALUE.toLong(),
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             colorStorage.getMinutesHandColor().toLong(),
         )
 
@@ -39,7 +39,7 @@ class CreateMinutesHandStyleSettings @Inject constructor(
             null,
             1,
             20,
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             sizeStorage.getMinutesHandWidth().toLong(),
         )
 
@@ -51,7 +51,7 @@ class CreateMinutesHandStyleSettings @Inject constructor(
             null,
             0.0,
             1.0,
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             sizeStorage.getMinutesHandScale().toDouble(),
         )
 
