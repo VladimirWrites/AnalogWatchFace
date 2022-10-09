@@ -2,12 +2,14 @@ package com.vlad1m1r.watchface.components.ticks.layout
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Paint
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.components.ticks.usecase.AdjustTicks
 import com.vlad1m1r.watchface.components.ticks.usecase.RoundCorners
 import com.vlad1m1r.watchface.components.ticks.TickPaintProvider
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
+import com.vlad1m1r.watchface.data.state.TicksState
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
@@ -17,26 +19,24 @@ import kotlin.math.*
 
 class TicksLayout1 @Inject constructor(
     @ApplicationContext context: Context,
-    colorStorage: ColorStorage,
-    private val dataStorage: DataStorage,
     override val  tickPaintProvider: TickPaintProvider,
     override val adjustTicks: AdjustTicks,
     override val roundCorners: RoundCorners
-) : TicksLayout(context, dataStorage) {
+) : TicksLayout(context) {
 
     private val tickLength = context.resources.getDimension(R.dimen.design1_tick_length)
-    private val watchHourTickColor = colorStorage.getHourTicksColor()
+    private var watchHourTickColor = 0
     private val tickWidth = context.resources.getDimension(R.dimen.design1_tick_width)
 
     private val tickLengthMinute = context.resources.getDimension(R.dimen.design1_tick_length_minute)
-    private val watchMinuteTickColor = colorStorage.getMinuteTicksColor()
+    private var watchMinuteTickColor = 0
     private val tickWidthMinute = context.resources.getDimension(R.dimen.design1_tick_width_minute)
 
     private val tickBurnInPadding = context.resources.getDimension(R.dimen.design1__tick_padding)
     private var tickPadding = tickBurnInPadding
 
-    private val tickPaint = tickPaintProvider.getTickPaint(watchHourTickColor, tickWidth)
-    private val tickPaintMinute = tickPaintProvider.getTickPaint(watchMinuteTickColor, tickWidthMinute)
+    private lateinit var tickPaint: Paint
+    private lateinit var tickPaintMinute:Paint
 
     private var center = Point()
     private var outerTickRadius: Float = 0f
@@ -58,9 +58,9 @@ class TicksLayout1 @Inject constructor(
                 center,
                 bottomInset,
                 isSquareScreen,
-                shouldAdjustToSquareScreen
+                state.shouldAdjustToSquareScreen
             )
-            val roundCorners = if (shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20) * 10 else 0.0
+            val roundCorners = if (state.shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20) * 10 else 0.0
 
             val outerX = sin(tickRotation) * (outerTickRadius - roundCorners) * adjust
             val outerY = -cos(tickRotation) * (outerTickRadius - roundCorners) * adjust
@@ -81,7 +81,7 @@ class TicksLayout1 @Inject constructor(
     override fun setMode(mode: Mode) {
         tickPaint.apply {
             if (mode.isAmbient) {
-                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchHourTickColor), dataStorage.useAntiAliasingInAmbientMode())
+                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchHourTickColor), state.useAntialiasingInAmbientMode)
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                 }
@@ -92,7 +92,7 @@ class TicksLayout1 @Inject constructor(
         }
         tickPaintMinute.apply {
             if (mode.isAmbient) {
-                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchMinuteTickColor), dataStorage.useAntiAliasingInAmbientMode())
+                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchMinuteTickColor), state.useAntialiasingInAmbientMode)
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                 }
@@ -107,5 +107,13 @@ class TicksLayout1 @Inject constructor(
             -2f
         }
         centerInvalidated = true
+    }
+
+    override fun setTicksState(ticksState: TicksState) {
+        super.setTicksState(ticksState)
+        this.watchHourTickColor = state.hourTicksColor
+        this.watchMinuteTickColor = state.minuteTicksColor
+        this.tickPaint = tickPaintProvider.getTickPaint(watchHourTickColor, tickWidth)
+        this.tickPaintMinute = tickPaintProvider.getTickPaint(watchMinuteTickColor, tickWidthMinute)
     }
 }

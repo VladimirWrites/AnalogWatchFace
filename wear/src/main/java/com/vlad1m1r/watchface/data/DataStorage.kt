@@ -36,12 +36,6 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
         return TicksLayoutType.fromId(sharedPreferences.getInt(KEY_WATCH_FACE_TYPE, TicksLayoutType.ORIGINAL.id))
     }
 
-    fun setTicksLayoutType(ticksLayoutType: TicksLayoutType) {
-        val editor = sharedPreferences.edit()
-        editor.putInt(KEY_WATCH_FACE_TYPE, ticksLayoutType.id)
-        editor.apply()
-    }
-
     fun hasComplicationsInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE, true)
 
     fun setHasComplicationsInAmbientMode(complicationsInAmbientMode: Boolean) {
@@ -52,19 +46,7 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun hasTicksInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_AMBIENT_MODE, true)
 
-    fun setHasTicksInAmbientMode(ticksInAmbientMode: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_HAS_TICKS_IN_AMBIENT_MODE, ticksInAmbientMode)
-        editor.apply()
-    }
-
     fun hasTicksInInteractiveMode() = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_INTERACTIVE_MODE, true)
-
-    fun setHasTicksInInteractiveMode(ticksInInteractiveMode: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_HAS_TICKS_IN_INTERACTIVE_MODE, ticksInInteractiveMode)
-        editor.apply()
-    }
 
     fun hasBiggerTopAndBottomComplications() = sharedPreferences.getBoolean(KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS, false)
 
@@ -76,35 +58,11 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun hasSmoothSecondsHand() = sharedPreferences.getBoolean(KEY_HAS_SMOOTH_SECONDS_HAND, false)
 
-    fun setHasSmoothSecondsHand(hasSmoothSecondsHand: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_HAS_SMOOTH_SECONDS_HAND, hasSmoothSecondsHand)
-        editor.apply()
-    }
-
     fun shouldAdjustToSquareScreen() = sharedPreferences.getBoolean(KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN, false)
-
-    fun setShouldAdjustToSquareScreen(shouldAdjustToSquareScreen: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN, shouldAdjustToSquareScreen)
-        editor.apply()
-    }
 
     fun hasBlackAmbientBackground() = sharedPreferences.getBoolean(KEY_HAS_BLACK_AMBIENT_BACKGROUND, false)
 
-    fun setHasBlackAmbientBackground(hasBlackAmbientBackground: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_HAS_BLACK_AMBIENT_BACKGROUND, hasBlackAmbientBackground)
-        editor.apply()
-    }
-
     fun useAntiAliasingInAmbientMode() = sharedPreferences.getBoolean(KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE, false)
-
-    fun setUseAntiAliasingInAmbientMode(useAntiAliasingInAmbientMode: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE, useAntiAliasingInAmbientMode)
-        editor.apply()
-    }
 
     fun getSettingsOpenCount() = sharedPreferences.getLong(KEY_SETTINGS_OPEN_COUNT, 0)
 
@@ -117,19 +75,11 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun hasCenterCircleInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE, true)
 
-    fun setHasCenterCircleInAmbientMode(ticksInAmbientMode: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE, ticksInAmbientMode)
-        editor.apply()
-    }
-
     fun setComplicationProviderName(complicationId: Int, complicationProviderName: String) {
         val editor = sharedPreferences.edit()
         editor.putString(KEY_COMPLICATION_PROVIDER_NAME + complicationId, complicationProviderName)
         editor.apply()
     }
-
-    fun getComplicationProviderName(complicationId: Int) = sharedPreferences.getString(KEY_COMPLICATION_PROVIDER_NAME + complicationId, "")
 
     fun shouldKeepHandColorInAmbientMode() = sharedPreferences.getBoolean(KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE, false)
 
@@ -138,5 +88,4 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
         editor.putBoolean(KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE, shouldKeepHandColorInAmbientMode)
         editor.apply()
     }
-
 }

@@ -1,10 +1,10 @@
 package com.vlad1m1r.watchface.components
 
-import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.components.background.Background
 import com.vlad1m1r.watchface.components.hands.Hands
 import com.vlad1m1r.watchface.components.ticks.*
 import com.vlad1m1r.watchface.components.ticks.layout.TicksLayout
+import com.vlad1m1r.watchface.data.state.WatchFaceState
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import javax.inject.Inject
@@ -21,38 +21,18 @@ class Layouts @Inject constructor(
     lateinit var ticks: TicksLayout
         private set
 
-    init {
-//        complications.setComplicationDrawable(R.drawable.complication_drawable)
-//        backgroundComplication.setComplicationDrawable(R.drawable.complication_drawable)
-        initTicks()
-    }
 
-    fun initTicks() {
-        ticks = getTicks()
+    fun setState(watchFaceState: WatchFaceState) {
+        background.setState(watchFaceState.backgroundState)
+        hands.setState(watchFaceState.handsState)
+
+        ticks = getTicks(watchFaceState.ticksState)
         ticks.bottomInset = bottomInset
-        ticks.invalidate()
-    }
-
-    fun invalidateHands() {
-        hands.invalidate()
-    }
-
-    fun invalidateBackground() {
-        background.invalidate()
-    }
-
-    fun invalidateComplications() {
-        //complications.invalidate()
-    }
-
-    fun invalidateBackgroundComplication() {
-        //backgroundComplication.invalidate()
+        ticks.setTicksState(watchFaceState.ticksState)
     }
 
     fun setBottomInset(bottomInset: Int) {
         this.bottomInset = bottomInset
-        this.ticks.bottomInset = bottomInset
-        //this.complications.bottomInset = bottomInset
     }
 
     fun setMode(mode: Mode) {

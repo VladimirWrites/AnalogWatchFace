@@ -8,22 +8,16 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
+import com.vlad1m1r.watchface.data.TicksLayoutType
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerFragment
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
+import com.vlad1m1r.watchface.settings.tickslayoutpicker.KEY_SELECTED_LAYOUT_TYPE
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class TicksFragment(@StringRes private val title: Int) : BaseRecyclerFragment() {
-
-    @Inject
-    lateinit var dataStorage: DataStorage
-
-    @Inject
-    lateinit var colorStorage: ColorStorage
 
     @Inject
     lateinit var navigator: Navigator
@@ -35,6 +29,12 @@ class TicksFragment(@StringRes private val title: Int) : BaseRecyclerFragment() 
 
         val watchFacePickerLauncher = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
+                val selectedTicksLayoutType = TicksLayoutType.fromId(
+                    result.data!!.getIntExtra(KEY_SELECTED_LAYOUT_TYPE, 0)
+                )
+                val newTicksState = getStateHolder().currentState.ticksState.copy(layoutType = selectedTicksLayoutType)
+                getStateHolder().setTicksState(newTicksState)
+
                 adapter.updateWatchFacePicker()
             }
         }
@@ -42,7 +42,10 @@ class TicksFragment(@StringRes private val title: Int) : BaseRecyclerFragment() 
         val hourTickColorLauncher = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val hourTicksColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setHourTicksColor(hourTicksColor)
+
+                val newTicksState = getStateHolder().currentState.ticksState.copy(hourTicksColor = hourTicksColor)
+                getStateHolder().setTicksState(newTicksState)
+
                 adapter.notifyDataSetChanged()
             }
         }
@@ -50,15 +53,17 @@ class TicksFragment(@StringRes private val title: Int) : BaseRecyclerFragment() 
         val minuteTickColorLauncher = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val minuteTicksColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setMinuteTicksColor(minuteTicksColor)
+
+                val newTicksState = getStateHolder().currentState.ticksState.copy(minuteTicksColor = minuteTicksColor)
+                getStateHolder().setTicksState(newTicksState)
+
                 adapter.notifyDataSetChanged()
             }
         }
 
         adapter = TicksAdapter(
             resources,
-            dataStorage,
-            colorStorage,
+            getStateHolder(),
             navigator,
             title,
             watchFacePickerLauncher,

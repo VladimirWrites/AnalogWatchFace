@@ -14,6 +14,7 @@ import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.ColorPickerViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
+import com.vlad1m1r.watchface.settings.hands.hand.WatchFaceStateHolder
 import com.vlad1m1r.watchface.settings.ticks.viewholders.TicksLayoutPickerViewHolder
 import java.lang.IllegalArgumentException
 
@@ -27,8 +28,7 @@ private const val TYPE_ADJUST_TO_SQUARE_SCREEN = 6
 
 class TicksAdapter(
     private val res: Resources,
-    private val dataStorage: DataStorage,
-    private val colorStorage: ColorStorage,
+    private val stateHolder: WatchFaceStateHolder,
     private val navigator: Navigator,
     @StringRes private val title: Int,
     private val watchFacePickerLauncher: ActivityResultLauncher<Intent>,
@@ -41,7 +41,7 @@ class TicksAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_TITLE -> TitleViewHolder(parent)
-            TYPE_TICKS_LAYOUT_PICKER -> TicksLayoutPickerViewHolder(parent, dataStorage, navigator).apply {
+            TYPE_TICKS_LAYOUT_PICKER -> TicksLayoutPickerViewHolder(parent, stateHolder, navigator).apply {
                 ticksLayoutPickerViewHolder = this
             }
             TYPE_TICKS_INTERACTIVE_MODE,
@@ -84,37 +84,40 @@ class TicksAdapter(
             TYPE_TICKS_AMBIENT_MODE ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
                     R.string.wear_ticks_in_ambient_mode,
-                    dataStorage.hasTicksInAmbientMode()
+                    stateHolder.currentState.ticksState.hasInAmbientMode
                 ) {
-                    dataStorage.setHasTicksInAmbientMode(it)
+                    val newTicksState = stateHolder.currentState.ticksState.copy(hasInAmbientMode = it)
+                    stateHolder.setTicksState(newTicksState)
                 }
             TYPE_TICKS_INTERACTIVE_MODE ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
                     R.string.wear_ticks_in_interactive_mode,
-                    dataStorage.hasTicksInInteractiveMode()
+                    stateHolder.currentState.ticksState.hasInInteractiveMode
                 ) {
-                    dataStorage.setHasTicksInInteractiveMode(it)
+                    val newTicksState = stateHolder.currentState.ticksState.copy(hasInInteractiveMode = it)
+                    stateHolder.setTicksState(newTicksState)
                 }
             TYPE_HOUR_TICKS_COLOR ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_hour_ticks_color,
-                    colorStorage.getHourTicksColor(),
+                    stateHolder.currentState.ticksState.hourTicksColor,
                     true,
                     hourTickColorLauncher
                 )
             TYPE_MINUTE_TICKS_COLOR ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_minute_ticks_color,
-                    colorStorage.getMinuteTicksColor(),
+                    stateHolder.currentState.ticksState.minuteTicksColor,
                     true,
                     minuteTickColorLauncher
                 )
             TYPE_ADJUST_TO_SQUARE_SCREEN ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
                     R.string.wear_ticks_adjust_to_square_screen,
-                    dataStorage.shouldAdjustToSquareScreen()
+                    stateHolder.currentState.ticksState.shouldAdjustToSquareScreen
                 ) {
-                    dataStorage.setShouldAdjustToSquareScreen(it)
+                    val newTicksState = stateHolder.currentState.ticksState.copy(shouldAdjustToSquareScreen = it)
+                    stateHolder.setTicksState(newTicksState)
                 }
         }
     }

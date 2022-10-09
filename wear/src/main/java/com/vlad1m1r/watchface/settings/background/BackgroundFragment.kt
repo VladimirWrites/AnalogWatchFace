@@ -1,12 +1,9 @@
 package com.vlad1m1r.watchface.settings.background
 
 import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.os.Bundle
-import android.support.wearable.complications.ComplicationProviderInfo
 import android.view.View
 import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.annotation.StringRes
 import androidx.lifecycle.lifecycleScope
@@ -14,8 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.watchface.complications.ComplicationDataSourceInfo
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.MainActivity
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerFragment
@@ -23,21 +18,12 @@ import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
 import com.vlad1m1r.watchface.settings.complications.picker.ComplicationLocation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class BackgroundFragment(@StringRes private val title: Int) : BaseRecyclerFragment() {
-
-    private lateinit var complicationHelperActivityLauncher: ActivityResultLauncher<Intent>
-
-    @Inject
-    lateinit var dataStorage: DataStorage
-
-    @Inject
-    lateinit var colorStorage: ColorStorage
 
     @Inject
     lateinit var navigator: Navigator
@@ -50,7 +36,10 @@ class BackgroundFragment(@StringRes private val title: Int) : BaseRecyclerFragme
         val leftBackgroundColorLauncher = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val leftBackgroundColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setBackgroundLeftColor(leftBackgroundColor)
+
+                val newBackgroundState = getStateHolder().currentState.backgroundState.copy(leftColor = leftBackgroundColor)
+                getStateHolder().setBackgroundState(newBackgroundState)
+
                 adapter.notifyDataSetChanged()
             }
         }
@@ -58,12 +47,15 @@ class BackgroundFragment(@StringRes private val title: Int) : BaseRecyclerFragme
         val rightBackgroundColorLauncher = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val rightBackgroundColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setBackgroundRightColor(rightBackgroundColor)
+
+                val newBackgroundState = getStateHolder().currentState.backgroundState.copy(rightColor = rightBackgroundColor)
+                getStateHolder().setBackgroundState(newBackgroundState)
+
                 adapter.notifyDataSetChanged()
             }
         }
 
-        adapter = BackgroundAdapter(colorStorage, dataStorage, navigator, title, leftBackgroundColorLauncher, rightBackgroundColorLauncher) {
+        adapter = BackgroundAdapter(getStateHolder(), navigator, title, leftBackgroundColorLauncher, rightBackgroundColorLauncher) {
             launchComplicationHelperActivity()
         }
         wearableRecyclerView.apply {

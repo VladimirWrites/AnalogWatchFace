@@ -1,20 +1,16 @@
 package com.vlad1m1r.watchface.settings.hands.centralcircle
 
-import android.app.Activity
 import android.content.Intent
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.*
+import com.vlad1m1r.watchface.settings.hands.hand.WatchFaceStateHolder
 import com.vlad1m1r.watchface.utils.getActivityContext
 import java.lang.IllegalArgumentException
 
@@ -26,9 +22,7 @@ private const val TYPE_CENTRAL_CIRCLE_RADIUS = 4
 private const val TYPE_CENTRAL_CIRCLE_IN_AMBIENT_MODE = 5
 
 class CentralCircleAdapter(
-    private val colorStorage: ColorStorage,
-    private val sizeStorage: SizeStorage,
-    private val dataStorage: DataStorage,
+    private val stateHolder: WatchFaceStateHolder,
     private val navigator: Navigator,
     @StringRes private val title: Int,
     private val centralCircleColorLauncher: ActivityResultLauncher<Intent>
@@ -81,36 +75,42 @@ class CentralCircleAdapter(
             }
             TYPE_COLOR_CENTRAL_CIRCLE -> (viewHolder as ColorPickerViewHolder).bind(
                 R.string.wear_central_circle_color,
-                colorStorage.getCentralCircleColor(),
+                stateHolder.currentState.handsState.circleState.color,
                 true,
                 centralCircleColorLauncher
             )
             TYPE_CENTRAL_CIRCLE_WIDTH -> (viewHolder as SettingsSliderViewHolder).setData(
                 R.string.wear_circle_width,
-                sizeStorage.getCircleWidth(),
+                stateHolder.currentState.handsState.circleState.width,
                 1,
-                sizeStorage.getCircleRadius()
+                stateHolder.currentState.handsState.circleState.radius
             ) { circleWidth ->
-                sizeStorage.setCircleWidth(circleWidth)
+                val newCircleState =
+                    stateHolder.currentState.handsState.circleState.copy(width = circleWidth)
+                stateHolder.setHandsState(stateHolder.currentState.handsState.copy(circleState = newCircleState))
                 notifyDataSetChanged()
             }
 
             TYPE_CENTRAL_CIRCLE_RADIUS -> (viewHolder as SettingsSliderViewHolder).setData(
                 R.string.wear_circle_radius,
-                sizeStorage.getCircleRadius(),
+                stateHolder.currentState.handsState.circleState.radius,
                 1,
                 15
             ) { circleRadius ->
-                sizeStorage.setCircleRadius(circleRadius)
+                val newCircleState =
+                    stateHolder.currentState.handsState.circleState.copy(radius = circleRadius)
+                stateHolder.setHandsState(stateHolder.currentState.handsState.copy(circleState = newCircleState))
                 notifyDataSetChanged()
             }
 
             TYPE_CENTRAL_CIRCLE_IN_AMBIENT_MODE ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
                     R.string.wear_central_circle_in_ambient_mode,
-                    dataStorage.hasCenterCircleInAmbientMode()
+                    stateHolder.currentState.handsState.circleState.hasInAmbientMode
                 ) {
-                    dataStorage.setHasCenterCircleInAmbientMode(it)
+                    val newCircleState =
+                        stateHolder.currentState.handsState.circleState.copy(hasInAmbientMode = it)
+                    stateHolder.setHandsState(stateHolder.currentState.handsState.copy(circleState = newCircleState))
                 }
         }
     }

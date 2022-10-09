@@ -11,11 +11,15 @@ import androidx.wear.widget.SwipeDismissFrameLayout
 import androidx.wear.widget.WearableRecyclerView
 import com.google.android.wearable.input.RotaryEncoderHelper
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.data.state.HandsState
+import com.vlad1m1r.watchface.settings.MainActivity
 import kotlin.math.roundToInt
 
 open class BaseRecyclerFragment : Fragment() {
 
     protected lateinit var wearableRecyclerView: WearableRecyclerView
+
+    protected fun getStateHolder() =  (requireActivity() as MainActivity).stateHolder
 
     private val callback = object : SwipeDismissFrameLayout.Callback() {
         override fun onSwipeStarted(layout: SwipeDismissFrameLayout) {

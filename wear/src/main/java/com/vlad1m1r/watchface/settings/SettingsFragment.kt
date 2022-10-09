@@ -21,8 +21,6 @@ class SettingsFragment : BaseRecyclerFragment() {
 
     internal lateinit var adapter: SettingsAdapter
 
-    lateinit var watchFaceCurrentSate: WatchFaceStateHolder.WatchFaceCurrentState
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

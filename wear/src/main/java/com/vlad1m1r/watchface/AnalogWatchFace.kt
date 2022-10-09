@@ -9,6 +9,7 @@ import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.CustomColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.SizeStorage
+import com.vlad1m1r.watchface.data.style.CreateUserStyleSchema
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -30,9 +31,11 @@ class AnalogWatchFace : WatchFaceService() {
     @Inject
     lateinit var layouts: Layouts
 
+    @Inject
+    lateinit var createUserStyleSchema: CreateUserStyleSchema
+
     // Used by Watch Face APIs to construct user setting options and repository.
-    override fun createUserStyleSchema(): UserStyleSchema =
-        createUserStyleSchema(context = applicationContext)
+    override fun createUserStyleSchema(): UserStyleSchema = createUserStyleSchema.invoke()
 
     // Creates all complication user settings and adds them to the existing user settings
     // repository.
@@ -52,16 +55,12 @@ class AnalogWatchFace : WatchFaceService() {
         // Creates class that renders the watch face.
 
         val renderer = AnalogWatchCanvasRenderer(
-            context = applicationContext,
             surfaceHolder = surfaceHolder,
             watchState = watchState,
             complicationSlotsManager = complicationSlotsManager,
             currentUserStyleRepository = currentUserStyleRepository,
             canvasType = CanvasType.HARDWARE,
             dataStorage = dataStorage,
-            colorStorage = colorStorage,
-            sizeStorage = sizeStorage,
-            customColorStorage = customColorStorage,
             layouts = layouts.apply {
                 setBottomInset(watchState.chinHeight)
             }

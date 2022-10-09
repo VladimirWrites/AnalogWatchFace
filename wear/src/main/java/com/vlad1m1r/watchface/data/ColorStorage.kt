@@ -51,12 +51,6 @@ class ColorStorage(private val context: Context, private val sharedPreferences: 
         )
     }
 
-    fun setHoursHandColor(@ColorInt color: Int) {
-        val editor = sharedPreferences.edit()
-        editor.putInt(KEY_HOURS_HAND_COLOR, color)
-        editor.apply()
-    }
-
     fun getMinutesHandColor(): Int {
         val defaultColor by lazy {
             if (hasHands())
@@ -69,12 +63,6 @@ class ColorStorage(private val context: Context, private val sharedPreferences: 
             KEY_MINUTES_HAND_COLOR,
             defaultColor
         )
-    }
-
-    fun setMinutesHandColor(@ColorInt color: Int) {
-        val editor = sharedPreferences.edit()
-        editor.putInt(KEY_MINUTES_HAND_COLOR, color)
-        editor.apply()
     }
 
     fun getSecondsHandColor(): Int {
@@ -91,23 +79,11 @@ class ColorStorage(private val context: Context, private val sharedPreferences: 
         )
     }
 
-    fun setSecondsHandColor(@ColorInt color: Int) {
-        val editor = sharedPreferences.edit()
-        editor.putInt(KEY_SECONDS_HAND_COLOR, color)
-        editor.apply()
-    }
-
     fun getCentralCircleColor(): Int {
         return sharedPreferences.getInt(
             KEY_CENTRAL_CIRCLE_COLOR,
             ContextCompat.getColor(context, R.color.watch_hand_second)
         )
-    }
-
-    fun setCentralCircleColor(@ColorInt color: Int) {
-        val editor = sharedPreferences.edit()
-        editor.putInt(KEY_CENTRAL_CIRCLE_COLOR, color)
-        editor.apply()
     }
 
     fun getHourTicksColor(): Int {
@@ -117,23 +93,11 @@ class ColorStorage(private val context: Context, private val sharedPreferences: 
         )
     }
 
-    fun setHourTicksColor(@ColorInt color: Int) {
-        val editor = sharedPreferences.edit()
-        editor.putInt(KEY_HOUR_TICKS_COLOR, color)
-        editor.apply()
-    }
-
     fun getMinuteTicksColor(): Int {
         return sharedPreferences.getInt(
             KEY_MINUTE_TICKS_COLOR,
             ContextCompat.getColor(context, R.color.watch_minute_ticks)
         )
-    }
-
-    fun setMinuteTicksColor(@ColorInt color: Int) {
-        val editor = sharedPreferences.edit()
-        editor.putInt(KEY_MINUTE_TICKS_COLOR, color)
-        editor.apply()
     }
 
     fun getBackgroundLeftColor(): Int {
@@ -146,12 +110,6 @@ class ColorStorage(private val context: Context, private val sharedPreferences: 
         return sharedPreferences.getInt(KEY_BACKGROUND_LEFT_COLOR, defaultColor)
     }
 
-    fun setBackgroundLeftColor(@ColorInt color: Int) {
-        val editor = sharedPreferences.edit()
-        editor.putInt(KEY_BACKGROUND_LEFT_COLOR, color)
-        editor.apply()
-    }
-
     fun getBackgroundRightColor(): Int {
         val defaultColor by lazy {
             if (hasBlackBackground()) ContextCompat.getColor(
@@ -160,13 +118,6 @@ class ColorStorage(private val context: Context, private val sharedPreferences: 
             ) else ContextCompat.getColor(context, R.color.watch_background_right)
         }
         return sharedPreferences.getInt(KEY_BACKGROUND_RIGHT_COLOR, defaultColor)
-    }
-
-
-    fun setBackgroundRightColor(@ColorInt color: Int) {
-        val editor = sharedPreferences.edit()
-        editor.putInt(KEY_BACKGROUND_RIGHT_COLOR, color)
-        editor.apply()
     }
 
     private fun getTicksLayoutType(): TicksLayoutType {
@@ -293,20 +244,6 @@ class ColorStorage(private val context: Context, private val sharedPreferences: 
     fun setComplicationsBackgroundColor(@ColorInt color: Int) {
         val editor = sharedPreferences.edit()
         editor.putInt(KEY_COMPLICATIONS_BACKGROUND_COLOR, color)
-        editor.apply()
-    }
-
-    fun getCustomColors(): List<Int> {
-        return sharedPreferences.getString(KEY_CUSTOM_COLORS, "")!!.split("#").map {
-            it.toInt()
-        }
-    }
-
-    fun addCustomColor(color: Int) {
-        val colors = getCustomColors().toMutableList()
-        colors.add(color)
-        val editor = sharedPreferences.edit()
-        editor.putStringSet(KEY_CUSTOM_COLORS, colors.map { it.toString() }.toSet())
         editor.apply()
     }
 }

@@ -5,10 +5,11 @@ import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.UserStyle
 import androidx.wear.watchface.style.UserStyleSchema
 import androidx.wear.watchface.style.UserStyleSetting
-import com.vlad1m1r.watchface.WATCH_BACKGROUND_MODIFIED
-import com.vlad1m1r.watchface.WATCH_COMPLICATION_MODIFIED
-import com.vlad1m1r.watchface.WATCH_HANDS_MODIFIED
-import com.vlad1m1r.watchface.WATCH_TICKS_MODIFIED
+import com.vlad1m1r.watchface.data.state.BackgroundState
+import com.vlad1m1r.watchface.data.state.HandsState
+import com.vlad1m1r.watchface.data.state.TicksState
+import com.vlad1m1r.watchface.data.state.WatchFaceState
+import com.vlad1m1r.watchface.utils.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -16,15 +17,46 @@ import kotlinx.coroutines.plus
 
 class WatchFaceStateHolder(
     private val scope: CoroutineScope,
-    private val activity: ComponentActivity
+    private val activity: ComponentActivity,
 ) {
 
+    lateinit var currentState: WatchFaceState
     lateinit var editorSession: EditorSession
 
-    private lateinit var backgroundStyleKey: UserStyleSetting.BooleanUserStyleSetting
-    private lateinit var handsStyleKey: UserStyleSetting.BooleanUserStyleSetting
-    private lateinit var complicationStyleKey: UserStyleSetting.BooleanUserStyleSetting
-    private lateinit var ticksStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var backgroundBlackInAmbientStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var backgroundLeftColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var backgroundRightColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+
+    private lateinit var ticksHasInAmbientModeStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var ticksHasInInteractiveModeStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var ticksLayoutTypeStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var ticksHourColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var ticksMinuteColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var ticksShouldAdjustToSquareStyleKey: UserStyleSetting.BooleanUserStyleSetting
+
+    private lateinit var handSecondsIsSmoothStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var handSecondsHasStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var handSecondsColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var handSecondsWidthStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var handSecondsLengthScaleStyleKey: UserStyleSetting.DoubleRangeUserStyleSetting
+
+    private lateinit var handMinutesColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var handMinutesWidthStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var handMinutesLengthScaleStyleKey: UserStyleSetting.DoubleRangeUserStyleSetting
+
+    private lateinit var handHoursColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var handHoursWidthStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var handHoursLengthScaleStyleKey: UserStyleSetting.DoubleRangeUserStyleSetting
+
+    private lateinit var handCircleColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var handsCircleWidthStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var handCircleRadiusStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var handCircleHasInAmbientModeStyleKey: UserStyleSetting.BooleanUserStyleSetting
+
+    private lateinit var handsHasInInteractiveStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var handsKeepColorInAmbientModeStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var handsHasStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var watchUseAntialiasingStyleKey: UserStyleSetting.BooleanUserStyleSetting
 
     val uiState: StateFlow<EditWatchFaceUiState> =
         flow<EditWatchFaceUiState> {
@@ -51,31 +83,158 @@ class WatchFaceStateHolder(
                 EditWatchFaceUiState.Loading("Initializing")
             )
 
-    fun setBackgroundState(state: Boolean) {
+    fun setBackgroundState(state: BackgroundState) {
+        this.currentState = currentState.copy(backgroundState = state)
         setUserStyleOption(
-            backgroundStyleKey,
-            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state)
+            backgroundBlackInAmbientStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.blackInAmbient)
+        )
+
+        setUserStyleOption(
+            backgroundRightColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.rightColor.toLong())
+        )
+
+        setUserStyleOption(
+            backgroundLeftColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.leftColor.toLong())
         )
     }
 
-    fun setHandsState(state: Boolean) {
+    fun setTicksState(state: TicksState) {
+        this.currentState = currentState.copy(ticksState = state)
         setUserStyleOption(
-            handsStyleKey,
-            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state)
+            ticksHasInAmbientModeStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.hasInAmbientMode)
+        )
+
+        setUserStyleOption(
+            ticksHasInInteractiveModeStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.hasInInteractiveMode)
+        )
+
+        setUserStyleOption(
+            ticksLayoutTypeStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.layoutType.id.toLong())
+        )
+
+        setUserStyleOption(
+            ticksHourColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.hourTicksColor.toLong())
+        )
+
+        setUserStyleOption(
+            ticksMinuteColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.minuteTicksColor.toLong())
+        )
+
+        setUserStyleOption(
+            ticksShouldAdjustToSquareStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.shouldAdjustToSquareScreen)
         )
     }
 
-    fun setComplicationsState(state: Boolean) {
+    fun setHandsState(state: HandsState) {
+        this.currentState = currentState.copy(handsState = state)
         setUserStyleOption(
-            complicationStyleKey,
-            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state)
+            handSecondsIsSmoothStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.hasSmoothSecondsHand)
+        )
+
+        setUserStyleOption(
+            handSecondsHasStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.hasSecondHand)
+        )
+
+        setUserStyleOption(
+            handSecondsColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.secondsHand.color.toLong())
+        )
+
+        setUserStyleOption(
+            handSecondsWidthStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.secondsHand.width.toLong())
+        )
+
+        setUserStyleOption(
+            handSecondsLengthScaleStyleKey,
+            UserStyleSetting.DoubleRangeUserStyleSetting.DoubleRangeOption(state.secondsHand.lengthScale.toDouble())
+        )
+
+        setUserStyleOption(
+            handMinutesColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.minutesHand.color.toLong())
+        )
+
+        setUserStyleOption(
+            handMinutesWidthStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.minutesHand.width.toLong())
+        )
+
+        setUserStyleOption(
+            handMinutesLengthScaleStyleKey,
+            UserStyleSetting.DoubleRangeUserStyleSetting.DoubleRangeOption(state.minutesHand.lengthScale.toDouble())
+        )
+
+        setUserStyleOption(
+            handHoursColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.hoursHand.color.toLong())
+        )
+
+        setUserStyleOption(
+            handHoursWidthStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.hoursHand.width.toLong())
+        )
+
+        setUserStyleOption(
+            handHoursLengthScaleStyleKey,
+            UserStyleSetting.DoubleRangeUserStyleSetting.DoubleRangeOption(state.hoursHand.lengthScale.toDouble())
+        )
+
+        setUserStyleOption(
+            handCircleColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.circleState.color.toLong())
+        )
+
+        setUserStyleOption(
+            handsCircleWidthStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.circleState.width.toLong())
+        )
+
+        setUserStyleOption(
+            handCircleRadiusStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.circleState.radius.toLong())
+        )
+
+        setUserStyleOption(
+            handCircleHasInAmbientModeStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.circleState.hasInAmbientMode)
+        )
+
+        setUserStyleOption(
+            handsHasInInteractiveStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.hasInInteractive)
+        )
+
+        setUserStyleOption(
+            handsKeepColorInAmbientModeStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.shouldKeepHandColorInAmbientMode)
+        )
+
+        setUserStyleOption(
+            handsHasStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.hasHands)
         )
     }
 
-    fun setTicksState(state: Boolean) {
+    fun setUseAntialiasing(useAntialiasing: Boolean) {
+        val handsState = currentState.handsState.copy(useAntialiasingInAmbientMode = useAntialiasing)
+        val ticksState = currentState.ticksState.copy(useAntialiasingInAmbientMode = useAntialiasing)
+        this.currentState = currentState.copy(handsState = handsState, ticksState = ticksState)
+
         setUserStyleOption(
-            ticksStyleKey,
-            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state)
+            watchUseAntialiasingStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(useAntialiasing)
         )
     }
 
@@ -92,62 +251,55 @@ class WatchFaceStateHolder(
     private fun extractsUserStyles(userStyleSchema: UserStyleSchema) {
 
         for (setting in userStyleSchema.userStyleSettings) {
-            when (setting.id.toString()) {
-                WATCH_BACKGROUND_MODIFIED -> {
-                    backgroundStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                }
+            when (setting.id) {
+                    BACKGROUND_BLACK_IN_AMBIENT -> backgroundBlackInAmbientStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                    BACKGROUND_LEFT_COLOR -> backgroundLeftColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    BACKGROUND_RIGHT_COLOR -> backgroundRightColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
 
-                WATCH_HANDS_MODIFIED -> {
-                    handsStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                }
+                    TICKS_HAS_IN_AMBIENT_MODE -> ticksHasInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                    TICKS_HAS_IN_INTERACTIVE_MODE -> ticksHasInInteractiveModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                    TICKS_LAYOUT_TYPE -> ticksLayoutTypeStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    TICKS_HOUR_COLOR -> ticksHourColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    TICKS_MINUTE_COLOR -> ticksMinuteColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    TICKS_SHOULD_ADJUST_TO_SQUARE -> ticksShouldAdjustToSquareStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
 
-                WATCH_COMPLICATION_MODIFIED -> {
-                    complicationStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                }
+                    HAND_SECONDS_IS_SMOOTH -> handSecondsIsSmoothStyleKey  = setting as UserStyleSetting.BooleanUserStyleSetting
+                    HAND_SECONDS_HAS -> handSecondsHasStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                    HAND_SECONDS_COLOR -> handSecondsColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    HAND_SECONDS_WIDTH -> handSecondsWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    HAND_SECONDS_LENGTH_SCALE -> handSecondsLengthScaleStyleKey = setting as UserStyleSetting.DoubleRangeUserStyleSetting
 
-                WATCH_TICKS_MODIFIED -> {
-                    ticksStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                }
+                    HAND_MINUTES_COLOR -> handMinutesColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    HAND_MINUTES_WIDTH -> handMinutesWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    HAND_MINUTES_LENGTH_SCALE -> handMinutesLengthScaleStyleKey = setting as UserStyleSetting.DoubleRangeUserStyleSetting
+
+                    HAND_HOURS_COLOR -> handHoursColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    HAND_HOURS_WIDTH -> handHoursWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    HAND_HOURS_LENGTH_SCALE -> handHoursLengthScaleStyleKey = setting as UserStyleSetting.DoubleRangeUserStyleSetting
+
+                    HAND_CIRCLE_COLOR -> handCircleColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    HAND_CIRCLE_WIDTH -> handsCircleWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    HAND_CIRCLE_RADIUS -> handCircleRadiusStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                    HAND_CIRCLE_HAS_IN_AMBIENT_MODE -> handCircleHasInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+
+                    HANDS_HAS_IN_INTERACTIVE -> handsHasInInteractiveStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                    HANDS_KEEP_COLOR_IN_AMBIENT_MODE -> handsKeepColorInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                    HANDS_HAS -> handsHasStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
             }
         }
     }
 
     private fun createWatchFaceCurrentState(
         userStyle: UserStyle
-    ): WatchFaceCurrentState {
-
-
-        val backgroundStyle =
-            userStyle[backgroundStyleKey] as UserStyleSetting.BooleanUserStyleSetting.BooleanOption
-        val handsStyle =
-            userStyle[handsStyleKey] as UserStyleSetting.BooleanUserStyleSetting.BooleanOption
-        val complicationStyle =
-            userStyle[complicationStyleKey] as UserStyleSetting.BooleanUserStyleSetting.BooleanOption
-        val ticksStyle =
-            userStyle[ticksStyleKey] as UserStyleSetting.BooleanUserStyleSetting.BooleanOption
-
-
-        return WatchFaceCurrentState(
-            backgroundStyle = backgroundStyle.value,
-            handsStyle = handsStyle.value,
-            complicationStyle = complicationStyle.value,
-            ticksStyle = ticksStyle.value
-        )
+    ): WatchFaceState {
+        return userStyle.toWatchFaceState()
     }
 
-    data class WatchFaceCurrentState(
-        val backgroundStyle: Boolean,
-        val handsStyle: Boolean,
-        val complicationStyle: Boolean,
-        val ticksStyle: Boolean
-    )
-
     sealed class EditWatchFaceUiState {
-        data class Success(val watchFaceCurrentState: WatchFaceCurrentState) :
+        data class Success(val watchFaceState: WatchFaceState) :
             EditWatchFaceUiState()
 
         data class Loading(val message: String) : EditWatchFaceUiState()
         data class Error(val exception: Throwable) : EditWatchFaceUiState()
     }
-
 }

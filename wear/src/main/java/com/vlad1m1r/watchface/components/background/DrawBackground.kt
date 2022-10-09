@@ -1,6 +1,7 @@
 package com.vlad1m1r.watchface.components.background
 
 import android.graphics.*
+import com.vlad1m1r.watchface.data.state.BackgroundState
 import com.vlad1m1r.watchface.model.Point
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class DrawBackground @Inject constructor(
         this.isInAmbientMode = isInAmbientMode
     }
 
-    fun setCenter(center: Point) {
-        backgroundBitmapProvider.initialize(center)
+    fun setCenter(center: Point, backgroundState: BackgroundState) {
+        backgroundBitmapProvider.initialize(center, backgroundState)
     }
 }

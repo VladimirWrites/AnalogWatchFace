@@ -1,17 +1,12 @@
 package com.vlad1m1r.watchface.settings.hands.hand
 
-import android.app.Activity
 import android.content.Intent
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.*
@@ -25,9 +20,7 @@ private const val TYPE_HAND_SCALE = 4
 private const val TYPE_SMOOTH_HAND = 5
 
 class HandAdapter(
-    private val colorStorage: ColorStorage,
-    private val dataStorage: DataStorage,
-    private val sizeStorage: SizeStorage,
+    private val stateHolder: WatchFaceStateHolder,
     private val navigator: Navigator,
     private val handType: HandType,
     @StringRes private val title: Int,
@@ -83,19 +76,19 @@ class HandAdapter(
                 when (handType) {
                     HandType.HOURS -> (viewHolder as ColorPickerViewHolder).bind(
                         R.string.wear_hand_color,
-                        colorStorage.getHoursHandColor(),
+                        stateHolder.currentState.handsState.hoursHand.color,
                         true,
                         hoursHandColorLauncher
                     )
                     HandType.MINUTES -> (viewHolder as ColorPickerViewHolder).bind(
                         R.string.wear_hand_color,
-                        colorStorage.getMinutesHandColor(),
+                        stateHolder.currentState.handsState.minutesHand.color,
                         true,
                         minutesHandColorLauncher
                     )
                     HandType.SECONDS -> (viewHolder as ColorPickerViewHolder).bind(
                         R.string.wear_hand_color,
-                        colorStorage.getSecondsHandColor(),
+                        stateHolder.currentState.handsState.secondsHand.color,
                         true,
                         secondsHandColorLauncher
                     )
@@ -103,9 +96,9 @@ class HandAdapter(
             TYPE_HAND_WIDTH -> (viewHolder as SettingsSliderViewHolder).setData(
                 R.string.wear_hand_width,
                 when (handType) {
-                    HandType.HOURS -> sizeStorage.getHoursHandWidth()
-                    HandType.MINUTES -> sizeStorage.getMinutesHandWidth()
-                    HandType.SECONDS -> sizeStorage.getSecondsHandWidth()
+                    HandType.HOURS -> stateHolder.currentState.handsState.hoursHand.width
+                    HandType.MINUTES -> stateHolder.currentState.handsState.minutesHand.width
+                    HandType.SECONDS -> stateHolder.currentState.handsState.secondsHand.width
                 },
                 1,
                 when (handType) {
@@ -115,34 +108,76 @@ class HandAdapter(
                 }
             ) { handWidth ->
                 when (handType) {
-                    HandType.HOURS -> sizeStorage.setHoursHandWidth(handWidth)
-                    HandType.MINUTES -> sizeStorage.setMinutesHandWidth(handWidth)
-                    HandType.SECONDS -> sizeStorage.setSecondsHandWidth(handWidth)
+                    HandType.HOURS -> {
+                        val newHoursHandState =
+                            stateHolder.currentState.handsState.hoursHand.copy(width = handWidth)
+                        stateHolder.setHandsState(stateHolder.currentState.handsState.copy(hoursHand = newHoursHandState))
+                    }
+                    HandType.MINUTES -> {
+                        val newMinutesHandState =
+                            stateHolder.currentState.handsState.minutesHand.copy(width = handWidth)
+                        stateHolder.setHandsState(
+                            stateHolder.currentState.handsState.copy(
+                                minutesHand = newMinutesHandState
+                            )
+                        )
+                    }
+                    HandType.SECONDS -> {
+                        val newSecondsHandState =
+                            stateHolder.currentState.handsState.secondsHand.copy(width = handWidth)
+                        stateHolder.setHandsState(
+                            stateHolder.currentState.handsState.copy(
+                                secondsHand = newSecondsHandState
+                            )
+                        )
+                    }
                 }
                 notifyDataSetChanged()
             }
             TYPE_HAND_SCALE -> (viewHolder as SettingsSliderScaleViewHolder).setData(
                 R.string.wear_hand_scale,
                 when (handType) {
-                    HandType.HOURS -> sizeStorage.getHoursHandScale()
-                    HandType.MINUTES -> sizeStorage.getMinutesHandScale()
-                    HandType.SECONDS -> sizeStorage.getSecondsHandScale()
+                    HandType.HOURS -> stateHolder.currentState.handsState.hoursHand.lengthScale
+                    HandType.MINUTES -> stateHolder.currentState.handsState.minutesHand.lengthScale
+                    HandType.SECONDS -> stateHolder.currentState.handsState.secondsHand.lengthScale
                 },
                 99
             ) { handScale ->
                 when (handType) {
-                    HandType.HOURS -> sizeStorage.setHoursHandScale(handScale)
-                    HandType.MINUTES -> sizeStorage.setMinutesHandScale(handScale)
-                    HandType.SECONDS -> sizeStorage.setSecondsHandScale(handScale)
+                    HandType.HOURS -> {
+                        val newHoursHandState =
+                            stateHolder.currentState.handsState.hoursHand.copy(lengthScale = handScale)
+                        stateHolder.setHandsState(stateHolder.currentState.handsState.copy(hoursHand = newHoursHandState))
+                    }
+                    HandType.MINUTES -> {
+                        val newMinutesHandState =
+                            stateHolder.currentState.handsState.minutesHand.copy(lengthScale = handScale)
+                        stateHolder.setHandsState(
+                            stateHolder.currentState.handsState.copy(
+                                minutesHand = newMinutesHandState
+                            )
+                        )
+                    }
+                    HandType.SECONDS -> {
+                        val newSecondsHandState =
+                            stateHolder.currentState.handsState.secondsHand.copy(lengthScale = handScale)
+                        stateHolder.setHandsState(
+                            stateHolder.currentState.handsState.copy(
+                                secondsHand = newSecondsHandState
+                            )
+                        )
+                    }
                 }
                 notifyDataSetChanged()
             }
             TYPE_SMOOTH_HAND ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
                     R.string.wear_smooth_seconds_hand,
-                    dataStorage.hasSmoothSecondsHand()
-                ) {
-                    dataStorage.setHasSmoothSecondsHand(it)
+                    stateHolder.currentState.handsState.hasSmoothSecondsHand
+                ) { hasSmoothSecondsHand ->
+                    val newHandsState =
+                        stateHolder.currentState.handsState.copy(hasSmoothSecondsHand = hasSmoothSecondsHand)
+                    stateHolder.setHandsState(newHandsState)
                 }
         }
     }

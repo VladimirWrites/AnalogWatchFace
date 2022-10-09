@@ -21,15 +21,6 @@ import javax.inject.Inject
 class CentralCircleFragment(@StringRes private val title: Int) : BaseRecyclerFragment() {
 
     @Inject
-    lateinit var sizeStorage: SizeStorage
-
-    @Inject
-    lateinit var dataStorage: DataStorage
-
-    @Inject
-    lateinit var colorStorage: ColorStorage
-
-    @Inject
     lateinit var navigator: Navigator
 
     private lateinit var adapter: CentralCircleAdapter
@@ -40,12 +31,16 @@ class CentralCircleFragment(@StringRes private val title: Int) : BaseRecyclerFra
         val centralCircleColorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val centralCircleColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                colorStorage.setCentralCircleColor(centralCircleColor)
+
+                val newCircleState =
+                    getStateHolder().currentState.handsState.circleState.copy(color = centralCircleColor)
+                getStateHolder().setHandsState(getStateHolder().currentState.handsState.copy(circleState = newCircleState))
+
                 adapter.notifyDataSetChanged()
             }
         }
 
-        adapter = CentralCircleAdapter(colorStorage, sizeStorage, dataStorage, navigator, title, centralCircleColorLauncher)
+        adapter = CentralCircleAdapter(getStateHolder(), navigator, title, centralCircleColorLauncher)
         wearableRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

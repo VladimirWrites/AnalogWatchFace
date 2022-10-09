@@ -8,6 +8,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.data.TicksLayoutType
 import com.vlad1m1r.watchface.settings.about.AboutFragment
 import com.vlad1m1r.watchface.settings.background.BackgroundFragment
 import com.vlad1m1r.watchface.settings.colorpicker.ColorPickerActivity
@@ -80,10 +81,11 @@ class Navigator @Inject constructor() {
 
     fun goToTicksLayoutPickerActivityForResult(
         activityResultLauncher: ActivityResultLauncher<Intent>,
-        context: Context
+        context: Context,
+        selectedTicksLayoutType: TicksLayoutType
     ) {
         activityResultLauncher.launch(
-            TicksLayoutPickerActivity.newInstance(context)
+            TicksLayoutPickerActivity.newInstance(context, selectedTicksLayoutType)
         )
     }
 
