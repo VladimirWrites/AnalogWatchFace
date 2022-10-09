@@ -3,6 +3,8 @@ package com.vlad1m1r.watchface.components.hands
 import android.graphics.Canvas
 import android.graphics.Color
 import com.vlad1m1r.watchface.data.ColorStorage
+import com.vlad1m1r.watchface.data.state.HandsState
+import com.vlad1m1r.watchface.data.state.WatchFaceState
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.WatchView
@@ -14,7 +16,6 @@ import java.util.*
 import javax.inject.Inject
 
 class Hands @Inject constructor(
-    private val colorStorage: ColorStorage,
     private val  getHandData: GetHandData
 ) : WatchView {
 
@@ -23,13 +24,15 @@ class Hands @Inject constructor(
     private var showHoursHand = true
 
     private var center = Point()
+    private lateinit var state: HandsState
 
     private lateinit var drawHourHand: DrawHand
     private lateinit var drawMinuteHand: DrawHand
     private lateinit var drawSecondsHand: DrawHand
     private lateinit var drawCircle: DrawCircle
 
-    init {
+    fun setState(state: HandsState) {
+        this.state = state
         initializeHands()
     }
 
@@ -37,22 +40,22 @@ class Hands @Inject constructor(
         val handPaintProvider = HandPaintProvider()
 
         drawHourHand = DrawHand(
-            getHandData.getHourHandData(),
+            getHandData.getHourHandData(state),
             handPaintProvider
         )
 
         drawMinuteHand = DrawHand(
-            getHandData.getMinuteHandData(),
+            getHandData.getMinuteHandData(state),
             handPaintProvider
         )
 
         drawSecondsHand = DrawHand(
-            getHandData.getSecondHandData(),
+            getHandData.getSecondHandData(state),
             handPaintProvider
         )
 
         drawCircle = DrawCircle(
-            getHandData.getCircleData(),
+            getHandData.getCircleData(state),
             handPaintProvider
         )
     }
@@ -108,9 +111,9 @@ class Hands @Inject constructor(
     }
 
     fun setMode(mode: Mode) {
-        val secondColor = colorStorage.getSecondsHandColor()
-        val minuteColor = colorStorage.getMinutesHandColor()
-        val hourColor = colorStorage.getHoursHandColor()
+        val secondColor = state.secondsHand.color
+        val minuteColor = state.minutesHand.color
+        val hourColor = state.hoursHand.color
 
         showSecondsHand = !mode.isAmbient && secondColor != Color.TRANSPARENT
         showMinutesHand = minuteColor != Color.TRANSPARENT
@@ -122,9 +125,5 @@ class Hands @Inject constructor(
 
         drawCircle.setInAmbientMode(mode.isAmbient)
         drawCircle.setInBurnInProtectionMode(mode.isBurnInProtection && mode.isAmbient)
-    }
-
-    fun invalidate() {
-        initializeHands()
     }
 }

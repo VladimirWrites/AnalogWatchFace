@@ -8,7 +8,7 @@ data class HandsState(
     val hoursHand: HandState,
     val circleState: CircleState,
     val hasInInteractive: Boolean,
-    val hasCenterCircleInAmbientMode: Boolean,
     val shouldKeepHandColorInAmbientMode: Boolean,
     val hasHands: Boolean,
+    val useAntialiasingInAmbientMode: Boolean,
 )

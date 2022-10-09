@@ -1,6 +1,7 @@
 package com.vlad1m1r.watchface.components.background
 
 import android.graphics.*
+import com.vlad1m1r.watchface.data.state.BackgroundState
 import com.vlad1m1r.watchface.model.Point
 import javax.inject.Inject
 
@@ -10,8 +11,8 @@ class BackgroundBitmapProvider @Inject constructor(
     private lateinit var normalBitmap: Bitmap
     private lateinit var ambientBitmap: Bitmap
 
-    fun initialize(center: Point) {
-        val backgroundData = getBackgroundData()
+    fun initialize(center: Point, backgroundState: BackgroundState) {
+        val backgroundData = getBackgroundData(backgroundState)
         if(center.x == 0f || center.y == 0f) return
         normalBitmap = getBackgroundBitmap(backgroundData.leftColor, backgroundData.rightColor, center)
         ambientBitmap = getBackgroundBitmap(backgroundData.leftColorAmbient, backgroundData.rightColorAmbient, center)

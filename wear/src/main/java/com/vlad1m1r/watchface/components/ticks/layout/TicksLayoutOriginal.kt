@@ -2,12 +2,14 @@ package com.vlad1m1r.watchface.components.ticks.layout
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Paint
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.components.ticks.usecase.AdjustTicks
 import com.vlad1m1r.watchface.components.ticks.usecase.RoundCorners
 import com.vlad1m1r.watchface.components.ticks.TickPaintProvider
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
+import com.vlad1m1r.watchface.data.state.TicksState
 import com.vlad1m1r.watchface.model.Mode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
@@ -17,21 +19,19 @@ import kotlin.math.*
 
 class TicksLayoutOriginal @Inject constructor(
     @ApplicationContext context: Context,
-    colorStorage: ColorStorage,
-    private val dataStorage: DataStorage,
     override val  tickPaintProvider: TickPaintProvider,
     override val adjustTicks: AdjustTicks,
     override val roundCorners: RoundCorners
-) : TicksLayout(context, dataStorage) {
+) : TicksLayout(context) {
 
     private val tickLength = context.resources.getDimension(R.dimen.original_tick_length)
-    private val watchTickColor = colorStorage.getHourTicksColor()
+    private var watchTickColor = 0
     private val tickWidth = context.resources.getDimension(R.dimen.original_tick_width)
 
     private val tickBurnInPadding = context.resources.getDimension(R.dimen.original_tick_padding)
     private var tickPadding = tickBurnInPadding
 
-    private val tickPaint = tickPaintProvider.getTickPaint(watchTickColor, tickWidth)
+    private lateinit var tickPaint: Paint
 
     private var center = Point()
     private var outerTickRadius: Float = 0f
@@ -51,9 +51,9 @@ class TicksLayoutOriginal @Inject constructor(
                 center,
                 bottomInset,
                 isSquareScreen,
-                shouldAdjustToSquareScreen
+                state.shouldAdjustToSquareScreen
             )
-            val roundCorners = if (shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20) * 10 else 0.0
+            val roundCorners = if (state.shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20) * 10 else 0.0
 
             val innerX = sin(tickRotation) * (innerTickRadius - roundCorners) * adjust
             val innerY = -cos(tickRotation) * (innerTickRadius - roundCorners) * adjust
@@ -69,7 +69,7 @@ class TicksLayoutOriginal @Inject constructor(
     override fun setMode(mode: Mode) {
         tickPaint.apply {
             if (mode.isAmbient) {
-                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchTickColor), dataStorage.useAntiAliasingInAmbientMode())
+                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchTickColor), state.useAntialiasingInAmbientMode)
                 if (mode.isBurnInProtection) {
                     strokeWidth = 0f
                 }
@@ -84,5 +84,11 @@ class TicksLayoutOriginal @Inject constructor(
             0f
         }
         centerInvalidated = true
+    }
+
+    override fun setTicksState(ticksState: TicksState) {
+        super.setTicksState(ticksState)
+        this.watchTickColor = state.hourTicksColor
+        this.tickPaint = tickPaintProvider.getTickPaint(watchTickColor, tickWidth)
     }
 }

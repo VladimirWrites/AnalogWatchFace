@@ -4,4 +4,5 @@ data class CircleState(
     val color: Int,
     val width: Int,
     val radius: Int,
+    val hasInAmbientMode: Boolean,
 )

@@ -1,6 +1,5 @@
 package com.vlad1m1r.watchface.settings.background
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Icon
 import android.view.LayoutInflater
@@ -11,11 +10,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.components.background.SettingsBackgroundComplicationViewHolder
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.*
+import com.vlad1m1r.watchface.settings.hands.hand.WatchFaceStateHolder
 import com.vlad1m1r.watchface.utils.getActivityContext
 import java.lang.IllegalArgumentException
 
@@ -27,8 +25,7 @@ private const val TYPE_BLACK_AMBIENT = 4
 private const val TYPE_BACKGROUND_COMPLICATION = 5
 
 class BackgroundAdapter(
-    private val colorStorage: ColorStorage,
-    private val dataStorage: DataStorage,
+    private val stateHolder: WatchFaceStateHolder,
     private val navigator: Navigator,
     @StringRes private val title: Int,
     private val leftBackgroundColorLauncher: ActivityResultLauncher<Intent>,
@@ -93,23 +90,24 @@ class BackgroundAdapter(
             TYPE_COLOR_LEFT ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_left_background_color,
-                    colorStorage.getBackgroundLeftColor(),
+                    stateHolder.currentState.backgroundState.leftColor,
                     false,
                     leftBackgroundColorLauncher
                 )
             TYPE_COLOR_RIGHT ->
                 (viewHolder as ColorPickerViewHolder).bind(
                     R.string.wear_right_background_color,
-                    colorStorage.getBackgroundRightColor(),
+                    stateHolder.currentState.backgroundState.rightColor,
                     false,
                     rightBackgroundColorLauncher
                 )
             TYPE_BLACK_AMBIENT ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
                     R.string.wear_black_ambient_background,
-                    dataStorage.hasBlackAmbientBackground()
+                    stateHolder.currentState.backgroundState.blackInAmbient
                 ) {
-                    dataStorage.setHasBlackAmbientBackground(it)
+                    val newBackgroundState = stateHolder.currentState.backgroundState.copy(blackInAmbient = it)
+                    stateHolder.setBackgroundState(newBackgroundState)
                     notifyDataSetChanged()
                 }
             TYPE_BACKGROUND_COMPLICATION -> (viewHolder as SettingsBackgroundComplicationViewHolder).bind(

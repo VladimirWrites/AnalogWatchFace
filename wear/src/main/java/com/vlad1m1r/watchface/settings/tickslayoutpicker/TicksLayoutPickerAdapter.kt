@@ -5,13 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
+import com.vlad1m1r.watchface.data.TicksLayoutType
 import com.vlad1m1r.watchface.data.TicksLayoutType.*
+import com.vlad1m1r.watchface.settings.hands.hand.WatchFaceStateHolder
 import kotlin.IllegalArgumentException
 
 const val TYPE_TICKS_LAYOUT = 0
 
-class TickLayoutPickerAdapter(private val dataStorage: DataStorage) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TickLayoutPickerAdapter(
+    private val onTicksLayoutType: (TicksLayoutType) -> Unit
+): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -23,7 +26,7 @@ class TickLayoutPickerAdapter(private val dataStorage: DataStorage) :
                             parent,
                             false
                         ),
-                    dataStorage
+                    onTicksLayoutType
                 )
             }
             else -> {

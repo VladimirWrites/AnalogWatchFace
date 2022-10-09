@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.Navigator
+import com.vlad1m1r.watchface.settings.hands.hand.WatchFaceStateHolder
 
 class TicksLayoutPickerViewHolder(
     parent: ViewGroup,
-    private val dataStorage: DataStorage,
+    private val stateHolder: WatchFaceStateHolder,
     private val navigator: Navigator
 ) : RecyclerView.ViewHolder(
     LayoutInflater.from(parent.context)
@@ -30,17 +31,18 @@ class TicksLayoutPickerViewHolder(
             setOnClickListener {
                 navigator.goToTicksLayoutPickerActivityForResult(
                     activityResultLauncher,
-                    itemView.context
+                    itemView.context,
+                    stateHolder.currentState.ticksState.layoutType
                 )
             }
         }
     }
 
     private val image = itemView.findViewById<ImageView>(R.id.image_watch_face).apply {
-        this.setImageResource(dataStorage.getTicksLayoutType().drawableZoomedRes)
+        this.setImageResource(stateHolder.currentState.ticksState.layoutType.drawableZoomedRes)
     }
 
     fun refreshImage() {
-        image.setImageResource(dataStorage.getTicksLayoutType().drawableZoomedRes)
+        image.setImageResource(stateHolder.currentState.ticksState.layoutType.drawableZoomedRes)
     }
 }

@@ -3,30 +3,28 @@ package com.vlad1m1r.watchface.components.background
 import android.graphics.Color
 import com.vlad1m1r.watchface.data.ColorStorage
 import com.vlad1m1r.watchface.data.DataStorage
+import com.vlad1m1r.watchface.data.state.BackgroundState
 import com.vlad1m1r.watchface.utils.getDarkerGrayscale
 import javax.inject.Inject
 
-class GetBackgroundData @Inject constructor(
-    private val colorStorage: ColorStorage,
-    private val dataStorage: DataStorage
-) {
+class GetBackgroundData @Inject constructor() {
 
-    operator fun invoke(): BackgroundData {
-        val leftColorAmbient =  if(dataStorage.hasBlackAmbientBackground()) {
+    operator fun invoke(backgroundState: BackgroundState): BackgroundData {
+        val leftColorAmbient =  if(backgroundState.blackInAmbient) {
             Color.BLACK
         } else {
-            getDarkerGrayscale(colorStorage.getBackgroundLeftColor())
+            getDarkerGrayscale(backgroundState.leftColor)
         }
 
-        val rightColorAmbient =  if(dataStorage.hasBlackAmbientBackground()) {
+        val rightColorAmbient =  if(backgroundState.blackInAmbient) {
             Color.BLACK
         } else {
-            getDarkerGrayscale(colorStorage.getBackgroundRightColor())
+            getDarkerGrayscale(backgroundState.rightColor)
         }
 
         return BackgroundData(
-            colorStorage.getBackgroundLeftColor(),
-            colorStorage.getBackgroundRightColor(),
+            backgroundState.leftColor,
+            backgroundState.rightColor,
             leftColorAmbient,
             rightColorAmbient
         )

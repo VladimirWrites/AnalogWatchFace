@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.data.state.WatchFaceState
 import com.vlad1m1r.watchface.settings.hands.hand.WatchFaceStateHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -25,8 +26,6 @@ class MainActivity : FragmentActivity() {
         )
     }
 
-    private lateinit var watchFaceCurrentSate: WatchFaceStateHolder.WatchFaceCurrentState
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,8 +40,7 @@ class MainActivity : FragmentActivity() {
                     }
                     is WatchFaceStateHolder.EditWatchFaceUiState.Success -> {
                         Log.d("TAG", "StateFlow Success.")
-                        watchFaceCurrentSate = uiState.watchFaceCurrentState
-                        Log.d("TEST", watchFaceCurrentSate.backgroundStyle.toString())
+                        stateHolder.currentState = uiState.watchFaceState
                     }
                     is WatchFaceStateHolder.EditWatchFaceUiState.Error -> {
                         Log.e("TAG", "Flow error: ${uiState.exception}")

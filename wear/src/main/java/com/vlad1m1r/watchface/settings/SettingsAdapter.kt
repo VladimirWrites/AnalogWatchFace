@@ -1,12 +1,12 @@
 package com.vlad1m1r.watchface.settings
 
-import android.app.Activity
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.base.viewholders.*
+import com.vlad1m1r.watchface.settings.hands.hand.WatchFaceStateHolder
 import com.vlad1m1r.watchface.utils.getActivityContext
 import java.lang.IllegalArgumentException
 
@@ -20,7 +20,7 @@ private const val TYPE_ABOUT = 6
 private const val TYPE_ANTI_ALIAS = 7
 
 class SettingsAdapter(
-    private val dataStorage: DataStorage,
+    private val stateHolder: WatchFaceStateHolder,
     private val navigator: Navigator
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -102,9 +102,9 @@ class SettingsAdapter(
             TYPE_ANTI_ALIAS -> {
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
                     R.string.wear_anti_aliasing_in_ambient_mode,
-                    dataStorage.useAntiAliasingInAmbientMode()
+                    stateHolder.currentState.ticksState.useAntialiasingInAmbientMode
                 ) {
-                    dataStorage.setUseAntiAliasingInAmbientMode(it)
+                    stateHolder.setUseAntialiasing(it)
                 }
             }
             TYPE_ABOUT -> {

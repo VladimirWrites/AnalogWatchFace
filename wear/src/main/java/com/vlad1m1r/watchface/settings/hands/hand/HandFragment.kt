@@ -8,10 +8,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.SizeStorage
-import com.vlad1m1r.watchface.settings.MainActivity
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerFragment
 import com.vlad1m1r.watchface.settings.colorpicker.KEY_SELECTED_COLOR
@@ -25,21 +21,9 @@ class HandFragment(
 ) : BaseRecyclerFragment() {
 
     @Inject
-    lateinit var dataStorage: DataStorage
-
-    @Inject
-    lateinit var sizeStorage: SizeStorage
-
-    @Inject
-    lateinit var colorStorage: ColorStorage
-
-    @Inject
     lateinit var navigator: Navigator
 
     private lateinit var adapter: HandAdapter
-
-    private lateinit var watchFaceCurrentSate: WatchFaceStateHolder.WatchFaceCurrentState
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,9 +32,10 @@ class HandFragment(
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
                 if (result.resultCode == RESULT_OK) {
                     val hoursHandColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setHoursHandColor(hoursHandColor)
 
-                    (requireActivity() as MainActivity).stateHolder.setHandsState(!watchFaceCurrentSate.handsStyle)
+                    val newHoursHandState = getStateHolder().currentState.handsState.hoursHand.copy(color = hoursHandColor)
+                    val newHandsState = getStateHolder().currentState.handsState.copy(hoursHand = newHoursHandState)
+                    getStateHolder().setHandsState(newHandsState)
 
                     adapter.notifyDataSetChanged()
                 }
@@ -60,7 +45,11 @@ class HandFragment(
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
                 if (result.resultCode == RESULT_OK) {
                     val minutesHandColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setMinutesHandColor(minutesHandColor)
+
+                    val newMinutesHandState = getStateHolder().currentState.handsState.minutesHand.copy(color = minutesHandColor)
+                    val newHandsState = getStateHolder().currentState.handsState.copy(minutesHand = newMinutesHandState)
+                    getStateHolder().setHandsState(newHandsState)
+
                     adapter.notifyDataSetChanged()
                 }
             }
@@ -69,15 +58,17 @@ class HandFragment(
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
                 if (result.resultCode == RESULT_OK) {
                     val secondsHandColor = result.data!!.getIntExtra(KEY_SELECTED_COLOR, 0)
-                    colorStorage.setSecondsHandColor(secondsHandColor)
+
+                    val newSecondsHandState = getStateHolder().currentState.handsState.secondsHand.copy(color = secondsHandColor)
+                    val newHandsState = getStateHolder().currentState.handsState.copy(secondsHand = newSecondsHandState)
+                    getStateHolder().setHandsState(newHandsState)
+
                     adapter.notifyDataSetChanged()
                 }
             }
 
         adapter = HandAdapter(
-            colorStorage,
-            dataStorage,
-            sizeStorage,
+            getStateHolder(),
             navigator,
             handType,
             title,

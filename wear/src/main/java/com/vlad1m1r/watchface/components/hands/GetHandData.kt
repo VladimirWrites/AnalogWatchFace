@@ -3,17 +3,13 @@ package com.vlad1m1r.watchface.components.hands
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.SizeStorage
+import com.vlad1m1r.watchface.data.state.HandsState
+import com.vlad1m1r.watchface.data.state.WatchFaceState
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class GetHandData @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val colorStorage: ColorStorage,
-    private val dataStorage: DataStorage,
-    private val sizeStorage: SizeStorage
+    @ApplicationContext private val context: Context
 ) {
 
     private val circleHandGap = context.resources.getDimensionPixelSize(R.dimen.circle_hand_gap)
@@ -21,11 +17,11 @@ class GetHandData @Inject constructor(
     private val shadowColor = ContextCompat.getColor(context, R.color.watch_shadow)
     private val shadowRadius = context.resources.getDimensionPixelSize(R.dimen.shadow_radius)
 
-    fun getHourHandData(): HandData {
-        val hourColor = colorStorage.getHoursHandColor()
-        val handWidthHour = sizeStorage.getHoursHandWidth()
+    fun getHourHandData(state: HandsState): HandData {
+        val hourColor = state.hoursHand.color
+        val handWidthHour = state.hoursHand.width
 
-        val ambientHourColor = if(hourColor.isColorTransparent() || dataStorage.shouldKeepHandColorInAmbientMode()) { hourColor } else { ambientColor }
+        val ambientHourColor = if(hourColor.isColorTransparent() || state.shouldKeepHandColorInAmbientMode) { hourColor } else { ambientColor }
 
         return HandData(
             hourColor,
@@ -33,17 +29,17 @@ class GetHandData @Inject constructor(
             shadowColor,
             shadowRadius,
             handWidthHour,
-            sizeStorage.getCircleRadius() + circleHandGap,
-            sizeStorage.getHoursHandScale(),
-            dataStorage.useAntiAliasingInAmbientMode()
+            state.circleState.radius + circleHandGap,
+            state.hoursHand.lengthScale,
+            state.useAntialiasingInAmbientMode
         )
     }
 
-    fun getMinuteHandData(): HandData {
-        val minuteColor = colorStorage.getMinutesHandColor()
-        val handWidthMinute = sizeStorage.getMinutesHandWidth()
+    fun getMinuteHandData(state: HandsState): HandData {
+        val minuteColor = state.minutesHand.color
+        val handWidthMinute = state.minutesHand.width
 
-        val ambientMinuteColor = if(minuteColor.isColorTransparent() || dataStorage.shouldKeepHandColorInAmbientMode()) { minuteColor } else { ambientColor }
+        val ambientMinuteColor = if(minuteColor.isColorTransparent() || state.shouldKeepHandColorInAmbientMode) { minuteColor } else { ambientColor }
 
         return HandData(
             minuteColor,
@@ -51,17 +47,17 @@ class GetHandData @Inject constructor(
             shadowColor,
             shadowRadius,
             handWidthMinute,
-            sizeStorage.getCircleRadius() + circleHandGap,
-            sizeStorage.getMinutesHandScale(),
-            dataStorage.useAntiAliasingInAmbientMode()
+            state.circleState.radius + circleHandGap,
+            state.minutesHand.lengthScale,
+            state.useAntialiasingInAmbientMode
         )
     }
 
-    fun getSecondHandData(): HandData {
-        val secondColor = colorStorage.getSecondsHandColor()
-        val handWidthSecond = sizeStorage.getSecondsHandWidth()
+    fun getSecondHandData(state: HandsState): HandData {
+        val secondColor = state.secondsHand.color
+        val handWidthSecond = state.secondsHand.width
 
-        val ambientSecondColor = if(secondColor.isColorTransparent()  || dataStorage.shouldKeepHandColorInAmbientMode()) { secondColor } else { ambientColor }
+        val ambientSecondColor = if(secondColor.isColorTransparent()  || state.shouldKeepHandColorInAmbientMode) { secondColor } else { ambientColor }
 
         return HandData(
             secondColor,
@@ -69,20 +65,20 @@ class GetHandData @Inject constructor(
             shadowColor,
             shadowRadius,
             handWidthSecond,
-            sizeStorage.getCircleRadius(),
-            sizeStorage.getSecondsHandScale(),
-            dataStorage.useAntiAliasingInAmbientMode()
+            state.circleState.radius,
+            state.secondsHand.lengthScale,
+            state.useAntialiasingInAmbientMode
         )
     }
 
-    fun getCircleData(): CircleData {
-        val circleColor = colorStorage.getCentralCircleColor()
-        val circleWidth = sizeStorage.getCircleWidth()
-        val middleCircleRadius = sizeStorage.getCircleRadius()
+    fun getCircleData(state: HandsState): CircleData {
+        val circleColor = state.circleState.color
+        val circleWidth =  state.circleState.width
+        val middleCircleRadius =  state.circleState.radius
 
         val ambientCircleColor =
-            if(dataStorage.hasCenterCircleInAmbientMode()) {
-                if (circleColor.isColorTransparent()  || dataStorage.shouldKeepHandColorInAmbientMode()) {
+            if(state.circleState.hasInAmbientMode) {
+                if (circleColor.isColorTransparent()  || state.shouldKeepHandColorInAmbientMode) {
                     circleColor
                 } else {
                     ambientColor
@@ -98,7 +94,7 @@ class GetHandData @Inject constructor(
             shadowRadius,
             circleWidth,
             middleCircleRadius,
-            dataStorage.useAntiAliasingInAmbientMode()
+            state.useAntialiasingInAmbientMode
         )
     }
 

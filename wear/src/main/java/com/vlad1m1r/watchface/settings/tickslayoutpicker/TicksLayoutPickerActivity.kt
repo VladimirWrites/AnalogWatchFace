@@ -9,16 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import androidx.wear.widget.WearableRecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.data.DataStorage
+import com.vlad1m1r.watchface.data.TicksLayoutType
 import com.vlad1m1r.watchface.settings.base.BaseRecyclerActivity
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+
+private const val KEY_LAYOUT_TYPE = "layout_type"
+const val KEY_SELECTED_LAYOUT_TYPE = "selected_layout_type"
 
 @AndroidEntryPoint
 class TicksLayoutPickerActivity : BaseRecyclerActivity() {
-
-    @Inject
-    lateinit var dataStorage: DataStorage
 
     private lateinit var adapter: TickLayoutPickerAdapter
 
@@ -26,7 +25,14 @@ class TicksLayoutPickerActivity : BaseRecyclerActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        adapter = TickLayoutPickerAdapter(dataStorage)
+        val ticksLayoutType = TicksLayoutType.fromId(intent.getIntExtra(KEY_LAYOUT_TYPE, 0))
+
+        adapter = TickLayoutPickerAdapter {
+            val data = Intent()
+            data.putExtra(KEY_SELECTED_LAYOUT_TYPE, it.id)
+            setResult(RESULT_OK, data)
+            finish()
+        }
         wearableRecyclerView =
             findViewById<WearableRecyclerView>(R.id.wearable_recycler_view).apply {
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -36,6 +42,7 @@ class TicksLayoutPickerActivity : BaseRecyclerActivity() {
                 isVerticalFadingEdgeEnabled = false
                 isCircularScrollingGestureEnabled = false
             }
+        wearableRecyclerView.scrollToPosition(ticksLayoutType.id)
 
         val snapHelper: SnapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(wearableRecyclerView)
@@ -45,9 +52,12 @@ class TicksLayoutPickerActivity : BaseRecyclerActivity() {
 
     companion object {
         fun newInstance(
-            context: Context
+            context: Context,
+            ticksLayoutType: TicksLayoutType
         ): Intent {
-            return Intent(context, TicksLayoutPickerActivity::class.java)
+            return Intent(context, TicksLayoutPickerActivity::class.java).apply {
+                putExtra(KEY_LAYOUT_TYPE, ticksLayoutType.id)
+            }
         }
     }
 }
