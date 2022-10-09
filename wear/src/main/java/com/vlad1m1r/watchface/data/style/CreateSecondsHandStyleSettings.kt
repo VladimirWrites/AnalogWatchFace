@@ -24,7 +24,7 @@ class CreateSecondsHandStyleSettings @Inject constructor(
             R.string.wear_smooth_seconds_hand,
             R.string.wear_hand_settings,
             null,
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             dataStorage.hasSmoothSecondsHand(),
         )
 
@@ -34,7 +34,7 @@ class CreateSecondsHandStyleSettings @Inject constructor(
             R.string.wear_seconds_hand,
             R.string.wear_hand_settings,
             null,
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             false,
         )
 
@@ -46,7 +46,7 @@ class CreateSecondsHandStyleSettings @Inject constructor(
             null,
             Int.MIN_VALUE.toLong(),
             Int.MAX_VALUE.toLong(),
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             colorStorage.getSecondsHandColor().toLong(),
         )
 
@@ -58,7 +58,7 @@ class CreateSecondsHandStyleSettings @Inject constructor(
             null,
             1,
             10,
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             sizeStorage.getSecondsHandWidth().toLong(),
         )
 
@@ -70,7 +70,7 @@ class CreateSecondsHandStyleSettings @Inject constructor(
             null,
             0.0,
             1.0,
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             sizeStorage.getSecondsHandScale().toDouble(),
         )
 

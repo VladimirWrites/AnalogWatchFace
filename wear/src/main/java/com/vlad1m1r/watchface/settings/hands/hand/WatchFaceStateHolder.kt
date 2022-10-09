@@ -5,10 +5,7 @@ import androidx.wear.watchface.editor.EditorSession
 import androidx.wear.watchface.style.UserStyle
 import androidx.wear.watchface.style.UserStyleSchema
 import androidx.wear.watchface.style.UserStyleSetting
-import com.vlad1m1r.watchface.data.state.BackgroundState
-import com.vlad1m1r.watchface.data.state.HandsState
-import com.vlad1m1r.watchface.data.state.TicksState
-import com.vlad1m1r.watchface.data.state.WatchFaceState
+import com.vlad1m1r.watchface.data.state.*
 import com.vlad1m1r.watchface.utils.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -57,6 +54,16 @@ class WatchFaceStateHolder(
     private lateinit var handsKeepColorInAmbientModeStyleKey: UserStyleSetting.BooleanUserStyleSetting
     private lateinit var handsHasStyleKey: UserStyleSetting.BooleanUserStyleSetting
     private lateinit var watchUseAntialiasingStyleKey: UserStyleSetting.BooleanUserStyleSetting
+
+    private lateinit var complicationsHasInAmbientModeStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var complicationsHasBiggerTopAndBottomStyleKey: UserStyleSetting.BooleanUserStyleSetting
+    private lateinit var complicationsTextColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var complicationsTitleColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var complicationsIconColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var complicationsBorderColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var complicationsRangedValuePrimaryColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var complicationsRangedValueSecondaryColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
+    private lateinit var complicationsBackgroundColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
 
     val uiState: StateFlow<EditWatchFaceUiState> =
         flow<EditWatchFaceUiState> {
@@ -227,6 +234,54 @@ class WatchFaceStateHolder(
         )
     }
 
+    fun setComplicationsState(state: ComplicationsState) {
+
+        setUserStyleOption(
+            complicationsHasInAmbientModeStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.hasInAmbientMode)
+        )
+
+        setUserStyleOption(
+            complicationsHasBiggerTopAndBottomStyleKey,
+            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.hasBiggerTopAndBottomComplications)
+        )
+
+        setUserStyleOption(
+            complicationsTextColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.textColor.toLong())
+        )
+
+        setUserStyleOption(
+            complicationsTitleColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.titleColor.toLong())
+        )
+
+        setUserStyleOption(
+            complicationsIconColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.iconColor.toLong())
+        )
+
+        setUserStyleOption(
+            complicationsBorderColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.borderColor.toLong())
+        )
+
+        setUserStyleOption(
+            complicationsRangedValuePrimaryColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.rangedValuePrimaryColor.toLong())
+        )
+
+        setUserStyleOption(
+            complicationsRangedValueSecondaryColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.rangedValueSecondaryColor.toLong())
+        )
+
+        setUserStyleOption(
+            complicationsBackgroundColorStyleKey,
+            UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.backgroundColor.toLong())
+        )
+    }
+
     fun setUseAntialiasing(useAntialiasing: Boolean) {
         val handsState = currentState.handsState.copy(useAntialiasingInAmbientMode = useAntialiasing)
         val ticksState = currentState.ticksState.copy(useAntialiasingInAmbientMode = useAntialiasing)
@@ -252,39 +307,49 @@ class WatchFaceStateHolder(
 
         for (setting in userStyleSchema.userStyleSettings) {
             when (setting.id) {
-                    BACKGROUND_BLACK_IN_AMBIENT -> backgroundBlackInAmbientStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                    BACKGROUND_LEFT_COLOR -> backgroundLeftColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    BACKGROUND_RIGHT_COLOR -> backgroundRightColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                BACKGROUND_BLACK_IN_AMBIENT -> backgroundBlackInAmbientStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                BACKGROUND_LEFT_COLOR -> backgroundLeftColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                BACKGROUND_RIGHT_COLOR -> backgroundRightColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
 
-                    TICKS_HAS_IN_AMBIENT_MODE -> ticksHasInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                    TICKS_HAS_IN_INTERACTIVE_MODE -> ticksHasInInteractiveModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                    TICKS_LAYOUT_TYPE -> ticksLayoutTypeStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    TICKS_HOUR_COLOR -> ticksHourColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    TICKS_MINUTE_COLOR -> ticksMinuteColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    TICKS_SHOULD_ADJUST_TO_SQUARE -> ticksShouldAdjustToSquareStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                TICKS_HAS_IN_AMBIENT_MODE -> ticksHasInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                TICKS_HAS_IN_INTERACTIVE_MODE -> ticksHasInInteractiveModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                TICKS_LAYOUT_TYPE -> ticksLayoutTypeStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                TICKS_HOUR_COLOR -> ticksHourColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                TICKS_MINUTE_COLOR -> ticksMinuteColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                TICKS_SHOULD_ADJUST_TO_SQUARE -> ticksShouldAdjustToSquareStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
 
-                    HAND_SECONDS_IS_SMOOTH -> handSecondsIsSmoothStyleKey  = setting as UserStyleSetting.BooleanUserStyleSetting
-                    HAND_SECONDS_HAS -> handSecondsHasStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                    HAND_SECONDS_COLOR -> handSecondsColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    HAND_SECONDS_WIDTH -> handSecondsWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    HAND_SECONDS_LENGTH_SCALE -> handSecondsLengthScaleStyleKey = setting as UserStyleSetting.DoubleRangeUserStyleSetting
+                HAND_SECONDS_IS_SMOOTH -> handSecondsIsSmoothStyleKey  = setting as UserStyleSetting.BooleanUserStyleSetting
+                HAND_SECONDS_HAS -> handSecondsHasStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                HAND_SECONDS_COLOR -> handSecondsColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                HAND_SECONDS_WIDTH -> handSecondsWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                HAND_SECONDS_LENGTH_SCALE -> handSecondsLengthScaleStyleKey = setting as UserStyleSetting.DoubleRangeUserStyleSetting
 
-                    HAND_MINUTES_COLOR -> handMinutesColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    HAND_MINUTES_WIDTH -> handMinutesWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    HAND_MINUTES_LENGTH_SCALE -> handMinutesLengthScaleStyleKey = setting as UserStyleSetting.DoubleRangeUserStyleSetting
+                HAND_MINUTES_COLOR -> handMinutesColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                HAND_MINUTES_WIDTH -> handMinutesWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                HAND_MINUTES_LENGTH_SCALE -> handMinutesLengthScaleStyleKey = setting as UserStyleSetting.DoubleRangeUserStyleSetting
 
-                    HAND_HOURS_COLOR -> handHoursColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    HAND_HOURS_WIDTH -> handHoursWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    HAND_HOURS_LENGTH_SCALE -> handHoursLengthScaleStyleKey = setting as UserStyleSetting.DoubleRangeUserStyleSetting
+                HAND_HOURS_COLOR -> handHoursColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                HAND_HOURS_WIDTH -> handHoursWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                HAND_HOURS_LENGTH_SCALE -> handHoursLengthScaleStyleKey = setting as UserStyleSetting.DoubleRangeUserStyleSetting
 
-                    HAND_CIRCLE_COLOR -> handCircleColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    HAND_CIRCLE_WIDTH -> handsCircleWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    HAND_CIRCLE_RADIUS -> handCircleRadiusStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
-                    HAND_CIRCLE_HAS_IN_AMBIENT_MODE -> handCircleHasInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                HAND_CIRCLE_COLOR -> handCircleColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                HAND_CIRCLE_WIDTH -> handsCircleWidthStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                HAND_CIRCLE_RADIUS -> handCircleRadiusStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                HAND_CIRCLE_HAS_IN_AMBIENT_MODE -> handCircleHasInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
 
-                    HANDS_HAS_IN_INTERACTIVE -> handsHasInInteractiveStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                    HANDS_KEEP_COLOR_IN_AMBIENT_MODE -> handsKeepColorInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                    HANDS_HAS -> handsHasStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                HANDS_HAS_IN_INTERACTIVE -> handsHasInInteractiveStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                HANDS_KEEP_COLOR_IN_AMBIENT_MODE -> handsKeepColorInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                HANDS_HAS -> handsHasStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+
+                COMPLICATION_HAS_IN_AMBIENT_MODE -> complicationsHasInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                COMPLICATION_HAS_BIGGER_TOP_AND_BOTTOM -> complicationsHasBiggerTopAndBottomStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
+                COMPLICATION_TEXT_COLOR -> complicationsTextColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                COMPLICATION_TITLE_COLOR -> complicationsTitleColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                COMPLICATION_ICON_COLOR -> complicationsIconColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                COMPLICATION_BORDER_COLOR -> complicationsBorderColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                COMPLICATION_RANGED_VALUE_PRIMARY_COLOR -> complicationsRangedValuePrimaryColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                COMPLICATION_RANGED_VALUE_SECONDARY_COLOR -> complicationsRangedValueSecondaryColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+                COMPLICATION_BACKGROUND_COLOR -> complicationsBackgroundColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
             }
         }
     }

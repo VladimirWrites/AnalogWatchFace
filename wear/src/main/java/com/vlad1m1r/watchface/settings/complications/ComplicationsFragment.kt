@@ -17,12 +17,6 @@ import javax.inject.Inject
 class ComplicationsFragment(@StringRes private val title: Int) : BaseRecyclerFragment() {
 
     @Inject
-    lateinit var dataStorage: DataStorage
-
-    @Inject
-    lateinit var colorStorage: ColorStorage
-
-    @Inject
     lateinit var navigator: Navigator
 
     private lateinit var adapter: ComplicationsAdapter
@@ -30,7 +24,7 @@ class ComplicationsFragment(@StringRes private val title: Int) : BaseRecyclerFra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ComplicationsAdapter(dataStorage, navigator, title)
+        adapter = ComplicationsAdapter(getStateHolder(), navigator, title)
         wearableRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

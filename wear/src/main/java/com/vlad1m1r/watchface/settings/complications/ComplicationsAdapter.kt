@@ -5,11 +5,11 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
+import com.vlad1m1r.watchface.settings.hands.hand.WatchFaceStateHolder
 import com.vlad1m1r.watchface.utils.getActivityContext
 
 private const val TYPE_TITLE = 0
@@ -19,7 +19,7 @@ private const val TYPE_COMPLICATIONS_AMBIENT_MODE = 3
 private const val TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS = 4
 
 class ComplicationsAdapter(
-    private val dataStorage: DataStorage,
+    private val stateHolder: WatchFaceStateHolder,
     private val navigator: Navigator,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -76,17 +76,19 @@ class ComplicationsAdapter(
             TYPE_COMPLICATIONS_AMBIENT_MODE ->
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
                     R.string.wear_complications_in_ambient_mode,
-                    dataStorage.hasComplicationsInAmbientMode()
+                    stateHolder.currentState.complicationsState.hasInAmbientMode
                 ) {
-                    dataStorage.setHasComplicationsInAmbientMode(it)
+                    val newComplicationsState = stateHolder.currentState.complicationsState.copy(hasInAmbientMode = it)
+                    stateHolder.setComplicationsState(newComplicationsState)
                 }
             TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS -> {
                 (viewHolder as SettingsWithSwitchViewHolder).apply {
                     bind(
                         R.string.wear_bigger_top_and_bottom_complications,
-                        dataStorage.hasBiggerTopAndBottomComplications(),
+                        stateHolder.currentState.complicationsState.hasBiggerTopAndBottomComplications,
                     ) {
-                        dataStorage.setHasBiggerTopAndBottomComplications(it)
+                        val newComplicationsState = stateHolder.currentState.complicationsState.copy(hasBiggerTopAndBottomComplications = it)
+                        stateHolder.setComplicationsState(newComplicationsState)
                     }
                 }
             }

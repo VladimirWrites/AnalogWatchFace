@@ -23,7 +23,7 @@ class CreateGeneralHandStyleSettings @Inject constructor(
             R.string.wear_hand_settings,
             R.string.wear_hand_settings,
             null,
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             true,
         )
 
@@ -33,7 +33,7 @@ class CreateGeneralHandStyleSettings @Inject constructor(
             R.string.wear_keep_hands_color_in_ambient_mode,
             R.string.wear_hand_settings,
             null,
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             dataStorage.shouldKeepHandColorInAmbientMode(),
         )
 
@@ -43,7 +43,7 @@ class CreateGeneralHandStyleSettings @Inject constructor(
             R.string.wear_hand_settings,
             R.string.wear_hand_settings,
             null,
-            listOf(WatchFaceLayer.BASE),
+            listOf(WatchFaceLayer.BASE, WatchFaceLayer.COMPLICATIONS_OVERLAY),
             true,
         )
 
