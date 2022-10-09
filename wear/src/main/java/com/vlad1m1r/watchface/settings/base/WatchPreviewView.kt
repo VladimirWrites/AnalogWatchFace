@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import com.vlad1m1r.watchface.components.background.DrawBackground
 import com.vlad1m1r.watchface.components.hands.*
+import com.vlad1m1r.watchface.data.state.WatchFaceState
 import com.vlad1m1r.watchface.model.Point
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -36,22 +37,23 @@ class WatchPreviewView: View {
     private val handPaintProvider = HandPaintProvider()
 
     fun invalidate(
-        center: Point
+        center: Point,
+        watchFaceState: WatchFaceState
     ) {
-//        this.center = center
-//        this.drawSecondsHand = DrawHand(getHandData.getSecondHandData(), handPaintProvider)
-//        this.drawHourHand = DrawHand(getHandData.getHourHandData(), handPaintProvider)
-//        this.drawMinutesHand = DrawHand(getHandData.getMinuteHandData(), handPaintProvider)
-//        this.drawCircle = DrawCircle(getHandData.getCircleData(), handPaintProvider)
-//
-//        this.drawBackground.setCenter(center)
-//        this.adjustedCenter = Point(center.x/2, center.y)
-//
-//        refreshMode()
-//
-//        this.setOnClickListener {
-//            switchMode()
-//        }
+        this.center = center
+        this.drawSecondsHand = DrawHand(getHandData.getSecondHandData(watchFaceState.handsState), handPaintProvider)
+        this.drawHourHand = DrawHand(getHandData.getHourHandData(watchFaceState.handsState), handPaintProvider)
+        this.drawMinutesHand = DrawHand(getHandData.getMinuteHandData(watchFaceState.handsState), handPaintProvider)
+        this.drawCircle = DrawCircle(getHandData.getCircleData(watchFaceState.handsState), handPaintProvider)
+
+        this.drawBackground.setCenter(center, watchFaceState.backgroundState)
+        this.adjustedCenter = Point(center.x/2, center.y)
+
+        refreshMode()
+
+        this.setOnClickListener {
+            switchMode()
+        }
     }
 
     private fun switchMode() {
@@ -69,20 +71,20 @@ class WatchPreviewView: View {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-//        if(::drawBackground.isInitialized) {
-//            drawBackground(canvas)
-//        }
-//        if(::drawMinutesHand.isInitialized) {
-//            drawMinutesHand(canvas, 100f, adjustedCenter, center.x)
-//        }
-//        if(::drawHourHand.isInitialized) {
-//            drawHourHand(canvas, 80f, adjustedCenter, center.x)
-//        }
-//        if(::drawSecondsHand.isInitialized) {
-//            drawSecondsHand(canvas, 90f, adjustedCenter, center.x)
-//        }
-//        if(::drawCircle.isInitialized) {
-//            drawCircle(canvas, adjustedCenter)
-//        }
+        if(::drawBackground.isInitialized) {
+            drawBackground(canvas)
+        }
+        if(::drawMinutesHand.isInitialized) {
+            drawMinutesHand(canvas, 100f, adjustedCenter, center.x)
+        }
+        if(::drawHourHand.isInitialized) {
+            drawHourHand(canvas, 80f, adjustedCenter, center.x)
+        }
+        if(::drawSecondsHand.isInitialized) {
+            drawSecondsHand(canvas, 90f, adjustedCenter, center.x)
+        }
+        if(::drawCircle.isInitialized) {
+            drawCircle(canvas, adjustedCenter)
+        }
     }
 }

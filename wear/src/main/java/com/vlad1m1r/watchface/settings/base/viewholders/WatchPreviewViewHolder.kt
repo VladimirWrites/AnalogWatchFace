@@ -5,11 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.data.state.WatchFaceState
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.base.WatchPreviewView
 
 class WatchPreviewViewHolder(
-    parent: ViewGroup
+    parent: ViewGroup,
 ) : RecyclerView.ViewHolder(
     LayoutInflater.from(parent.context)
         .inflate(
@@ -22,7 +23,7 @@ class WatchPreviewViewHolder(
         setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
 
-    fun bind(center: Point) {
-        handPreview.invalidate(center)
+    fun bind(center: Point, state: WatchFaceState) {
+        handPreview.invalidate(center, state)
     }
 }

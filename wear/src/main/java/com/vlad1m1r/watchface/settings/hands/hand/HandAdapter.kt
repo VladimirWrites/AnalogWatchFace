@@ -70,6 +70,7 @@ class HandAdapter(
                 val height = activity.resources.getDimension(R.dimen.item_watch_preview_height)
                 (viewHolder as WatchPreviewViewHolder).bind(
                     Point(width / 2, height / 2),
+                    stateHolder.currentState
                 )
             }
             TYPE_COLOR_HAND ->
