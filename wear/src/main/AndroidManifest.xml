@@ -88,15 +88,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.vlad1m1r.watchface.settings.tickslayoutpicker.TicksLayoutPickerActivity"/>
-        <activity android:name="com.vlad1m1r.watchface.settings.hands.hand.HandFragment"/>
-        <activity android:name="com.vlad1m1r.watchface.settings.hands.centralcircle.CentralCircleFragment"/>
         <activity android:name="com.vlad1m1r.watchface.settings.colorpicker.ColorPickerActivity"/>
         <activity android:name="com.vlad1m1r.watchface.settings.colorpicker.customcolor.CustomColorActivity"/>
-        <activity android:name="com.vlad1m1r.watchface.settings.about.AboutFragment"/>
-        <activity android:name="com.vlad1m1r.watchface.settings.background.BackgroundFragment"/>
-        <activity android:name="com.vlad1m1r.watchface.settings.complications.ComplicationsFragment"/>
-        <activity android:name="com.vlad1m1r.watchface.settings.complications.picker.ComplicationPickerFragment"/>
-        <activity android:name="com.vlad1m1r.watchface.settings.complications.colors.ComplicationColorsFragment"/>
         <activity android:name="com.vlad1m1r.watchface.settings.confirm.ConfirmDeleteColorActivity"/>
         <activity android:name="androidx.wear.activity.ConfirmationActivity" />
     </application>

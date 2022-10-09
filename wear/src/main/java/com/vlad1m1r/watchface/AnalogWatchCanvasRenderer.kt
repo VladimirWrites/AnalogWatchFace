@@ -11,6 +11,7 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyle
 import com.vlad1m1r.watchface.components.Layouts
 import com.vlad1m1r.watchface.data.DataStorage
+import com.vlad1m1r.watchface.data.state.WatchFaceState
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.toWatchFaceState
 import kotlinx.coroutines.*
@@ -36,6 +37,8 @@ class AnalogWatchCanvasRenderer(
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
 
+    private lateinit var state: WatchFaceState
+
     class AnalogSharedAssets : SharedAssets {
         override fun onDestroy() {
         }
@@ -58,6 +61,7 @@ class AnalogWatchCanvasRenderer(
      */
     private fun updateWatchFaceData(userStyle: UserStyle) {
         val watchFaceState = userStyle.toWatchFaceState()
+        this.state = watchFaceState
         layouts.setState(watchFaceState)
     }
 
@@ -88,26 +92,28 @@ class AnalogWatchCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: AnalogSharedAssets
     ) {
-        if (
-            layouts.ticks.centerInvalidated
-        ) {
-            val center = Point(canvas.width / 2f, canvas.height / 2f)
-            layouts.setCenter(center)
+        if(this::state.isInitialized) {
+            if (
+                layouts.ticks.centerInvalidated
+            ) {
+                val center = Point(canvas.width / 2f, canvas.height / 2f)
+                layouts.setCenter(center)
+            }
+
+            layouts.background.draw(canvas)
+
+            if (renderParameters.drawMode != DrawMode.AMBIENT || dataStorage.hasComplicationsInAmbientMode()) {
+                drawComplications(canvas, zonedDateTime)
+            }
+
+            if ((renderParameters.drawMode == DrawMode.AMBIENT && state.ticksState.hasInAmbientMode) ||
+                (renderParameters.drawMode != DrawMode.AMBIENT && state.ticksState.hasInInteractiveMode)
+            ) {
+                layouts.ticks.draw(canvas)
+            }
+
+            layouts.hands.draw(canvas, zonedDateTime)
         }
-
-        layouts.background.draw(canvas)
-
-        if (renderParameters.drawMode != DrawMode.AMBIENT || dataStorage.hasComplicationsInAmbientMode()) {
-            drawComplications(canvas, zonedDateTime)
-        }
-
-        if ((renderParameters.drawMode == DrawMode.AMBIENT && dataStorage.hasTicksInAmbientMode()) ||
-            (renderParameters.drawMode != DrawMode.AMBIENT && dataStorage.hasTicksInInteractiveMode())
-        ) {
-            layouts.ticks.draw(canvas)
-        }
-
-        layouts.hands.draw(canvas, zonedDateTime)
     }
 
     override fun renderHighlightLayer(
