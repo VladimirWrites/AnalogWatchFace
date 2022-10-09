@@ -25,8 +25,8 @@ class CreateMinutesHandStyleSettings @Inject constructor(
             R.string.wear_minutes_hand_color,
             R.string.wear_hand_settings,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            Int.MIN_VALUE.toLong(),
+            Int.MAX_VALUE.toLong(),
             listOf(WatchFaceLayer.BASE),
             colorStorage.getMinutesHandColor().toLong(),
         )
@@ -37,8 +37,8 @@ class CreateMinutesHandStyleSettings @Inject constructor(
             R.string.wear_hand_width,
             R.string.wear_hand_settings,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            1,
+            20,
             listOf(WatchFaceLayer.BASE),
             sizeStorage.getMinutesHandWidth().toLong(),
         )

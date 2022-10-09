@@ -34,8 +34,8 @@ class CreateBackgroundStyleSettings @Inject constructor(
             R.string.wear_left_background_color,
             R.string.wear_background_settings,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            Int.MIN_VALUE.toLong(),
+            Int.MAX_VALUE.toLong(),
             listOf(WatchFaceLayer.BASE),
             colorStorage.getBackgroundLeftColor().toLong(),
         )
@@ -46,8 +46,8 @@ class CreateBackgroundStyleSettings @Inject constructor(
             R.string.wear_right_background_color,
             R.string.wear_background_settings,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            Int.MIN_VALUE.toLong(),
+            Int.MAX_VALUE.toLong(),
             listOf(WatchFaceLayer.BASE),
             colorStorage.getBackgroundRightColor().toLong(),
         )

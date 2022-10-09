@@ -54,8 +54,8 @@ class CreateTicksStyleSettings @Inject constructor(
             R.string.wear_hour_ticks_color,
             R.string.wear_ticks_settings,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            Int.MIN_VALUE.toLong(),
+            Int.MAX_VALUE.toLong(),
             listOf(WatchFaceLayer.BASE),
             colorStorage.getHourTicksColor().toLong(),
         )
@@ -66,8 +66,8 @@ class CreateTicksStyleSettings @Inject constructor(
             R.string.wear_minute_ticks_color,
             R.string.wear_ticks_settings,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            Int.MIN_VALUE.toLong(),
+            Int.MAX_VALUE.toLong(),
             listOf(WatchFaceLayer.BASE),
             colorStorage.getMinuteTicksColor().toLong(),
         )

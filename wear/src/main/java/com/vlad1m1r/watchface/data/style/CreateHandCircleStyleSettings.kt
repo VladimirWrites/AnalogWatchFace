@@ -28,8 +28,8 @@ class CreateHandCircleStyleSettings @Inject constructor(
             R.string.wear_central_circle_color,
             R.string.wear_central_circle,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            Int.MIN_VALUE.toLong(),
+            Int.MAX_VALUE.toLong(),
             listOf(WatchFaceLayer.BASE),
             colorStorage.getCentralCircleColor().toLong(),
         )
@@ -40,8 +40,8 @@ class CreateHandCircleStyleSettings @Inject constructor(
             R.string.wear_circle_width,
             R.string.wear_central_circle,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            1,
+            15,
             listOf(WatchFaceLayer.BASE),
             sizeStorage.getCircleWidth().toLong(),
         )
@@ -52,8 +52,8 @@ class CreateHandCircleStyleSettings @Inject constructor(
             R.string.wear_circle_radius,
             R.string.wear_central_circle,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            1,
+            15,
             listOf(WatchFaceLayer.BASE),
             sizeStorage.getCircleRadius().toLong(),
         )

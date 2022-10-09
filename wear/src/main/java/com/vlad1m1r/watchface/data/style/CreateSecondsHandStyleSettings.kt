@@ -44,8 +44,8 @@ class CreateSecondsHandStyleSettings @Inject constructor(
             R.string.wear_seconds_hand_color,
             R.string.wear_hand_settings,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            Int.MIN_VALUE.toLong(),
+            Int.MAX_VALUE.toLong(),
             listOf(WatchFaceLayer.BASE),
             colorStorage.getSecondsHandColor().toLong(),
         )
@@ -56,8 +56,8 @@ class CreateSecondsHandStyleSettings @Inject constructor(
             R.string.wear_hand_width,
             R.string.wear_hand_settings,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            1,
+            10,
             listOf(WatchFaceLayer.BASE),
             sizeStorage.getSecondsHandWidth().toLong(),
         )
