@@ -26,7 +26,7 @@ class SettingsFragment : BaseRecyclerFragment() {
 
         dataStorage.increaseSettingsOpenCount()
 
-        adapter = SettingsAdapter(dataStorage, navigator)
+        adapter = SettingsAdapter(getStateHolder(), navigator)
         wearableRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isEdgeItemsCenteringEnabled = true

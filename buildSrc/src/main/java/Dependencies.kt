@@ -9,7 +9,7 @@ object Versions {
     const val androidx_core_ktx = "1.7.0"
     const val androidx_app_compat = "1.4.1"
     const val material = "1.5.0"
-    const val constraintLayout = "2.1.3"
+    const val constraintLayout = "2.1.4"
 
     const val hilt = "2.42"
 

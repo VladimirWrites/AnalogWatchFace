@@ -2,7 +2,7 @@ package com.vlad1m1r.watchface.settings.base.viewholders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.settings.RateApp
@@ -16,7 +16,7 @@ class RateViewHolder(parent: ViewGroup, private val rateApp: RateApp) : Recycler
         )
 ) {
     init {
-        itemView.findViewById<TextView>(R.id.settings_rate).apply {
+        itemView.findViewById<ConstraintLayout>(R.id.settings_rate).apply {
             setOnClickListener { rateApp.openAppInPlayStore() }
         }
     }

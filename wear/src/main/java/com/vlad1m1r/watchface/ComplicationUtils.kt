@@ -27,19 +27,6 @@ fun createComplicationSlotManager(
     val minDimen = min(screenWidthDp, screenHeightDp).toFloat()
     val maxDimen = max(screenWidthDp, screenHeightDp).toFloat()
 
-    val temp = getRightBounds(minDimen/2f, maxDimen/2f)
-    Log.d("TEST1", temp.top.toString())
-    Log.d("TEST2", temp.bottom.toString())
-    Log.d("TEST3", temp.left.toString())
-    Log.d("TEST4", temp.right.toString())
-
-    val temp1 = RectF()
-    temp1.set(temp)
-    Log.d("TEST5", temp1.top.toString())
-    Log.d("TEST6", temp1.bottom.toString())
-    Log.d("TEST7", temp1.left.toString())
-    Log.d("TEST8", temp1.right.toString())
-
     val defaultCanvasComplicationFactory =
         CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
