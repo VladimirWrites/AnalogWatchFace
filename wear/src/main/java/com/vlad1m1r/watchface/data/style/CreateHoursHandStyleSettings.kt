@@ -25,8 +25,8 @@ class CreateHoursHandStyleSettings @Inject constructor(
             R.string.wear_hours_hand_color,
             R.string.wear_hand_settings,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            Int.MIN_VALUE.toLong(),
+            Int.MAX_VALUE.toLong(),
             listOf(WatchFaceLayer.BASE),
             colorStorage.getHoursHandColor().toLong(),
         )
@@ -37,8 +37,8 @@ class CreateHoursHandStyleSettings @Inject constructor(
             R.string.wear_hand_width,
             R.string.wear_hand_settings,
             null,
-            Long.MIN_VALUE,
-            Long.MAX_VALUE,
+            1,
+            20,
             listOf(WatchFaceLayer.BASE),
             sizeStorage.getHoursHandWidth().toLong(),
         )
