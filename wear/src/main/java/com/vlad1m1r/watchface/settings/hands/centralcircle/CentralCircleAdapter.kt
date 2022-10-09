@@ -71,6 +71,7 @@ class CentralCircleAdapter(
                 val height = activity.resources.getDimension(R.dimen.item_watch_preview_height)
                 (viewHolder as WatchPreviewViewHolder).bind(
                     Point(width / 2, height / 2),
+                    stateHolder.currentState
                 )
             }
             TYPE_COLOR_CENTRAL_CIRCLE -> (viewHolder as ColorPickerViewHolder).bind(
@@ -111,6 +112,7 @@ class CentralCircleAdapter(
                     val newCircleState =
                         stateHolder.currentState.handsState.circleState.copy(hasInAmbientMode = it)
                     stateHolder.setHandsState(stateHolder.currentState.handsState.copy(circleState = newCircleState))
+                    notifyDataSetChanged()
                 }
         }
     }
