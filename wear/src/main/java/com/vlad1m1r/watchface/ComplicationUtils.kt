@@ -87,11 +87,11 @@ fun createComplicationSlotManager(
 
     return ComplicationSlotsManager(
         listOf(
+            backgroundComplication,
             leftComplication,
             rightComplication,
             topComplication,
             bottomComplication,
-            backgroundComplication
         ),
         currentUserStyleRepository
     )
