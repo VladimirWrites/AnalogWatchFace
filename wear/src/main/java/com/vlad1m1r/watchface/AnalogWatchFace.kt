@@ -6,40 +6,30 @@ import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyleSchema
 import com.vlad1m1r.watchface.components.Complications
 import com.vlad1m1r.watchface.components.Layouts
-import com.vlad1m1r.watchface.data.ColorStorage
-import com.vlad1m1r.watchface.data.CustomColorStorage
-import com.vlad1m1r.watchface.data.DataStorage
-import com.vlad1m1r.watchface.data.SizeStorage
 import com.vlad1m1r.watchface.data.style.CreateUserStyleSchema
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 
-@AndroidEntryPoint
 class AnalogWatchFace : WatchFaceService() {
 
-    @Inject
-    lateinit var dataStorage: DataStorage
-
-    @Inject
-    lateinit var sizeStorage: SizeStorage
-
-    @Inject
-    lateinit var colorStorage: ColorStorage
-
-    @Inject
-    lateinit var customColorStorage: CustomColorStorage
-
-    @Inject
-    lateinit var layouts: Layouts
-
-    @Inject
-    lateinit var complications: Complications
-
-    @Inject
-    lateinit var createUserStyleSchemaImplementation: CreateUserStyleSchema
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface AnalogWatchFaceEntryPoint {
+        fun createUserStyleSchemaImplementation(): CreateUserStyleSchema
+        fun layouts(): Layouts
+        fun complications(): Complications
+    }
 
     // Used by Watch Face APIs to construct user setting options and repository.
-    override fun createUserStyleSchema(): UserStyleSchema = createUserStyleSchemaImplementation()
+    override fun createUserStyleSchema(): UserStyleSchema {
+
+        val hiltEntryPoint =
+            EntryPointAccessors.fromApplication(applicationContext, AnalogWatchFaceEntryPoint::class.java)
+
+        return hiltEntryPoint.createUserStyleSchemaImplementation().invoke()
+    }
 
     // Creates all complication user settings and adds them to the existing user settings
     // repository.
@@ -58,14 +48,17 @@ class AnalogWatchFace : WatchFaceService() {
     ): WatchFace {
         // Creates class that renders the watch face.
 
+        val hiltEntryPoint =
+            EntryPointAccessors.fromApplication(applicationContext, AnalogWatchFaceEntryPoint::class.java)
+
         val renderer = AnalogWatchCanvasRenderer(
             surfaceHolder = surfaceHolder,
             watchState = watchState,
             complicationSlotsManager = complicationSlotsManager,
             currentUserStyleRepository = currentUserStyleRepository,
             canvasType = CanvasType.HARDWARE,
-            complications = complications,
-            layouts = layouts.apply {
+            complications = hiltEntryPoint.complications(),
+            layouts = hiltEntryPoint.layouts().apply {
                 setBottomInset(watchState.chinHeight)
             }
         )
