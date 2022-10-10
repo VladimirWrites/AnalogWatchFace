@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
+import androidx.wear.watchface.DrawMode
 import com.vlad1m1r.watchface.components.background.DrawBackground
 import com.vlad1m1r.watchface.components.hands.*
 import com.vlad1m1r.watchface.data.state.WatchFaceState
@@ -36,20 +37,20 @@ class WatchPreviewView: View {
 
     private val handPaintProvider = HandPaintProvider()
 
+    private lateinit var watchFaceState: WatchFaceState
+
     fun invalidate(
         center: Point,
         watchFaceState: WatchFaceState
     ) {
+        this.watchFaceState = watchFaceState
         this.center = center
         this.drawSecondsHand = DrawHand(getHandData.getSecondHandData(watchFaceState.handsState), handPaintProvider)
         this.drawHourHand = DrawHand(getHandData.getHourHandData(watchFaceState.handsState), handPaintProvider)
         this.drawMinutesHand = DrawHand(getHandData.getMinuteHandData(watchFaceState.handsState), handPaintProvider)
         this.drawCircle = DrawCircle(getHandData.getCircleData(watchFaceState.handsState), handPaintProvider)
 
-        this.drawBackground.setCenter(center, watchFaceState.backgroundState)
         this.adjustedCenter = Point(center.x/2, center.y)
-
-        refreshMode()
 
         this.setOnClickListener {
             switchMode()
@@ -58,33 +59,29 @@ class WatchPreviewView: View {
 
     private fun switchMode() {
         isInAmbientMode = !isInAmbientMode
-        refreshMode()
-    }
-
-    private fun refreshMode() {
-        drawHourHand.setInAmbientMode(isInAmbientMode)
-        drawMinutesHand.setInAmbientMode(isInAmbientMode)
-        drawSecondsHand.setInAmbientMode(isInAmbientMode)
-        drawCircle.setInAmbientMode(isInAmbientMode)
-        drawBackground.setInAmbientMode(isInAmbientMode)
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if(::drawBackground.isInitialized) {
-            drawBackground(canvas)
-        }
-        if(::drawMinutesHand.isInitialized) {
-            drawMinutesHand(canvas, 100f, adjustedCenter, center.x)
-        }
-        if(::drawHourHand.isInitialized) {
-            drawHourHand(canvas, 80f, adjustedCenter, center.x)
-        }
-        if(::drawSecondsHand.isInitialized) {
-            drawSecondsHand(canvas, 90f, adjustedCenter, center.x)
-        }
-        if(::drawCircle.isInitialized) {
-            drawCircle(canvas, adjustedCenter)
+
+        if(::watchFaceState.isInitialized) {
+            val drawMode = if (isInAmbientMode) DrawMode.AMBIENT else DrawMode.INTERACTIVE
+
+            if (::drawBackground.isInitialized) {
+                drawBackground(canvas, drawMode, center, watchFaceState.backgroundState)
+            }
+            if (::drawMinutesHand.isInitialized) {
+                drawMinutesHand(canvas, 100f, adjustedCenter, center.x, drawMode)
+            }
+            if (::drawHourHand.isInitialized) {
+                drawHourHand(canvas, 80f, adjustedCenter, center.x, drawMode)
+            }
+            if (::drawSecondsHand.isInitialized) {
+                drawSecondsHand(canvas, 90f, adjustedCenter, center.x, drawMode)
+            }
+            if (::drawCircle.isInitialized) {
+                drawCircle(canvas, adjustedCenter, drawMode)
+            }
         }
     }
 }

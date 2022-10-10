@@ -1,6 +1,7 @@
 package com.vlad1m1r.watchface.components.hands
 
 import android.graphics.Canvas
+import androidx.wear.watchface.DrawMode
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.inAmbientMode
 import com.vlad1m1r.watchface.utils.inInteractiveMode
@@ -12,7 +13,20 @@ class DrawHand(
 
     private var paint = handPaintProvider.getHandPaint(handData)
 
-    operator fun invoke(canvas: Canvas, rotation:Float, center: Point, handSpace: Float) {
+    operator fun invoke(
+        canvas: Canvas,
+        rotation: Float,
+        center: Point,
+        handSpace: Float,
+        drawMode: DrawMode
+    ) {
+
+        if(drawMode == DrawMode.AMBIENT) {
+            paint.inAmbientMode(handData.colorAmbient, handData.useAntiAliasingInAmbientMode)
+        } else {
+            paint.inInteractiveMode(handData.color, handData.shadowColor, handData.shadowRadius.toFloat())
+        }
+
         val handLength = (handSpace - handData.paddingFromCenter) * handData.handLengthRatio
         canvas.rotate(rotation, center.x, center.y)
         canvas.drawLine(
@@ -23,13 +37,5 @@ class DrawHand(
             paint
         )
         canvas.rotate(-rotation, center.x, center.y)
-    }
-
-    fun setInAmbientMode(isInAmbientMode: Boolean) {
-        if(isInAmbientMode) {
-            paint.inAmbientMode(handData.colorAmbient, handData.useAntiAliasingInAmbientMode)
-        } else {
-            paint.inInteractiveMode(handData.color, handData.shadowColor, handData.shadowRadius.toFloat())
-        }
     }
 }

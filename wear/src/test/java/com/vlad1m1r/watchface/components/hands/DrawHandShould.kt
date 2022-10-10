@@ -29,7 +29,8 @@ class DrawHandShould {
             canvasMock,
             rotation,
             center,
-            0f
+            0f,
+            drawMode
         )
 
         canvasMock.inOrder {
@@ -62,7 +63,8 @@ class DrawHandShould {
             canvasMock,
             rotation,
             center,
-            10f
+            10f,
+            drawMode
         )
 
         verify(canvasMock).drawLine(

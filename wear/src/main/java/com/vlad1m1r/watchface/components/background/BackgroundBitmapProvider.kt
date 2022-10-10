@@ -11,6 +11,8 @@ class BackgroundBitmapProvider @Inject constructor(
     private lateinit var normalBitmap: Bitmap
     private lateinit var ambientBitmap: Bitmap
 
+    var isInitialized = this::normalBitmap.isInitialized && this::ambientBitmap.isInitialized
+
     fun initialize(center: Point, backgroundState: BackgroundState) {
         val backgroundData = getBackgroundData(backgroundState)
         if(center.x == 0f || center.y == 0f) return

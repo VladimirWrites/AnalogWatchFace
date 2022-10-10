@@ -350,6 +350,8 @@ class WatchFaceStateHolder(
                 COMPLICATION_RANGED_VALUE_PRIMARY_COLOR -> complicationsRangedValuePrimaryColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
                 COMPLICATION_RANGED_VALUE_SECONDARY_COLOR -> complicationsRangedValueSecondaryColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
                 COMPLICATION_BACKGROUND_COLOR -> complicationsBackgroundColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
+
+                WATCH_USE_ANTIALIASING -> watchUseAntialiasingStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
             }
         }
     }

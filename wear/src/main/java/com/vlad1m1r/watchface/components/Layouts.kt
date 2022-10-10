@@ -32,16 +32,4 @@ class Layouts @Inject constructor(
     fun setBottomInset(bottomInset: Int) {
         this.bottomInset = bottomInset
     }
-
-    fun setMode(mode: Mode) {
-        background.setMode(mode)
-        ticks.setMode(mode)
-        hands.setMode(mode)
-    }
-
-    fun setCenter(center: Point) {
-        background.setCenter(center)
-        ticks.setCenter(center)
-        hands.setCenter(center)
-    }
 }

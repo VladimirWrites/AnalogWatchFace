@@ -97,14 +97,9 @@ class AnalogWatchCanvasRenderer(
         sharedAssets: AnalogSharedAssets
     ) {
         if(this::state.isInitialized) {
-            if (
-                layouts.ticks.centerInvalidated
-            ) {
-                val center = Point(canvas.width / 2f, canvas.height / 2f)
-                layouts.setCenter(center)
-            }
+            val center = Point(canvas.width / 2f, canvas.height / 2f)
 
-            layouts.background.draw(canvas)
+            layouts.background.draw(canvas, renderParameters.drawMode, center)
 
             if (renderParameters.drawMode != DrawMode.AMBIENT || state.complicationsState.hasInAmbientMode) {
                 drawComplications(canvas, zonedDateTime)
@@ -113,10 +108,10 @@ class AnalogWatchCanvasRenderer(
             if ((renderParameters.drawMode == DrawMode.AMBIENT && state.ticksState.hasInAmbientMode) ||
                 (renderParameters.drawMode != DrawMode.AMBIENT && state.ticksState.hasInInteractiveMode)
             ) {
-                layouts.ticks.draw(canvas)
+                layouts.ticks.draw(canvas, renderParameters.drawMode, center)
             }
 
-            layouts.hands.draw(canvas, zonedDateTime)
+            layouts.hands.draw(canvas, zonedDateTime, renderParameters.drawMode, center)
         }
     }
 

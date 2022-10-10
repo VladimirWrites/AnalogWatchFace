@@ -3,15 +3,15 @@ object Versions {
 
     const val wearable_support = "2.8.1"
     const val wearable_support_ui = "1.2.0"
-    const val wearable = "2.8.1"
+    const val wearable = "2.9.0"
     const val wear_remote_interactions = "1.0.0"
 
     const val androidx_core_ktx = "1.7.0"
-    const val androidx_app_compat = "1.4.1"
+    const val androidx_app_compat = "1.5.1"
     const val material = "1.5.0"
     const val constraintLayout = "2.1.4"
 
-    const val hilt = "2.42"
+    const val hilt = "2.44"
 
     const val junit = "4.13.2"
     const val mockito = "4.4.0"
