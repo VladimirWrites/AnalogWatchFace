@@ -7,14 +7,10 @@ import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
-import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
-import androidx.wear.watchface.complications.rendering.ComplicationDrawable
-import androidx.wear.watchface.complications.rendering.ComplicationStyle
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyle
 import com.vlad1m1r.watchface.components.Complications
 import com.vlad1m1r.watchface.components.Layouts
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.state.WatchFaceState
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.toWatchFaceState
@@ -71,9 +67,11 @@ class AnalogWatchCanvasRenderer(
     }
 
     private fun drawComplications(canvas: Canvas, zonedDateTime: ZonedDateTime) {
-        for ((_, complication) in complicationSlotsManager.complicationSlots) {
+        for ((id, complication) in complicationSlotsManager.complicationSlots) {
             if (complication.enabled) {
-                complications.applyComplicationState(complication, state.complicationsState)
+                if(id != BACKGROUND_COMPLICATION_ID) {
+                    complications.applyComplicationState(complication, state.complicationsState)
+                }
                 complication.render(canvas, zonedDateTime, renderParameters)
             }
         }
