@@ -26,7 +26,7 @@ class DrawBackgroundShould {
         )
 
         drawBackground.setInAmbientMode(true)
-        drawBackground(canvasMock)
+        drawBackground(canvasMock, drawMode, center)
 
         verify(canvasMock).drawBitmap(backgroundBitmapProviderMock.getAmbientBitmap(), 0f, 0f, null)
     }
@@ -38,7 +38,7 @@ class DrawBackgroundShould {
         )
 
         drawBackground.setInAmbientMode(false)
-        drawBackground(canvasMock)
+        drawBackground(canvasMock, drawMode, center)
 
         verify(canvasMock).drawBitmap(backgroundBitmapProviderMock.getNormalBitmap(), 0f, 0f, null)
     }

@@ -1,30 +1,25 @@
 package com.vlad1m1r.watchface
 
 import android.content.Context
-import android.graphics.Rect
 import android.graphics.RectF
-import android.util.Log
-import androidx.core.graphics.toRectF
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
+import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import kotlin.math.max
-import kotlin.math.min
+import com.vlad1m1r.watchface.utils.ScreenMetricsCompat
 
 fun createComplicationSlotManager(
     context: Context,
     currentUserStyleRepository: CurrentUserStyleRepository,
 ): ComplicationSlotsManager {
 
-    val screenWidthDp = context.resources.configuration.screenWidthDp
-    val screenHeightDp = context.resources.configuration.screenHeightDp
-    val minDimen = min(screenWidthDp, screenHeightDp).toFloat()
-    val maxDimen = max(screenWidthDp, screenHeightDp).toFloat()
+    val screenWidthDp = ScreenMetricsCompat.getScreenSize(context).width
+    val screenHeightDp = ScreenMetricsCompat.getScreenSize(context).height
 
     val defaultCanvasComplicationFactory =
         CanvasComplicationFactory { watchState, listener ->
@@ -42,7 +37,7 @@ fun createComplicationSlotManager(
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(),
 
         bounds = ComplicationSlotBounds(
-            getLeftBounds(minDimen/2f, maxDimen/2f).customToRectF(minDimen/2f, maxDimen/2f)
+            getLeftBounds(screenWidthDp / 2f, screenHeightDp / 2f)
         )
     ).build()
 
@@ -52,7 +47,7 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Right.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(),
         bounds = ComplicationSlotBounds(
-            getRightBounds(minDimen/2f, maxDimen/2f).customToRectF(minDimen/2f, maxDimen/2f)
+            getRightBounds(screenWidthDp / 2f, screenHeightDp / 2f)
         )
     ).build()
 
@@ -63,7 +58,14 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Top.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(),
         bounds = ComplicationSlotBounds(
-            getTopBounds(minDimen/2f, maxDimen/2f, false).customToRectF(minDimen/2f, maxDimen/2f)
+            ComplicationType.values().associate {
+                val default = getTopBounds(screenWidthDp / 2f, screenHeightDp / 2f)
+                if (it == ComplicationType.LONG_TEXT) {
+                    it to getTopWideBounds(screenWidthDp / 2f, screenHeightDp / 2f)
+                } else {
+                    it to default
+                }
+            }
         )
 
     ).build()
@@ -74,7 +76,14 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Bottom.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(),
         bounds = ComplicationSlotBounds(
-            getBottomBounds(minDimen/2f, maxDimen/2f, false).customToRectF(minDimen/2f, maxDimen/2f)
+            ComplicationType.values().associate {
+                val default = getBottomBounds(screenWidthDp / 2f, screenHeightDp / 2f)
+                if (it == ComplicationType.LONG_TEXT) {
+                    it to getBottomWideBounds(screenWidthDp / 2f, screenHeightDp / 2f)
+                } else {
+                    it to default
+                }
+            }
         )
     ).build()
 
@@ -97,62 +106,87 @@ fun createComplicationSlotManager(
     )
 }
 
-private fun getLeftBounds(centerX: Float, centerY: Float): Rect {
-    val sizeOfComplication = centerX.toInt() / 2
-    val horizontalOffset = (centerX.toInt() - sizeOfComplication) / 2
-    val verticalOffset = centerY.toInt() - sizeOfComplication / 2
+private const val ROUND_COMPLICATION_SIZE = 0.25f
+private const val WIDE_COMPLICATION_WIDTH = 0.6f
+private const val WIDE_COMPLICATION_HEIGHT = 0.15f
+private const val CENTER = 0.5f
+private const val PADDING_FROM_CENTER = 0.1f
+private const val PADDING_FROM_CENTER_WIDE = 0.2f
 
-    return Rect(
-        horizontalOffset,
-        verticalOffset,
-        horizontalOffset + sizeOfComplication,
-        verticalOffset + sizeOfComplication
+private fun getLeftBounds(centerX: Float, centerY: Float): RectF {
+    val height = ROUND_COMPLICATION_SIZE * centerX / centerY
+    val width = ROUND_COMPLICATION_SIZE
+    val right = CENTER - PADDING_FROM_CENTER * centerY / centerX
+
+    return RectF(
+        right - width,
+        CENTER - height / 2,
+        right,
+        CENTER + height / 2
     )
 }
 
-private fun getRightBounds(centerX: Float, centerY: Float): Rect {
-    val sizeOfComplication = centerX.toInt() / 2
-    val horizontalOffset = (centerX.toInt() - sizeOfComplication) / 2
-    val verticalOffset = centerY.toInt() - sizeOfComplication / 2
+private fun getRightBounds(centerX: Float, centerY: Float): RectF {
+    val height = ROUND_COMPLICATION_SIZE * centerX / centerY
+    val width = ROUND_COMPLICATION_SIZE
+    val left = CENTER + PADDING_FROM_CENTER * centerY / centerX
 
-    return Rect(
-        centerX.toInt() + horizontalOffset,
-        verticalOffset,
-        centerX.toInt() + horizontalOffset + sizeOfComplication,
-        verticalOffset + sizeOfComplication
+    return RectF(
+        left,
+        CENTER - height / 2,
+        left + width,
+        CENTER + height / 2
     )
 }
 
-private fun getTopBounds(centerX: Float, centerY: Float, wider: Boolean): Rect {
+private fun getTopBounds(centerX: Float, centerY: Float): RectF {
+    val height = ROUND_COMPLICATION_SIZE * centerX / centerY
+    val width = ROUND_COMPLICATION_SIZE
+    val bottom = CENTER - PADDING_FROM_CENTER * centerX / centerY
 
-    val sizeOfComplicationSmall = centerX.toInt() / 2
-    val horizontalOffsetSmall = centerX.toInt() - (sizeOfComplicationSmall / 2)
-    val verticalOffsetSmall = (centerY.toInt() - sizeOfComplicationSmall) / 2
-
-    return Rect(
-        horizontalOffsetSmall,
-        centerY.toInt() - verticalOffsetSmall - sizeOfComplicationSmall,
-        horizontalOffsetSmall + sizeOfComplicationSmall,
-        centerY.toInt() - verticalOffsetSmall
+    return RectF(
+        CENTER - width / 2,
+        bottom - height,
+        CENTER + width / 2,
+        bottom
     )
 }
 
-private fun getBottomBounds(centerX: Float, centerY: Float, wider: Boolean, bottomInset: Int = 0): Rect {
+private fun getTopWideBounds(centerX: Float, centerY: Float): RectF {
+    val height = WIDE_COMPLICATION_HEIGHT * centerX / centerY
+    val width = WIDE_COMPLICATION_WIDTH
+    val bottom = CENTER - PADDING_FROM_CENTER_WIDE * centerX / centerY
 
-    val sizeOfComplicationSmall = centerX.toInt() / 2
-    val horizontalOffsetSmall = centerX.toInt() - (sizeOfComplicationSmall / 2)
-    val verticalOffsetSmall = (centerY.toInt() - sizeOfComplicationSmall) / 2
-
-    return Rect(
-        horizontalOffsetSmall,
-        centerY.toInt() + verticalOffsetSmall - bottomInset / 4,
-        horizontalOffsetSmall + sizeOfComplicationSmall,
-        centerY.toInt() + verticalOffsetSmall + sizeOfComplicationSmall - bottomInset / 4
+    return RectF(
+        CENTER - width / 2,
+        bottom - height,
+        CENTER + width / 2,
+        bottom
     )
 }
 
-private fun Rect.customToRectF(centerX: Float, centerY: Float): RectF {
-    return RectF(this.left/(2*centerX), this.top/(2*centerY), this.right/(2*centerX), this.bottom/(2*centerY))
+private fun getBottomBounds(centerX: Float, centerY: Float): RectF {
+    val height = ROUND_COMPLICATION_SIZE * centerX / centerY
+    val width = ROUND_COMPLICATION_SIZE
+    val top = CENTER + PADDING_FROM_CENTER * centerX / centerY
+    return RectF(
+        CENTER - width / 2,
+        top,
+        CENTER + width / 2,
+        (top + height)
+    )
+}
+
+private fun getBottomWideBounds(centerX: Float, centerY: Float): RectF {
+    val height = WIDE_COMPLICATION_HEIGHT * centerX / centerY
+    val width = WIDE_COMPLICATION_WIDTH
+    val top = CENTER + PADDING_FROM_CENTER_WIDE * centerX / centerY
+    return RectF(
+        CENTER - width / 2,
+        top,
+        CENTER + width / 2,
+        (top + height)
+    )
 }
 
 

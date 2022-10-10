@@ -2,17 +2,16 @@ package com.vlad1m1r.watchface.components.ticks.layout
 
 import android.content.Context
 import android.graphics.Canvas
+import androidx.wear.watchface.DrawMode
 import com.vlad1m1r.watchface.components.ticks.usecase.AdjustTicks
 import com.vlad1m1r.watchface.components.ticks.usecase.RoundCorners
 import com.vlad1m1r.watchface.components.ticks.TickPaintProvider
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.state.TicksState
-import com.vlad1m1r.watchface.model.Mode
-import com.vlad1m1r.watchface.utils.WatchView
+import com.vlad1m1r.watchface.model.Point
 
 sealed class TicksLayout(
     context: Context
-): WatchView {
+) {
 
     protected val isSquareScreen: Boolean = !context.resources.configuration.isScreenRound
 
@@ -24,14 +23,9 @@ sealed class TicksLayout(
 
     var bottomInset = 0
 
-    var centerInvalidated: Boolean = true
-        protected set
-
-    abstract fun draw(canvas: Canvas)
-    abstract fun setMode(mode: Mode)
-
-    protected fun shouldAdjustForBurnInProtection(mode: Mode) =
-        mode.isAmbient && mode.isBurnInProtection && ((isSquareScreen && state.shouldAdjustToSquareScreen) || !isSquareScreen)
+    protected fun shouldAdjustForBurnInProtection(mode: DrawMode) =
+        mode == DrawMode.AMBIENT && ((isSquareScreen && state.shouldAdjustToSquareScreen) || !isSquareScreen)
+    abstract fun draw(canvas: Canvas, drawMode: DrawMode, center: Point)
 
     open fun setTicksState(ticksState: TicksState) {
         this.state = ticksState

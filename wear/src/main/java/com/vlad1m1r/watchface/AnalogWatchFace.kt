@@ -36,10 +36,10 @@ class AnalogWatchFace : WatchFaceService() {
     lateinit var complications: Complications
 
     @Inject
-    lateinit var createUserStyleSchema: CreateUserStyleSchema
+    lateinit var createUserStyleSchemaImplementation: CreateUserStyleSchema
 
     // Used by Watch Face APIs to construct user setting options and repository.
-    override fun createUserStyleSchema(): UserStyleSchema = createUserStyleSchema.invoke()
+    override fun createUserStyleSchema(): UserStyleSchema = createUserStyleSchemaImplementation()
 
     // Creates all complication user settings and adds them to the existing user settings
     // repository.

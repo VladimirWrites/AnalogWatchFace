@@ -37,7 +37,8 @@ class DrawCircleShould {
 
         drawCircle.invoke(
             canvasMock,
-            center
+            center,
+            drawMode
         )
 
         verify(canvasMock).drawCircle(
