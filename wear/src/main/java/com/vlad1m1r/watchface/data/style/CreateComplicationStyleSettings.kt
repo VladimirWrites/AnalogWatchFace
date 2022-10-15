@@ -27,16 +27,6 @@ class CreateComplicationStyleSettings @Inject constructor(
             dataStorage.hasComplicationsInAmbientMode(),
         )
 
-        val hasBiggerTopAndBottom = UserStyleSetting.BooleanUserStyleSetting(
-            COMPLICATION_HAS_BIGGER_TOP_AND_BOTTOM,
-            context.resources,
-            R.string.wear_bigger_top_and_bottom_complications,
-            R.string.wear_complications_settings,
-            null,
-            listOf(WatchFaceLayer.COMPLICATIONS),
-            dataStorage.hasBiggerTopAndBottomComplications(),
-        )
-
         val textColor = UserStyleSetting.LongRangeUserStyleSetting(
             COMPLICATION_TEXT_COLOR,
             context.resources,
@@ -123,7 +113,6 @@ class CreateComplicationStyleSettings @Inject constructor(
 
         return listOf(
             hasInAmbientMode,
-            hasBiggerTopAndBottom,
             textColor,
             titleColor,
             iconColor,

@@ -56,7 +56,6 @@ class WatchFaceStateHolder(
     private lateinit var watchUseAntialiasingStyleKey: UserStyleSetting.BooleanUserStyleSetting
 
     private lateinit var complicationsHasInAmbientModeStyleKey: UserStyleSetting.BooleanUserStyleSetting
-    private lateinit var complicationsHasBiggerTopAndBottomStyleKey: UserStyleSetting.BooleanUserStyleSetting
     private lateinit var complicationsTextColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
     private lateinit var complicationsTitleColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
     private lateinit var complicationsIconColorStyleKey: UserStyleSetting.LongRangeUserStyleSetting
@@ -242,11 +241,6 @@ class WatchFaceStateHolder(
         )
 
         setUserStyleOption(
-            complicationsHasBiggerTopAndBottomStyleKey,
-            UserStyleSetting.BooleanUserStyleSetting.BooleanOption.from(state.hasBiggerTopAndBottomComplications)
-        )
-
-        setUserStyleOption(
             complicationsTextColorStyleKey,
             UserStyleSetting.LongRangeUserStyleSetting.LongRangeOption(state.textColor.toLong())
         )
@@ -305,7 +299,7 @@ class WatchFaceStateHolder(
 
     private fun extractsUserStyles(userStyleSchema: UserStyleSchema) {
 
-        for (setting in userStyleSchema.userStyleSettings) {
+        for (setting in userStyleSchema.rootUserStyleSettings) {
             when (setting.id) {
                 BACKGROUND_BLACK_IN_AMBIENT -> backgroundBlackInAmbientStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
                 BACKGROUND_LEFT_COLOR -> backgroundLeftColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
@@ -342,7 +336,6 @@ class WatchFaceStateHolder(
                 HANDS_HAS -> handsHasStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
 
                 COMPLICATION_HAS_IN_AMBIENT_MODE -> complicationsHasInAmbientModeStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
-                COMPLICATION_HAS_BIGGER_TOP_AND_BOTTOM -> complicationsHasBiggerTopAndBottomStyleKey = setting as UserStyleSetting.BooleanUserStyleSetting
                 COMPLICATION_TEXT_COLOR -> complicationsTextColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
                 COMPLICATION_TITLE_COLOR -> complicationsTitleColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
                 COMPLICATION_ICON_COLOR -> complicationsIconColorStyleKey = setting as UserStyleSetting.LongRangeUserStyleSetting
