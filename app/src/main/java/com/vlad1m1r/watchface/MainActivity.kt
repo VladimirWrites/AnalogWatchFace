@@ -92,7 +92,14 @@ class MainActivity : Activity() {
             false
         }
 
-        return hasWearOsApp || hasSamsungWearableApp
+        val hasPixelWatchApp = try {
+            packageManager.getPackageInfo("com.google.android.apps.wear.companion", PackageManager.GET_META_DATA)
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
+
+        return hasWearOsApp || hasSamsungWearableApp || hasPixelWatchApp
     }
 
     private fun openUriOnWear(uri: String) {
