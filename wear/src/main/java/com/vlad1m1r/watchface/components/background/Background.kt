@@ -1,6 +1,6 @@
 package com.vlad1m1r.watchface.components.background
 
-import android.graphics.*
+import android.graphics.Canvas
 import androidx.wear.watchface.DrawMode
 import com.vlad1m1r.watchface.data.state.BackgroundState
 import com.vlad1m1r.watchface.model.Point
@@ -16,7 +16,7 @@ class Background @Inject constructor(
     }
 
     fun draw(canvas: Canvas, drawMode: DrawMode, center: Point) {
-        if(state != null) {
+        if (state != null) {
             drawBackground(canvas, drawMode, center, state!!)
         }
     }

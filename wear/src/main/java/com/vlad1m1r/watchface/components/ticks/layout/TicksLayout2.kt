@@ -5,19 +5,21 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import androidx.wear.watchface.DrawMode
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.components.ticks.TickPaintProvider
 import com.vlad1m1r.watchface.components.ticks.usecase.AdjustTicks
 import com.vlad1m1r.watchface.components.ticks.usecase.RoundCorners
-import com.vlad1m1r.watchface.components.ticks.TickPaintProvider
 import com.vlad1m1r.watchface.data.state.TicksState
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-import kotlin.math.*
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 class TicksLayout2 @Inject constructor(
     @ApplicationContext context: Context,
-    override val  tickPaintProvider: TickPaintProvider,
+    override val tickPaintProvider: TickPaintProvider,
     override val adjustTicks: AdjustTicks,
     override val roundCorners: RoundCorners
 ) : TicksLayout(context) {
@@ -25,7 +27,8 @@ class TicksLayout2 @Inject constructor(
     private val tickRadius = context.resources.getDimension(R.dimen.design2_tick_radius)
     private var watchHourTickColor = 0
 
-    private val tickRadiusMinute = context.resources.getDimension(R.dimen.design2_tick_radius_minute)
+    private val tickRadiusMinute =
+        context.resources.getDimension(R.dimen.design2_tick_radius_minute)
     private var watchMinuteTickColor = 0
 
     private val tickPadding = context.resources.getDimension(R.dimen.design2_tick_padding)
@@ -41,7 +44,11 @@ class TicksLayout2 @Inject constructor(
 
         tickPaint.apply {
             if (drawMode == DrawMode.AMBIENT) {
-                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchHourTickColor), state.useAntialiasingInAmbientMode)
+                tickPaintProvider.inAmbientMode(
+                    this,
+                    getLighterGrayscale(watchHourTickColor),
+                    state.useAntialiasingInAmbientMode
+                )
                 strokeWidth = 0f
                 style = Paint.Style.STROKE
             } else {
@@ -51,7 +58,11 @@ class TicksLayout2 @Inject constructor(
         }
         tickPaintMinute.apply {
             if (drawMode == DrawMode.AMBIENT) {
-                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchMinuteTickColor), state.useAntialiasingInAmbientMode)
+                tickPaintProvider.inAmbientMode(
+                    this,
+                    getLighterGrayscale(watchMinuteTickColor),
+                    state.useAntialiasingInAmbientMode
+                )
                 strokeWidth = 0f
                 style = Paint.Style.STROKE
             } else {
@@ -63,13 +74,18 @@ class TicksLayout2 @Inject constructor(
 
         for (tickIndex in 0..59) {
             val tickRotation = tickIndex * PI / 30
-            val adjust = adjustTicks(tickRotation,
+            val adjust = adjustTicks(
+                tickRotation,
                 center,
                 bottomInset,
                 isSquareScreen,
                 state.shouldAdjustToSquareScreen
             )
-            val roundCorners = if (state.shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20) * 10 else 0.0
+            val roundCorners = if (state.shouldAdjustToSquareScreen) roundCorners(
+                tickRotation,
+                center,
+                PI / 20
+            ) * 10 else 0.0
 
             val radius = if (tickIndex % 5 == 0) tickRadius else tickRadiusMinute
             val paint = if (tickIndex % 5 == 0) tickPaint else tickPaintMinute

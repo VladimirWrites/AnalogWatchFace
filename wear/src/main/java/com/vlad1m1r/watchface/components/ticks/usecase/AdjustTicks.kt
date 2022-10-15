@@ -14,7 +14,7 @@ class AdjustTicks @Inject constructor(
         isSquareScreen: Boolean,
         shouldAdjustToSquareScreen: Boolean
     ): Double {
-        return if(isSquareScreen && shouldAdjustToSquareScreen) {
+        return if (isSquareScreen && shouldAdjustToSquareScreen) {
             adjustToSquare(tickRotation, center)
         } else if (!isSquareScreen && bottomInset > 0) {
             adjustToChin(tickRotation, center, bottomInset)

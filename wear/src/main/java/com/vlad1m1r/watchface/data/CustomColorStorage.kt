@@ -9,8 +9,6 @@ private const val KEY_CUSTOM_COLORS = "custom_colors"
 class CustomColorStorage(
     private val sharedPreferences: SharedPreferences
 ) {
-
-
     fun getCustomColors(): List<Int> {
         return sharedPreferences.getString(KEY_CUSTOM_COLORS, defaultColors)!!.split("#").map {
             it.toInt()
@@ -34,7 +32,7 @@ class CustomColorStorage(
     }
 
     private val defaultColors: String by lazy {
-                "${Color.parseColor("#00000000")}#" +
+        "${Color.parseColor("#00000000")}#" +
                 "${Color.parseColor("#ffa17a")}#" +
                 "${Color.parseColor("#fe7682")}#" +
 

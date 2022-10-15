@@ -79,21 +79,30 @@ class MainActivity : Activity() {
 
     private fun isWearAppAvailable(): Boolean {
         val hasWearOsApp = try {
-            packageManager.getPackageInfo("com.google.android.wearable.app", PackageManager.GET_META_DATA)
+            packageManager.getPackageInfo(
+                "com.google.android.wearable.app",
+                PackageManager.GET_META_DATA
+            )
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false
         }
 
         val hasSamsungWearableApp = try {
-            packageManager.getPackageInfo("com.samsung.android.app.watchmanager", PackageManager.GET_META_DATA)
+            packageManager.getPackageInfo(
+                "com.samsung.android.app.watchmanager",
+                PackageManager.GET_META_DATA
+            )
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false
         }
 
         val hasPixelWatchApp = try {
-            packageManager.getPackageInfo("com.google.android.apps.wear.companion", PackageManager.GET_META_DATA)
+            packageManager.getPackageInfo(
+                "com.google.android.apps.wear.companion",
+                PackageManager.GET_META_DATA
+            )
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false
@@ -132,7 +141,8 @@ class MainActivity : Activity() {
             .setTextColor(ContextCompat.getColor(this, R.color.white))
 
         val snackbarView = snackbar.view
-        val textView = snackbarView.findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView
+        val textView =
+            snackbarView.findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView
         textView.maxLines = 5
 
         snackbar.show()

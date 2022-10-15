@@ -21,7 +21,13 @@ class AdjustTicksShould {
 
     @Test
     fun callAdjustToSquare_whenRectangularScreen_andShouldAdjustToSquareIsTrue() {
-        adjustTicks(tickRotation, center, bottomInset = 0, isSquareScreen = true, shouldAdjustToSquareScreen = true)
+        adjustTicks(
+            tickRotation,
+            center,
+            bottomInset = 0,
+            isSquareScreen = true,
+            shouldAdjustToSquareScreen = true
+        )
 
         verify(adjustToSquare).invoke(tickRotation, center)
     }
@@ -29,21 +35,39 @@ class AdjustTicksShould {
     @Test
     fun callAdjustToChin_whenRoundScreen_andHasBottomInset() {
         val bottomInset = 10
-        adjustTicks(tickRotation, center, bottomInset, isSquareScreen = false, shouldAdjustToSquareScreen = false)
+        adjustTicks(
+            tickRotation,
+            center,
+            bottomInset,
+            isSquareScreen = false,
+            shouldAdjustToSquareScreen = false
+        )
 
         verify(adjustToChin).invoke(tickRotation, center, bottomInset)
     }
 
     @Test
     fun returnOne_whenRectangularScreen_andShouldAdjustToSquareIsFalse() {
-        val result = adjustTicks(tickRotation, center, 10, isSquareScreen = true, shouldAdjustToSquareScreen = false)
+        val result = adjustTicks(
+            tickRotation,
+            center,
+            10,
+            isSquareScreen = true,
+            shouldAdjustToSquareScreen = false
+        )
 
         assertThat(result).isEqualTo(1.0)
     }
 
     @Test
     fun returnOne_whenRoundScreen_andHasNoBottomInset() {
-        val result = adjustTicks(tickRotation, center, 0, isSquareScreen = false, shouldAdjustToSquareScreen = false)
+        val result = adjustTicks(
+            tickRotation,
+            center,
+            0,
+            isSquareScreen = false,
+            shouldAdjustToSquareScreen = false
+        )
 
         assertThat(result).isEqualTo(1.0)
     }

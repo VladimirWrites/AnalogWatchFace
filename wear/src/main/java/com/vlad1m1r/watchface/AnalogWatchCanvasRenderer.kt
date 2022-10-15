@@ -9,8 +9,9 @@ import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyle
-import com.vlad1m1r.watchface.components.complications.Complications
 import com.vlad1m1r.watchface.components.Layouts
+import com.vlad1m1r.watchface.components.complications.BACKGROUND_COMPLICATION_ID
+import com.vlad1m1r.watchface.components.complications.Complications
 import com.vlad1m1r.watchface.data.state.WatchFaceState
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.toWatchFaceState
@@ -67,7 +68,7 @@ class AnalogWatchCanvasRenderer(
     }
 
     private fun updateRefreshRate() {
-        if(state.handsState.hasSmoothSecondsHand) {
+        if (state.handsState.hasSmoothSecondsHand) {
             this.interactiveDrawModeUpdateDelayMillis = FRAME_PERIOD_MS_SMOOTH
         } else {
             this.interactiveDrawModeUpdateDelayMillis = FRAME_PERIOD_MS_TICKING
@@ -77,7 +78,7 @@ class AnalogWatchCanvasRenderer(
     private fun drawComplications(canvas: Canvas, zonedDateTime: ZonedDateTime) {
         for ((id, complication) in complicationSlotsManager.complicationSlots) {
             if (complication.enabled) {
-                if(id != BACKGROUND_COMPLICATION_ID) {
+                if (id != BACKGROUND_COMPLICATION_ID) {
                     complications.applyComplicationState(complication, state.complicationsState)
                 }
                 complication.render(canvas, zonedDateTime, renderParameters)
@@ -104,7 +105,7 @@ class AnalogWatchCanvasRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: AnalogSharedAssets
     ) {
-        if(this::state.isInitialized) {
+        if (this::state.isInitialized) {
             val center = Point(canvas.width / 2f, canvas.height / 2f)
 
             layouts.background.draw(canvas, renderParameters.drawMode, center)

@@ -4,8 +4,8 @@ import android.view.SurfaceHolder
 import androidx.wear.watchface.*
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyleSchema
-import com.vlad1m1r.watchface.components.complications.Complications
 import com.vlad1m1r.watchface.components.Layouts
+import com.vlad1m1r.watchface.components.complications.Complications
 import com.vlad1m1r.watchface.components.complications.createComplicationSlotManager
 import com.vlad1m1r.watchface.data.style.CreateUserStyleSchema
 import dagger.hilt.EntryPoint
@@ -27,7 +27,10 @@ class AnalogWatchFace : WatchFaceService() {
     override fun createUserStyleSchema(): UserStyleSchema {
 
         val hiltEntryPoint =
-            EntryPointAccessors.fromApplication(applicationContext, AnalogWatchFaceEntryPoint::class.java)
+            EntryPointAccessors.fromApplication(
+                applicationContext,
+                AnalogWatchFaceEntryPoint::class.java
+            )
 
         return hiltEntryPoint.createUserStyleSchemaImplementation().invoke()
     }
@@ -50,7 +53,10 @@ class AnalogWatchFace : WatchFaceService() {
         // Creates class that renders the watch face.
 
         val hiltEntryPoint =
-            EntryPointAccessors.fromApplication(applicationContext, AnalogWatchFaceEntryPoint::class.java)
+            EntryPointAccessors.fromApplication(
+                applicationContext,
+                AnalogWatchFaceEntryPoint::class.java
+            )
 
         val renderer = AnalogWatchCanvasRenderer(
             surfaceHolder = surfaceHolder,

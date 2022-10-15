@@ -21,15 +21,26 @@ class SizeStorage(
     private val sharedPreferences: SharedPreferences
 ) {
 
-    fun getCircleWidth() = sharedPreferences.getInt(KEY_CIRCLE_WIDTH, getDimensionPixelSize(R.dimen.circle_width))
+    fun getCircleWidth() =
+        sharedPreferences.getInt(KEY_CIRCLE_WIDTH, getDimensionPixelSize(R.dimen.circle_width))
 
-    fun getCircleRadius() = sharedPreferences.getInt(KEY_CIRCLE_RADIUS, getDimensionPixelSize(R.dimen.circle_radius))
+    fun getCircleRadius() =
+        sharedPreferences.getInt(KEY_CIRCLE_RADIUS, getDimensionPixelSize(R.dimen.circle_radius))
 
-    fun getSecondsHandWidth() = sharedPreferences.getInt(KEY_HAND_SECONDS_WIDTH, getDimensionPixelSize(R.dimen.hand_width_second))
+    fun getSecondsHandWidth() = sharedPreferences.getInt(
+        KEY_HAND_SECONDS_WIDTH,
+        getDimensionPixelSize(R.dimen.hand_width_second)
+    )
 
-    fun getMinutesHandWidth() = sharedPreferences.getInt(KEY_HAND_MINUTES_WIDTH, getDimensionPixelSize(R.dimen.hand_width_minute))
+    fun getMinutesHandWidth() = sharedPreferences.getInt(
+        KEY_HAND_MINUTES_WIDTH,
+        getDimensionPixelSize(R.dimen.hand_width_minute)
+    )
 
-    fun getHoursHandWidth() = sharedPreferences.getInt(KEY_HAND_HOURS_WIDTH, getDimensionPixelSize(R.dimen.hand_width_hour))
+    fun getHoursHandWidth() = sharedPreferences.getInt(
+        KEY_HAND_HOURS_WIDTH,
+        getDimensionPixelSize(R.dimen.hand_width_hour)
+    )
 
     fun getSecondsHandScale() = sharedPreferences.getFloat(KEY_HAND_SECONDS_SCALE, 0.875f)
 
@@ -37,5 +48,6 @@ class SizeStorage(
 
     fun getHoursHandScale() = sharedPreferences.getFloat(KEY_HAND_HOURS_SCALE, 0.5f)
 
-    private fun getDimensionPixelSize(@DimenRes res: Int) =  context.resources.getDimensionPixelSize(res)
+    private fun getDimensionPixelSize(@DimenRes res: Int) =
+        context.resources.getDimensionPixelSize(res)
 }
