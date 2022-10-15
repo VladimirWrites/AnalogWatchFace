@@ -1,7 +1,6 @@
 package com.vlad1m1r.watchface.data
 
 import android.content.SharedPreferences
-import com.vlad1m1r.watchface.settings.complications.picker.ComplicationLocation
 
 const val KEY_ANALOG_WATCH_FACE = "analog_watch_face_key"
 
@@ -12,14 +11,11 @@ private const val KEY_HAS_TICKS_IN_INTERACTIVE_MODE = "has_ticks_in_interactive_
 
 const val KEY_HAS_SECOND_HAND = "has_second_hand"
 const val KEY_HAS_HANDS = "has_hands"
-const val KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS = "has_bigger_top_and_bottom_complications"
 const val KEY_HAS_SMOOTH_SECONDS_HAND = "has_smooth_seconds_hand"
 
 const val KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN = "should_adjust_to_square_screen"
 
 const val KEY_HAS_BLACK_AMBIENT_BACKGROUND = "has_black_ambient_background"
-
-const val KEY_HAS_BIGGER_COMPLICATION_TEXT = "has_bigger_complication_text"
 
 const val KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE = "use_anti_aliasing_in_ambient_mode"
 
@@ -38,23 +34,9 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun hasComplicationsInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE, true)
 
-    fun setHasComplicationsInAmbientMode(complicationsInAmbientMode: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE, complicationsInAmbientMode)
-        editor.apply()
-    }
-
     fun hasTicksInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_AMBIENT_MODE, true)
 
     fun hasTicksInInteractiveMode() = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_INTERACTIVE_MODE, true)
-
-    fun hasBiggerTopAndBottomComplications() = sharedPreferences.getBoolean(KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS, false)
-
-    fun setHasBiggerTopAndBottomComplications(biggerTopAndBottomComplications: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_HAS_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS, biggerTopAndBottomComplications)
-        editor.apply()
-    }
 
     fun hasSmoothSecondsHand() = sharedPreferences.getBoolean(KEY_HAS_SMOOTH_SECONDS_HAND, false)
 
@@ -82,10 +64,4 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
     }
 
     fun shouldKeepHandColorInAmbientMode() = sharedPreferences.getBoolean(KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE, false)
-
-    fun setShouldKeepHandColorInAmbientMode(shouldKeepHandColorInAmbientMode: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE, shouldKeepHandColorInAmbientMode)
-        editor.apply()
-    }
 }

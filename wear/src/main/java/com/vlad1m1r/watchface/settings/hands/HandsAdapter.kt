@@ -1,6 +1,5 @@
 package com.vlad1m1r.watchface.settings.hands
 
-import android.app.Activity
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
@@ -12,6 +11,7 @@ import com.vlad1m1r.watchface.settings.base.viewholders.SettingsViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.SettingsWithSwitchViewHolder
 import com.vlad1m1r.watchface.settings.base.viewholders.TitleViewHolder
 import com.vlad1m1r.watchface.settings.hands.hand.HandType
+import com.vlad1m1r.watchface.settings.hands.hand.WatchFaceStateHolder
 import com.vlad1m1r.watchface.utils.getActivityContext
 import java.lang.IllegalArgumentException
 
@@ -24,7 +24,7 @@ private const val TYPE_KEEP_COLOR_IN_AMBIENT_MODE = 5
 
 class HandsAdapter(
     private val navigator: Navigator,
-    private val dataStorage: DataStorage,
+    private val stateHolder: WatchFaceStateHolder,
     @StringRes private val title: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -95,9 +95,12 @@ class HandsAdapter(
             TYPE_KEEP_COLOR_IN_AMBIENT_MODE -> {
                 (viewHolder as SettingsWithSwitchViewHolder).bind(
                     R.string.wear_keep_hands_color_in_ambient_mode,
-                    dataStorage.shouldKeepHandColorInAmbientMode()
+                    stateHolder.currentState.handsState.shouldKeepHandColorInAmbientMode
                 ) {
-                    dataStorage.setShouldKeepHandColorInAmbientMode(it)
+                    val newHandsState =
+                        stateHolder.currentState.handsState.copy(shouldKeepHandColorInAmbientMode = it)
+                    stateHolder.setHandsState(newHandsState)
+                    notifyDataSetChanged()
                 }
             }
         }
