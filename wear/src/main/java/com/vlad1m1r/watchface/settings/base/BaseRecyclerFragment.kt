@@ -31,7 +31,7 @@ open class BaseRecyclerFragment : Fragment() {
         }
 
         override fun onDismissed(layout: SwipeDismissFrameLayout) {
-            requireActivity().onBackPressed()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 

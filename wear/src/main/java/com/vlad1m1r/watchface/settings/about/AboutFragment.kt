@@ -30,7 +30,7 @@ class AboutFragment : Fragment() {
         override fun onSwipeCanceled(layout: SwipeDismissFrameLayout) {}
 
         override fun onDismissed(layout: SwipeDismissFrameLayout) {
-            requireActivity().onBackPressed()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 
