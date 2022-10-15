@@ -1,7 +1,6 @@
 package com.vlad1m1r.watchface.settings.complications.picker
 
-import com.vlad1m1r.watchface.*
-
+import com.vlad1m1r.watchface.components.complications.*
 
 enum class ComplicationLocation(val id: Int, val isBig: Boolean) {
     LEFT(LEFT_COMPLICATION_ID, false),

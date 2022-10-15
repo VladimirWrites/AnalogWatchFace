@@ -4,6 +4,7 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
+import java.time.*
 import java.util.*
 
 @RunWith(Parameterized::class)
@@ -26,14 +27,13 @@ class HandsCalculationsSecondsShould(private val timeInMillis: Long, private val
         )
     }
 
-    private val calendar: Calendar = Calendar.getInstance().apply {
-        timeZone = TimeZone.getTimeZone("CET")
-    }
-
     @Test
     fun calculateSecondsRotation() {
-        calendar.timeInMillis = timeInMillis
+        val zonedDateTime = ZonedDateTime.ofInstant(
+            Instant.ofEpochMilli(timeInMillis),
+            ZoneId.of("CET")
+        )
 
-        assertThat(calendar.secondsRotation()).isEqualTo(rotation)
+        assertThat(zonedDateTime.secondsRotation()).isEqualTo(rotation)
     }
 }
