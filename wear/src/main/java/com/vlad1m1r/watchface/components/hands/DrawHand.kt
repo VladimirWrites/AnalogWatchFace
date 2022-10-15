@@ -21,10 +21,14 @@ class DrawHand(
         drawMode: DrawMode
     ) {
 
-        if(drawMode == DrawMode.AMBIENT) {
+        if (drawMode == DrawMode.AMBIENT) {
             paint.inAmbientMode(handData.colorAmbient, handData.useAntiAliasingInAmbientMode)
         } else {
-            paint.inInteractiveMode(handData.color, handData.shadowColor, handData.shadowRadius.toFloat())
+            paint.inInteractiveMode(
+                handData.color,
+                handData.shadowColor,
+                handData.shadowRadius.toFloat()
+            )
         }
 
         val handLength = (handSpace - handData.paddingFromCenter) * handData.handLengthRatio

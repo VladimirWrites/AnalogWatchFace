@@ -14,7 +14,10 @@ import javax.inject.Inject
 class Complications @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    fun applyComplicationState(complication: ComplicationSlot, complicationsState: ComplicationsState) {
+    fun applyComplicationState(
+        complication: ComplicationSlot,
+        complicationsState: ComplicationsState
+    ) {
         ComplicationDrawable.getDrawable(context, R.drawable.complication_drawable)!!.apply {
             activeStyle.run {
                 textColor = complicationsState.textColor
@@ -29,9 +32,12 @@ class Complications @Inject constructor(
                 ambientStyle.titleColor = getLighterGrayscale(complicationsState.titleColor)
                 ambientStyle.iconColor = getLighterGrayscale(complicationsState.iconColor)
                 ambientStyle.borderColor = getLighterGrayscale(complicationsState.borderColor)
-                ambientStyle.rangedValuePrimaryColor = getLighterGrayscale(complicationsState.rangedValuePrimaryColor)
-                ambientStyle.rangedValueSecondaryColor = getLighterGrayscale(complicationsState.rangedValueSecondaryColor)
-                ambientStyle.backgroundColor = getDarkerGrayscale(complicationsState.backgroundColor)
+                ambientStyle.rangedValuePrimaryColor =
+                    getLighterGrayscale(complicationsState.rangedValuePrimaryColor)
+                ambientStyle.rangedValueSecondaryColor =
+                    getLighterGrayscale(complicationsState.rangedValueSecondaryColor)
+                ambientStyle.backgroundColor =
+                    getDarkerGrayscale(complicationsState.backgroundColor)
             }
             (complication.renderer as CanvasComplicationDrawable).drawable = this
         }

@@ -1,7 +1,6 @@
 package com.vlad1m1r.watchface.utils
 
 import androidx.annotation.ColorInt
-import androidx.core.graphics.toColorInt
 import androidx.wear.watchface.style.UserStyle
 import androidx.wear.watchface.style.UserStyleSetting
 import com.vlad1m1r.watchface.data.TicksLayoutType
@@ -46,8 +45,10 @@ val COMPLICATION_TEXT_COLOR = UserStyleSetting.Id("complication_text_color")
 val COMPLICATION_TITLE_COLOR = UserStyleSetting.Id("complication_title_color")
 val COMPLICATION_ICON_COLOR = UserStyleSetting.Id("complication_icon_color")
 val COMPLICATION_BORDER_COLOR = UserStyleSetting.Id("complication_border_color")
-val COMPLICATION_RANGED_VALUE_PRIMARY_COLOR = UserStyleSetting.Id("complication_ranged_primary_color")
-val COMPLICATION_RANGED_VALUE_SECONDARY_COLOR = UserStyleSetting.Id("complication_ranged_secondary_color")
+val COMPLICATION_RANGED_VALUE_PRIMARY_COLOR =
+    UserStyleSetting.Id("complication_ranged_primary_color")
+val COMPLICATION_RANGED_VALUE_SECONDARY_COLOR =
+    UserStyleSetting.Id("complication_ranged_secondary_color")
 val COMPLICATION_BACKGROUND_COLOR = UserStyleSetting.Id("complication_background_color")
 
 val WATCH_USE_ANTIALIASING = UserStyleSetting.Id("watch_use_antialiasing")

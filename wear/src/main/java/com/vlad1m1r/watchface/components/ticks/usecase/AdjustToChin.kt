@@ -2,7 +2,9 @@ package com.vlad1m1r.watchface.components.ticks.usecase
 
 import com.vlad1m1r.watchface.model.Point
 import javax.inject.Inject
-import kotlin.math.*
+import kotlin.math.PI
+import kotlin.math.acos
+import kotlin.math.cos
 
 /*
 It's used for adjusting the round tick layout to the shape of the watch with chin (flat tire).

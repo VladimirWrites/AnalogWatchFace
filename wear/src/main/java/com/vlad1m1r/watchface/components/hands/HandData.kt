@@ -6,7 +6,7 @@ import androidx.annotation.FloatRange
 data class HandData(
     @ColorInt val color: Int,
     @ColorInt val colorAmbient: Int,
-    @ColorInt  val shadowColor: Int,
+    @ColorInt val shadowColor: Int,
     val shadowRadius: Int,
     val width: Int,
     val paddingFromCenter: Int,

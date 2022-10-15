@@ -5,19 +5,21 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import androidx.wear.watchface.DrawMode
 import com.vlad1m1r.watchface.R
+import com.vlad1m1r.watchface.components.ticks.TickPaintProvider
 import com.vlad1m1r.watchface.components.ticks.usecase.AdjustTicks
 import com.vlad1m1r.watchface.components.ticks.usecase.RoundCorners
-import com.vlad1m1r.watchface.components.ticks.TickPaintProvider
 import com.vlad1m1r.watchface.data.state.TicksState
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.utils.getLighterGrayscale
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-import kotlin.math.*
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 class TicksLayout3 @Inject constructor(
     @ApplicationContext context: Context,
-    override val  tickPaintProvider: TickPaintProvider,
+    override val tickPaintProvider: TickPaintProvider,
     override val adjustTicks: AdjustTicks,
     override val roundCorners: RoundCorners
 ) : TicksLayout(context) {
@@ -26,7 +28,8 @@ class TicksLayout3 @Inject constructor(
     private var watchHourTickColor = 0
     private val tickWidth = context.resources.getDimension(R.dimen.design3_tick_width)
 
-    private val tickLengthMinute = context.resources.getDimension(R.dimen.design3_tick_length_minute)
+    private val tickLengthMinute =
+        context.resources.getDimension(R.dimen.design3_tick_length_minute)
     private var watchMinuteTickColor = 0
     private val tickWidthMinute = context.resources.getDimension(R.dimen.design3_tick_width_minute)
 
@@ -54,21 +57,33 @@ class TicksLayout3 @Inject constructor(
 
         tickPaint.apply {
             if (drawMode == DrawMode.AMBIENT) {
-                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchHourTickColor), state.useAntialiasingInAmbientMode)
+                tickPaintProvider.inAmbientMode(
+                    this,
+                    getLighterGrayscale(watchHourTickColor),
+                    state.useAntialiasingInAmbientMode
+                )
             } else {
                 tickPaintProvider.inInteractiveMode(this, watchHourTickColor)
             }
         }
         tickPaintMinute.apply {
             if (drawMode == DrawMode.AMBIENT) {
-                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchMinuteTickColor), state.useAntialiasingInAmbientMode)
+                tickPaintProvider.inAmbientMode(
+                    this,
+                    getLighterGrayscale(watchMinuteTickColor),
+                    state.useAntialiasingInAmbientMode
+                )
             } else {
                 tickPaintProvider.inInteractiveMode(this, watchMinuteTickColor)
             }
         }
         tickPaintMilli.apply {
             if (drawMode == DrawMode.AMBIENT) {
-                tickPaintProvider.inAmbientMode(this, getLighterGrayscale(watchMinuteTickColor), state.useAntialiasingInAmbientMode)
+                tickPaintProvider.inAmbientMode(
+                    this,
+                    getLighterGrayscale(watchMinuteTickColor),
+                    state.useAntialiasingInAmbientMode
+                )
             } else {
                 tickPaintProvider.inInteractiveMode(this, watchMinuteTickColor)
             }
@@ -82,19 +97,26 @@ class TicksLayout3 @Inject constructor(
         for (tickIndex in 0..239) {
 
             val tickRotation = tickIndex * PI / 120
-            val adjust = adjustTicks(tickRotation,
+            val adjust = adjustTicks(
+                tickRotation,
                 center,
                 bottomInset,
                 isSquareScreen,
                 state.shouldAdjustToSquareScreen
             )
-            val roundCorners = if (state.shouldAdjustToSquareScreen) roundCorners(tickRotation, center, PI / 20) * 10 else 0.0
+            val roundCorners = if (state.shouldAdjustToSquareScreen) roundCorners(
+                tickRotation,
+                center,
+                PI / 20
+            ) * 10 else 0.0
 
             val outerX = sin(tickRotation) * (outerTickRadius - roundCorners) * adjust
             val outerY = -cos(tickRotation) * (outerTickRadius - roundCorners) * adjust
 
-            val innerTickRadius = if (tickIndex % 20 == 0) innerTickRadiusHour else if (tickIndex % 4 == 0) innerTickRadiusMinute else innerTickRadiusMilli
-            val paint = if (tickIndex % 20 == 0) tickPaint else if (tickIndex % 4 == 0) tickPaintMinute else tickPaintMilli
+            val innerTickRadius =
+                if (tickIndex % 20 == 0) innerTickRadiusHour else if (tickIndex % 4 == 0) innerTickRadiusMinute else innerTickRadiusMilli
+            val paint =
+                if (tickIndex % 20 == 0) tickPaint else if (tickIndex % 4 == 0) tickPaintMinute else tickPaintMilli
 
             val innerX = sin(tickRotation) * (innerTickRadius - roundCorners) * adjust
             val innerY = -cos(tickRotation) * (innerTickRadius - roundCorners) * adjust

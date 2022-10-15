@@ -24,7 +24,8 @@ const val KEY_COMPLICATIONS_TITLE_COLOR = "complications_title_color"
 const val KEY_COMPLICATIONS_ICON_COLOR = "complications_icon_color"
 const val KEY_COMPLICATIONS_BORDER_COLOR = "complications_border_color"
 const val KEY_COMPLICATIONS_RANGED_VALUE_PRIMARY_COLOR = "complications_ranged_value_primary_color"
-const val KEY_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR = "complications_ranged_value_secondary_color"
+const val KEY_COMPLICATIONS_RANGED_VALUE_SECONDARY_COLOR =
+    "complications_ranged_value_secondary_color"
 const val KEY_COMPLICATIONS_BACKGROUND_COLOR = "complications_background_color"
 
 private const val KEY_CUSTOM_COLORS = "custom_colors"

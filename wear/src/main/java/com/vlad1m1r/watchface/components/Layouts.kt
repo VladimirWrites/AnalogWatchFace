@@ -2,11 +2,9 @@ package com.vlad1m1r.watchface.components
 
 import com.vlad1m1r.watchface.components.background.Background
 import com.vlad1m1r.watchface.components.hands.Hands
-import com.vlad1m1r.watchface.components.ticks.*
+import com.vlad1m1r.watchface.components.ticks.GetTicks
 import com.vlad1m1r.watchface.components.ticks.layout.TicksLayout
 import com.vlad1m1r.watchface.data.state.WatchFaceState
-import com.vlad1m1r.watchface.model.Mode
-import com.vlad1m1r.watchface.model.Point
 import javax.inject.Inject
 
 class Layouts @Inject constructor(

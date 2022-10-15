@@ -1,7 +1,6 @@
 package com.vlad1m1r.watchface.components.ticks
 
 import com.vlad1m1r.watchface.components.ticks.layout.*
-import com.vlad1m1r.watchface.data.DataStorage
 import com.vlad1m1r.watchface.data.TicksLayoutType
 import com.vlad1m1r.watchface.data.state.TicksState
 import javax.inject.Inject

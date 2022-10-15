@@ -26,25 +26,36 @@ const val KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE = "has_center_circle_in_ambient_
 const val KEY_COMPLICATION_PROVIDER_NAME = "complication_provider_name"
 
 const val KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE = "should_keep_hand_color_in_ambient_mode"
+
 class DataStorage(private val sharedPreferences: SharedPreferences) {
 
     fun getTicksLayoutType(): TicksLayoutType {
-        return TicksLayoutType.fromId(sharedPreferences.getInt(KEY_WATCH_FACE_TYPE, TicksLayoutType.ORIGINAL.id))
+        return TicksLayoutType.fromId(
+            sharedPreferences.getInt(
+                KEY_WATCH_FACE_TYPE,
+                TicksLayoutType.ORIGINAL.id
+            )
+        )
     }
 
-    fun hasComplicationsInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE, true)
+    fun hasComplicationsInAmbientMode() =
+        sharedPreferences.getBoolean(KEY_HAS_COMPLICATIONS_IN_AMBIENT_MODE, true)
 
     fun hasTicksInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_AMBIENT_MODE, true)
 
-    fun hasTicksInInteractiveMode() = sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_INTERACTIVE_MODE, true)
+    fun hasTicksInInteractiveMode() =
+        sharedPreferences.getBoolean(KEY_HAS_TICKS_IN_INTERACTIVE_MODE, true)
 
     fun hasSmoothSecondsHand() = sharedPreferences.getBoolean(KEY_HAS_SMOOTH_SECONDS_HAND, false)
 
-    fun shouldAdjustToSquareScreen() = sharedPreferences.getBoolean(KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN, false)
+    fun shouldAdjustToSquareScreen() =
+        sharedPreferences.getBoolean(KEY_SHOULD_ADJUST_TO_SQUARE_SCREEN, false)
 
-    fun hasBlackAmbientBackground() = sharedPreferences.getBoolean(KEY_HAS_BLACK_AMBIENT_BACKGROUND, false)
+    fun hasBlackAmbientBackground() =
+        sharedPreferences.getBoolean(KEY_HAS_BLACK_AMBIENT_BACKGROUND, false)
 
-    fun useAntiAliasingInAmbientMode() = sharedPreferences.getBoolean(KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE, false)
+    fun useAntiAliasingInAmbientMode() =
+        sharedPreferences.getBoolean(KEY_USE_ANTI_ALIASING_IN_AMBIENT_MODE, false)
 
     fun getSettingsOpenCount() = sharedPreferences.getLong(KEY_SETTINGS_OPEN_COUNT, 0)
 
@@ -55,7 +66,8 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
         editor.apply()
     }
 
-    fun hasCenterCircleInAmbientMode() = sharedPreferences.getBoolean(KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE, true)
+    fun hasCenterCircleInAmbientMode() =
+        sharedPreferences.getBoolean(KEY_HAS_CENTER_CIRCLE_IN_AMBIENT_MODE, true)
 
     fun setComplicationProviderName(complicationId: Int, complicationProviderName: String) {
         val editor = sharedPreferences.edit()
@@ -63,5 +75,6 @@ class DataStorage(private val sharedPreferences: SharedPreferences) {
         editor.apply()
     }
 
-    fun shouldKeepHandColorInAmbientMode() = sharedPreferences.getBoolean(KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE, false)
+    fun shouldKeepHandColorInAmbientMode() =
+        sharedPreferences.getBoolean(KEY_SHOULD_KEEP_HAND_COLOR_IN_AMBIENT_MODE, false)
 }

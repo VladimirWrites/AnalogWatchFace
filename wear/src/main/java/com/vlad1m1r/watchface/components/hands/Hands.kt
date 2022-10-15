@@ -12,7 +12,7 @@ import java.time.ZonedDateTime
 import javax.inject.Inject
 
 class Hands @Inject constructor(
-    private val  getHandData: GetHandData
+    private val getHandData: GetHandData
 ) {
 
     private var showSecondsHand = true
@@ -67,11 +67,11 @@ class Hands @Inject constructor(
         val hoursRotation = zonedDateTime.hoursRotation()
         val minutesRotation = zonedDateTime.minutesRotation()
 
-        if(showMinutesHand) {
+        if (showMinutesHand) {
             drawMinuteHand(canvas, minutesRotation, center, center.x, drawMode)
         }
 
-        if(showHoursHand) {
+        if (showHoursHand) {
             drawHourHand(canvas, hoursRotation, center, center.x, drawMode)
         }
 
@@ -80,7 +80,7 @@ class Hands @Inject constructor(
             drawSecondsHand(canvas, secondsRotation, center, center.x, drawMode)
         }
 
-        if(showSecondsHand || showHoursHand || showMinutesHand) {
+        if (showSecondsHand || showHoursHand || showMinutesHand) {
             drawCircle(canvas, center, drawMode)
         }
     }

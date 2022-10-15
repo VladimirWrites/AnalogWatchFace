@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.data.state.HandsState
-import com.vlad1m1r.watchface.data.state.WatchFaceState
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -21,7 +20,12 @@ class GetHandData @Inject constructor(
         val hourColor = state.hoursHand.color
         val handWidthHour = state.hoursHand.width
 
-        val ambientHourColor = if(hourColor.isColorTransparent() || state.shouldKeepHandColorInAmbientMode) { hourColor } else { ambientColor }
+        val ambientHourColor =
+            if (hourColor.isColorTransparent() || state.shouldKeepHandColorInAmbientMode) {
+                hourColor
+            } else {
+                ambientColor
+            }
 
         return HandData(
             hourColor,
@@ -39,7 +43,12 @@ class GetHandData @Inject constructor(
         val minuteColor = state.minutesHand.color
         val handWidthMinute = state.minutesHand.width
 
-        val ambientMinuteColor = if(minuteColor.isColorTransparent() || state.shouldKeepHandColorInAmbientMode) { minuteColor } else { ambientColor }
+        val ambientMinuteColor =
+            if (minuteColor.isColorTransparent() || state.shouldKeepHandColorInAmbientMode) {
+                minuteColor
+            } else {
+                ambientColor
+            }
 
         return HandData(
             minuteColor,
@@ -57,7 +66,12 @@ class GetHandData @Inject constructor(
         val secondColor = state.secondsHand.color
         val handWidthSecond = state.secondsHand.width
 
-        val ambientSecondColor = if(secondColor.isColorTransparent()  || state.shouldKeepHandColorInAmbientMode) { secondColor } else { ambientColor }
+        val ambientSecondColor =
+            if (secondColor.isColorTransparent() || state.shouldKeepHandColorInAmbientMode) {
+                secondColor
+            } else {
+                ambientColor
+            }
 
         return HandData(
             secondColor,
@@ -73,12 +87,12 @@ class GetHandData @Inject constructor(
 
     fun getCircleData(state: HandsState): CircleData {
         val circleColor = state.circleState.color
-        val circleWidth =  state.circleState.width
-        val middleCircleRadius =  state.circleState.radius
+        val circleWidth = state.circleState.width
+        val middleCircleRadius = state.circleState.radius
 
         val ambientCircleColor =
-            if(state.circleState.hasInAmbientMode) {
-                if (circleColor.isColorTransparent()  || state.shouldKeepHandColorInAmbientMode) {
+            if (state.circleState.hasInAmbientMode) {
+                if (circleColor.isColorTransparent() || state.shouldKeepHandColorInAmbientMode) {
                     circleColor
                 } else {
                     ambientColor

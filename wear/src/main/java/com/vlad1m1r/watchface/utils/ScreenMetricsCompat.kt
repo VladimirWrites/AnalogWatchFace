@@ -35,7 +35,8 @@ object ScreenMetricsCompat {
     @RequiresApi(Build.VERSION_CODES.R)
     private class ApiLevel30 : Api() {
         override fun getScreenSize(context: Context): Size {
-            val metrics: WindowMetrics = context.getSystemService(WindowManager::class.java).currentWindowMetrics
+            val metrics: WindowMetrics =
+                context.getSystemService(WindowManager::class.java).currentWindowMetrics
             return Size(metrics.bounds.width(), metrics.bounds.height())
         }
     }

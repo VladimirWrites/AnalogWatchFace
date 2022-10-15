@@ -15,9 +15,14 @@ class BackgroundBitmapProvider @Inject constructor(
 
     fun initialize(center: Point, backgroundState: BackgroundState) {
         val backgroundData = getBackgroundData(backgroundState)
-        if(center.x == 0f || center.y == 0f) return
-        normalBitmap = getBackgroundBitmap(backgroundData.leftColor, backgroundData.rightColor, center)
-        ambientBitmap = getBackgroundBitmap(backgroundData.leftColorAmbient, backgroundData.rightColorAmbient, center)
+        if (center.x == 0f || center.y == 0f) return
+        normalBitmap =
+            getBackgroundBitmap(backgroundData.leftColor, backgroundData.rightColor, center)
+        ambientBitmap = getBackgroundBitmap(
+            backgroundData.leftColorAmbient,
+            backgroundData.rightColorAmbient,
+            center
+        )
     }
 
     fun getAmbientBitmap() = ambientBitmap
