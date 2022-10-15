@@ -55,6 +55,8 @@ dependencies {
     implementation Deps.constraint_layout
     implementation Deps.androidx_app_compat
 
+    implementation Deps.wear_remote_interactions
+
     implementation Deps.watchface
     implementation Deps.watchface_client
     implementation Deps.watchface_complications_rendering
