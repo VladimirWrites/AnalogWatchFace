@@ -55,9 +55,6 @@
                     android:name="com.google.android.wearable.watchface.wearableConfigurationAction"
                     android:value="androidx.wear.watchface.editor.action.WATCH_FACE_EDITOR" />
 
-            <meta-data
-                    android:name="com.google.android.wearable.watchface.companionBuiltinConfigurationEnabled"
-                    android:value="true" />
         </service>
 
         <activity android:name="com.vlad1m1r.watchface.settings.MainActivity"
