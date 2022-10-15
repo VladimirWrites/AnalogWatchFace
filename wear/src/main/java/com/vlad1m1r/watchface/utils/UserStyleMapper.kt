@@ -42,7 +42,6 @@ val HANDS_KEEP_COLOR_IN_AMBIENT_MODE = UserStyleSetting.Id("hands_keep_color_in_
 val HANDS_HAS = UserStyleSetting.Id("hands_has")
 
 val COMPLICATION_HAS_IN_AMBIENT_MODE = UserStyleSetting.Id("complication_has_in_ambient_mode")
-val COMPLICATION_HAS_BIGGER_TOP_AND_BOTTOM = UserStyleSetting.Id("complication_has_bigger_top_and_bottom")
 val COMPLICATION_TEXT_COLOR = UserStyleSetting.Id("complication_text_color")
 val COMPLICATION_TITLE_COLOR = UserStyleSetting.Id("complication_title_color")
 val COMPLICATION_ICON_COLOR = UserStyleSetting.Id("complication_icon_color")
@@ -133,7 +132,6 @@ private fun UserStyle.toCircleState(): CircleState {
 private fun UserStyle.toComplicationsState(): ComplicationsState {
     return ComplicationsState(
         this.getAsBooleanOption(COMPLICATION_HAS_IN_AMBIENT_MODE),
-        this.getAsBooleanOption(COMPLICATION_HAS_BIGGER_TOP_AND_BOTTOM),
         this.getAsColorOption(COMPLICATION_TEXT_COLOR),
         this.getAsColorOption(COMPLICATION_TITLE_COLOR),
         this.getAsColorOption(COMPLICATION_ICON_COLOR),

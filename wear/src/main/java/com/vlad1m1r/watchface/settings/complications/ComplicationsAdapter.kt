@@ -16,7 +16,6 @@ private const val TYPE_TITLE = 0
 private const val TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG = 1
 private const val TYPE_COMPLICATION_COLORS = 2
 private const val TYPE_COMPLICATIONS_AMBIENT_MODE = 3
-private const val TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS = 4
 
 class ComplicationsAdapter(
     private val stateHolder: WatchFaceStateHolder,
@@ -29,7 +28,6 @@ class ComplicationsAdapter(
             TYPE_TITLE -> TitleViewHolder(parent)
             TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG,
             TYPE_COMPLICATION_COLORS -> SettingsViewHolder(parent)
-            TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS,
             TYPE_COMPLICATIONS_AMBIENT_MODE -> SettingsWithSwitchViewHolder(parent)
             else -> {
                 throw IllegalArgumentException("viewType: $viewType is not supported")
@@ -38,7 +36,7 @@ class ComplicationsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 4
     }
 
     override fun getItemViewType(position: Int) =
@@ -47,7 +45,6 @@ class ComplicationsAdapter(
             1 -> TYPE_PREVIEW_AND_COMPLICATIONS_CONFIG
             2 -> TYPE_COMPLICATION_COLORS
             3 -> TYPE_COMPLICATIONS_AMBIENT_MODE
-            4 -> TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS
             else -> throw IllegalArgumentException("Unsupported View Type position: $position")
         }
 
@@ -81,17 +78,6 @@ class ComplicationsAdapter(
                     val newComplicationsState = stateHolder.currentState.complicationsState.copy(hasInAmbientMode = it)
                     stateHolder.setComplicationsState(newComplicationsState)
                 }
-            TYPE_BIGGER_TOP_AND_BOTTOM_COMPLICATIONS -> {
-                (viewHolder as SettingsWithSwitchViewHolder).apply {
-                    bind(
-                        R.string.wear_bigger_top_and_bottom_complications,
-                        stateHolder.currentState.complicationsState.hasBiggerTopAndBottomComplications,
-                    ) {
-                        val newComplicationsState = stateHolder.currentState.complicationsState.copy(hasBiggerTopAndBottomComplications = it)
-                        stateHolder.setComplicationsState(newComplicationsState)
-                    }
-                }
-            }
         }
     }
 }
