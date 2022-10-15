@@ -25,7 +25,7 @@ class ComplicationPickerFragment : Fragment(), View.OnClickListener {
         override fun onSwipeStarted(layout: SwipeDismissFrameLayout) {}
         override fun onSwipeCanceled(layout: SwipeDismissFrameLayout) {}
         override fun onDismissed(layout: SwipeDismissFrameLayout) {
-            requireActivity().onBackPressed()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 
