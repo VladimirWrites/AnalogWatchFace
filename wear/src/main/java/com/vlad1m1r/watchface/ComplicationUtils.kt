@@ -65,7 +65,8 @@ fun createComplicationSlotManager(
                 } else {
                     it to default
                 }
-            }
+            },
+            ComplicationType.values().associateWith { RectF(0.01f, 0.01f, 0.01f, 0.01f) }
         )
 
     ).build()
@@ -83,7 +84,8 @@ fun createComplicationSlotManager(
                 } else {
                     it to default
                 }
-            }
+            },
+            ComplicationType.values().associateWith { RectF(0.01f, 0.01f, 0.01f, 0.01f) }
         )
     ).build()
 
