@@ -17,8 +17,8 @@ import com.vlad1m1r.watchface.utils.toWatchFaceState
 import kotlinx.coroutines.*
 import java.time.ZonedDateTime
 
-// Default for how long each frame is displayed at expected frame rate.
-private const val FRAME_PERIOD_MS_DEFAULT: Long = 16L
+private const val FRAME_PERIOD_MS_SMOOTH: Long = 16L
+private const val FRAME_PERIOD_MS_TICKING: Long = 1000L
 
 class AnalogWatchCanvasRenderer(
     surfaceHolder: SurfaceHolder,
@@ -33,7 +33,7 @@ class AnalogWatchCanvasRenderer(
     currentUserStyleRepository,
     watchState,
     canvasType,
-    FRAME_PERIOD_MS_DEFAULT,
+    FRAME_PERIOD_MS_TICKING,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
 
@@ -62,8 +62,16 @@ class AnalogWatchCanvasRenderer(
     private fun updateWatchFaceData(userStyle: UserStyle) {
         val watchFaceState = userStyle.toWatchFaceState()
         this.state = watchFaceState
-
+        updateRefreshRate()
         layouts.setState(watchFaceState)
+    }
+
+    private fun updateRefreshRate() {
+        if(state.handsState.hasSmoothSecondsHand) {
+            this.interactiveDrawModeUpdateDelayMillis = FRAME_PERIOD_MS_SMOOTH
+        } else {
+            this.interactiveDrawModeUpdateDelayMillis = FRAME_PERIOD_MS_TICKING
+        }
     }
 
     private fun drawComplications(canvas: Canvas, zonedDateTime: ZonedDateTime) {
