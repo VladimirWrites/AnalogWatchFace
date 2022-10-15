@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface
+package com.vlad1m1r.watchface.components.complications
 
 import androidx.wear.watchface.complications.data.ComplicationExperimental
 import androidx.wear.watchface.complications.data.ComplicationType
@@ -85,17 +85,4 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
             ComplicationType.MONOCHROMATIC_IMAGE,
         )
     )
-
-    companion object {
-        fun getSupportedComplicationTypes(id: Int): List<ComplicationType> {
-            return when (id) {
-                Top.id -> Top.supportedTypes
-                Bottom.id -> Bottom.supportedTypes
-                Left.id -> Left.supportedTypes
-                Right.id -> Right.supportedTypes
-                Background.id -> Background.supportedTypes
-                else -> emptyList()
-            }
-        }
-    }
 }

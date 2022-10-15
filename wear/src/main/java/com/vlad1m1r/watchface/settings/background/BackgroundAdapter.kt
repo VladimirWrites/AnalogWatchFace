@@ -9,7 +9,6 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vlad1m1r.watchface.R
-import com.vlad1m1r.watchface.components.background.SettingsBackgroundComplicationViewHolder
 import com.vlad1m1r.watchface.model.Point
 import com.vlad1m1r.watchface.settings.Navigator
 import com.vlad1m1r.watchface.settings.base.viewholders.*

@@ -9,7 +9,7 @@ import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyle
-import com.vlad1m1r.watchface.components.Complications
+import com.vlad1m1r.watchface.components.complications.Complications
 import com.vlad1m1r.watchface.components.Layouts
 import com.vlad1m1r.watchface.data.state.WatchFaceState
 import com.vlad1m1r.watchface.model.Point
