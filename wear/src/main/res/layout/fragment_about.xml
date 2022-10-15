@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
-                app:drawableBottomCompat="@drawable/ic_arrow_down"
+                android:drawableBottom="@drawable/ic_arrow_down"
                 android:text="@string/wear_view_on_you_phone"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_mini"
