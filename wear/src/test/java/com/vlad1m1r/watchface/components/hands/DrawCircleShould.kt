@@ -2,6 +2,7 @@ package com.vlad1m1r.watchface.components.hands
 
 import android.graphics.Canvas
 import android.graphics.Paint
+import androidx.wear.watchface.DrawMode
 import com.vlad1m1r.watchface.model.Point
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -17,28 +18,29 @@ class DrawCircleShould {
     }
 
     private val canvasMock = mock<Canvas>()
+    private val center = Point(11f, 22f)
+
+    private val circleData = CircleData(
+        color = 1,
+        colorAmbient = 2,
+        shadowColor = 3,
+        shadowRadius = 4,
+        width = 5,
+        radius = 6,
+        useAntiAliasingInAmbientMode = false
+    )
+
+    private val drawCircle = DrawCircle(
+        circleData,
+        handPaintProviderMock
+    )
 
     @Test
     fun drawCircle() {
-        val circleData = CircleData(
-            color = 1,
-            colorAmbient = 2,
-            shadowColor = 3,
-            shadowRadius = 4,
-            width = 5,
-            radius = 6,
-            useAntiAliasingInAmbientMode = false
-        )
-        val drawCircle = DrawCircle(
-            circleData,
-            handPaintProviderMock
-        )
-        val center = Point(11f, 22f)
-
         drawCircle.invoke(
             canvasMock,
             center,
-            drawMode
+            DrawMode.INTERACTIVE
         )
 
         verify(canvasMock).drawCircle(
@@ -50,40 +52,30 @@ class DrawCircleShould {
     }
 
     @Test
-    fun switchToAmbientMode() {
-        val circleDataMock = mock<CircleData>().apply {
-            whenever(this.colorAmbient).thenReturn(128)
-        }
-        val drawCircle = DrawCircle(
-            circleDataMock,
-            handPaintProviderMock
+    fun drawInAmbientMode() {
+        drawCircle.invoke(
+            canvasMock,
+            center,
+            DrawMode.AMBIENT
         )
 
-        drawCircle.setInAmbientMode(true)
-
-        verify(paintMock).color = circleDataMock.colorAmbient
+        verify(paintMock).color = circleData.colorAmbient
         verify(paintMock).isAntiAlias = false
         verify(paintMock).clearShadowLayer()
     }
 
     @Test
-    fun switchToInteractiveMode() {
-        val circleDataMock = mock<CircleData>().apply {
-            whenever(this.color).thenReturn(256)
-            whenever(this.shadowRadius).thenReturn(10)
-            whenever(this.shadowColor).thenReturn(512)
-        }
-        val drawCircle = DrawCircle(
-            circleDataMock,
-            handPaintProviderMock
+    fun drawInInteractiveMode() {
+        drawCircle.invoke(
+            canvasMock,
+            center,
+            DrawMode.INTERACTIVE
         )
 
-        drawCircle.setInAmbientMode(false)
-
-        verify(paintMock).color = circleDataMock.color
+        verify(paintMock).color = circleData.color
         verify(paintMock).isAntiAlias = true
         verify(paintMock).setShadowLayer(
-            circleDataMock.shadowRadius.toFloat(), 0f, 0f, circleDataMock.shadowColor
+            circleData.shadowRadius.toFloat(), 0f, 0f, circleData.shadowColor
         )
     }
 }
