@@ -9,7 +9,6 @@ import com.vlad1m1r.watchface.utils.hoursRotation
 import com.vlad1m1r.watchface.utils.minutesRotation
 import com.vlad1m1r.watchface.utils.secondsRotation
 import java.time.ZonedDateTime
-import java.util.*
 import javax.inject.Inject
 
 class Hands @Inject constructor(

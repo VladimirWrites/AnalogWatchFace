@@ -4,8 +4,9 @@ import android.view.SurfaceHolder
 import androidx.wear.watchface.*
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyleSchema
-import com.vlad1m1r.watchface.components.Complications
+import com.vlad1m1r.watchface.components.complications.Complications
 import com.vlad1m1r.watchface.components.Layouts
+import com.vlad1m1r.watchface.components.complications.createComplicationSlotManager
 import com.vlad1m1r.watchface.data.style.CreateUserStyleSchema
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn

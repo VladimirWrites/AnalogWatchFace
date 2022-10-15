@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.components
+package com.vlad1m1r.watchface.components.complications
 
 import android.content.Context
 import androidx.wear.watchface.ComplicationSlot

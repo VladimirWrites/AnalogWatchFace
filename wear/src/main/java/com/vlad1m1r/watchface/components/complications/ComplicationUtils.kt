@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface
+package com.vlad1m1r.watchface.components.complications
 
 import android.content.Context
 import android.graphics.RectF
@@ -11,6 +11,7 @@ import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import com.vlad1m1r.watchface.R
 import com.vlad1m1r.watchface.utils.ScreenMetricsCompat
 
 fun createComplicationSlotManager(

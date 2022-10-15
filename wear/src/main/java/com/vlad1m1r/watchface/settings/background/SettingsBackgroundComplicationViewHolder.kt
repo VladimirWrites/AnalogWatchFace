@@ -1,4 +1,4 @@
-package com.vlad1m1r.watchface.components.background
+package com.vlad1m1r.watchface.settings.background
 
 import android.graphics.drawable.Icon
 import android.view.View
