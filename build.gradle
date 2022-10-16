@@ -1,20 +1,9 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath Deps.android_gradle_plugin
-        classpath Deps.kotlin_gradle_plugin
-        classpath Deps.hilt_android_plugin
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+plugins {
+    alias libs.plugins.android.application apply false
+    alias libs.plugins.android.library apply false
+    alias libs.plugins.kotlin.android apply false
+    alias libs.plugins.kotlin.kapt apply false
+    alias libs.plugins.hilt apply false
 }
 
 task clean(type: Delete) {

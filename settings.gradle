@@ -1,2 +1,18 @@
-include ':styleguide'
-include ':wear', ':app'
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+include ':wear', ':app', ':styleguide'
+
+enableFeaturePreview("VERSION_CATALOGS")

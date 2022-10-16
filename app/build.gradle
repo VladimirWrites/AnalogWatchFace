@@ -1,5 +1,9 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    alias libs.plugins.android.application
+    alias libs.plugins.kotlin.android
+}
+
+apply from: "$project.rootDir/buildsystem/java_version.gradle"
 
 android {
     compileSdk Versions.compile_sdk
@@ -11,17 +15,10 @@ android {
         versionName Versions.version_name
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -30,9 +27,9 @@ android {
 dependencies {
     implementation project(path: ':styleguide')
 
-    implementation Deps.androidx_core_ktx
-    implementation Deps.androidx_app_compat
-    implementation Deps.material
-    implementation Deps.constraint_layout
-    implementation Deps.wear_remote_interactions
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.app.compat
+    implementation libs.material
+    implementation libs.constraint.layout
+    implementation libs.wear.remote.interactions
 }

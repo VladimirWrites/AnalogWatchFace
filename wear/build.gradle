@@ -1,9 +1,11 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    alias libs.plugins.android.application
+    alias libs.plugins.kotlin.android
+    alias libs.plugins.kotlin.kapt
+    alias libs.plugins.hilt
 }
+
+apply from: "$project.rootDir/buildsystem/java_version.gradle"
 
 android {
     compileSdk Versions.compile_sdk
@@ -15,20 +17,13 @@ android {
         versionName Versions.version_name
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-
     buildTypes {
         debug {
             testCoverageEnabled true
         }
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -48,35 +43,36 @@ kapt {
 
 dependencies {
     implementation project(path: ':styleguide')
-    implementation Deps.recyclerview
 
-    compileOnly Deps.wearable
-    implementation Deps.wear
-    implementation Deps.constraint_layout
-    implementation Deps.androidx_app_compat
+    implementation libs.recycler.view
 
-    implementation Deps.wear_remote_interactions
+    compileOnly libs.wearable
+    implementation libs.wear
+    implementation libs.constraint.layout
+    implementation libs.androidx.app.compat
 
-    implementation Deps.watchface
-    implementation Deps.watchface_client
-    implementation Deps.watchface_complications_rendering
-    implementation Deps.watchface_data
-    implementation Deps.watchface_editor
-    implementation Deps.watchface_style
+    implementation libs.wear.remote.interactions
 
-    implementation Deps.androidx_core_ktx
+    implementation libs.watchface
+    implementation libs.watchface.client
+    implementation libs.watchface.complications.rendering
+    implementation libs.watchface.data
+    implementation libs.watchface.editor
+    implementation libs.watchface.style
 
-    implementation Deps.coroutines_android
-    implementation Deps.coroutines_core
+    implementation libs.androidx.core.ktx
 
-    implementation Deps.lifecycle_runtime_ktx
+    implementation libs.coroutines.android
+    implementation libs.coroutines.core
 
-    implementation Deps.hilt_android
-    kapt Deps.hilt_compiler
+    implementation libs.lifecycle.runtime.ktx
 
-    testImplementation Deps.junit
-    testImplementation Deps.mockito_core
-    testImplementation Deps.mockito_inline
-    testImplementation Deps.mockito_kotlin
-    testImplementation Deps.truth
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
+
+    testImplementation libs.junit
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.inline
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.truth
 }
