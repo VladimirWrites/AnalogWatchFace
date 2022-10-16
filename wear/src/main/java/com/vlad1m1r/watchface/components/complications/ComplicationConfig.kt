@@ -82,7 +82,6 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
         BACKGROUND_COMPLICATION_ID,
         listOf(
             ComplicationType.PHOTO_IMAGE,
-            ComplicationType.MONOCHROMATIC_IMAGE,
         )
     )
 }
