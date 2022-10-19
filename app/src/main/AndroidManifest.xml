@@ -8,6 +8,7 @@
     <queries>
         <package android:name="com.google.android.wearable.app" />
         <package android:name="com.samsung.android.app.watchmanager" />
+        <package android:name="com.google.android.apps.wear.companion" />
     </queries>
 
     <application
