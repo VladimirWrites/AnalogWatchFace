@@ -81,17 +81,15 @@ class AnalogWatchCanvasRenderer(
             if (complication.enabled) {
                 if (id != BACKGROUND_COMPLICATION_ID) {
                     complications.applyComplicationState(complication, state.complicationsState)
-                    complication.render(canvas, zonedDateTime, renderParameters)
-                } else {
-                    val backgroundComplicationType = complication.complicationData.value.type
-                    if (backgroundComplicationType != ComplicationType.NO_DATA &&
-                        backgroundComplicationType != ComplicationType.NOT_CONFIGURED &&
-                        backgroundComplicationType != ComplicationType.NO_PERMISSION
-                    ) {
-                        complication.render(canvas, zonedDateTime, renderParameters)
-                    }
                 }
 
+                val complicationType = complication.complicationData.value.type
+                if (complicationType != ComplicationType.NO_DATA &&
+                    complicationType != ComplicationType.NOT_CONFIGURED &&
+                    complicationType != ComplicationType.NO_PERMISSION
+                ) {
+                    complication.render(canvas, zonedDateTime, renderParameters)
+                }
             }
         }
     }
