@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Icon" src="https://i.imgur.com/SJ2FHpR.png" width="160" />
+    <img alt="Icon" src="https://i.imgur.com/APhUjXB.png" width="160" />
 </div>
 <h3 align="center">
     Analog Watch Face for Wear OS
