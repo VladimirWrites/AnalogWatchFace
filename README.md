@@ -1,3 +1,11 @@
+Thank you everyone for using the watch face.
+
+Sadly, Google decided to kill this project. The new way of building watch faces is much more restricted and doesn't allow me to do all the fun stuff that I did with the Analog Watch Face. I could transfer my watch face to this new way of building watch faces, but it would retain 10% of its current features. 
+
+As a result, Analog Watch Face is no longer being developed and has been removed from the Play Store.
+
+Here is the post from Google: https://support.google.com/wearos/thread/284572445
+
 <div align="center">
     <img alt="Icon" src="https://i.imgur.com/APhUjXB.png" width="160" />
 </div>
@@ -28,27 +36,6 @@ Features:
 * Option to hide complications in the ambient mode
 * Option to hide ticks in the ambient and interactive modes
 * Smooth seconds hand in the interactive mode
-
-Download ⌚
------
-
-The watch face is available on Google Play Store for free.
-
-<a href='https://play.google.com/store/apps/details?id=com.vlad1m1r.watchface'>
-    <img alt='Get it on Google Play' src='http://i.imgur.com/tka3Exw.png'/>
-</a>
-
-Contributing 💻
--------
-
-Want to contribute? You are welcome! 
-Just create a pull request!
-
-Help me with translations ✍️
--------
-
- - [App localization](https://poeditor.com/join/project?hash=9iy0lPTpkn)
- - [Google Play Store localization](https://poeditor.com/join/project?hash=wRxShKc33w)
 
 Before adding a new language and investing time into translation, please check if it's supported by Wear OS.
 
